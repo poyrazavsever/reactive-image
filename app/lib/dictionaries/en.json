@@ -1,0 +1,13 @@
+{
+  "navigation": {
+    "docs": "Documentation",
+    "examples": "Examples",
+    "components": "Components"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "back": "Back",
+    "next": "Next"
+  }
+}

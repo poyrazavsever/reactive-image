@@ -1,0 +1,13 @@
+{
+  "navigation": {
+    "docs": "Dokümantasyon",
+    "examples": "Örnekler",
+    "components": "Bileşenler"
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Hata",
+    "back": "Geri",
+    "next": "İleri"
+  }
+}

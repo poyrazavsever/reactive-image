@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Getting Started",
+    "description": "Install and render your first ReactiveImage.",
+    "order": 1,
+    "toc": true,
+    "locale": "en",
+    "slug": "getting-started",
+    "body": "const{Fragment:t,jsx:e,jsxs:n}=arguments[0],r=arguments[0].baseUrl;if(!r)throw new Error(\"Unexpected missing `options.baseUrl` needed to support `export … from`, `import`, or `import.meta.url` when generating `function-body`\");const{ReactiveImage:o}=await import(function(t){if(\"string\"!=typeof t)return t;try{return new URL(t),t}catch{}return t.startsWith(\"/\")||t.startsWith(\"./\")||t.startsWith(\"../\")?new URL(t,r).href:t}(\"reactive-image\"));function _createMdxContent(r){const a={h1:\"h1\",...r.components};return n(t,{children:[e(a.h1,{children:\"Getting Started\"}),\"\\n\",e(o,{src:\"/img/a.jpg\",alt:\"demo\",variant:\"zoomOnHover\",zoomScale:1.15})]})}return{default:function(t={}){const{wrapper:n}=t.components||{};return n?e(n,{...t,children:e(_createMdxContent,{...t})}):_createMdxContent(t)}};"
+  },
+  {
+    "title": "Başlangıç",
+    "description": "ReactiveImage kurulum ve ilk kullanım.",
+    "order": 1,
+    "toc": true,
+    "locale": "tr",
+    "slug": "baslangic",
+    "body": "const{Fragment:t,jsx:e,jsxs:r}=arguments[0],n=arguments[0].baseUrl;if(!n)throw new Error(\"Unexpected missing `options.baseUrl` needed to support `export … from`, `import`, or `import.meta.url` when generating `function-body`\");const{ReactiveImage:o}=await import(function(t){if(\"string\"!=typeof t)return t;try{return new URL(t),t}catch{}return t.startsWith(\"/\")||t.startsWith(\"./\")||t.startsWith(\"../\")?new URL(t,n).href:t}(\"reactive-image\"));function _createMdxContent(n){const a={h1:\"h1\",...n.components};return r(t,{children:[e(a.h1,{children:\"Başlangıç\"}),\"\\n\",e(o,{src:\"/img/a.jpg\",alt:\"demo\",variant:\"hoverSwitch\",hoverSrc:\"/img/a-hover.jpg\"})]})}return{default:function(t={}){const{wrapper:r}=t.components||{};return r?e(r,{...t,children:e(_createMdxContent,{...t})}):_createMdxContent(t)}};"
+  }
+]
