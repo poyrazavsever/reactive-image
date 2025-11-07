@@ -2,7 +2,7 @@
 import type { ReactiveImageProps } from "./types";
 import { HoverSwitch } from "./variants/HoverSwitch";
 import { ZoomOnHover } from "./variants/ZoomOnHover";
-import { TiltOnHover } from "./variants/tiltOnHover";
+import { TiltOnHover } from "./variants/TiltOnHover";
 import { ClickExpand } from "./variants/clickExpand";
 
 export function ReactiveImage(props: ReactiveImageProps) {

@@ -218,23 +218,209 @@ export default function Page() {
         </div>
       </div>
 
-      <h2 className="text-2xl font-semibold mb-4 mt-8">tiltOnHover</h2>
-      <ReactiveImage
-        variant="tiltOnHover"
-        src="/img/c.jpg"
-        alt="Tilt"
-        tiltMax={12}
-      />
+      <h2 className="text-2xl font-semibold mb-4 mt-8">TiltOnHover Variants</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div>
+          <h3 className="text-lg font-medium mb-2">Basic Tilt</h3>
+          <ReactiveImage
+            variant="tiltOnHover"
+            src="https://picsum.photos/300/300?random=30"
+            alt="Basic tilt effect"
+            animation="basic"
+            tiltMax={12}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover"
+          />
+        </div>
 
-      <h2 className="text-2xl font-semibold mb-4 mt-8">clickExpand</h2>
-      <ReactiveImage
-        variant="clickExpand"
-        src="/img/d.jpg"
-        alt="Modal"
-        caption="Sample caption"
-        modalAnimation="springPop"
-        backdrop="blur"
-      />
+        <div>
+          <h3 className="text-lg font-medium mb-2">Glare Effect</h3>
+          <ReactiveImage
+            variant="tiltOnHover"
+            src="https://picsum.photos/300/300?random=31"
+            alt="Glare tilt effect"
+            animation="glare"
+            tiltMax={10}
+            glare={{
+              enabled: true,
+              maxOpacity: 0.4,
+              position: "mouse",
+            }}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover"
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Scale Tilt</h3>
+          <ReactiveImage
+            variant="tiltOnHover"
+            src="https://picsum.photos/300/300?random=32"
+            alt="Scale tilt effect"
+            animation="scale"
+            tiltMax={15}
+            scale={1.05}
+            timing={{ duration: 150, reset: 400 }}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover"
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">3D Perspective</h3>
+          <ReactiveImage
+            variant="tiltOnHover"
+            src="https://picsum.photos/300/300?random=33"
+            alt="3D perspective tilt"
+            animation="perspective"
+            tiltMax={20}
+            perspective={1200}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover"
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Magnetic Effect</h3>
+          <ReactiveImage
+            variant="tiltOnHover"
+            src="https://picsum.photos/300/300?random=34"
+            alt="Magnetic tilt effect"
+            animation="magnetic"
+            tiltMax={12}
+            enableTouch={true}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover"
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Float with Shadow</h3>
+          <ReactiveImage
+            variant="tiltOnHover"
+            src="https://picsum.photos/300/300?random=35"
+            alt="Float tilt effect"
+            animation="float"
+            tiltMax={8}
+            shadow={true}
+            timing={{ reset: 600, easing: "ease-out" }}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover"
+          />
+        </div>
+      </div>
+
+      <h2 className="text-2xl font-semibold mb-4 mt-12">
+        Click Expand Variants
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div>
+          <h3 className="text-lg font-medium mb-2">Spring Pop</h3>
+          <ReactiveImage
+            variant="clickExpand"
+            src="https://picsum.photos/300/300?random=40"
+            alt="Spring pop modal"
+            modalAnimation="springPop"
+            backdrop="blur"
+            caption="Bouncy spring animation with blur backdrop"
+            modalSize="md"
+            closeOnBackdrop={true}
+            closeOnEsc={true}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover cursor-zoom-in"
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Rotate In</h3>
+          <ReactiveImage
+            variant="clickExpand"
+            src="https://picsum.photos/300/300?random=41"
+            alt="Rotate in modal"
+            modalAnimation="rotateIn"
+            backdrop="glass"
+            caption="3D rotation entrance with glass backdrop"
+            modalSize="lg"
+            animationDuration={350}
+            closeOnBackdrop={true}
+            closeOnEsc={true}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover cursor-zoom-in"
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Flip In</h3>
+          <ReactiveImage
+            variant="clickExpand"
+            src="https://picsum.photos/300/300?random=42"
+            alt="Flip in modal"
+            modalAnimation="flipIn"
+            backdrop="dark"
+            caption="3D flip entrance with dark backdrop"
+            modalSize="auto"
+            animationDuration={400}
+            closeOnBackdrop={true}
+            closeOnEsc={true}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover cursor-zoom-in"
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Zoom Bounce</h3>
+          <ReactiveImage
+            variant="clickExpand"
+            src="https://picsum.photos/300/300?random=43"
+            alt="Zoom bounce modal"
+            modalAnimation="zoomBounce"
+            backdrop="dim"
+            caption="Zoom with bounce effect"
+            modalSize="xl"
+            closeOnEsc={true}
+            closeOnBackdrop={true}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover cursor-zoom-in"
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Slide Up</h3>
+          <ReactiveImage
+            variant="clickExpand"
+            src="https://picsum.photos/300/300?random=44"
+            alt="Slide up modal"
+            modalAnimation="slideUp"
+            backdrop="blur"
+            caption="Smooth slide from bottom"
+            modalSize="sm"
+            animationDuration={250}
+            onOpen={() => console.log("Modal opened!")}
+            onClose={() => console.log("Modal closed!")}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover cursor-zoom-in"
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Custom Glass</h3>
+          <ReactiveImage
+            variant="clickExpand"
+            src="https://picsum.photos/300/300?random=45"
+            alt="Custom glass modal"
+            modalAnimation="scaleFade"
+            backdrop="glass"
+            caption="Custom glassmorphism effect with enhanced blur"
+            modalSize="full"
+            customBackdrop={{
+              backgroundColor: "rgba(100, 50, 150, 0.15)",
+              backdropFilter: "blur(20px) saturate(200%)",
+            }}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover cursor-zoom-in"
+          />
+        </div>
+      </div>
     </main>
   );
 }
