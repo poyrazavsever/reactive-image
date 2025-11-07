@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Reactive Image Docs & Demo",
+  title: "Reactive Image",
   description: "Documentation and demo for the Reactive Image component library. Created by Poyraz Avsever. This project is open-source and available on GitHub.",
 };
 
