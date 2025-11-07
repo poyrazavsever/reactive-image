@@ -49,7 +49,44 @@ export type HoverSwitchProps = {
   onAnimationStart?: () => void;
   onAnimationEnd?: () => void;
 };
-export type ZoomOnHoverProps = { zoomScale?: number; origin?: string };
+export type ZoomOnHoverProps = {
+  zoomScale?: number;
+  animation?:
+    | "scale"
+    | "scaleRotate"
+    | "scaleBlur"
+    | "scaleFade"
+    | "scaleSlide"
+    | "perspective"
+    | "pulse"
+    | "bounce"
+    | "elastic";
+  origin?:
+    | "center"
+    | "top"
+    | "bottom"
+    | "left"
+    | "right"
+    | "top-left"
+    | "top-right"
+    | "bottom-left"
+    | "bottom-right"
+    | "cursor";
+  timing?: {
+    duration?: number;
+    delay?: number;
+    easing?: string;
+  };
+  followCursor?: boolean;
+  opacityChange?: number;
+  blurAmount?: number;
+  rotation?: number;
+  containZoom?: boolean;
+  enableTouch?: boolean;
+  zoomClassName?: string;
+  onZoomStart?: () => void;
+  onZoomEnd?: () => void;
+};
 export type TiltOnHoverProps = { tiltMax?: number; glare?: boolean };
 export type ClickExpandProps = {
   modalAnimation?: "scaleFade" | "slideUp" | "springPop";

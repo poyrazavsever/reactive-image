@@ -32,7 +32,22 @@ type HoverSwitchProps = {
 };
 type ZoomOnHoverProps = {
     zoomScale?: number;
-    origin?: string;
+    animation?: "scale" | "scaleRotate" | "scaleBlur" | "scaleFade" | "scaleSlide" | "perspective" | "pulse" | "bounce" | "elastic";
+    origin?: "center" | "top" | "bottom" | "left" | "right" | "top-left" | "top-right" | "bottom-left" | "bottom-right" | "cursor";
+    timing?: {
+        duration?: number;
+        delay?: number;
+        easing?: string;
+    };
+    followCursor?: boolean;
+    opacityChange?: number;
+    blurAmount?: number;
+    rotation?: number;
+    containZoom?: boolean;
+    enableTouch?: boolean;
+    zoomClassName?: string;
+    onZoomStart?: () => void;
+    onZoomEnd?: () => void;
 };
 type TiltOnHoverProps = {
     tiltMax?: number;

@@ -1,7 +1,7 @@
 "use client";
 import type { ReactiveImageProps } from "./types";
 import { HoverSwitch } from "./variants/HoverSwitch";
-import { ZoomOnHover } from "./variants/zoomOnHover";
+import { ZoomOnHover } from "./variants/ZoomOnHover";
 import { TiltOnHover } from "./variants/tiltOnHover";
 import { ClickExpand } from "./variants/clickExpand";
 

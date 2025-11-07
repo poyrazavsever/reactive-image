@@ -29,28 +29,6 @@ var import_react2 = require("react");
 
 // src/variants/HoverSwitch/animations.ts
 var animations = {
-  fade: {
-    container: {
-      position: "relative",
-      display: "inline-block",
-      overflow: "hidden"
-    },
-    image: {
-      transition: "opacity var(--duration, 300ms) var(--easing, ease-in-out) var(--delay, 0ms)",
-      display: "block",
-      width: "100%",
-      height: "auto"
-    },
-    hoverImage: {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      objectFit: "cover",
-      transition: "opacity var(--duration, 300ms) var(--easing, ease-in-out) var(--delay, 0ms)"
-    }
-  },
   slide: {
     container: {
       position: "relative",
@@ -325,7 +303,7 @@ function HoverSwitch({
   src,
   alt,
   hoverSrc,
-  animation = "fade",
+  animation = "slide",
   slideDirection = "right",
   timing = {},
   preloadHover = true,
@@ -408,7 +386,6 @@ function HoverSwitch({
         case "crossfade":
           animationStyle = { opacity: 0 };
           break;
-        case "fade":
         default:
           animationStyle = hoverSrc ? { opacity: 0 } : {};
           break;
@@ -441,9 +418,6 @@ function HoverSwitch({
           animationStyle = { transform: "translate(0%, 0%)" };
           break;
         case "crossfade":
-        case "fade":
-          animationStyle = { opacity: 1 };
-          break;
         case "zoom":
           animationStyle = { transform: "scale(1)", opacity: 1 };
           break;
@@ -510,44 +484,373 @@ function HoverSwitch({
   );
 }
 
-// src/variants/zoomOnHover.tsx
+// src/variants/ZoomOnHover/ZoomOnHover.tsx
+var import_react4 = require("react");
+
+// src/variants/ZoomOnHover/animations.ts
+var zoomAnimations = {
+  scale: {
+    container: {
+      display: "inline-block",
+      overflow: "hidden",
+      cursor: "zoom-in"
+    },
+    image: {
+      display: "block",
+      width: "100%",
+      height: "auto",
+      transition: "transform var(--duration, 300ms) var(--easing, ease-out)",
+      transformOrigin: "var(--origin, center)"
+    }
+  },
+  scaleRotate: {
+    container: {
+      display: "inline-block",
+      overflow: "hidden",
+      cursor: "zoom-in"
+    },
+    image: {
+      display: "block",
+      width: "100%",
+      height: "auto",
+      transition: "transform var(--duration, 400ms) var(--easing, ease-out)",
+      transformOrigin: "var(--origin, center)"
+    }
+  },
+  scaleBlur: {
+    container: {
+      display: "inline-block",
+      overflow: "hidden",
+      cursor: "zoom-in"
+    },
+    image: {
+      display: "block",
+      width: "100%",
+      height: "auto",
+      transition: "transform var(--duration, 300ms) var(--easing, ease-out), filter var(--duration, 300ms) var(--easing, ease-out)",
+      transformOrigin: "var(--origin, center)"
+    }
+  },
+  scaleFade: {
+    container: {
+      display: "inline-block",
+      overflow: "hidden",
+      cursor: "zoom-in"
+    },
+    image: {
+      display: "block",
+      width: "100%",
+      height: "auto",
+      transition: "transform var(--duration, 300ms) var(--easing, ease-out), opacity var(--duration, 300ms) var(--easing, ease-out)",
+      transformOrigin: "var(--origin, center)"
+    }
+  },
+  scaleSlide: {
+    container: {
+      display: "inline-block",
+      overflow: "hidden",
+      cursor: "zoom-in"
+    },
+    image: {
+      display: "block",
+      width: "100%",
+      height: "auto",
+      transition: "transform var(--duration, 350ms) var(--easing, ease-out)",
+      transformOrigin: "var(--origin, center)"
+    }
+  },
+  perspective: {
+    container: {
+      display: "inline-block",
+      overflow: "hidden",
+      cursor: "zoom-in",
+      perspective: "1000px"
+    },
+    image: {
+      display: "block",
+      width: "100%",
+      height: "auto",
+      transition: "transform var(--duration, 400ms) var(--easing, ease-out)",
+      transformOrigin: "var(--origin, center)"
+    }
+  },
+  pulse: {
+    container: {
+      display: "inline-block",
+      overflow: "hidden",
+      cursor: "zoom-in"
+    },
+    image: {
+      display: "block",
+      width: "100%",
+      height: "auto",
+      transition: "transform var(--duration, 200ms) var(--easing, ease-in-out)",
+      transformOrigin: "var(--origin, center)"
+    }
+  },
+  bounce: {
+    container: {
+      display: "inline-block",
+      overflow: "hidden",
+      cursor: "zoom-in"
+    },
+    image: {
+      display: "block",
+      width: "100%",
+      height: "auto",
+      transition: "transform var(--duration, 600ms) var(--easing, cubic-bezier(0.68, -0.55, 0.265, 1.55))",
+      transformOrigin: "var(--origin, center)"
+    }
+  },
+  elastic: {
+    container: {
+      display: "inline-block",
+      overflow: "hidden",
+      cursor: "zoom-in"
+    },
+    image: {
+      display: "block",
+      width: "100%",
+      height: "auto",
+      transition: "transform var(--duration, 800ms) var(--easing, cubic-bezier(0.175, 0.885, 0.32, 1.275))",
+      transformOrigin: "var(--origin, center)"
+    }
+  }
+};
+
+// src/variants/ZoomOnHover/hooks.ts
+var import_react3 = require("react");
+function useZoomOnHover({
+  followCursor = false,
+  origin = "center",
+  enableTouch = false,
+  onZoomStart,
+  onZoomEnd
+}) {
+  const [isZoomed, setIsZoomed] = (0, import_react3.useState)(false);
+  const [cursorPosition, setCursorPosition] = (0, import_react3.useState)({ x: 50, y: 50 });
+  const [isAnimating, setIsAnimating] = (0, import_react3.useState)(false);
+  const timeoutRef = (0, import_react3.useRef)(null);
+  const containerRef = (0, import_react3.useRef)(null);
+  const handleMouseEnter = (0, import_react3.useCallback)(() => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setIsZoomed(true);
+    onZoomStart?.();
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setIsAnimating(false);
+      onZoomEnd?.();
+    }, 800);
+  }, [isAnimating, onZoomStart, onZoomEnd]);
+  const handleMouseLeave = (0, import_react3.useCallback)(() => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setIsZoomed(false);
+    onZoomStart?.();
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setIsAnimating(false);
+      onZoomEnd?.();
+    }, 800);
+  }, [isAnimating, onZoomStart, onZoomEnd]);
+  const handleMouseMove = (0, import_react3.useCallback)(
+    (e) => {
+      if (!followCursor || !containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width * 100;
+      const y = (e.clientY - rect.top) / rect.height * 100;
+      setCursorPosition({
+        x: Math.max(0, Math.min(100, x)),
+        y: Math.max(0, Math.min(100, y))
+      });
+    },
+    [followCursor]
+  );
+  const handleTouchStart = (0, import_react3.useCallback)(() => {
+    if (!enableTouch) return;
+    handleMouseEnter();
+  }, [enableTouch, handleMouseEnter]);
+  const handleTouchEnd = (0, import_react3.useCallback)(() => {
+    if (!enableTouch) return;
+    setTimeout(handleMouseLeave, 200);
+  }, [enableTouch, handleMouseLeave]);
+  (0, import_react3.useEffect)(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+  const getTransformOrigin = (0, import_react3.useCallback)(() => {
+    if (origin === "cursor" && followCursor) {
+      return `${cursorPosition.x}% ${cursorPosition.y}%`;
+    }
+    const originMap = {
+      center: "center center",
+      top: "center top",
+      bottom: "center bottom",
+      left: "left center",
+      right: "right center",
+      "top-left": "left top",
+      "top-right": "right top",
+      "bottom-left": "left bottom",
+      "bottom-right": "right bottom"
+    };
+    return originMap[origin] || "center center";
+  }, [origin, followCursor, cursorPosition]);
+  return {
+    isZoomed,
+    isAnimating,
+    cursorPosition,
+    transformOrigin: getTransformOrigin(),
+    containerRef,
+    handlers: {
+      onMouseEnter: handleMouseEnter,
+      onMouseLeave: handleMouseLeave,
+      onMouseMove: handleMouseMove,
+      onTouchStart: handleTouchStart,
+      onTouchEnd: handleTouchEnd
+    }
+  };
+}
+
+// src/variants/ZoomOnHover/ZoomOnHover.tsx
 var import_jsx_runtime2 = require("react/jsx-runtime");
 function ZoomOnHover({
   src,
   alt,
   zoomScale = 1.15,
+  animation = "scale",
   origin = "center",
+  timing = {},
+  followCursor = false,
+  opacityChange = 1,
+  blurAmount = 0,
+  rotation = 0,
+  containZoom = false,
+  enableTouch = false,
   className,
   imgClassName,
+  zoomClassName,
   style,
+  onZoomStart,
+  onZoomEnd,
   ...rest
 }) {
+  const { isZoomed, transformOrigin, containerRef, handlers } = useZoomOnHover({
+    followCursor,
+    origin,
+    enableTouch,
+    onZoomStart,
+    onZoomEnd
+  });
+  const animationConfig = zoomAnimations[animation];
+  const cssVars = (0, import_react4.useMemo)(
+    () => ({
+      "--duration": `${timing.duration || 300}ms`,
+      "--delay": `${timing.delay || 0}ms`,
+      "--easing": timing.easing || "ease-out",
+      "--origin": transformOrigin,
+      "--zoom-scale": zoomScale.toString(),
+      "--opacity": opacityChange.toString(),
+      "--blur": `${blurAmount}px`,
+      "--rotation": `${rotation}deg`
+    }),
+    [timing, transformOrigin, zoomScale, opacityChange, blurAmount, rotation]
+  );
+  const containerStyle = (0, import_react4.useMemo)(
+    () => ({
+      ...animationConfig.container,
+      ...cssVars,
+      ...containZoom && { overflow: "hidden" },
+      ...style
+    }),
+    [animationConfig.container, cssVars, containZoom, style]
+  );
+  const imageStyle = (0, import_react4.useMemo)(() => {
+    const baseStyle = animationConfig.image;
+    let zoomTransform = "";
+    let additionalStyles = {};
+    if (isZoomed) {
+      switch (animation) {
+        case "scale":
+          zoomTransform = `scale(${zoomScale})`;
+          break;
+        case "scaleRotate":
+          zoomTransform = `scale(${zoomScale}) rotate(${rotation}deg)`;
+          break;
+        case "scaleBlur":
+          zoomTransform = `scale(${zoomScale})`;
+          additionalStyles.filter = `blur(${blurAmount}px)`;
+          break;
+        case "scaleFade":
+          zoomTransform = `scale(${zoomScale})`;
+          additionalStyles.opacity = opacityChange;
+          break;
+        case "scaleSlide":
+          const slideOffset = (zoomScale - 1) * 10;
+          zoomTransform = `scale(${zoomScale}) translate(${slideOffset}px, ${slideOffset}px)`;
+          break;
+        case "perspective":
+          zoomTransform = `scale(${zoomScale}) perspective(1000px) rotateX(${rotation / 4}deg) rotateY(${rotation / 4}deg)`;
+          break;
+        case "pulse":
+          zoomTransform = `scale(${zoomScale})`;
+          break;
+        case "bounce":
+          zoomTransform = `scale(${zoomScale})`;
+          break;
+        case "elastic":
+          zoomTransform = `scale(${zoomScale})`;
+          break;
+        default:
+          zoomTransform = `scale(${zoomScale})`;
+      }
+    }
+    return {
+      ...baseStyle,
+      ...additionalStyles,
+      transform: zoomTransform,
+      transformOrigin
+    };
+  }, [
+    animationConfig.image,
+    isZoomed,
+    animation,
+    zoomScale,
+    rotation,
+    blurAmount,
+    opacityChange,
+    transformOrigin
+  ]);
+  const containerClassName = (0, import_react4.useMemo)(() => {
+    const classes = ["ri-zoom", `ri-zoom--${animation}`];
+    if (className) classes.push(className);
+    if (isZoomed && zoomClassName) classes.push(zoomClassName);
+    return classes.join(" ");
+  }, [animation, className, isZoomed, zoomClassName]);
   return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
     "span",
     {
-      className: `ri-zoom ${className ?? ""}`,
-      style: {
-        display: "inline-block",
-        overflow: "hidden",
-        ...style
-      },
+      ref: containerRef,
+      className: containerClassName,
+      style: containerStyle,
+      ...handlers,
       children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
         "img",
         {
           src,
           alt,
           className: imgClassName,
+          style: imageStyle,
           loading: rest.loading,
           decoding: rest.decoding,
-          style: {
-            display: "block",
-            width: "100%",
-            height: "auto",
-            transformOrigin: origin,
-            transition: "transform 200ms ease"
-          },
-          onMouseEnter: (e) => e.currentTarget.style.transform = `scale(${zoomScale})`,
-          onMouseLeave: (e) => e.currentTarget.style.transform = "scale(1)"
+          draggable: false
         }
       )
     }
@@ -555,7 +858,7 @@ function ZoomOnHover({
 }
 
 // src/variants/tiltOnHover.tsx
-var import_react3 = require("react");
+var import_react5 = require("react");
 var import_jsx_runtime3 = require("react/jsx-runtime");
 function TiltOnHover({
   src,
@@ -566,7 +869,7 @@ function TiltOnHover({
   style,
   ...rest
 }) {
-  const ref = (0, import_react3.useRef)(null);
+  const ref = (0, import_react5.useRef)(null);
   const onMove = (e) => {
     const el = ref.current;
     if (!el) return;
@@ -610,7 +913,7 @@ function TiltOnHover({
 }
 
 // src/variants/clickExpand.tsx
-var import_react4 = require("react");
+var import_react6 = require("react");
 var import_jsx_runtime4 = require("react/jsx-runtime");
 function ClickExpand({
   src,
@@ -625,8 +928,8 @@ function ClickExpand({
   closeOnBackdrop = true,
   ...rest
 }) {
-  const [open, setOpen] = (0, import_react4.useState)(false);
-  (0, import_react4.useEffect)(() => {
+  const [open, setOpen] = (0, import_react6.useState)(false);
+  (0, import_react6.useEffect)(() => {
     if (!open || !closeOnEsc) return;
     const h = (e) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", h);

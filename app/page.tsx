@@ -129,13 +129,94 @@ export default function Page() {
         </div>
       </div>
 
-      <h2 className="text-2xl font-semibold mb-4 mt-8">zoomOnHover</h2>
-      <ReactiveImage
-        variant="zoomOnHover"
-        src="/img/b.jpg"
-        alt="Zoom"
-        zoomScale={1.2}
-      />
+      <h2 className="text-2xl font-semibold mb-4 mt-8">ZoomOnHover Variants</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div>
+          <h3 className="text-lg font-medium mb-2">Basic Scale</h3>
+          <ReactiveImage
+            variant="zoomOnHover"
+            src="https://picsum.photos/300/300?random=20"
+            alt="Basic scale zoom"
+            animation="scale"
+            zoomScale={1.2}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover"
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Scale Rotate</h3>
+          <ReactiveImage
+            variant="zoomOnHover"
+            src="https://picsum.photos/300/300?random=21"
+            alt="Scale rotate zoom"
+            animation="scaleRotate"
+            zoomScale={1.25}
+            rotation={15}
+            timing={{ duration: 400 }}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover"
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Elastic Bounce</h3>
+          <ReactiveImage
+            variant="zoomOnHover"
+            src="https://picsum.photos/300/300?random=22"
+            alt="Elastic zoom"
+            animation="elastic"
+            zoomScale={1.3}
+            timing={{ duration: 600 }}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover"
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Scale Blur</h3>
+          <ReactiveImage
+            variant="zoomOnHover"
+            src="https://picsum.photos/300/300?random=23"
+            alt="Scale blur zoom"
+            animation="scaleBlur"
+            zoomScale={1.15}
+            blurAmount={3}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover"
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Cursor Following</h3>
+          <ReactiveImage
+            variant="zoomOnHover"
+            src="https://picsum.photos/300/300?random=24"
+            alt="Cursor following zoom"
+            animation="scale"
+            origin="cursor"
+            followCursor={true}
+            zoomScale={1.4}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover"
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">3D Perspective</h3>
+          <ReactiveImage
+            variant="zoomOnHover"
+            src="https://picsum.photos/300/300?random=25"
+            alt="3D perspective zoom"
+            animation="perspective"
+            zoomScale={1.2}
+            rotation={20}
+            timing={{ duration: 500 }}
+            className="w-full h-64"
+            imgClassName="rounded-lg object-cover"
+          />
+        </div>
+      </div>
 
       <h2 className="text-2xl font-semibold mb-4 mt-8">tiltOnHover</h2>
       <ReactiveImage
