@@ -4,23 +4,45 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:full": "concurrently \"npm run -w reactive-image dev\" \"npm run dev\"",
     "build": "next build",
+    "build:package": "npm run -w reactive-image build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "next": "16.0.1",
+    "postcss": "^8.5.6",
     "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "next": "16.0.1"
+    "react-dom": "19.2.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@tailwindcss/postcss": "^4.1.17",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "concurrently": "^9.2.1",
     "eslint": "^9",
-    "eslint-config-next": "16.0.1"
-  }
+    "eslint-config-next": "16.0.1",
+    "tailwindcss": "^4.1.17",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poyrazavsever/reactive-image.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/poyrazavsever/reactive-image/issues"
+  },
+  "homepage": "https://github.com/poyrazavsever/reactive-image#readme"
 }
