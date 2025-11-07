@@ -1,3 +1,5 @@
+<img src="./public/logo/logo.png" width="64" height="64">
+
 # Reactive Image
 
 **Reactive Image** - A powerful, interactive, and customizable visual component collection for React applications. Delivers stunning animations and smooth transitions to enhance user experience.
