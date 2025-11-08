@@ -1,1 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+SAS:wght@100..400&display=swap');
 @import "tailwindcss";
+
+
+@theme {
+    --font-playwrite: "Playwrite DE SAS", cursive;
+}
