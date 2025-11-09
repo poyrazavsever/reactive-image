@@ -1,4 +1,4 @@
-import { docs } from "@/.velite"; // velite output
+import { docs } from "@/.velite";
 import { notFound } from "next/navigation";
 import { MDXContent } from "@/app/components/mdx/MdxProvider";
 
