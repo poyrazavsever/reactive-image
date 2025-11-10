@@ -13,7 +13,7 @@ export default async function LocalePage({ params }: Props) {
   const dict = await getDictionary(locale as any);
 
   return (
-    <main>
+    <main className="pt-20">
       {/* Hero Section */}
       <HeroSection locale={locale} dict={dict} />
 
