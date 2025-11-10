@@ -43,7 +43,7 @@ const Navbar = ({ locale, dict }: NavbarProps) => {
             {dict.navbar.docs}
           </Link>
           <Link
-            href={`/${locale}/blog`}
+            href="https://www.poyrazavsever.com/blog"
             className="text-neutral-700 hover:text-orange-500 transition-colors"
           >
             {dict.navbar.blog}
@@ -111,7 +111,7 @@ const Navbar = ({ locale, dict }: NavbarProps) => {
                 {dict.navbar.docs}
               </Link>
               <Link
-                href={`/${locale}/blog`}
+                href="https://www.poyrazavsever.com/blog"
                 className="block text-neutral-700 hover:text-orange-500 transition-colors py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
