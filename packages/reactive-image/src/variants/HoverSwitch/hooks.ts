@@ -24,42 +24,46 @@ export function useHoverSwitch({
   }, [hoverSrc, preloadHover, isPreloaded]);
 
   const handleMouseEnter = useCallback(() => {
-    if (isAnimating) return;
-
-    setIsAnimating(true);
-    setIsHovered(true);
-    onAnimationStart?.();
-
-    // Clear any pending timeout
+    // Always clear any pending timeout first
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
 
-    // Animation end callback
-    timeoutRef.current = setTimeout(() => {
-      setIsAnimating(false);
-      onAnimationEnd?.();
-    }, 400); // Max animation duration
-  }, [isAnimating, onAnimationStart, onAnimationEnd]);
+    // Don't block on animation state - allow immediate state changes
+    if (!isHovered) {
+      setIsAnimating(true);
+      setIsHovered(true);
+      onAnimationStart?.();
+
+      // Set animation end callback
+      timeoutRef.current = setTimeout(() => {
+        setIsAnimating(false);
+        onAnimationEnd?.();
+      }, 400); // Max animation duration
+    }
+  }, [isHovered, onAnimationStart, onAnimationEnd]);
 
   const handleMouseLeave = useCallback(() => {
-    if (isAnimating) return;
-
-    setIsAnimating(true);
-    setIsHovered(false);
-    onAnimationStart?.();
-
-    // Clear any pending timeout
+    // Always clear any pending timeout first
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
 
-    // Animation end callback
-    timeoutRef.current = setTimeout(() => {
-      setIsAnimating(false);
-      onAnimationEnd?.();
-    }, 400); // Max animation duration
-  }, [isAnimating, onAnimationStart, onAnimationEnd]);
+    // Don't block on animation state - allow immediate state changes
+    if (isHovered) {
+      setIsAnimating(true);
+      setIsHovered(false);
+      onAnimationStart?.();
+
+      // Set animation end callback
+      timeoutRef.current = setTimeout(() => {
+        setIsAnimating(false);
+        onAnimationEnd?.();
+      }, 400); // Max animation duration
+    }
+  }, [isHovered, onAnimationStart, onAnimationEnd]);
 
   // Touch handlers for mobile
   const handleTouchStart = useCallback(() => {
@@ -69,8 +73,8 @@ export function useHoverSwitch({
 
   const handleTouchEnd = useCallback(() => {
     if (!enableTouch) return;
-    // Delay touch end to show effect
-    setTimeout(handleMouseLeave, 150);
+    // Shorter delay for better mobile experience
+    setTimeout(handleMouseLeave, 100);
   }, [enableTouch, handleMouseLeave]);
 
   // Cleanup timeout on unmount

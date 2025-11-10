@@ -84,7 +84,7 @@ export function useTiltOnHover({
       const rect = containerRef.current.getBoundingClientRect();
       const newTilt = calculateTilt(e.clientX, e.clientY, rect);
 
-      // Use RAF for smooth animation
+      // Use RAF for smooth animation, but don't block multiple calls
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
@@ -107,15 +107,26 @@ export function useTiltOnHover({
   );
 
   const handleMouseLeave = useCallback(() => {
-    if (!resetOnLeave) return;
+    // Always clear any pending animations
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
+    }
 
+    // Clear any pending reset timeout
+    if (resetTimeoutRef.current) {
+      clearTimeout(resetTimeoutRef.current);
+      resetTimeoutRef.current = null;
+    }
+
+    // Immediately set inactive state
     setTiltState((prev) => ({
       ...prev,
       isActive: false,
     }));
 
-    // Smooth reset with timeout
-    resetTimeoutRef.current = setTimeout(() => {
+    if (resetOnLeave) {
+      // Immediate reset for better responsiveness
       setTiltState((prev) => ({
         ...prev,
         tiltX: 0,
@@ -123,8 +134,12 @@ export function useTiltOnHover({
         mouseX: 50,
         mouseY: 50,
       }));
-      onTiltEnd?.();
-    }, 50);
+
+      // Call end callback after a short delay
+      resetTimeoutRef.current = setTimeout(() => {
+        onTiltEnd?.();
+      }, 100);
+    }
   }, [resetOnLeave, onTiltEnd]);
 
   // Touch handlers for mobile

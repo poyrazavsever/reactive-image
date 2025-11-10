@@ -1,5 +1,4 @@
 export const animations = {
-
   slide: {
     container: {
       position: "relative" as const,
@@ -8,10 +7,11 @@ export const animations = {
     },
     image: {
       transition:
-        "transform var(--duration, 300ms) var(--easing, ease-in-out) var(--delay, 0ms)",
+        "transform var(--duration, 300ms) var(--easing, ease-out) var(--delay, 0ms)",
       display: "block" as const,
       width: "100%",
       height: "auto",
+      willChange: "transform" as const,
     },
     hoverImage: {
       position: "absolute" as const,
@@ -22,7 +22,8 @@ export const animations = {
       objectFit: "cover" as const,
       transform: "translateX(100%)",
       transition:
-        "transform var(--duration, 300ms) var(--easing, ease-in-out) var(--delay, 0ms)",
+        "transform var(--duration, 300ms) var(--easing, ease-out) var(--delay, 0ms)",
+      willChange: "transform" as const,
     },
   },
 
@@ -34,10 +35,11 @@ export const animations = {
     },
     image: {
       transition:
-        "opacity var(--duration, 400ms) var(--easing, ease-in-out) var(--delay, 0ms)",
+        "opacity var(--duration, 300ms) var(--easing, ease-out) var(--delay, 0ms)",
       display: "block" as const,
       width: "100%",
       height: "auto",
+      willChange: "opacity" as const,
     },
     hoverImage: {
       position: "absolute" as const,

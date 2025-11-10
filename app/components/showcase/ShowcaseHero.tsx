@@ -135,7 +135,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
                 alt="Crossfade hover switch"
                 className="w-full aspect-4/3 object-cover"
                 animation="crossfade"
-                timing={{ duration: 300, easing: "ease-in-out" }}
+                timing={{ duration: 250, easing: "ease-out" }}
               />
             </div>
 
@@ -152,7 +152,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
                 alt="Slide hover switch"
                 className="w-full aspect-4/3 object-cover"
                 animation="slide"
-                timing={{ duration: 400, easing: "ease-out" }}
+                timing={{ duration: 300, easing: "ease-out" }}
               />
             </div>
 
@@ -169,7 +169,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
                 alt="Fast hover switch"
                 className="w-full aspect-4/3 object-cover"
                 animation="crossfade"
-                timing={{ duration: 150, easing: "ease-in-out" }}
+                timing={{ duration: 150, easing: "ease-out" }}
               />
             </div>
           </div>
@@ -196,7 +196,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
                 alt="Basic 3D tilt"
                 className="w-full aspect-4/3 object-cover rounded-lg"
                 tiltMax={15}
-                timing={{ duration: 300, easing: "ease-out" }}
+                timing={{ duration: 200, easing: "ease-out" }}
               />
             </div>
 
@@ -214,7 +214,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
                 animation="glare"
                 tiltMax={20}
                 glare={{ enabled: true, maxOpacity: 0.3, color: "#ffffff" }}
-                timing={{ duration: 400, easing: "ease-out" }}
+                timing={{ duration: 300, easing: "ease-out" }}
               />
             </div>
 
@@ -231,7 +231,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
                 className="w-full aspect-4/3 object-cover rounded-lg"
                 tiltMax={18}
                 scale={1.1}
-                timing={{ duration: 350, easing: "ease-out" }}
+                timing={{ duration: 250, easing: "ease-out" }}
               />
             </div>
           </div>
@@ -258,7 +258,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
                 alt="Basic zoom"
                 className="w-full aspect-4/3 object-cover"
                 zoomScale={1.2}
-                timing={{ duration: 300, easing: "ease-in-out" }}
+                timing={{ duration: 250, easing: "ease-out" }}
               />
             </div>
 
@@ -274,7 +274,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
                 alt="Strong zoom"
                 className="w-full aspect-4/3 object-cover"
                 zoomScale={1.5}
-                timing={{ duration: 500, easing: "ease-out" }}
+                timing={{ duration: 400, easing: "ease-out" }}
               />
             </div>
 
@@ -290,7 +290,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
                 alt="Fast zoom"
                 className="w-full aspect-4/3 object-cover"
                 zoomScale={1.25}
-                timing={{ duration: 200, easing: "ease-in-out" }}
+                timing={{ duration: 200, easing: "ease-out" }}
               />
             </div>
 
@@ -307,7 +307,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
                 className="w-full aspect-4/3 object-cover"
                 zoomScale={1.3}
                 origin="top-left"
-                timing={{ duration: 400, easing: "ease-in-out" }}
+                timing={{ duration: 350, easing: "ease-out" }}
               />
             </div>
           </div>

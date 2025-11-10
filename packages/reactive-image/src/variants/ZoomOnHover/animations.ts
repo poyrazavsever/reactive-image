@@ -11,6 +11,7 @@ export const zoomAnimations = {
       height: "auto",
       transition: "transform var(--duration, 300ms) var(--easing, ease-out)",
       transformOrigin: "var(--origin, center)",
+      willChange: "transform" as const,
     },
   },
 

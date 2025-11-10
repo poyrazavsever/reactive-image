@@ -15,42 +15,46 @@ export function useZoomOnHover({
   const containerRef = useRef<HTMLElement>(null);
 
   const handleMouseEnter = useCallback(() => {
-    if (isAnimating) return;
-
-    setIsAnimating(true);
-    setIsZoomed(true);
-    onZoomStart?.();
-
-    // Clear any pending timeout
+    // Always clear any pending timeout first
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
 
-    // Animation end callback
-    timeoutRef.current = setTimeout(() => {
-      setIsAnimating(false);
-      onZoomEnd?.();
-    }, 800); // Max animation duration for elastic
-  }, [isAnimating, onZoomStart, onZoomEnd]);
+    // Don't block on animation state - allow immediate state changes
+    if (!isZoomed) {
+      setIsAnimating(true);
+      setIsZoomed(true);
+      onZoomStart?.();
+
+      // Set animation end callback
+      timeoutRef.current = setTimeout(() => {
+        setIsAnimating(false);
+        onZoomEnd?.();
+      }, 600); // Reduced timeout for better responsiveness
+    }
+  }, [isZoomed, onZoomStart, onZoomEnd]);
 
   const handleMouseLeave = useCallback(() => {
-    if (isAnimating) return;
-
-    setIsAnimating(true);
-    setIsZoomed(false);
-    onZoomStart?.();
-
-    // Clear any pending timeout
+    // Always clear any pending timeout first
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
 
-    // Animation end callback
-    timeoutRef.current = setTimeout(() => {
-      setIsAnimating(false);
-      onZoomEnd?.();
-    }, 800); // Max animation duration
-  }, [isAnimating, onZoomStart, onZoomEnd]);
+    // Don't block on animation state - allow immediate state changes
+    if (isZoomed) {
+      setIsAnimating(true);
+      setIsZoomed(false);
+      onZoomStart?.();
+
+      // Set animation end callback
+      timeoutRef.current = setTimeout(() => {
+        setIsAnimating(false);
+        onZoomEnd?.();
+      }, 600); // Reduced timeout for better responsiveness
+    }
+  }, [isZoomed, onZoomStart, onZoomEnd]);
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
@@ -76,8 +80,8 @@ export function useZoomOnHover({
 
   const handleTouchEnd = useCallback(() => {
     if (!enableTouch) return;
-    // Delay touch end to show effect
-    setTimeout(handleMouseLeave, 200);
+    // Shorter delay for better mobile experience
+    setTimeout(handleMouseLeave, 150);
   }, [enableTouch, handleMouseLeave]);
 
   // Cleanup timeout on unmount
