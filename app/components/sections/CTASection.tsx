@@ -11,7 +11,7 @@ type CTASectionProps = {
 
 export function CTASection({ locale, dict }: CTASectionProps) {
   return (
-    <section className="py-20 px-6 sm:px-0 bg-orange-50">
+    <section className="py-20 px-6 sm:px-0">
       <div className="container max-w-6xl mx-auto text-center">
         {/* Section Header */}
         <div className="mb-12">
