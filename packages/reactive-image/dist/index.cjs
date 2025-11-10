@@ -46,10 +46,11 @@ var animations = {
       overflow: "hidden"
     },
     image: {
-      transition: "transform var(--duration, 300ms) var(--easing, ease-in-out) var(--delay, 0ms)",
+      transition: "transform var(--duration, 300ms) var(--easing, ease-out) var(--delay, 0ms)",
       display: "block",
       width: "100%",
-      height: "auto"
+      height: "auto",
+      willChange: "transform"
     },
     hoverImage: {
       position: "absolute",
@@ -59,7 +60,8 @@ var animations = {
       height: "100%",
       objectFit: "cover",
       transform: "translateX(100%)",
-      transition: "transform var(--duration, 300ms) var(--easing, ease-in-out) var(--delay, 0ms)"
+      transition: "transform var(--duration, 300ms) var(--easing, ease-out) var(--delay, 0ms)",
+      willChange: "transform"
     }
   },
   crossfade: {
@@ -69,10 +71,11 @@ var animations = {
       overflow: "hidden"
     },
     image: {
-      transition: "opacity var(--duration, 400ms) var(--easing, ease-in-out) var(--delay, 0ms)",
+      transition: "opacity var(--duration, 300ms) var(--easing, ease-out) var(--delay, 0ms)",
       display: "block",
       width: "100%",
-      height: "auto"
+      height: "auto",
+      willChange: "opacity"
     },
     hoverImage: {
       position: "absolute",
@@ -253,38 +256,42 @@ function useHoverSwitch({
     }
   }, [hoverSrc, preloadHover, isPreloaded]);
   const handleMouseEnter = (0, import_react.useCallback)(() => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setIsHovered(true);
-    onAnimationStart?.();
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
-    timeoutRef.current = setTimeout(() => {
-      setIsAnimating(false);
-      onAnimationEnd?.();
-    }, 400);
-  }, [isAnimating, onAnimationStart, onAnimationEnd]);
+    if (!isHovered) {
+      setIsAnimating(true);
+      setIsHovered(true);
+      onAnimationStart?.();
+      timeoutRef.current = setTimeout(() => {
+        setIsAnimating(false);
+        onAnimationEnd?.();
+      }, 400);
+    }
+  }, [isHovered, onAnimationStart, onAnimationEnd]);
   const handleMouseLeave = (0, import_react.useCallback)(() => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setIsHovered(false);
-    onAnimationStart?.();
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
-    timeoutRef.current = setTimeout(() => {
-      setIsAnimating(false);
-      onAnimationEnd?.();
-    }, 400);
-  }, [isAnimating, onAnimationStart, onAnimationEnd]);
+    if (isHovered) {
+      setIsAnimating(true);
+      setIsHovered(false);
+      onAnimationStart?.();
+      timeoutRef.current = setTimeout(() => {
+        setIsAnimating(false);
+        onAnimationEnd?.();
+      }, 400);
+    }
+  }, [isHovered, onAnimationStart, onAnimationEnd]);
   const handleTouchStart = (0, import_react.useCallback)(() => {
     if (!enableTouch) return;
     handleMouseEnter();
   }, [enableTouch, handleMouseEnter]);
   const handleTouchEnd = (0, import_react.useCallback)(() => {
     if (!enableTouch) return;
-    setTimeout(handleMouseLeave, 150);
+    setTimeout(handleMouseLeave, 100);
   }, [enableTouch, handleMouseLeave]);
   (0, import_react.useEffect)(() => {
     return () => {
@@ -510,7 +517,8 @@ var zoomAnimations = {
       width: "100%",
       height: "auto",
       transition: "transform var(--duration, 300ms) var(--easing, ease-out)",
-      transformOrigin: "var(--origin, center)"
+      transformOrigin: "var(--origin, center)",
+      willChange: "transform"
     }
   },
   scaleRotate: {
@@ -643,31 +651,35 @@ function useZoomOnHover({
   const timeoutRef = (0, import_react3.useRef)(null);
   const containerRef = (0, import_react3.useRef)(null);
   const handleMouseEnter = (0, import_react3.useCallback)(() => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setIsZoomed(true);
-    onZoomStart?.();
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
-    timeoutRef.current = setTimeout(() => {
-      setIsAnimating(false);
-      onZoomEnd?.();
-    }, 800);
-  }, [isAnimating, onZoomStart, onZoomEnd]);
+    if (!isZoomed) {
+      setIsAnimating(true);
+      setIsZoomed(true);
+      onZoomStart?.();
+      timeoutRef.current = setTimeout(() => {
+        setIsAnimating(false);
+        onZoomEnd?.();
+      }, 600);
+    }
+  }, [isZoomed, onZoomStart, onZoomEnd]);
   const handleMouseLeave = (0, import_react3.useCallback)(() => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setIsZoomed(false);
-    onZoomStart?.();
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
-    timeoutRef.current = setTimeout(() => {
-      setIsAnimating(false);
-      onZoomEnd?.();
-    }, 800);
-  }, [isAnimating, onZoomStart, onZoomEnd]);
+    if (isZoomed) {
+      setIsAnimating(true);
+      setIsZoomed(false);
+      onZoomStart?.();
+      timeoutRef.current = setTimeout(() => {
+        setIsAnimating(false);
+        onZoomEnd?.();
+      }, 600);
+    }
+  }, [isZoomed, onZoomStart, onZoomEnd]);
   const handleMouseMove = (0, import_react3.useCallback)(
     (e) => {
       if (!followCursor || !containerRef.current) return;
@@ -687,7 +699,7 @@ function useZoomOnHover({
   }, [enableTouch, handleMouseEnter]);
   const handleTouchEnd = (0, import_react3.useCallback)(() => {
     if (!enableTouch) return;
-    setTimeout(handleMouseLeave, 200);
+    setTimeout(handleMouseLeave, 150);
   }, [enableTouch, handleMouseLeave]);
   (0, import_react3.useEffect)(() => {
     return () => {
@@ -1084,12 +1096,19 @@ function useTiltOnHover({
     [tiltState.isActive, calculateTilt, onTiltMove]
   );
   const handleMouseLeave = (0, import_react5.useCallback)(() => {
-    if (!resetOnLeave) return;
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
+    }
+    if (resetTimeoutRef.current) {
+      clearTimeout(resetTimeoutRef.current);
+      resetTimeoutRef.current = null;
+    }
     setTiltState((prev) => ({
       ...prev,
       isActive: false
     }));
-    resetTimeoutRef.current = setTimeout(() => {
+    if (resetOnLeave) {
       setTiltState((prev) => ({
         ...prev,
         tiltX: 0,
@@ -1097,8 +1116,10 @@ function useTiltOnHover({
         mouseX: 50,
         mouseY: 50
       }));
-      onTiltEnd?.();
-    }, 50);
+      resetTimeoutRef.current = setTimeout(() => {
+        onTiltEnd?.();
+      }, 100);
+    }
   }, [resetOnLeave, onTiltEnd]);
   const handleTouchStart = (0, import_react5.useCallback)(
     (e) => {
@@ -1473,7 +1494,13 @@ function useClickExpand(config = {}) {
           onClose?.();
         }, 200);
       }
-    }, [closeOnBackdrop, state.isOpen, state.isAnimating, startAnimation, onClose])
+    }, [
+      closeOnBackdrop,
+      state.isOpen,
+      state.isAnimating,
+      startAnimation,
+      onClose
+    ])
   };
   (0, import_react7.useEffect)(() => {
     return () => {

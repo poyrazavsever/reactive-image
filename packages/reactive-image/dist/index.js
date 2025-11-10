@@ -10,10 +10,11 @@ var animations = {
       overflow: "hidden"
     },
     image: {
-      transition: "transform var(--duration, 300ms) var(--easing, ease-in-out) var(--delay, 0ms)",
+      transition: "transform var(--duration, 300ms) var(--easing, ease-out) var(--delay, 0ms)",
       display: "block",
       width: "100%",
-      height: "auto"
+      height: "auto",
+      willChange: "transform"
     },
     hoverImage: {
       position: "absolute",
@@ -23,7 +24,8 @@ var animations = {
       height: "100%",
       objectFit: "cover",
       transform: "translateX(100%)",
-      transition: "transform var(--duration, 300ms) var(--easing, ease-in-out) var(--delay, 0ms)"
+      transition: "transform var(--duration, 300ms) var(--easing, ease-out) var(--delay, 0ms)",
+      willChange: "transform"
     }
   },
   crossfade: {
@@ -33,10 +35,11 @@ var animations = {
       overflow: "hidden"
     },
     image: {
-      transition: "opacity var(--duration, 400ms) var(--easing, ease-in-out) var(--delay, 0ms)",
+      transition: "opacity var(--duration, 300ms) var(--easing, ease-out) var(--delay, 0ms)",
       display: "block",
       width: "100%",
-      height: "auto"
+      height: "auto",
+      willChange: "opacity"
     },
     hoverImage: {
       position: "absolute",
@@ -217,38 +220,42 @@ function useHoverSwitch({
     }
   }, [hoverSrc, preloadHover, isPreloaded]);
   const handleMouseEnter = useCallback(() => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setIsHovered(true);
-    onAnimationStart?.();
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
-    timeoutRef.current = setTimeout(() => {
-      setIsAnimating(false);
-      onAnimationEnd?.();
-    }, 400);
-  }, [isAnimating, onAnimationStart, onAnimationEnd]);
+    if (!isHovered) {
+      setIsAnimating(true);
+      setIsHovered(true);
+      onAnimationStart?.();
+      timeoutRef.current = setTimeout(() => {
+        setIsAnimating(false);
+        onAnimationEnd?.();
+      }, 400);
+    }
+  }, [isHovered, onAnimationStart, onAnimationEnd]);
   const handleMouseLeave = useCallback(() => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setIsHovered(false);
-    onAnimationStart?.();
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
-    timeoutRef.current = setTimeout(() => {
-      setIsAnimating(false);
-      onAnimationEnd?.();
-    }, 400);
-  }, [isAnimating, onAnimationStart, onAnimationEnd]);
+    if (isHovered) {
+      setIsAnimating(true);
+      setIsHovered(false);
+      onAnimationStart?.();
+      timeoutRef.current = setTimeout(() => {
+        setIsAnimating(false);
+        onAnimationEnd?.();
+      }, 400);
+    }
+  }, [isHovered, onAnimationStart, onAnimationEnd]);
   const handleTouchStart = useCallback(() => {
     if (!enableTouch) return;
     handleMouseEnter();
   }, [enableTouch, handleMouseEnter]);
   const handleTouchEnd = useCallback(() => {
     if (!enableTouch) return;
-    setTimeout(handleMouseLeave, 150);
+    setTimeout(handleMouseLeave, 100);
   }, [enableTouch, handleMouseLeave]);
   useEffect(() => {
     return () => {
@@ -474,7 +481,8 @@ var zoomAnimations = {
       width: "100%",
       height: "auto",
       transition: "transform var(--duration, 300ms) var(--easing, ease-out)",
-      transformOrigin: "var(--origin, center)"
+      transformOrigin: "var(--origin, center)",
+      willChange: "transform"
     }
   },
   scaleRotate: {
@@ -607,31 +615,35 @@ function useZoomOnHover({
   const timeoutRef = useRef2(null);
   const containerRef = useRef2(null);
   const handleMouseEnter = useCallback2(() => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setIsZoomed(true);
-    onZoomStart?.();
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
-    timeoutRef.current = setTimeout(() => {
-      setIsAnimating(false);
-      onZoomEnd?.();
-    }, 800);
-  }, [isAnimating, onZoomStart, onZoomEnd]);
+    if (!isZoomed) {
+      setIsAnimating(true);
+      setIsZoomed(true);
+      onZoomStart?.();
+      timeoutRef.current = setTimeout(() => {
+        setIsAnimating(false);
+        onZoomEnd?.();
+      }, 600);
+    }
+  }, [isZoomed, onZoomStart, onZoomEnd]);
   const handleMouseLeave = useCallback2(() => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setIsZoomed(false);
-    onZoomStart?.();
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
-    timeoutRef.current = setTimeout(() => {
-      setIsAnimating(false);
-      onZoomEnd?.();
-    }, 800);
-  }, [isAnimating, onZoomStart, onZoomEnd]);
+    if (isZoomed) {
+      setIsAnimating(true);
+      setIsZoomed(false);
+      onZoomStart?.();
+      timeoutRef.current = setTimeout(() => {
+        setIsAnimating(false);
+        onZoomEnd?.();
+      }, 600);
+    }
+  }, [isZoomed, onZoomStart, onZoomEnd]);
   const handleMouseMove = useCallback2(
     (e) => {
       if (!followCursor || !containerRef.current) return;
@@ -651,7 +663,7 @@ function useZoomOnHover({
   }, [enableTouch, handleMouseEnter]);
   const handleTouchEnd = useCallback2(() => {
     if (!enableTouch) return;
-    setTimeout(handleMouseLeave, 200);
+    setTimeout(handleMouseLeave, 150);
   }, [enableTouch, handleMouseLeave]);
   useEffect2(() => {
     return () => {
@@ -1048,12 +1060,19 @@ function useTiltOnHover({
     [tiltState.isActive, calculateTilt, onTiltMove]
   );
   const handleMouseLeave = useCallback3(() => {
-    if (!resetOnLeave) return;
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
+    }
+    if (resetTimeoutRef.current) {
+      clearTimeout(resetTimeoutRef.current);
+      resetTimeoutRef.current = null;
+    }
     setTiltState((prev) => ({
       ...prev,
       isActive: false
     }));
-    resetTimeoutRef.current = setTimeout(() => {
+    if (resetOnLeave) {
       setTiltState((prev) => ({
         ...prev,
         tiltX: 0,
@@ -1061,8 +1080,10 @@ function useTiltOnHover({
         mouseX: 50,
         mouseY: 50
       }));
-      onTiltEnd?.();
-    }, 50);
+      resetTimeoutRef.current = setTimeout(() => {
+        onTiltEnd?.();
+      }, 100);
+    }
   }, [resetOnLeave, onTiltEnd]);
   const handleTouchStart = useCallback3(
     (e) => {
@@ -1437,7 +1458,13 @@ function useClickExpand(config = {}) {
           onClose?.();
         }, 200);
       }
-    }, [closeOnBackdrop, state.isOpen, state.isAnimating, startAnimation, onClose])
+    }, [
+      closeOnBackdrop,
+      state.isOpen,
+      state.isAnimating,
+      startAnimation,
+      onClose
+    ])
   };
   useEffect4(() => {
     return () => {

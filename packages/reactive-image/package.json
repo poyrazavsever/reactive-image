@@ -1,6 +1,7 @@
 {
   "name": "reactive-image",
-  "version": "1.0.0",
+  "version": "1.0.2",
+  "description": "A modern React image component library with interactive animations",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -8,8 +9,36 @@
   "sideEffects": false,
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
+  "keywords": [
+    "react",
+    "image",
+    "animation",
+    "hover",
+    "zoom",
+    "tilt",
+    "modal",
+    "typescript",
+    "component",
+    "ui",
+    "interactive"
+  ],
+  "author": {
+    "name": "Poyraz Avsever",
+    "email": "poyrazavsever@gmail.com",
+    "url": "https://github.com/poyrazavsever"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poyrazavsever/reactive-image.git"
+  },
+  "homepage": "https://reactive-image.poyrazavsever.com",
+  "bugs": {
+    "url": "https://github.com/poyrazavsever/reactive-image/issues"
+  },
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18"
