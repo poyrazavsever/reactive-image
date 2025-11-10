@@ -3,6 +3,8 @@ import { HeroSection } from "@/app/components/sections/HeroSection";
 import { FeaturesSection } from "@/app/components/sections/FeaturesSection";
 import { ShowcaseSection } from "@/app/components/sections/ShowcaseSection";
 import { CTASection } from "@/app/components/sections/CTASection";
+import { CodeExamples } from "@/app/components/showcase/CodeExamples";
+import { InteractivePlayground } from "@/app/components/showcase/InteractivePlayground";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -22,6 +24,12 @@ export default async function LocalePage({ params }: Props) {
 
       {/* Showcase Section */}
       <ShowcaseSection locale={locale} dict={dict} />
+
+      {/* Code Examples */}
+      <CodeExamples locale={locale} dict={dict} />
+
+      {/* Interactive Playground */}
+      <InteractivePlayground locale={locale} dict={dict} />
 
       {/* CTA Section */}
       <CTASection locale={locale} dict={dict} />
