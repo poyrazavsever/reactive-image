@@ -75,7 +75,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {/* Scale Fade */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Scale Fade</h4>
               </div>
               <ClickExpand
@@ -89,7 +89,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Slide Up */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Slide Up</h4>
               </div>
               <ClickExpand
@@ -103,7 +103,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Slide Down */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Slide Down</h4>
               </div>
               <ClickExpand
@@ -117,7 +117,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Slide Left */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Slide Left</h4>
               </div>
               <ClickExpand
@@ -131,7 +131,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Slide Right */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Slide Right</h4>
               </div>
               <ClickExpand
@@ -145,7 +145,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Spring Pop */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Spring Pop</h4>
               </div>
               <ClickExpand
@@ -159,7 +159,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Zoom Bounce */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Zoom Bounce</h4>
               </div>
               <ClickExpand
@@ -173,7 +173,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Rotate In */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Rotate In</h4>
               </div>
               <ClickExpand
@@ -187,7 +187,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Flip In */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Flip In</h4>
               </div>
               <ClickExpand
@@ -211,7 +211,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {/* Crossfade */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Crossfade</h4>
               </div>
               <HoverSwitch
@@ -226,7 +226,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Slide Right */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Slide Right</h4>
               </div>
               <HoverSwitch
@@ -242,7 +242,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Slide Left */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Slide Left</h4>
               </div>
               <HoverSwitch
@@ -258,7 +258,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Slide Up */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Slide Up</h4>
               </div>
               <HoverSwitch
@@ -273,7 +273,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Slide Down */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Slide Down</h4>
               </div>
               <HoverSwitch
@@ -288,7 +288,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Zoom */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Zoom</h4>
               </div>
               <HoverSwitch
@@ -303,7 +303,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Blur */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Blur</h4>
               </div>
               <HoverSwitch
@@ -318,7 +318,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Rotate Y */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Rotate Y</h4>
               </div>
               <HoverSwitch
@@ -333,7 +333,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Scale Rotate */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Scale Rotate</h4>
               </div>
               <HoverSwitch
@@ -358,7 +358,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {/* Basic Tilt */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Basic Tilt</h4>
               </div>
               <TiltOnHover
@@ -373,7 +373,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Glare Tilt */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Glare Effect</h4>
               </div>
               <TiltOnHover
@@ -389,7 +389,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Scale Tilt */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Scale Tilt</h4>
               </div>
               <TiltOnHover
@@ -405,7 +405,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Perspective Tilt */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Perspective</h4>
               </div>
               <TiltOnHover
@@ -421,7 +421,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Bounce Tilt */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Bounce</h4>
               </div>
               <TiltOnHover
@@ -439,7 +439,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Elastic Tilt */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Elastic</h4>
               </div>
               <TiltOnHover
@@ -454,7 +454,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Magnetic Tilt */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Magnetic</h4>
               </div>
               <TiltOnHover
@@ -469,7 +469,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Float Tilt */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Float</h4>
               </div>
               <TiltOnHover
@@ -485,7 +485,7 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
 
             {/* Parallax Tilt */}
             <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
                 <h4 className="text-white font-medium text-xs">Parallax</h4>
               </div>
               <TiltOnHover
