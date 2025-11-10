@@ -7,13 +7,39 @@ locale: en
 slug: getting-started
 ---
 
-import { ReactiveImage } from "reactive-image";
-
 # Getting Started
 
+Welcome to Reactive Image! This library provides beautiful, interactive React image components with smooth animations.
+
+## Quick Start
+
 <ReactiveImage
-  src="/img/a.jpg"
-  alt="demo"
+  src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop&crop=center"
+  alt="Mountain landscape demo"
   variant="zoomOnHover"
-  zoomScale={1.15}
+  zoomScale={1.25}
 />
+
+## Installation
+
+Install using your preferred package manager:
+
+```bash
+npm install reactive-image
+# or
+yarn add reactive-image
+# or
+pnpm add reactive-image
+```
+
+## Basic Usage
+
+Import and use any component:
+
+```jsx
+import { ZoomOnHover } from "reactive-image";
+
+function MyComponent() {
+  return <ZoomOnHover src="your-image.jpg" alt="Description" zoomScale={1.2} />;
+}
+```

@@ -7,47 +7,55 @@ export function MDXContent({ code }: { code: string }) {
   const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    try {
-      // Create the function with proper context
-      const AsyncFunction = Object.getPrototypeOf(
-        async function () {}
-      ).constructor;
+    async function renderMDX() {
+      try {
+        // Create async function with proper context
+        const AsyncFunction = Object.getPrototypeOf(
+          async function () {}
+        ).constructor;
 
-      // Wrap the code to handle the Velite output format
-      const wrappedCode = `
-        const { Fragment, jsx, jsxs } = arguments[0];
-        const baseUrl = arguments[0].baseUrl || window.location.origin;
-        
-        ${code}
-        
-        return { default: _createMdxContent };
-      `;
+        // Wrap the code to handle the Velite output format with async support
+        const wrappedCode = `
+          const { Fragment, jsx, jsxs } = arguments[0];
+          const baseUrl = arguments[0].baseUrl || window.location.origin;
+          
+          ${code}
+          
+          return { default: _createMdxContent };
+        `;
 
-      const func = new Function("arguments", wrappedCode);
+        const func = new AsyncFunction("arguments", wrappedCode);
 
-      // Execute with React context
-      const result = func([
-        {
-          Fragment: React.Fragment,
-          jsx: React.createElement,
-          jsxs: React.createElement,
-          baseUrl: window.location.origin,
-        },
-      ]);
+        // Execute with React context
+        const result = await func([
+          {
+            Fragment: React.Fragment,
+            jsx: (type: any, props: any, key?: any) =>
+              React.createElement(type, { ...props, key }, props?.children),
+            jsxs: (type: any, props: any, key?: any) =>
+              React.createElement(type, { ...props, key }, props?.children),
+            baseUrl: window.location.origin,
+            // Provide components directly instead of dynamic imports
+            ...mdxComponents,
+          },
+        ]);
 
-      if (result && result.default) {
-        const MDXComponent = result.default;
-        const element = React.createElement(MDXComponent, {
-          components: mdxComponents,
-        });
-        setContent(element);
-      } else {
-        setError("Could not find MDX component");
+        if (result && result.default) {
+          const MDXComponent = result.default;
+          const element = React.createElement(MDXComponent, {
+            components: mdxComponents,
+          });
+          setContent(element);
+        } else {
+          setError("Could not find MDX component");
+        }
+      } catch (err) {
+        console.error("MDX rendering error:", err);
+        setError(`Rendering failed: ${err}`);
       }
-    } catch (err) {
-      console.error("MDX rendering error:", err);
-      setError(`Rendering failed: ${err}`);
     }
+
+    renderMDX();
   }, [code]);
 
   if (error) {

@@ -7,13 +7,41 @@ locale: tr
 slug: baslangic
 ---
 
-import { ReactiveImage } from "reactive-image";
-
 # Başlangıç
 
+Reactive Image'e hoş geldiniz! Bu kütüphane, güzel ve etkileşimli React görsel componentleri sunar.
+
+## Hızlı Başlangıç
+
 <ReactiveImage
-  src="/img/a.jpg"
-  alt="demo"
+  src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop&crop=center"
+  alt="Orman manzarası demo"
   variant="hoverSwitch"
-  hoverSrc="/img/a-hover.jpg"
+  hoverSrc="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop&crop=center"
 />
+
+## Kurulum
+
+Tercih ettiğiniz paket yöneticisi ile kurun:
+
+```bash
+npm install reactive-image
+# veya
+yarn add reactive-image
+# veya
+pnpm add reactive-image
+```
+
+## Temel Kullanım
+
+Herhangi bir componenti import edip kullanın:
+
+```jsx
+import { HoverSwitch } from "reactive-image";
+
+function MyComponent() {
+  return (
+    <HoverSwitch src="görsel.jpg" hoverSrc="hover-görsel.jpg" alt="Açıklama" />
+  );
+}
+```

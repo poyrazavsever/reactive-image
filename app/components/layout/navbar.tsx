@@ -37,7 +37,9 @@ const Navbar = ({ locale, dict }: NavbarProps) => {
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-6">
           <Link
-            href={`/${locale}/docs/getting-started`}
+            href={`/${locale}/docs/${
+              locale === "tr" ? "baslangic" : "getting-started"
+            }`}
             className="text-neutral-700 hover:text-orange-500 transition-colors"
           >
             {dict.navbar.docs}
@@ -104,7 +106,9 @@ const Navbar = ({ locale, dict }: NavbarProps) => {
             {/* Mobile Navigation Links */}
             <div className="space-y-4">
               <Link
-                href={`/${locale}/docs/getting-started`}
+                href={`/${locale}/docs/${
+                  locale === "tr" ? "baslangic" : "getting-started"
+                }`}
                 className="block text-neutral-700 hover:text-orange-500 transition-colors py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >

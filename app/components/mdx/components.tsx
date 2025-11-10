@@ -1,10 +1,34 @@
 "use client";
 import React from "react";
-import { ReactiveImage } from "reactive-image";
+// Import components directly from the package source
+import { ClickExpand } from "../../../packages/reactive-image/src/variants/ClickExpand";
+import { HoverSwitch } from "../../../packages/reactive-image/src/variants/HoverSwitch";
+import { TiltOnHover } from "../../../packages/reactive-image/src/variants/TiltOnHover";
+import { ZoomOnHover } from "../../../packages/reactive-image/src/variants/ZoomOnHover";
+
+// Create a wrapper component for ReactiveImage
+const ReactiveImage = ({ variant, ...props }: any) => {
+  switch (variant) {
+    case "clickExpand":
+      return <ClickExpand {...props} />;
+    case "hoverSwitch":
+      return <HoverSwitch {...props} />;
+    case "tiltOnHover":
+      return <TiltOnHover {...props} />;
+    case "zoomOnHover":
+      return <ZoomOnHover {...props} />;
+    default:
+      return <ZoomOnHover {...props} />;
+  }
+};
 
 export const mdxComponents = {
   // Custom components for MDX
   ReactiveImage,
+  ClickExpand,
+  HoverSwitch,
+  TiltOnHover,
+  ZoomOnHover,
 
   // HTML elements with custom styling
   h1: (props: any) => (
