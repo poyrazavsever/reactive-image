@@ -46,9 +46,11 @@ const Navbar = ({ locale, dict }: NavbarProps) => {
           </Link>
           <Link
             href="https://www.poyrazavsever.com/blog"
+            target="_blank"
             className="text-neutral-700 hover:text-orange-500 transition-colors"
           >
             {dict.navbar.blog}
+            <Icon icon="prime:external-link" className="inline w-4 h-4 ml-1" />
           </Link>
           <Link
             href={`/${locale}/showcase`}
@@ -116,10 +118,15 @@ const Navbar = ({ locale, dict }: NavbarProps) => {
               </Link>
               <Link
                 href="https://www.poyrazavsever.com/blog"
+                target="_blank"
                 className="block text-neutral-700 hover:text-orange-500 transition-colors py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {dict.navbar.blog}
+                <Icon
+                  icon="prime:external-link"
+                  className="inline w-4 h-4 ml-1"
+                />
               </Link>
               <Link
                 href={`/${locale}/showcase`}
