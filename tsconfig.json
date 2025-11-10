@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "reactive-image": ["./packages/reactive-image/src"]
     }
   },
   "include": [

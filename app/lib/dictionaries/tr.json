@@ -16,5 +16,88 @@
     "error": "Hata",
     "back": "Geri",
     "next": "İleri"
+  },
+  "hero": {
+    "badge": "İnteraktif React Bileşenleri",
+    "title": {
+      "line1": "Güzel React Görsel",
+      "line2": "Bileşenleri"
+    },
+    "description": "React uygulamalarınız için güçlü, interaktif ve özelleştirilebilir görsel bileşen koleksiyonu. Hover efektleri, animasyonlar ve modern etkileşimlerle muhteşem görsel deneyimler oluşturun.",
+    "buttons": {
+      "getStarted": "Başlayın",
+      "viewExamples": "Örnekleri Görün"
+    },
+    "stats": {
+      "variants": "Bileşen Varyantı",
+      "typeScript": "Tam TypeScript",
+      "license": "Lisans"
+    }
+  },
+  "features": {
+    "title": "Güçlü Görsel Bileşenleri",
+    "subtitle": "Kullanıcı deneyiminizi geliştirmek için tasarlanmış interaktif React bileşenleri koleksiyonumuzdan seçin.",
+    "clickExpand": {
+      "title": "Tıklayarak Büyüt",
+      "description": "Tıklandığında pürüzsüz animasyonlarla güzelce büyüyen interaktif genişletilebilir görseller."
+    },
+    "hoverSwitch": {
+      "title": "Hover Geçişi",
+      "description": "Özelleştirilebilir geçiş efektleri ve zamanlaması ile hover'da dinamik görsel değişimi."
+    },
+    "tiltOnHover": {
+      "title": "3D Eğim Efekti",
+      "description": "Derinlik ve etkileşim için fare hareketine tepki veren modern 3D eğim animasyonları."
+    },
+    "zoomOnHover": {
+      "title": "Hover Yakınlaştırma",
+      "description": "Detayları vurgulayan ve önemli görsellere odak yaratan pürüzsüz yakınlaştırma efektleri."
+    }
+  },
+  "examples": {
+    "title": "Canlı Örnekler",
+    "subtitle": "Bileşenlerimizin interaktif demolarını keşfedin ve uygulamalarınızı nasıl geliştirebileceklerini görün.",
+    "viewAll": "Tüm Örnekleri Görüntüle"
+  },
+  "contributors": {
+    "title": "Topluluğumuza Katılın",
+    "subtitle": "React görsel bileşenlerini herkes için daha iyi hale getirmemize yardım edin.",
+    "starProject": "Desteğinizi gösterin",
+    "forkProject": "Kendi versiyonunuzu oluşturun",
+    "contribute": "Geliştirmemize yardım edin",
+    "viewOnGithub": "GitHub'da Görüntüle",
+    "reportIssue": "Sorun Bildir"
+  },
+  "cta": {
+    "title": "Çalışmalarımızı Destekleyin",
+    "subtitle": "Topluluk için harika React bileşenleri oluşturmaya devam etmemize yardım edin.",
+    "coffee": {
+      "title": "Kahve Ismarla",
+      "description": "Bu projenin geliştirilmesi ve bakımını küçük bir bağışla destekleyin.",
+      "button": "Kahve Ismarla"
+    },
+    "github": {
+      "title": "GitHub'da Yıldızla",
+      "description": "Desteğinizi göstermek ve bu projeyi başkalarının keşfetmesine yardım etmek için GitHub'da yıldız verin.",
+      "button": "Yıldızla"
+    },
+    "reportIssue": "Sorun Bildir",
+    "share": "Projeyi Paylaş",
+    "reportIssueDescription": "Hata bulduysanız veya öneriniz varsa bize bildirin.",
+    "shareDescription": "Bu projeyi arkadaşlarınızla paylaşın."
+  },
+  "showcase": {
+    "title": "İnteraktif Vitrin",
+    "subtitle": "React görsel bileşenlerimizin gücünü canlı demonstrasyonlar ve interaktif örneklerle deneyimleyin.",
+    "clickExpand": "Tam ekranda görüntülemek için tıklayın",
+    "hoverSwitch": "Hover ile dinamik görsel değişimi",
+    "tiltOnHover": "Fare etkileşimi ile 3D eğim efekti",
+    "zoomOnHover": "Hover ile pürüzsüz yakınlaştırma efekti",
+    "explore": {
+      "title": "İnteraktif Demoları Keşfedin",
+      "description": "Bileşenlerimizin gerçek uygulamalarda nasıl çalıştığını tam interaktif örnekler ve kapsamlı dokümantasyonla görün.",
+      "liveDemo": "Canlı Demoları Görüntüle",
+      "documentation": "Dokümantasyonu Oku"
+    }
   }
 }

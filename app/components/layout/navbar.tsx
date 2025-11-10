@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { getDictionary } from "@/app/lib/i18n";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import Button from "@/app/components/shared/Button";
 
 type NavbarProps = {
   locale: string;
@@ -50,34 +51,24 @@ const Navbar = ({ locale, dict }: NavbarProps) => {
         >
           {dict.navbar.showcase}
         </Link>
-        <a
+        <Button
           href="https://buymeacoffee.com/poyrazavsever"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 border border-dashed border-orange-500 py-2 px-4 group hover:bg-orange-500 hover:text-white transition-colors rounded-md"
+          external
+          variant="outline"
+          size="sm"
+          icon="cib:buy-me-a-coffee"
         >
-          <Icon
-            icon="cib:buy-me-a-coffee"
-            width="16"
-            height="16"
-            className="text-orange-500 group-hover:text-white"
-          />
           {dict.navbar.buyMeCoffee}
-        </a>
-        <a
+        </Button>
+        <Button
           href="https://github.com/poyrazavsever/reactive-image"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 border border-dashed border-orange-500 text-white py-2 px-4 group bg-orange-500 hover:bg-white hover:text-black transition-colors rounded-md"
+          external
+          variant="primary"
+          size="sm"
+          icon="akar-icons:github-fill"
         >
-          <Icon
-            icon="akar-icons:github-fill"
-            width="16"
-            height="16"
-            className="text-white group-hover:text-orange-500"
-          />
           {dict.navbar.starGithub}
-        </a>
+        </Button>
 
         {/* Language Switcher */}
         <LanguageSwitcher locale={locale} />

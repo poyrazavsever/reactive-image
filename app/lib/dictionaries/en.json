@@ -16,5 +16,88 @@
     "error": "Error",
     "back": "Back",
     "next": "Next"
+  },
+  "hero": {
+    "badge": "Interactive React Components",
+    "title": {
+      "line1": "Beautiful React Image",
+      "line2": "Components"
+    },
+    "description": "A powerful, interactive, and customizable visual component collection for React applications. Create stunning image experiences with hover effects, animations, and modern interactions.",
+    "buttons": {
+      "getStarted": "Get Started",
+      "viewExamples": "View Examples"
+    },
+    "stats": {
+      "variants": "Component Variants",
+      "typeScript": "Full TypeScript",
+      "license": "License"
+    }
+  },
+  "features": {
+    "title": "Powerful Image Components",
+    "subtitle": "Choose from our collection of interactive React components designed to enhance your user experience.",
+    "clickExpand": {
+      "title": "Click to Expand",
+      "description": "Interactive expandable images that grow beautifully on click with smooth animations."
+    },
+    "hoverSwitch": {
+      "title": "Hover Switch",
+      "description": "Dynamic image switching on hover with customizable transition effects and timing."
+    },
+    "tiltOnHover": {
+      "title": "3D Tilt Effect",
+      "description": "Modern 3D tilt animations that respond to mouse movement for depth and engagement."
+    },
+    "zoomOnHover": {
+      "title": "Zoom on Hover",
+      "description": "Smooth zoom effects that highlight details and create focus on important visuals."
+    }
+  },
+  "examples": {
+    "title": "See It in Action",
+    "subtitle": "Explore interactive demos of our components and see how they can enhance your applications.",
+    "viewAll": "View All Examples"
+  },
+  "contributors": {
+    "title": "Join Our Community",
+    "subtitle": "Help us make React image components better for everyone.",
+    "starProject": "Show your support",
+    "forkProject": "Create your version",
+    "contribute": "Help us improve",
+    "viewOnGithub": "View on GitHub",
+    "reportIssue": "Report an Issue"
+  },
+  "cta": {
+    "title": "Support Our Work",
+    "subtitle": "Help us continue building amazing React components for the community.",
+    "coffee": {
+      "title": "Buy Me a Coffee",
+      "description": "Support the development and maintenance of this project with a small donation.",
+      "button": "Buy Me Coffee"
+    },
+    "github": {
+      "title": "Star on GitHub",
+      "description": "Give us a star on GitHub to show your support and help others discover this project.",
+      "button": "Star Project"
+    },
+    "reportIssue": "Report an Issue",
+    "share": "Share Project",
+    "reportIssueDescription": "Found a bug or have a suggestion? A pull request is welcome. Let us know!",
+    "shareDescription": "Share this project with your friends. All help is appreciated! We love to see it spread around."
+  },
+  "showcase": {
+    "title": "Interactive Showcase",
+    "subtitle": "Experience the power of our React image components with live demonstrations and interactive examples.",
+    "clickExpand": "Click to expand and view in full screen",
+    "hoverSwitch": "Dynamic image switching on hover",
+    "tiltOnHover": "3D tilt effect with mouse interaction",
+    "zoomOnHover": "Smooth zoom effect on hover",
+    "explore": {
+      "title": "Explore Interactive Demos",
+      "description": "See how our components work in real applications with fully interactive examples and comprehensive documentation.",
+      "liveDemo": "View Live Demos",
+      "documentation": "Read Documentation"
+    }
   }
 }
