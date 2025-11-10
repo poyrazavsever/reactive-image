@@ -27,7 +27,7 @@ const showcaseImages = {
     secondary:
       "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=500&h=400&fit=crop&crop=center",
     tertiary:
-      "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1f?w=500&h=400&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=500&h=400&fit=crop&crop=center",
   },
   architecture: {
     primary:
@@ -50,276 +50,625 @@ const showcaseImages = {
 export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
   return (
     <section className="py-12 bg-white">
-      <div className="container max-w-7xl mx-auto px-6 sm:px-0">
+      <div className="container max-w-6xl mx-auto px-6 sm:px-0">
+        {/* Header */}
+        <div className="text-left mb-12">
+          <h2 className="text-4xl font-bold text-neutral-900 mb-4">
+            {locale === "tr"
+              ? "Tüm Animasyon Varyantları"
+              : "All Animation Variants"}
+          </h2>
+          <p className="text-lg text-neutral-600 max-w-2xl">
+            {locale === "tr"
+              ? "Reactive Image kütüphanesinin sunduğu tüm etkileşimli animasyon türlerini keşfedin. Her varyant farklı kullanım senaryoları için optimize edilmiştir."
+              : "Explore all interactive animation types offered by the Reactive Image library. Each variant is optimized for different use cases."}
+          </p>
+        </div>
+
         {/* ClickExpand Section */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center gap-3">
-            <span className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-sm font-bold">
-              CE
-            </span>
-            {locale === "tr" ? "Tıklayarak Genişlet" : "Click to Expand"}
+        <div className="mb-20">
+          <h3 className="text-xl text-neutral-400 mb-8 flex items-center gap-3">
+            {locale === "tr"
+              ? "Tıklayarak Genişlet - Modal Animasyonları"
+              : "Click to Expand - Modal Animations"}
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Basic ClickExpand */}
-            <div className="relative group overflow-hidden rounded-xl bg-gray-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-4 z-10">
-                <h4 className="text-white font-medium text-sm">
-                  {locale === "tr" ? "Temel Genişletme" : "Basic Expand"}
-                </h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {/* Scale Fade */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Scale Fade</h4>
               </div>
               <ClickExpand
                 src={showcaseImages.nature.primary}
-                alt="Basic click expand"
-                className="w-full aspect-[4/3] object-cover"
+                alt="Scale fade modal"
+                className="w-full aspect-4/3 object-cover"
                 modalAnimation="scaleFade"
                 backdrop="dim"
               />
             </div>
 
-            {/* ClickExpand with Blur Backdrop */}
-            <div className="relative group overflow-hidden rounded-xl bg-gray-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-4 z-10">
-                <h4 className="text-white font-medium text-sm">
-                  {locale === "tr" ? "Bulanık Arka Plan" : "Blur Backdrop"}
-                </h4>
+            {/* Slide Up */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Slide Up</h4>
               </div>
               <ClickExpand
                 src={showcaseImages.urban.primary}
-                alt="Click expand with blur"
-                className="w-full aspect-[4/3] object-cover"
-                modalAnimation="scaleFade"
+                alt="Slide up modal"
+                className="w-full aspect-4/3 object-cover"
+                modalAnimation="slideUp"
                 backdrop="blur"
-                caption={
-                  locale === "tr" ? "Şehir manzarası" : "Urban landscape"
-                }
               />
             </div>
 
-            {/* ClickExpand with SlideUp */}
-            <div className="relative group overflow-hidden rounded-xl bg-gray-100">
-              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-4 z-10">
-                <h4 className="text-white font-medium text-sm">
-                  {locale === "tr" ? "Kayarak Açılma" : "Slide Animation"}
-                </h4>
+            {/* Slide Down */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Slide Down</h4>
               </div>
               <ClickExpand
                 src={showcaseImages.architecture.primary}
-                alt="Click expand slide animation"
-                className="w-full aspect-[4/3] object-cover"
-                modalAnimation="slideUp"
+                alt="Slide down modal"
+                className="w-full aspect-4/3 object-cover"
+                modalAnimation="slideDown"
+                backdrop="glass"
+              />
+            </div>
+
+            {/* Slide Left */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Slide Left</h4>
+              </div>
+              <ClickExpand
+                src={showcaseImages.abstract.primary}
+                alt="Slide left modal"
+                className="w-full aspect-4/3 object-cover"
+                modalAnimation="slideLeft"
                 backdrop="dark"
+              />
+            </div>
+
+            {/* Slide Right */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Slide Right</h4>
+              </div>
+              <ClickExpand
+                src={showcaseImages.nature.secondary}
+                alt="Slide right modal"
+                className="w-full aspect-4/3 object-cover"
+                modalAnimation="slideRight"
+                backdrop="blur"
+              />
+            </div>
+
+            {/* Spring Pop */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Spring Pop</h4>
+              </div>
+              <ClickExpand
+                src={showcaseImages.urban.secondary}
+                alt="Spring pop modal"
+                className="w-full aspect-4/3 object-cover"
+                modalAnimation="springPop"
+                backdrop="dim"
+              />
+            </div>
+
+            {/* Zoom Bounce */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Zoom Bounce</h4>
+              </div>
+              <ClickExpand
+                src={showcaseImages.architecture.secondary}
+                alt="Zoom bounce modal"
+                className="w-full aspect-4/3 object-cover"
+                modalAnimation="zoomBounce"
+                backdrop="glass"
+              />
+            </div>
+
+            {/* Rotate In */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Rotate In</h4>
+              </div>
+              <ClickExpand
+                src={showcaseImages.abstract.secondary}
+                alt="Rotate in modal"
+                className="w-full aspect-4/3 object-cover"
+                modalAnimation="rotateIn"
+                backdrop="dark"
+              />
+            </div>
+
+            {/* Flip In */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Flip In</h4>
+              </div>
+              <ClickExpand
+                src={showcaseImages.nature.tertiary}
+                alt="Flip in modal"
+                className="w-full aspect-4/3 object-cover"
+                modalAnimation="flipIn"
+                backdrop="blur"
               />
             </div>
           </div>
         </div>
 
         {/* HoverSwitch Section */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center gap-3">
-            <span className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center text-white text-sm font-bold">
-              HS
-            </span>
-            {locale === "tr" ? "Hover ile Değiştir" : "Hover to Switch"}
+        <div className="mb-20">
+          <h3 className="text-xl text-neutral-400 mb-8 flex items-center gap-3">
+            {locale === "tr"
+              ? "Hover Geçiş Animasyonları"
+              : "Hover Transition Animations"}
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Crossfade HoverSwitch */}
-            <div className="relative group overflow-hidden rounded-xl bg-gray-100">
-              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-4 z-10">
-                <h4 className="text-white font-medium text-sm">
-                  {locale === "tr" ? "Yumuşak Geçiş" : "Smooth Crossfade"}
-                </h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {/* Crossfade */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Crossfade</h4>
               </div>
               <HoverSwitch
-                src={showcaseImages.nature.secondary}
-                hoverSrc={showcaseImages.nature.tertiary}
+                src={showcaseImages.nature.primary}
+                hoverSrc={showcaseImages.nature.secondary}
                 alt="Crossfade hover switch"
                 className="w-full aspect-4/3 object-cover"
                 animation="crossfade"
-                timing={{ duration: 250, easing: "ease-out" }}
-              />
-            </div>
-
-            {/* Slide HoverSwitch */}
-            <div className="relative group overflow-hidden rounded-xl bg-gray-100">
-              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-4 z-10">
-                <h4 className="text-white font-medium text-sm">
-                  {locale === "tr" ? "Kayarak Değişim" : "Slide Transition"}
-                </h4>
-              </div>
-              <HoverSwitch
-                src={showcaseImages.urban.secondary}
-                hoverSrc={showcaseImages.urban.tertiary}
-                alt="Slide hover switch"
-                className="w-full aspect-4/3 object-cover"
-                animation="slide"
                 timing={{ duration: 300, easing: "ease-out" }}
               />
             </div>
 
-            {/* Fast HoverSwitch */}
-            <div className="relative group overflow-hidden rounded-xl bg-gray-100">
-              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-4 z-10">
-                <h4 className="text-white font-medium text-sm">
-                  {locale === "tr" ? "Hızlı Değişim" : "Fast Switch"}
-                </h4>
+            {/* Slide Right */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Slide Right</h4>
+              </div>
+              <HoverSwitch
+                src={showcaseImages.urban.primary}
+                hoverSrc={showcaseImages.urban.secondary}
+                alt="Slide right hover switch"
+                className="w-full aspect-4/3 object-cover"
+                animation="slide"
+                slideDirection="right"
+                timing={{ duration: 350, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Slide Left */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Slide Left</h4>
+              </div>
+              <HoverSwitch
+                src={showcaseImages.architecture.primary}
+                hoverSrc={showcaseImages.architecture.secondary}
+                alt="Slide left hover switch"
+                className="w-full aspect-4/3 object-cover"
+                animation="slide"
+                slideDirection="left"
+                timing={{ duration: 350, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Slide Up */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Slide Up</h4>
               </div>
               <HoverSwitch
                 src={showcaseImages.abstract.primary}
                 hoverSrc={showcaseImages.abstract.secondary}
-                alt="Fast hover switch"
+                alt="Slide up hover switch"
                 className="w-full aspect-4/3 object-cover"
-                animation="crossfade"
-                timing={{ duration: 150, easing: "ease-out" }}
+                animation="slideUp"
+                timing={{ duration: 400, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Slide Down */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Slide Down</h4>
+              </div>
+              <HoverSwitch
+                src={showcaseImages.nature.tertiary}
+                hoverSrc={showcaseImages.urban.tertiary}
+                alt="Slide down hover switch"
+                className="w-full aspect-4/3 object-cover"
+                animation="slideDown"
+                timing={{ duration: 400, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Zoom */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Zoom</h4>
+              </div>
+              <HoverSwitch
+                src={showcaseImages.architecture.tertiary}
+                hoverSrc={showcaseImages.nature.primary}
+                alt="Zoom hover switch"
+                className="w-full aspect-4/3 object-cover"
+                animation="zoom"
+                timing={{ duration: 300, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Blur */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Blur</h4>
+              </div>
+              <HoverSwitch
+                src={showcaseImages.abstract.tertiary}
+                hoverSrc={showcaseImages.urban.primary}
+                alt="Blur hover switch"
+                className="w-full aspect-4/3 object-cover"
+                animation="blur"
+                timing={{ duration: 250, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Rotate Y */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Rotate Y</h4>
+              </div>
+              <HoverSwitch
+                src={showcaseImages.urban.secondary}
+                hoverSrc={showcaseImages.architecture.primary}
+                alt="Rotate Y hover switch"
+                className="w-full aspect-4/3 object-cover"
+                animation="rotateY"
+                timing={{ duration: 500, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Scale Rotate */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Scale Rotate</h4>
+              </div>
+              <HoverSwitch
+                src={showcaseImages.nature.secondary}
+                hoverSrc={showcaseImages.abstract.primary}
+                alt="Scale rotate hover switch"
+                className="w-full aspect-4/3 object-cover"
+                animation="scaleRotate"
+                timing={{ duration: 400, easing: "ease-out" }}
               />
             </div>
           </div>
         </div>
 
         {/* TiltOnHover Section */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center gap-3">
-            <span className="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center text-white text-sm font-bold">
-              3D
-            </span>
-            {locale === "tr" ? "3D Eğim Efekti" : "3D Tilt Effect"}
+        <div className="mb-20">
+          <h3 className="text-xl text-neutral-400 mb-8 flex items-center gap-3">
+            {locale === "tr"
+              ? "3D Eğim ve Perspektif Efektleri"
+              : "3D Tilt and Perspective Effects"}
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Basic 3D Tilt */}
-            <div className="relative group overflow-hidden rounded-xl bg-gray-100 p-4">
-              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-4 z-10">
-                <h4 className="text-white font-medium text-sm">
-                  {locale === "tr" ? "Temel 3D Eğim" : "Basic 3D Tilt"}
-                </h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {/* Basic Tilt */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Basic Tilt</h4>
               </div>
               <TiltOnHover
-                src={showcaseImages.architecture.secondary}
+                src={showcaseImages.nature.primary}
                 alt="Basic 3D tilt"
                 className="w-full aspect-4/3 object-cover rounded-lg"
+                animation="basic"
                 tiltMax={15}
                 timing={{ duration: 200, easing: "ease-out" }}
               />
             </div>
 
-            {/* 3D Tilt with Glare */}
-            <div className="relative group overflow-hidden rounded-xl bg-gray-100 p-4">
-              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-4 z-10">
-                <h4 className="text-white font-medium text-sm">
-                  {locale === "tr" ? "Parıltılı Eğim" : "Tilt with Glare"}
-                </h4>
+            {/* Glare Tilt */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Glare Effect</h4>
               </div>
               <TiltOnHover
-                src={showcaseImages.nature.primary}
-                alt="3D tilt with glare"
+                src={showcaseImages.urban.primary}
+                alt="Glare tilt effect"
                 className="w-full aspect-4/3 object-cover rounded-lg"
                 animation="glare"
+                tiltMax={18}
+                glare={{ enabled: true, maxOpacity: 0.4, color: "#ffffff" }}
+                timing={{ duration: 250, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Scale Tilt */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Scale Tilt</h4>
+              </div>
+              <TiltOnHover
+                src={showcaseImages.architecture.primary}
+                alt="Scale tilt effect"
+                className="w-full aspect-4/3 object-cover rounded-lg"
+                animation="scale"
+                tiltMax={16}
+                scale={1.08}
+                timing={{ duration: 200, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Perspective Tilt */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Perspective</h4>
+              </div>
+              <TiltOnHover
+                src={showcaseImages.abstract.primary}
+                alt="Perspective tilt effect"
+                className="w-full aspect-4/3 object-cover rounded-lg"
+                animation="perspective"
                 tiltMax={20}
-                glare={{ enabled: true, maxOpacity: 0.3, color: "#ffffff" }}
+                perspective={800}
                 timing={{ duration: 300, easing: "ease-out" }}
               />
             </div>
 
-            {/* 3D Tilt with Scale */}
-            <div className="relative group overflow-hidden rounded-xl bg-gray-100 p-4">
-              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-4 z-10">
-                <h4 className="text-white font-medium text-sm">
-                  {locale === "tr" ? "Ölçekli Eğim" : "Tilt with Scale"}
-                </h4>
+            {/* Bounce Tilt */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Bounce</h4>
               </div>
               <TiltOnHover
-                src={showcaseImages.abstract.tertiary}
-                alt="3D tilt with scale"
+                src={showcaseImages.nature.secondary}
+                alt="Bounce tilt effect"
                 className="w-full aspect-4/3 object-cover rounded-lg"
-                tiltMax={18}
-                scale={1.1}
+                animation="bounce"
+                tiltMax={14}
+                timing={{
+                  duration: 600,
+                  easing: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+                }}
+              />
+            </div>
+
+            {/* Elastic Tilt */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Elastic</h4>
+              </div>
+              <TiltOnHover
+                src={showcaseImages.urban.secondary}
+                alt="Elastic tilt effect"
+                className="w-full aspect-4/3 object-cover rounded-lg"
+                animation="elastic"
+                tiltMax={12}
+                timing={{ duration: 400, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Magnetic Tilt */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Magnetic</h4>
+              </div>
+              <TiltOnHover
+                src={showcaseImages.architecture.secondary}
+                alt="Magnetic tilt effect"
+                className="w-full aspect-4/3 object-cover rounded-lg"
+                animation="magnetic"
+                tiltMax={10}
+                timing={{ duration: 150, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Float Tilt */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Float</h4>
+              </div>
+              <TiltOnHover
+                src={showcaseImages.abstract.secondary}
+                alt="Float tilt effect"
+                className="w-full aspect-4/3 object-cover rounded-lg"
+                animation="float"
+                tiltMax={8}
+                shadow={true}
                 timing={{ duration: 250, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Parallax Tilt */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100 p-3">
+              <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Parallax</h4>
+              </div>
+              <TiltOnHover
+                src={showcaseImages.nature.tertiary}
+                alt="Parallax tilt effect"
+                className="w-full aspect-4/3 object-cover rounded-lg"
+                animation="parallax"
+                tiltMax={15}
+                timing={{ duration: 300, easing: "ease-out" }}
               />
             </div>
           </div>
         </div>
 
         {/* ZoomOnHover Section */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center gap-3">
-            <span className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center text-white text-sm font-bold">
-              ZM
-            </span>
-            {locale === "tr" ? "Yakınlaştırma Efekti" : "Zoom Effect"}
+        <div className="mb-20">
+          <h3 className="text-xl text-neutral-400 mb-8 flex items-center gap-3">
+            {locale === "tr"
+              ? "Yakınlaştırma ve Transform Efektleri"
+              : "Zoom and Transform Effects"}
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Basic Zoom */}
-            <div className="relative group overflow-hidden rounded-xl bg-gray-100">
-              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-4 z-10">
-                <h4 className="text-white font-medium text-sm">
-                  {locale === "tr" ? "Temel Yakınlaştırma" : "Basic Zoom"}
-                </h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+            {/* Scale */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Scale</h4>
               </div>
               <ZoomOnHover
-                src={showcaseImages.urban.primary}
-                alt="Basic zoom"
+                src={showcaseImages.nature.primary}
+                alt="Basic scale zoom"
                 className="w-full aspect-4/3 object-cover"
-                zoomScale={1.2}
+                animation="scale"
+                zoomScale={1.25}
                 timing={{ duration: 250, easing: "ease-out" }}
               />
             </div>
 
-            {/* Strong Zoom */}
-            <div className="relative group overflow-hidden rounded-xl bg-gray-100">
-              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-4 z-10">
-                <h4 className="text-white font-medium text-sm">
-                  {locale === "tr" ? "Güçlü Yakınlaştırma" : "Strong Zoom"}
-                </h4>
+            {/* Scale Rotate */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Scale Rotate</h4>
               </div>
               <ZoomOnHover
-                src={showcaseImages.nature.tertiary}
-                alt="Strong zoom"
+                src={showcaseImages.urban.primary}
+                alt="Scale rotate zoom"
                 className="w-full aspect-4/3 object-cover"
-                zoomScale={1.5}
+                animation="scaleRotate"
+                zoomScale={1.3}
+                rotation={10}
                 timing={{ duration: 400, easing: "ease-out" }}
               />
             </div>
 
-            {/* Fast Zoom */}
-            <div className="relative group overflow-hidden rounded-xl bg-gray-100">
-              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-4 z-10">
-                <h4 className="text-white font-medium text-sm">
-                  {locale === "tr" ? "Hızlı Yakınlaştırma" : "Fast Zoom"}
+            {/* Scale Blur */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Scale Blur</h4>
+              </div>
+              <ZoomOnHover
+                src={showcaseImages.architecture.primary}
+                alt="Scale blur zoom"
+                className="w-full aspect-4/3 object-cover"
+                animation="scaleBlur"
+                zoomScale={1.2}
+                blurAmount={2}
+                timing={{ duration: 300, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Scale Fade */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Scale Fade</h4>
+              </div>
+              <ZoomOnHover
+                src={showcaseImages.abstract.primary}
+                alt="Scale fade zoom"
+                className="w-full aspect-4/3 object-cover"
+                animation="scaleFade"
+                zoomScale={1.4}
+                opacityChange={0.8}
+                timing={{ duration: 350, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Scale Slide */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Scale Slide</h4>
+              </div>
+              <ZoomOnHover
+                src={showcaseImages.nature.secondary}
+                alt="Scale slide zoom"
+                className="w-full aspect-4/3 object-cover"
+                animation="scaleSlide"
+                zoomScale={1.3}
+                timing={{ duration: 300, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Perspective */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Perspective</h4>
+              </div>
+              <ZoomOnHover
+                src={showcaseImages.urban.secondary}
+                alt="Perspective zoom"
+                className="w-full aspect-4/3 object-cover"
+                animation="perspective"
+                zoomScale={1.2}
+                rotation={8}
+                timing={{ duration: 500, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Pulse */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Pulse</h4>
+              </div>
+              <ZoomOnHover
+                src={showcaseImages.architecture.secondary}
+                alt="Pulse zoom"
+                className="w-full aspect-4/3 object-cover"
+                animation="pulse"
+                zoomScale={1.15}
+                timing={{ duration: 600, easing: "ease-in-out" }}
+              />
+            </div>
+
+            {/* Bounce */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Bounce</h4>
+              </div>
+              <ZoomOnHover
+                src={showcaseImages.abstract.secondary}
+                alt="Bounce zoom"
+                className="w-full aspect-4/3 object-cover"
+                animation="bounce"
+                zoomScale={1.25}
+                timing={{
+                  duration: 800,
+                  easing: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+                }}
+              />
+            </div>
+
+            {/* Elastic */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Elastic</h4>
+              </div>
+              <ZoomOnHover
+                src={showcaseImages.architecture.tertiary}
+                alt="Elastic zoom"
+                className="w-full aspect-4/3 object-cover"
+                animation="elastic"
+                zoomScale={1.3}
+                timing={{ duration: 600, easing: "ease-out" }}
+              />
+            </div>
+
+            {/* Cursor Origin */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">
+                  Cursor Origin
                 </h4>
               </div>
               <ZoomOnHover
                 src={showcaseImages.architecture.tertiary}
-                alt="Fast zoom"
+                alt="Cursor origin zoom"
                 className="w-full aspect-4/3 object-cover"
-                zoomScale={1.25}
+                animation="scale"
+                zoomScale={1.4}
+                origin="cursor"
+                followCursor={true}
                 timing={{ duration: 200, easing: "ease-out" }}
               />
             </div>
-
-            {/* Zoom with Different Origin */}
-            <div className="relative group overflow-hidden rounded-xl bg-gray-100">
-              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-4 z-10">
-                <h4 className="text-white font-medium text-sm">
-                  {locale === "tr" ? "Köşe Yakınlaştırması" : "Corner Zoom"}
-                </h4>
-              </div>
-              <ZoomOnHover
-                src={showcaseImages.abstract.secondary}
-                alt="Zoom from corner"
-                className="w-full aspect-4/3 object-cover"
-                zoomScale={1.3}
-                origin="top-left"
-                timing={{ duration: 350, easing: "ease-out" }}
-              />
-            </div>
           </div>
-        </div>
-
-        {/* Performance Note */}
-        <div className="text-center py-8 border-t border-gray-200">
-          <p className="text-sm text-gray-500 max-w-2xl mx-auto">
-            {locale === "tr"
-              ? "Tüm animasyonlar performans için optimize edilmiştir ve modern tarayıcılarda 60fps ile çalışır. Her efekt CSS transforms ve GPU hızlandırması kullanır."
-              : "All animations are optimized for performance and run at 60fps in modern browsers. Each effect uses CSS transforms and GPU acceleration."}
-          </p>
         </div>
       </div>
     </section>

@@ -1,6 +1,5 @@
 import { getDictionary } from "../../lib/i18n";
 import { ShowcaseHero } from "../../components/showcase/ShowcaseHero";
-import { VariantShowcase } from "../../components/showcase/VariantShowcase";
 
 
 type Props = {
@@ -15,9 +14,6 @@ export default async function ShowcasePage({ params }: Props) {
     <main className="pt-20 min-h-screen bg-white">
       {/* Hero Section */}
       <ShowcaseHero locale={locale} dict={dict} />
-
-      {/* Variant Showcases */}
-      <VariantShowcase locale={locale} dict={dict} />
     </main>
   );
 }
