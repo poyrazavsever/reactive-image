@@ -106,60 +106,93 @@ export function CodeExamples({ locale, dict }: CodeExamplesProps) {
   };
 
   return (
-    <section className="py-20 px-6 sm:px-0 bg-neutral-50">
+    <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-0 bg-neutral-50">
       <div className="container max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-900 mb-4 sm:mb-6">
             Code Examples
           </h2>
-          <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
             Ready-to-use code snippets for quick implementation in your React
             applications.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Example Selection */}
-          <div className="lg:col-span-1">
-            <div className="space-y-3 sticky top-24">
-              {codeExamples.map((example, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveExample(index)}
-                  className={`w-full text-left p-4 rounded-xl transition-all ${
-                    activeExample === index
-                      ? "bg-orange-500 text-white shadow-lg"
-                      : "bg-white text-neutral-700 hover:bg-neutral-100 border border-neutral-200"
-                  }`}
-                >
-                  <h4 className="font-semibold mb-1">{example.title}</h4>
-                  <p
-                    className={`text-sm ${
+          <div className="lg:col-span-1 order-2 lg:order-1">
+            {/* Mobile/Tablet Horizontal Scroll */}
+            <div className="lg:hidden mb-6">
+              <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide">
+                {codeExamples.map((example, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveExample(index)}
+                    className={`flex-shrink-0 text-left p-3 rounded-xl transition-all min-w-[200px] ${
                       activeExample === index
-                        ? "text-orange-100"
-                        : "text-neutral-500"
+                        ? "bg-orange-500 text-white shadow-lg"
+                        : "bg-white text-neutral-700 hover:bg-neutral-100 border border-neutral-200"
                     }`}
                   >
-                    {example.description}
-                  </p>
-                </button>
-              ))}
+                    <h4 className="font-semibold mb-1 text-sm">
+                      {example.title}
+                    </h4>
+                    <p
+                      className={`text-xs ${
+                        activeExample === index
+                          ? "text-orange-100"
+                          : "text-neutral-500"
+                      }`}
+                    >
+                      {example.description}
+                    </p>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop Vertical List */}
+            <div className="hidden lg:block">
+              <div className="space-y-3 sticky top-24">
+                {codeExamples.map((example, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveExample(index)}
+                    className={`w-full text-left p-4 rounded-xl transition-all ${
+                      activeExample === index
+                        ? "bg-orange-500 text-white shadow-lg"
+                        : "bg-white text-neutral-700 hover:bg-neutral-100 border border-neutral-200"
+                    }`}
+                  >
+                    <h4 className="font-semibold mb-1">{example.title}</h4>
+                    <p
+                      className={`text-sm ${
+                        activeExample === index
+                          ? "text-orange-100"
+                          : "text-neutral-500"
+                      }`}
+                    >
+                      {example.description}
+                    </p>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Code Display */}
-          <div className="lg:col-span-2">
-            <div className="bg-white border border-neutral-200 rounded-2xl overflow-hidden shadow-lg">
+          <div className="lg:col-span-2 order-1 lg:order-2">
+            <div className="bg-white border border-neutral-200 rounded-xl lg:rounded-2xl overflow-hidden shadow-lg">
               {/* Code Header */}
-              <div className="flex items-center justify-between p-4 border-b border-neutral-200 bg-neutral-50">
-                <div className="flex items-center gap-3">
-                  <div className="flex gap-2">
+              <div className="flex items-center justify-between p-3 sm:p-4 border-b border-neutral-200 bg-neutral-50">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+                  <div className="hidden sm:flex gap-2">
                     <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                     <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                   </div>
-                  <span className="text-sm font-medium text-neutral-600">
+                  <span className="text-xs sm:text-sm font-medium text-neutral-600 truncate">
                     {codeExamples[activeExample].title}
                   </span>
                 </div>
@@ -168,49 +201,55 @@ export function CodeExamples({ locale, dict }: CodeExamplesProps) {
                   onClick={() =>
                     copyToClipboard(codeExamples[activeExample].code)
                   }
-                  className="flex items-center gap-2 px-3 py-1 text-sm text-neutral-600 hover:text-neutral-900 hover:bg-neutral-200 rounded transition-colors"
+                  className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 text-xs sm:text-sm text-neutral-600 hover:text-neutral-900 hover:bg-neutral-200 rounded transition-colors shrink-0"
                 >
                   {copied ? (
                     <>
-                      <Icon icon="lucide:check" className="w-4 h-4" />
-                      Copied!
+                      <Icon
+                        icon="lucide:check"
+                        className="w-3 h-3 sm:w-4 sm:h-4"
+                      />
+                      <span className="hidden sm:inline">Copied!</span>
                     </>
                   ) : (
                     <>
-                      <Icon icon="lucide:copy" className="w-4 h-4" />
-                      Copy
+                      <Icon
+                        icon="lucide:copy"
+                        className="w-3 h-3 sm:w-4 sm:h-4"
+                      />
+                      <span className="hidden sm:inline">Copy</span>
                     </>
                   )}
                 </button>
               </div>
 
               {/* Code Content */}
-              <div className="p-6 bg-neutral-900">
-                <pre className="text-sm text-white overflow-x-auto">
+              <div className="p-3 sm:p-4 lg:p-6 bg-neutral-900">
+                <pre className="text-xs sm:text-sm text-white overflow-x-auto">
                   <code>{codeExamples[activeExample].code}</code>
                 </pre>
               </div>
             </div>
 
             {/* Installation Instructions */}
-            <div className="mt-8 bg-white border border-neutral-200 rounded-xl p-6">
+            <div className="mt-6 lg:mt-8 bg-white border border-neutral-200 rounded-xl p-4 sm:p-6">
               <h4 className="font-semibold text-neutral-900 mb-4 flex items-center gap-2">
                 <Icon
                   icon="lucide:download"
-                  className="w-5 h-5 text-blue-500"
+                  className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500"
                 />
-                Installation
+                <span className="text-sm sm:text-base">Installation</span>
               </h4>
               <div className="space-y-4">
-                <div className="bg-neutral-900 rounded-lg p-4">
-                  <code className="text-green-400 text-sm">
+                <div className="bg-neutral-900 rounded-lg p-3 sm:p-4">
+                  <code className="text-green-400 text-xs sm:text-sm">
                     npm install reactive-image
                   </code>
                 </div>
-                <div className="text-sm text-neutral-600">
+                <div className="text-xs sm:text-sm text-neutral-600">
                   <p>Or using yarn:</p>
-                  <div className="bg-neutral-900 rounded-lg p-4 mt-2">
-                    <code className="text-green-400 text-sm">
+                  <div className="bg-neutral-900 rounded-lg p-3 sm:p-4 mt-2">
+                    <code className="text-green-400 text-xs sm:text-sm">
                       yarn add reactive-image
                     </code>
                   </div>

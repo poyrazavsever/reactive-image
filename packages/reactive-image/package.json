@@ -1,6 +1,6 @@
 {
   "name": "reactive-image",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A modern React image component library with interactive animations",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -35,7 +35,7 @@
     "type": "git",
     "url": "git+https://github.com/poyrazavsever/reactive-image.git"
   },
-  "homepage": "https://reactive-image.poyrazavsever.com",
+  "homepage": "https://reactive-image.vercel.app",
   "bugs": {
     "url": "https://github.com/poyrazavsever/reactive-image/issues"
   },

@@ -45,17 +45,17 @@ export function InteractivePlayground({
         return (
           <ZoomOnHover
             {...baseProps}
-            className="w-full h-80 object-cover rounded-xl"
+            className="w-full h-48 sm:h-64 lg:h-80 object-cover rounded-lg sm:rounded-xl"
             zoomScale={settings.zoomScale}
             timing={{ duration: settings.duration, easing: "ease-in-out" }}
           />
         );
       case "tilt-on-hover":
         return (
-          <div className="p-8">
+          <div className="p-4 sm:p-6 lg:p-8">
             <TiltOnHover
               {...baseProps}
-              className="w-full h-64 object-cover rounded-xl"
+              className="w-full h-40 sm:h-52 lg:h-64 object-cover rounded-lg sm:rounded-xl"
               tiltMax={settings.tiltMax}
               glare={{
                 enabled: settings.glareEnabled,
@@ -71,7 +71,7 @@ export function InteractivePlayground({
         return (
           <HoverSwitch
             {...baseProps}
-            className="w-full h-80 object-cover rounded-xl"
+            className="w-full h-48 sm:h-64 lg:h-80 object-cover rounded-lg sm:rounded-xl"
             hoverSrc={sampleImages[(selectedImage + 1) % sampleImages.length]}
             timing={{ duration: settings.duration, easing: "ease-in-out" }}
             preloadHover={true}
@@ -82,7 +82,7 @@ export function InteractivePlayground({
           <div className="relative">
             <ClickExpand
               {...baseProps}
-              className="w-full h-80 object-cover rounded-xl cursor-pointer"
+              className="w-full h-48 sm:h-64 lg:h-80 object-cover rounded-lg sm:rounded-xl cursor-pointer"
               modalAnimation="scaleFade"
               backdrop="blur"
               caption="Interactive playground demo image"
@@ -136,29 +136,61 @@ export function InteractivePlayground({
   };
 
   return (
-    <section id="playground" className="py-20 px-6 sm:px-0 bg-white">
+    <section
+      id="playground"
+      className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-0 bg-white"
+    >
       <div className="container max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-900 mb-4 sm:mb-6">
             Interactive Playground
           </h2>
-          <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
             Experiment with different components, settings, and images in
             real-time to see how they work.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Settings Panel */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="lg:col-span-1 order-2 lg:order-1 space-y-4 sm:space-y-6">
             {/* Component Selector */}
-            <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-6">
-              <h3 className="font-semibold text-neutral-900 mb-4 flex items-center gap-2">
-                <Icon icon="lucide:settings" className="w-5 h-5" />
+            <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-4 sm:p-6">
+              <h3 className="font-semibold text-neutral-900 mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
+                <Icon
+                  icon="lucide:settings"
+                  className="w-4 h-4 sm:w-5 sm:h-5"
+                />
                 Component Type
               </h3>
-              <div className="space-y-2">
+
+              {/* Mobile Component Selector - Horizontal Scroll */}
+              <div className="sm:hidden mb-4">
+                <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                  {[
+                    { id: "zoom-on-hover", name: "Zoom", shortName: "Zoom" },
+                    { id: "tilt-on-hover", name: "3D Tilt", shortName: "Tilt" },
+                    { id: "hover-switch", name: "Switch", shortName: "Switch" },
+                    { id: "click-expand", name: "Expand", shortName: "Expand" },
+                  ].map((variant) => (
+                    <button
+                      key={variant.id}
+                      onClick={() => setSelectedVariant(variant.id)}
+                      className={`shrink-0 px-3 py-2 rounded-lg transition-colors text-xs font-medium ${
+                        selectedVariant === variant.id
+                          ? "bg-orange-500 text-white"
+                          : "bg-white text-neutral-700 hover:bg-neutral-100 border border-neutral-200"
+                      }`}
+                    >
+                      {variant.shortName}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Desktop Component Selector - Vertical */}
+              <div className="hidden sm:block space-y-2">
                 {[
                   { id: "zoom-on-hover", name: "Zoom on Hover" },
                   { id: "tilt-on-hover", name: "3D Tilt" },
@@ -168,7 +200,7 @@ export function InteractivePlayground({
                   <button
                     key={variant.id}
                     onClick={() => setSelectedVariant(variant.id)}
-                    className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
+                    className={`w-full text-left px-3 sm:px-4 py-2 rounded-lg transition-colors text-sm ${
                       selectedVariant === variant.id
                         ? "bg-orange-500 text-white"
                         : "bg-white text-neutral-700 hover:bg-neutral-100 border border-neutral-200"
@@ -181,12 +213,12 @@ export function InteractivePlayground({
             </div>
 
             {/* Image Selector */}
-            <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-6">
-              <h3 className="font-semibold text-neutral-900 mb-4 flex items-center gap-2">
-                <Icon icon="lucide:image" className="w-5 h-5" />
+            <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-4 sm:p-6">
+              <h3 className="font-semibold text-neutral-900 mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
+                <Icon icon="lucide:image" className="w-4 h-4 sm:w-5 sm:h-5" />
                 Sample Image
               </h3>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
                 {sampleImages.map((image, index) => (
                   <button
                     key={index}
@@ -200,7 +232,7 @@ export function InteractivePlayground({
                     <img
                       src={image}
                       alt={`Sample ${index + 1}`}
-                      className="w-full h-16 object-cover"
+                      className="w-full h-12 sm:h-16 object-cover"
                     />
                   </button>
                 ))}
@@ -208,15 +240,15 @@ export function InteractivePlayground({
             </div>
 
             {/* Settings Controls */}
-            <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-6">
-              <h3 className="font-semibold text-neutral-900 mb-4 flex items-center gap-2">
-                <Icon icon="lucide:sliders" className="w-5 h-5" />
+            <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-4 sm:p-6">
+              <h3 className="font-semibold text-neutral-900 mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
+                <Icon icon="lucide:sliders" className="w-4 h-4 sm:w-5 sm:h-5" />
                 Settings
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {selectedVariant === "zoom-on-hover" && (
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-2">
                       Zoom Scale: {settings.zoomScale}
                     </label>
                     <input
@@ -231,7 +263,7 @@ export function InteractivePlayground({
                           zoomScale: parseFloat(e.target.value),
                         }))
                       }
-                      className="w-full"
+                      className="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer"
                     />
                   </div>
                 )}
@@ -239,7 +271,7 @@ export function InteractivePlayground({
                 {selectedVariant === "tilt-on-hover" && (
                   <>
                     <div>
-                      <label className="block text-sm font-medium text-neutral-700 mb-2">
+                      <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-2">
                         Tilt Max: {settings.tiltMax}°
                       </label>
                       <input
@@ -253,10 +285,10 @@ export function InteractivePlayground({
                             tiltMax: parseInt(e.target.value),
                           }))
                         }
-                        className="w-full"
+                        className="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer"
                       />
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
                       <input
                         type="checkbox"
                         id="glare"
@@ -267,16 +299,16 @@ export function InteractivePlayground({
                             glareEnabled: e.target.checked,
                           }))
                         }
-                        className="w-4 h-4"
+                        className="w-3 h-3 sm:w-4 sm:h-4"
                       />
                       <label
                         htmlFor="glare"
-                        className="text-sm text-neutral-700"
+                        className="text-xs sm:text-sm text-neutral-700"
                       >
                         Enable Glare
                       </label>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
                       <input
                         type="checkbox"
                         id="scale"
@@ -287,11 +319,11 @@ export function InteractivePlayground({
                             scaleEnabled: e.target.checked,
                           }))
                         }
-                        className="w-4 h-4"
+                        className="w-3 h-3 sm:w-4 sm:h-4"
                       />
                       <label
                         htmlFor="scale"
-                        className="text-sm text-neutral-700"
+                        className="text-xs sm:text-sm text-neutral-700"
                       >
                         Enable Scale
                       </label>
@@ -301,7 +333,7 @@ export function InteractivePlayground({
 
                 {selectedVariant !== "click-expand" && (
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-2">
                       Duration: {settings.duration}ms
                     </label>
                     <input
@@ -316,7 +348,7 @@ export function InteractivePlayground({
                           duration: parseInt(e.target.value),
                         }))
                       }
-                      className="w-full"
+                      className="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer"
                     />
                   </div>
                 )}
@@ -325,34 +357,36 @@ export function InteractivePlayground({
           </div>
 
           {/* Demo and Code */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-2 order-1 lg:order-2 space-y-6 lg:space-y-8">
             {/* Component Demo */}
-            <div className="bg-neutral-50 rounded-2xl p-8">
-              <h3 className="font-semibold text-neutral-900 mb-6 flex items-center gap-2">
+            <div className="bg-neutral-50 rounded-xl lg:rounded-2xl p-4 sm:p-6 lg:p-8">
+              <h3 className="font-semibold text-neutral-900 mb-4 sm:mb-6 flex items-center gap-2 text-sm sm:text-base">
                 <Icon
                   icon="lucide:play-circle"
-                  className="w-5 h-5 text-orange-500"
+                  className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500"
                 />
                 Live Demo
               </h3>
-              <div className="bg-white rounded-xl p-6 shadow-lg overflow-hidden">
+              <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 lg:p-6 shadow-lg overflow-hidden">
                 <div className="relative">{renderComponent()}</div>
               </div>
             </div>
 
             {/* Generated Code */}
-            <div className="bg-neutral-900 rounded-2xl overflow-hidden">
-              <div className="flex items-center justify-between p-4 border-b border-neutral-700">
+            <div className="bg-neutral-900 rounded-xl lg:rounded-2xl overflow-hidden">
+              <div className="flex items-center justify-between p-3 sm:p-4 border-b border-neutral-700">
                 <div className="flex items-center gap-2">
                   <Icon
                     icon="lucide:code"
-                    className="w-5 h-5 text-neutral-400"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-400"
                   />
-                  <span className="text-neutral-300">Generated Code</span>
+                  <span className="text-neutral-300 text-sm sm:text-base">
+                    Generated Code
+                  </span>
                 </div>
               </div>
-              <div className="p-6">
-                <pre className="text-sm text-white overflow-x-auto">
+              <div className="p-3 sm:p-4 lg:p-6">
+                <pre className="text-xs sm:text-sm text-white overflow-x-auto">
                   <code>{generateCode()}</code>
                 </pre>
               </div>
