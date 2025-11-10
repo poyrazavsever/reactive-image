@@ -78,13 +78,13 @@
     },
     "github": {
       "title": "GitHub'da Yıldızla",
-      "description": "Desteğinizi göstermek ve bu projeyi başkalarının keşfetmesine yardım etmek için GitHub'da yıldız verin.",
+      "description": "Bu projeyi başkalarının keşfetmesine yardım etmek için GitHub'da yıldız verin. ",
       "button": "Yıldızla"
     },
     "reportIssue": "Sorun Bildir",
     "share": "Projeyi Paylaş",
-    "reportIssueDescription": "Hata bulduysanız veya öneriniz varsa bize bildirin.",
-    "shareDescription": "Bu projeyi arkadaşlarınızla paylaşın."
+    "reportIssueDescription": "Hata bulduysanız veya öneriniz varsa bize bildirin. Geliştirmemize yardımcı olun.",
+    "shareDescription": "Bu projeyi arkadaşlarınızla paylaşın. Tüm yardımlarınız takdir edilir!"
   },
   "showcase": {
     "title": "İnteraktif Vitrin",
