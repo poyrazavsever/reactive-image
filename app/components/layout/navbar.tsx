@@ -1,25 +1,59 @@
-import { Icon } from "@iconify/react";
+"use client";
 
-const Navbar = () => {
+import { Icon } from "@iconify/react";
+import Link from "next/link";
+import { getDictionary } from "@/app/lib/i18n";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+
+type NavbarProps = {
+  locale: string;
+  dict: Awaited<ReturnType<typeof getDictionary>>;
+};
+
+const Navbar = ({ locale, dict }: NavbarProps) => {
   return (
     <nav className="container max-w-6xl mx-auto px-6 py-6 sm:px-0 flex items-center justify-between">
       {/* Left Side */}
-      <div className="flex items-center gap-2">
+      <Link
+        href={`/${locale}`}
+        className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+      >
         <img
           src="/logo/logo.png"
           alt="Logo for navigation bar"
           className="w-8 h-8"
+          onError={(e) => {
+            // Fallback if logo doesn't load
+            e.currentTarget.style.display = "none";
+          }}
         />
-        <span className="text-lg font-semibold ">Reactive Image</span>
-      </div>
+        <span className="text-lg font-semibold">Reactive Image</span>
+      </Link>
 
       {/* Right Side */}
       <div className="flex items-center justify-center gap-4">
-        <a href="#" className="hover:text-orange-500 hover:underline">Docs</a>
-        <a href="#" className="hover:text-orange-500 hover:underline">Blog</a>
-        <a href="#" className="hover:text-orange-500 hover:underline">Showcase</a>
+        <Link
+          href={`/${locale}/docs/getting-started`}
+          className="hover:text-orange-500 hover:underline"
+        >
+          {dict.navbar.docs}
+        </Link>
+        <Link
+          href={`/${locale}/blog`}
+          className="hover:text-orange-500 hover:underline"
+        >
+          {dict.navbar.blog}
+        </Link>
+        <Link
+          href={`/${locale}/showcase`}
+          className="hover:text-orange-500 hover:underline"
+        >
+          {dict.navbar.showcase}
+        </Link>
         <a
-          href="#"
+          href="https://buymeacoffee.com/poyrazavsever"
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex items-center gap-2 border border-dashed border-orange-500 py-2 px-4 group hover:bg-orange-500 hover:text-white transition-colors rounded-md"
         >
           <Icon
@@ -28,10 +62,12 @@ const Navbar = () => {
             height="16"
             className="text-orange-500 group-hover:text-white"
           />
-          Buy Me a Coffee
+          {dict.navbar.buyMeCoffee}
         </a>
         <a
-          href="#"
+          href="https://github.com/poyrazavsever/reactive-image"
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex items-center gap-2 border border-dashed border-orange-500 text-white py-2 px-4 group bg-orange-500 hover:bg-white hover:text-black transition-colors rounded-md"
         >
           <Icon
@@ -40,11 +76,14 @@ const Navbar = () => {
             height="16"
             className="text-white group-hover:text-orange-500"
           />
-          Star on GitHub
+          {dict.navbar.starGithub}
         </a>
+
+        {/* Language Switcher */}
+        <LanguageSwitcher locale={locale} />
       </div>
     </nav>
   );
-}
+};
 
-export default Navbar
+export default Navbar;

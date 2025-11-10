@@ -4,6 +4,13 @@
     "examples": "Examples",
     "components": "Components"
   },
+  "navbar": {
+    "docs": "Docs",
+    "blog": "Blog",
+    "showcase": "Showcase",
+    "buyMeCoffee": "Buy Me a Coffee",
+    "starGithub": "Star on GitHub"
+  },
   "common": {
     "loading": "Loading...",
     "error": "Error",

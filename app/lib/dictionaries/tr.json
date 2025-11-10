@@ -4,6 +4,13 @@
     "examples": "Örnekler",
     "components": "Bileşenler"
   },
+  "navbar": {
+    "docs": "Dökümanlar",
+    "blog": "Blog",
+    "showcase": "Vitrin",
+    "buyMeCoffee": "Kahve Ismarla",
+    "starGithub": "GitHub'da Yıldızla"
+  },
   "common": {
     "loading": "Yükleniyor...",
     "error": "Hata",
