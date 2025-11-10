@@ -1,4 +1,4 @@
-<img src="./public/logo/logo.png" width="64" height="64">
+<img src="./public/tr/logo/logo.png" width="64" height="64">
 
 # Reactive Image
 
