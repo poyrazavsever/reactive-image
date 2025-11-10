@@ -1,0 +1,628 @@
+---
+title: HoverSwitch
+description: Gelişmiş fare üzeri geçiş komponenti ile pürüzsüz animasyonlar, performans optimizasyonları ve dokunmatik destek için etkileşimli görsel deneyimleri.
+order: 3
+locale: tr
+slug: hover-switch
+toc: true
+---
+
+# HoverSwitch
+
+HoverSwitch varyantı, fare üzeri geçişte iki farklı görsel arasında pürüzsüzce geçiş yaparak etkileyici etkileşimler oluşturur. Ürün vitrinleri, önce/sonra karşılaştırmaları ve profesyonel animasyonlar ile performans optimizasyonu içeren etkileşimli galeriler için mükemmeldir.
+
+## Özellikler
+
+- **8 Animasyon Türü**: Pürüzsüz geçişlerden dinamik 3D dönüşlere
+- **Performans Optimize**: Görsel ön yükleme, tembel yükleme, verimli yeniden renderlar
+- **Dokunmatik Cihaz Desteği**: Mobil deneyimler için isteğe bağlı dokunmatik etkileşimler
+- **Özelleştirilebilir Zamanlama**: Süre, gecikme ve yumuşatma üzerinde hassas kontrol
+- **Erişilebilirlik Hazır**: Uygun ARIA öznitelikleri ve klavye desteği
+- **TypeScript Desteği**: Tam tip tanımları ve IntelliSense
+
+## Hızlı Başlangıç
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export default function ÜrünVitrini() {
+  return (
+    <ReactiveImage
+      variant="hoverSwitch"
+      src="/ürün-ön.jpg"
+      hoverSrc="/ürün-arka.jpg"
+      alt="Ürün ön ve arka görünüm"
+      animation="slide"
+      slideDirection="right"
+    />
+  );
+}
+```
+
+## Animasyon Türleri
+
+### Kaydırma Animasyonları
+
+Önce/sonra karşılaştırmaları ve yönlü açıklamalar için mükemmel.
+
+```tsx
+// Yatay kaydırma (özelleştirilebilir yön)
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/önce.jpg"
+  hoverSrc="/sonra.jpg"
+  alt="Önce ve sonra karşılaştırması"
+  animation="slide"
+  slideDirection="right" // left, right, up, down
+/>
+
+// Dikey yukarı kaydırma
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/orijinal.jpg"
+  hoverSrc="/geliştirilmiş.jpg"
+  alt="Görsel geliştirme demo"
+  animation="slideUp"
+/>
+
+// Dikey aşağı kaydırma
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/başlangıç.jpg"
+  hoverSrc="/son.jpg"
+  alt="Tasarım ilerlemesi"
+  animation="slideDown"
+/>
+```
+
+### Geçiş & Çapraz Geçiş Efektleri
+
+Ürün varyasyonları ve hafif değişiklikler için pürüzsüz geçişler.
+
+```tsx
+// Basit çapraz geçiş (varsayılan)
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/renk-mavi.jpg"
+  hoverSrc="/renk-kırmızı.jpg"
+  alt="Ürün renk seçenekleri"
+  animation="crossfade"
+/>
+
+// Yakınlaştırma ile geçiş efekti
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/genel-bakış.jpg"
+  hoverSrc="/detay.jpg"
+  alt="Ürün genel bakış ve detaylar"
+  animation="zoom"
+/>
+```
+
+### Yaratıcı Efektler
+
+Sanatsal ve premium deneyimler için göz alıcı animasyonlar.
+
+```tsx
+// Bulanık'tan netlik geçişi
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/bulanık-arkaplan.jpg"
+  hoverSrc="/keskin-odak.jpg"
+  alt="Odak geçiş efekti"
+  animation="blur"
+/>
+
+// 3D çevirme efekti
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/ön-kart.jpg"
+  hoverSrc="/arka-kart.jpg"
+  alt="Kart çevirme etkileşimi"
+  animation="rotateY"
+/>
+
+// Birleşik ölçek ve döndürme
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/statik-logo.jpg"
+  hoverSrc="/animasyon-logo.jpg"
+  alt="Logo animasyon demo"
+  animation="scaleRotate"
+/>
+```
+
+## Zamanlama Konfigürasyonu
+
+Hassas zamanlama kontrolleri ile animasyon davranışını ince ayarlayın.
+
+```tsx
+// Hızlı çıtırtılı etkileşim
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/hızlı1.jpg"
+  hoverSrc="/hızlı2.jpg"
+  alt="Hızlı geçiş demo"
+  animation="slide"
+  timing={{
+    duration: 200,
+    delay: 0,
+    easing: "ease-out"
+  }}
+/>
+
+// Pürüzsüz profesyonel geçiş
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/pürüzsüz1.jpg"
+  hoverSrc="/pürüzsüz2.jpg"
+  alt="Pürüzsüz geçiş demo"
+  animation="crossfade"
+  timing={{
+    duration: 400,
+    delay: 50,
+    easing: "cubic-bezier(0.4, 0, 0.2, 1)"
+  }}
+/>
+
+// Sanatsal yavaş açılım
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/sanatsal1.jpg"
+  hoverSrc="/sanatsal2.jpg"
+  alt="Sanatsal açılım demo"
+  animation="blur"
+  timing={{
+    duration: 600,
+    delay: 100,
+    easing: "ease-in-out"
+  }}
+/>
+```
+
+## Kaydırma Yönleri
+
+Sezgisel etkileşimler için kaydırma animasyonlarının yönünü kontrol edin.
+
+```tsx
+// Yatay kaydırmalar
+<div className="grid grid-cols-2 gap-4">
+  <ReactiveImage
+    variant="hoverSwitch"
+    src="/kaydırma-temel.jpg"
+    hoverSrc="/kaydırma-açılım.jpg"
+    alt="Soldan kaydırma"
+    animation="slide"
+    slideDirection="left"
+  />
+
+  <ReactiveImage
+    variant="hoverSwitch"
+    src="/kaydırma-temel.jpg"
+    hoverSrc="/kaydırma-açılım.jpg"
+    alt="Sağdan kaydırma"
+    animation="slide"
+    slideDirection="right"
+  />
+</div>
+
+// Dikey kaydırmalar
+<div className="grid grid-cols-2 gap-4">
+  <ReactiveImage
+    variant="hoverSwitch"
+    src="/kaydırma-temel.jpg"
+    hoverSrc="/kaydırma-açılım.jpg"
+    alt="Üstten kaydırma"
+    animation="slide"
+    slideDirection="up"
+  />
+
+  <ReactiveImage
+    variant="hoverSwitch"
+    src="/kaydırma-temel.jpg"
+    hoverSrc="/kaydırma-açılım.jpg"
+    alt="Alttan kaydırma"
+    animation="slide"
+    slideDirection="down"
+  />
+</div>
+```
+
+## Performans Optimizasyonu
+
+Daha iyi kullanıcı deneyimi için yükleme ve etkileşim performansını optimize edin.
+
+```tsx
+// Anında etkileşim için fare üzeri görselini ön yükle
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/ana-görsel.jpg"
+  hoverSrc="/ana-detay.jpg"
+  alt="Detaylı ana görsel"
+  animation="zoom"
+  preloadHover={true}  // Fare üzeri görselini hemen yükler
+  disableLazy={false}  // Performans için tembel yüklemeyi koru
+/>
+
+// Kritik görseller için istekli yükleme
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/kritik-görsel.jpg"
+  hoverSrc="/kritik-fare-üzeri.jpg"
+  alt="Sayfa üstü içerik"
+  animation="crossfade"
+  preloadHover={true}
+  disableLazy={true}   // Kritik içerik için hemen yükle
+/>
+
+// Tembel optimizasyon ile arkaplan görselleri
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/arkaplan1.jpg"
+  hoverSrc="/arkaplan2.jpg"
+  alt="Arkaplan dekorasyonu"
+  animation="blur"
+  preloadHover={false} // Dekoratif görseller için ön yükleme yapma
+  disableLazy={false}  // Bant genişliğini korumak için tembel yükleme kullan
+/>
+```
+
+## Dokunmatik Cihaz Desteği
+
+Dokunmatik cihazlarda dokunma etkileşimleri ile fare üzeri efektlerini etkinleştirin.
+
+```tsx
+// Mobil dostu ürün galerisi
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/ürün-varsayılan.jpg"
+  hoverSrc="/ürün-aktif.jpg"
+  alt="Fare üzeri durumu olan ürün"
+  animation="slide"
+  enableTouch={true}  // Mobilde dokunma-değiştir etkinleştirir
+  timing={{
+    duration: 300,
+    easing: "ease-out"
+  }}
+/>
+
+// Yalnızca masaüstü fare üzeri efekti
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/masaüstü-görsel.jpg"
+  hoverSrc="/masaüstü-fare-üzeri.jpg"
+  alt="Yalnızca masaüstü etkileşimi"
+  animation="rotateY"
+  enableTouch={false} // Yalnızca fare üzeri, dokunmatik etkileşim yok
+/>
+```
+
+## Olay İşleme & Analitik
+
+Etkileşimleri takip edin ve özel davranışları tetikleyin.
+
+```tsx
+export default function TakipEdilen_Fare_Üzeri_Görsel() {
+  const animasyonBaşlangıcınıYönet = () => {
+    // Fare üzeri başlangıcını takip et
+    analytics.track("görsel_fare_üzeri_başladı", {
+      görsel_türü: "ürün_vitrini",
+    });
+  };
+
+  const animasyonBitişiniYönet = () => {
+    // Fare üzeri tamamlanmasını takip et
+    analytics.track("görsel_fare_üzeri_tamamlandı", {
+      animasyon_türü: "slide",
+    });
+  };
+
+  return (
+    <ReactiveImage
+      variant="hoverSwitch"
+      src="/takip-edilen-görsel.jpg"
+      hoverSrc="/takip-edilen-fare-üzeri.jpg"
+      alt="Analitik takipli görsel"
+      animation="slide"
+      slideDirection="right"
+      onAnimationStart={animasyonBaşlangıcınıYönet}
+      onAnimationEnd={animasyonBitişiniYönet}
+    />
+  );
+}
+```
+
+## Gelişmiş Stil & CSS Sınıfları
+
+Karmaşık tasarımlar ve durum tabanlı stilleme için CSS sınıfları ile birleştirin.
+
+```tsx
+// Fare üzeri durumuna dayalı dinamik stilleme
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/stilli-görsel.jpg"
+  hoverSrc="/stilli-fare-üzeri.jpg"
+  alt="Özel stilli görsel"
+  animation="zoom"
+  className="rounded-xl shadow-lg transition-shadow duration-300"
+  imgClassName="object-cover w-full h-64"
+  hoverClassName="shadow-2xl ring-4 ring-blue-500 ring-opacity-50"
+  style={{
+    maxWidth: '400px',
+    background: 'linear-gradient(45deg, #f0f0f0, #e0e0e0)'
+  }}
+/>
+
+// Tutarlı stilleme ile karmaşık ızgara düzeni
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+  {portföyÖğeleri.map((öğe, index) => (
+    <ReactiveImage
+      key={index}
+      variant="hoverSwitch"
+      src={öğe.küçükResim}
+      hoverSrc={öğe.önizleme}
+      alt={öğe.başlık}
+      animation="crossfade"
+      className="group cursor-pointer"
+      imgClassName="rounded-lg transition-transform duration-300 group-hover:scale-105"
+      hoverClassName="shadow-xl"
+      timing={{ duration: 350 }}
+    />
+  ))}
+</div>
+```
+
+## Gerçek Dünya Desenleri
+
+### E-ticaret Ürün Galerisi
+
+```tsx
+const ürünGörselleri = [
+  {
+    ana: "/ürünler/ayakkabı-1-ön.jpg",
+    fareÜzeri: "/ürünler/ayakkabı-1-yan.jpg",
+  },
+  {
+    ana: "/ürünler/ayakkabı-2-ön.jpg",
+    fareÜzeri: "/ürünler/ayakkabı-2-yan.jpg",
+  },
+  {
+    ana: "/ürünler/ayakkabı-3-ön.jpg",
+    fareÜzeri: "/ürünler/ayakkabı-3-yan.jpg",
+  },
+];
+
+export default function ÜrünIzgara() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {ürünGörselleri.map((ürün, index) => (
+        <div key={index} className="bg-white rounded-lg p-4 shadow-md">
+          <ReactiveImage
+            variant="hoverSwitch"
+            src={ürün.ana}
+            hoverSrc={ürün.fareÜzeri}
+            alt={`Ürün ${index + 1} - Ön ve yan görünüm`}
+            animation="slide"
+            slideDirection="right"
+            timing={{ duration: 300, easing: "ease-out" }}
+            className="w-full aspect-square overflow-hidden rounded-md"
+            imgClassName="w-full h-full object-cover"
+            preloadHover={true}
+          />
+          <div className="mt-4">
+            <h3 className="font-semibold text-gray-900">
+              Premium Spor Ayakkabı
+            </h3>
+            <p className="text-gray-600">₺349,99</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+### Portföy Önce/Sonra Vitrin
+
+```tsx
+const portföyProjeleri = [
+  {
+    önce: "/portföy/website-önce.jpg",
+    sonra: "/portföy/website-sonra.jpg",
+    başlık: "E-ticaret Yeniden Tasarımı",
+    açıklama: "%40 dönüşüm artışı ile tam UI yenilemesi",
+  },
+  {
+    önce: "/portföy/logo-önce.jpg",
+    sonra: "/portföy/logo-sonra.jpg",
+    başlık: "Marka Kimliği Yenilemesi",
+    açıklama: "Teknoloji girişimi için modern logo tasarımı",
+  },
+];
+
+export default function PortföyVitrini() {
+  return (
+    <div className="space-y-12">
+      {portföyProjeleri.map((proje, index) => (
+        <div
+          key={index}
+          className="flex flex-col lg:flex-row items-center gap-8"
+        >
+          <div className="lg:w-1/2">
+            <ReactiveImage
+              variant="hoverSwitch"
+              src={proje.önce}
+              hoverSrc={proje.sonra}
+              alt={`${proje.başlık} - Önce ve sonra`}
+              animation="slide"
+              slideDirection="left"
+              timing={{ duration: 400 }}
+              className="rounded-xl overflow-hidden shadow-xl"
+              imgClassName="w-full h-auto"
+              enableTouch={true}
+            />
+            <p className="text-center text-sm text-gray-500 mt-2">
+              Dönüşümü görmek için fare ile üzerine gelin
+            </p>
+          </div>
+          <div className="lg:w-1/2">
+            <h3 className="text-2xl font-bold mb-4">{proje.başlık}</h3>
+            <p className="text-gray-600 leading-relaxed">{proje.açıklama}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+### Etkileşimli Görsel Karşılaştırma
+
+```tsx
+export default function KarşılaştırmaAracı() {
+  const [seçiliFiltre, setSeçiliFiltre] = useState("orijinal");
+
+  const filtreGörselleri = {
+    orijinal: "/fotoğraf-orijinal.jpg",
+    vintage: "/fotoğraf-vintage.jpg",
+    siyahBeyaz: "/fotoğraf-sb.jpg",
+    sepya: "/fotoğraf-sepya.jpg",
+  };
+
+  return (
+    <div className="max-w-2xl mx-auto">
+      <div className="mb-6">
+        <h3 className="text-xl font-semibold mb-4">
+          Fotoğraf Filtre Önizlemesi
+        </h3>
+        <div className="flex gap-2">
+          {Object.keys(filtreGörselleri).map((filtre) => (
+            <button
+              key={filtre}
+              onClick={() => setSeçiliFiltre(filtre)}
+              className={`px-4 py-2 rounded-lg capitalize ${
+                seçiliFiltre === filtre
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+            >
+              {filtre}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <ReactiveImage
+        variant="hoverSwitch"
+        src={filtreGörselleri.orijinal}
+        hoverSrc={
+          filtreGörselleri[seçiliFiltre as keyof typeof filtreGörselleri]
+        }
+        alt="Filtre önizlemeli fotoğraf"
+        animation="crossfade"
+        timing={{ duration: 250 }}
+        className="rounded-lg overflow-hidden"
+        imgClassName="w-full h-auto"
+        preloadHover={true}
+      />
+    </div>
+  );
+}
+```
+
+## API Referansı
+
+### Özellikler
+
+| Özellik            | Tür                        | Varsayılan    | Açıklama                                                |
+| ------------------ | -------------------------- | ------------- | ------------------------------------------------------- |
+| `hoverSrc`         | `string`                   | `undefined`   | Fare üzeri durum için görsel kaynağı                    |
+| `animation`        | `HoverSwitchAnimationType` | `"crossfade"` | Animasyon türü                                          |
+| `slideDirection`   | `SlideDirection`           | `"right"`     | Kaydırma animasyonları için yön                         |
+| `timing`           | `HoverSwitchTiming`        | `{}`          | Animasyon zamanlama konfigürasyonu                      |
+| `preloadHover`     | `boolean`                  | `true`        | Anında etkileşim için fare üzeri görselini ön yükle     |
+| `disableLazy`      | `boolean`                  | `false`       | Kritik görseller için tembel yüklemeyi devre dışı bırak |
+| `enableTouch`      | `boolean`                  | `false`       | Dokunmatik cihaz desteğini etkinleştir                  |
+| `hoverClassName`   | `string`                   | `undefined`   | Fare üzeri gelindiğinde ek CSS sınıfı                   |
+| `onAnimationStart` | `() => void`               | `undefined`   | Animasyon başladığında geri çağırma                     |
+| `onAnimationEnd`   | `() => void`               | `undefined`   | Animasyon bittiğinde geri çağırma                       |
+
+### Türler
+
+```tsx
+// Animasyon türleri
+type HoverSwitchAnimationType =
+  | "slide" // Yönlü kaydırma geçişi
+  | "crossfade" // Pürüzsüz opaklık çapraz geçişi
+  | "zoom" // Geçiş ile ölçek efekti
+  | "blur" // Bulanık'tan odağa geçiş
+  | "rotateY" // 3D dikey çevirme
+  | "slideUp" // Alttan dikey kaydırma
+  | "slideDown" // Üstten dikey kaydırma
+  | "scaleRotate"; // Birleşik ölçek ve döndürme
+
+// Kaydırma yönleri (kaydırma animasyonu için)
+type SlideDirection =
+  | "left" // Soldan sağa kaydırma
+  | "right" // Sağdan sola kaydırma
+  | "up" // Üstten alta kaydırma
+  | "down"; // Alttan üste kaydırma
+
+// Zamanlama konfigürasyonu
+type HoverSwitchTiming = {
+  duration?: number; // Milisaniye cinsinden animasyon süresi (varsayılan: 300)
+  delay?: number; // Milisaniye cinsinden animasyon gecikmesi (varsayılan: 0)
+  easing?: string; // CSS yumuşatma işlevi (varsayılan: "ease-in-out")
+};
+```
+
+### Animasyon Vitrini
+
+| Animasyon     | En İyisi                     | Süre      | Mobil         |
+| ------------- | ---------------------------- | --------- | ------------- |
+| `slide`       | Önce/sonra karşılaştırmaları | 300-400ms | ✅ Harika     |
+| `crossfade`   | Ürün varyasyonları           | 250-350ms | ✅ Mükemmel   |
+| `zoom`        | Detay açılımları             | 300-500ms | ✅ İyi        |
+| `blur`        | Sanatsal efektler            | 400-600ms | ⚠️ Performans |
+| `rotateY`     | Kart çevirmeleri             | 400-500ms | ⚠️ Performans |
+| `slideUp`     | İçerik açılımları            | 250-350ms | ✅ Harika     |
+| `slideDown`   | İçerik açılımları            | 250-350ms | ✅ Harika     |
+| `scaleRotate` | Dinamik etkileşimler         | 350-450ms | ⚠️ Performans |
+
+## Performans Kılavuzları
+
+### Yükleme Stratejisi
+
+- **Kritik Görseller**: `preloadHover={true}` ve `disableLazy={true}` kullanın
+- **Sayfa Üstü**: `preloadHover={true}` ve `disableLazy={false}` kullanın
+- **Sayfa Altı**: `preloadHover={false}` ve `disableLazy={false}` kullanın
+- **Dekoratif**: `preloadHover={false}` ve `disableLazy={false}` kullanın
+
+### Animasyon Performansı
+
+- **Hızlı Etkileşimler**: 200-300ms süre ile `ease-out`
+- **Profesyonel Geçişler**: 300-400ms ile `cubic-bezier(0.4, 0, 0.2, 1)`
+- **Sanatsal Efektler**: 400-600ms ile `ease-in-out`
+- **Mobil Cihazlar**: Daha kısa süreleri tercih edin (200-350ms)
+
+### Bellek Optimizasyonu
+
+- Yalnızca kullanıcıların etkileşim kuracağı fare üzeri görsellerini ön yükleyin
+- Uygun görsel formatlarını kullanın (desteklendiğinde WebP, AVIF)
+- Görsel boyutlarını göz önünde bulundurun - gereksiz yere büyük görseller yüklemeyin
+- Pürüzsüz performans sağlamak için yavaş cihazlarda test edin
+
+## Tarayıcı Desteği
+
+| Tarayıcı      | Sürüm | Animasyon Desteği | Dokunmatik Destek |
+| ------------- | ----- | ----------------- | ----------------- |
+| Chrome        | 80+   | ✅ Tam            | ✅ Tam            |
+| Firefox       | 75+   | ✅ Tam            | ✅ Tam            |
+| Safari        | 13+   | ✅ Tam            | ✅ Tam            |
+| Edge          | 80+   | ✅ Tam            | ✅ Tam            |
+| Mobile Safari | 13+   | ✅ Tam            | ✅ Tam            |
+| Chrome Mobile | 80+   | ✅ Tam            | ✅ Tam            |
+
+---
+
+_Etkileyici fare üzeri etkileşimleri oluşturmaya hazır mısınız? Canlı demolar için [vitrin sayfamızı](/showcase) kontrol edin veya dokümantasyonumuzda daha fazla [komponent varyantını](/docs/baslangic) keşfedin._

@@ -1,0 +1,857 @@
+---
+title: TiltOnHover
+description: Advanced 3D tilt effect component with interactive glare effects, gyroscope support, and smooth animations for immersive image experiences.
+order: 4
+locale: en
+slug: tilt-on-hover
+toc: true
+---
+
+# TiltOnHover
+
+The TiltOnHover variant creates stunning 3D tilt effects that respond to mouse movement, adding depth and interactivity to images. Features smooth animations, realistic glare effects, gyroscope support for mobile devices, and performance-optimized transforms for premium user experiences.
+
+## Features
+
+- **9 Animation Types**: From basic tilts to magnetic attractions and parallax effects
+- **Interactive Glare Effects**: Mouse-following light reflections for premium feel
+- **Gyroscope Support**: Mobile device orientation integration
+- **Performance Optimized**: RequestAnimationFrame and smooth 60fps rendering
+- **Axis Control**: Full control over X, Y, or both-axis movement
+- **Touch Support**: Optional touch device interactions
+- **TypeScript Ready**: Complete type definitions and IntelliSense
+
+## Quick Start
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export default function InteractiveCard() {
+  return (
+    <ReactiveImage
+      variant="tiltOnHover"
+      src="/product-card.jpg"
+      alt="Interactive product card"
+      animation="glare"
+      tiltMax={12}
+      glare={{
+        enabled: true,
+        maxOpacity: 0.4,
+        position: "mouse",
+      }}
+    />
+  );
+}
+```
+
+## Animation Types
+
+### Basic Tilt Effects
+
+Perfect for cards, UI elements, and general interactivity.
+
+```tsx
+// Simple 3D tilt (default)
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/card.jpg"
+  alt="Basic tilt card"
+  animation="basic"
+  tiltMax={10}
+/>
+
+// Enhanced 3D perspective
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/hero-image.jpg"
+  alt="3D perspective demo"
+  animation="perspective"
+  tiltMax={15}
+  perspective={1200}
+/>
+
+// Bouncy reset animation
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/playful-card.jpg"
+  alt="Bouncy tilt effect"
+  animation="bounce"
+  tiltMax={12}
+  timing={{
+    reset: 800,
+    easing: "cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+  }}
+/>
+
+// Smooth elastic reset
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/modern-ui.jpg"
+  alt="Elastic tilt effect"
+  animation="elastic"
+  tiltMax={8}
+  timing={{
+    duration: 100,
+    reset: 600
+  }}
+/>
+```
+
+### Premium Glare Effects
+
+Add realistic light reflections for luxury and product showcase experiences.
+
+```tsx
+// Mouse-following glare
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/premium-product.jpg"
+  alt="Premium product with glare"
+  animation="glare"
+  tiltMax={10}
+  glare={{
+    enabled: true,
+    maxOpacity: 0.4,
+    color: "rgba(255, 255, 255, 0.3)",
+    position: "mouse" // Follows mouse cursor
+  }}
+/>
+
+// Center-positioned glare
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/luxury-watch.jpg"
+  alt="Luxury watch with center glare"
+  animation="glare"
+  tiltMax={15}
+  glare={{
+    enabled: true,
+    maxOpacity: 0.5,
+    color: "rgba(255, 215, 0, 0.2)", // Golden glare
+    position: "center"
+  }}
+/>
+
+// Subtle glare for cards
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/business-card.jpg"
+  alt="Business card with subtle glare"
+  animation="glare"
+  tiltMax={6}
+  glare={{
+    enabled: true,
+    maxOpacity: 0.25,
+    color: "rgba(255, 255, 255, 0.15)"
+  }}
+/>
+```
+
+### Scale & Transform Effects
+
+Combine tilting with scaling and advanced transformations.
+
+```tsx
+// Scale with tilt
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/interactive-element.jpg"
+  alt="Scale tilt demonstration"
+  animation="scale"
+  tiltMax={12}
+  scale={1.05} // 5% scale increase
+/>
+
+// Floating effect with shadow
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/floating-card.jpg"
+  alt="Floating card effect"
+  animation="float"
+  tiltMax={8}
+  shadow={true} // Dynamic shadow based on tilt
+/>
+
+// Parallax movement
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/parallax-demo.jpg"
+  alt="Parallax tilt effect"
+  animation="parallax"
+  tiltMax={15}
+/>
+```
+
+### Advanced Interactive Effects
+
+Creative animations for unique user experiences.
+
+```tsx
+// Magnetic attraction
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/magnetic-card.jpg"
+  alt="Magnetic attraction effect"
+  animation="magnetic"
+  tiltMax={10}
+/>
+
+// Custom perspective depth
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/deep-perspective.jpg"
+  alt="Deep 3D perspective"
+  animation="perspective"
+  tiltMax={20}
+  perspective={800} // Stronger perspective effect
+/>
+```
+
+## Axis Control
+
+Control which axes respond to mouse movement for specific interaction patterns.
+
+```tsx
+// Full movement (default)
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/full-tilt.jpg"
+  alt="Full axis movement"
+  axis="both"
+  tiltMax={12}
+/>
+
+// Horizontal tilt only
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/horizontal-card.jpg"
+  alt="Horizontal tilt only"
+  axis="x"
+  tiltMax={15}
+/>
+
+// Vertical tilt only
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/vertical-card.jpg"
+  alt="Vertical tilt only"
+  axis="y"
+  tiltMax={10}
+/>
+
+// Comparison layout
+<div className="grid grid-cols-3 gap-6">
+  <div className="text-center">
+    <ReactiveImage
+      variant="tiltOnHover"
+      src="/axis-demo.jpg"
+      alt="Both axes"
+      axis="both"
+      tiltMax={10}
+      className="mb-2"
+    />
+    <p className="text-sm text-gray-600">Both Axes</p>
+  </div>
+
+  <div className="text-center">
+    <ReactiveImage
+      variant="tiltOnHover"
+      src="/axis-demo.jpg"
+      alt="X-axis only"
+      axis="x"
+      tiltMax={10}
+      className="mb-2"
+    />
+    <p className="text-sm text-gray-600">X-Axis Only</p>
+  </div>
+
+  <div className="text-center">
+    <ReactiveImage
+      variant="tiltOnHover"
+      src="/axis-demo.jpg"
+      alt="Y-axis only"
+      axis="y"
+      tiltMax={10}
+      className="mb-2"
+    />
+    <p className="text-sm text-gray-600">Y-Axis Only</p>
+  </div>
+</div>
+```
+
+## Timing & Performance
+
+Fine-tune animation responsiveness and reset behavior.
+
+```tsx
+// Fast responsive interaction
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/fast-response.jpg"
+  alt="Fast response demo"
+  animation="basic"
+  tiltMax={10}
+  timing={{
+    duration: 50,  // Ultra-fast response
+    reset: 300,    // Quick reset
+    easing: "ease-out"
+  }}
+/>
+
+// Smooth professional feel
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/smooth-professional.jpg"
+  alt="Professional smooth interaction"
+  animation="elastic"
+  tiltMax={8}
+  timing={{
+    duration: 150, // Balanced response
+    reset: 600,    // Smooth reset
+    easing: "cubic-bezier(0.4, 0, 0.2, 1)"
+  }}
+/>
+
+// Dramatic cinematic effect
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/cinematic-effect.jpg"
+  alt="Cinematic dramatic effect"
+  animation="perspective"
+  tiltMax={20}
+  timing={{
+    duration: 200, // Slightly slower response
+    reset: 1000,   // Long dramatic reset
+    easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+  }}
+/>
+```
+
+## Mobile & Touch Support
+
+Enable tilt effects on touch devices with gyroscope integration.
+
+```tsx
+// Touch-enabled tilt
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/touch-card.jpg"
+  alt="Touch-enabled tilt"
+  animation="basic"
+  tiltMax={8}
+  enableTouch={true} // Enable touch interactions
+/>
+
+// Gyroscope integration (mobile)
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/gyroscope-demo.jpg"
+  alt="Gyroscope tilt effect"
+  animation="glare"
+  tiltMax={15}
+  gyroscope={true} // Use device orientation
+  glare={{
+    enabled: true,
+    maxOpacity: 0.3
+  }}
+/>
+
+// Mobile-optimized settings
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/mobile-optimized.jpg"
+  alt="Mobile optimized tilt"
+  animation="scale"
+  tiltMax={6}        // Reduced for mobile
+  scale={1.03}       // Subtle scale
+  enableTouch={true}
+  timing={{
+    duration: 100,   // Fast response for touch
+    reset: 400       // Quick reset
+  }}
+/>
+```
+
+## Advanced Configuration
+
+Customize behavior, direction, and interaction patterns.
+
+```tsx
+// Reverse tilt direction
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/reverse-tilt.jpg"
+  alt="Reverse tilt direction"
+  animation="basic"
+  tiltMax={12}
+  reverse={true} // Inverts tilt direction
+/>
+
+// Persistent tilt (no reset on leave)
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/persistent-tilt.jpg"
+  alt="Persistent tilt state"
+  animation="glare"
+  tiltMax={10}
+  resetOnLeave={false} // Maintains tilt when mouse leaves
+  glare={{ enabled: true }}
+/>
+
+// High perspective intensity
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/intense-perspective.jpg"
+  alt="Intense 3D perspective"
+  animation="perspective"
+  tiltMax={25}
+  perspective={600} // Stronger 3D effect
+/>
+```
+
+## Event Handling & Analytics
+
+Track tilt interactions and trigger custom behaviors.
+
+```tsx
+export default function TrackedTiltCard() {
+  const handleTiltStart = ({ tiltX, tiltY }) => {
+    console.log("Tilt started:", { tiltX, tiltY });
+    // Track interaction start
+    analytics.track("tilt_interaction_start");
+  };
+
+  const handleTiltMove = ({ tiltX, tiltY, mouseX, mouseY }) => {
+    // Real-time tilt tracking
+    console.log("Tilt position:", {
+      tiltX: tiltX.toFixed(1),
+      tiltY: tiltY.toFixed(1),
+      mouse: { x: mouseX.toFixed(1), y: mouseY.toFixed(1) },
+    });
+  };
+
+  const handleTiltEnd = () => {
+    console.log("Tilt interaction ended");
+    // Track engagement duration
+    analytics.track("tilt_interaction_end");
+  };
+
+  return (
+    <ReactiveImage
+      variant="tiltOnHover"
+      src="/tracked-tilt.jpg"
+      alt="Analytics-tracked tilt"
+      animation="glare"
+      tiltMax={12}
+      glare={{ enabled: true }}
+      onTiltStart={handleTiltStart}
+      onTiltMove={handleTiltMove}
+      onTiltEnd={handleTiltEnd}
+    />
+  );
+}
+```
+
+## Styling & CSS Integration
+
+Combine with CSS classes for complex designs and state-based styling.
+
+```tsx
+// Dynamic styling during tilt
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/styled-card.jpg"
+  alt="Dynamic styled card"
+  animation="scale"
+  tiltMax={10}
+  scale={1.05}
+  className="rounded-xl shadow-lg transition-shadow duration-300"
+  imgClassName="object-cover w-full h-64"
+  tiltClassName="shadow-2xl ring-4 ring-blue-500 ring-opacity-30"
+  style={{
+    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    padding: '4px'
+  }}
+/>
+
+// Card grid with consistent tilt effects
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {cardData.map((card, index) => (
+    <div key={index} className="bg-white rounded-xl p-6 shadow-md">
+      <ReactiveImage
+        variant="tiltOnHover"
+        src={card.image}
+        alt={card.title}
+        animation="glare"
+        tiltMax={8}
+        glare={{
+          enabled: true,
+          maxOpacity: 0.25
+        }}
+        className="w-full aspect-video overflow-hidden rounded-lg mb-4"
+        imgClassName="w-full h-full object-cover"
+      />
+      <h3 className="text-lg font-semibold mb-2">{card.title}</h3>
+      <p className="text-gray-600">{card.description}</p>
+    </div>
+  ))}
+</div>
+```
+
+## Real-World Patterns
+
+### Premium Product Showcase
+
+```tsx
+const premiumProducts = [
+  {
+    image: "/watches/luxury-watch-1.jpg",
+    name: "Swiss Master Chronograph",
+    price: "$2,499",
+    badge: "Limited Edition",
+  },
+  {
+    image: "/watches/luxury-watch-2.jpg",
+    name: "Heritage Classic",
+    price: "$1,899",
+    badge: "Best Seller",
+  },
+  {
+    image: "/watches/luxury-watch-3.jpg",
+    name: "Modern Minimalist",
+    price: "$999",
+    badge: "New Arrival",
+  },
+];
+
+export default function LuxuryWatchShowcase() {
+  return (
+    <div className="bg-black text-white py-20">
+      <div className="max-w-7xl mx-auto px-4">
+        <h2 className="text-4xl font-bold text-center mb-16">
+          Premium Collection
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {premiumProducts.map((product, index) => (
+            <div key={index} className="text-center">
+              <div className="relative mb-8">
+                {product.badge && (
+                  <span className="absolute -top-3 right-4 z-10 bg-gold text-black px-3 py-1 text-xs font-bold rounded-full">
+                    {product.badge}
+                  </span>
+                )}
+
+                <ReactiveImage
+                  variant="tiltOnHover"
+                  src={product.image}
+                  alt={product.name}
+                  animation="glare"
+                  tiltMax={10}
+                  glare={{
+                    enabled: true,
+                    maxOpacity: 0.6,
+                    color: "rgba(255, 215, 0, 0.3)", // Golden glare
+                    position: "mouse",
+                  }}
+                  timing={{
+                    duration: 120,
+                    reset: 800,
+                    easing: "cubic-bezier(0.23, 1, 0.32, 1)",
+                  }}
+                  className="w-full aspect-square rounded-2xl overflow-hidden"
+                  imgClassName="w-full h-full object-cover"
+                />
+              </div>
+
+              <h3 className="text-2xl font-semibold mb-2">{product.name}</h3>
+              <p className="text-gold text-xl font-bold">{product.price}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### Interactive Dashboard Cards
+
+```tsx
+const dashboardCards = [
+  {
+    icon: "📊",
+    title: "Analytics",
+    value: "1.2M",
+    trend: "+15%",
+    color: "blue",
+  },
+  {
+    icon: "💰",
+    title: "Revenue",
+    value: "$45.2K",
+    trend: "+8%",
+    color: "green",
+  },
+  { icon: "👥", title: "Users", value: "8.4K", trend: "+23%", color: "purple" },
+  {
+    icon: "🎯",
+    title: "Conversion",
+    value: "3.2%",
+    trend: "+12%",
+    color: "orange",
+  },
+];
+
+export default function InteractiveDashboard() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {dashboardCards.map((card, index) => (
+        <div
+          key={index}
+          className="relative bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+        >
+          <ReactiveImage
+            variant="tiltOnHover"
+            src={`/dashboard-bg-${card.color}.jpg`}
+            alt={`${card.title} dashboard card`}
+            animation="magnetic"
+            tiltMax={6}
+            timing={{
+              duration: 80,
+              reset: 400,
+            }}
+            className="absolute inset-0 rounded-xl overflow-hidden opacity-5"
+            imgClassName="w-full h-full object-cover"
+          />
+
+          <div className="relative z-10">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-2xl">{card.icon}</span>
+              <span
+                className={`text-sm font-medium px-2 py-1 rounded-full bg-${card.color}-100 text-${card.color}-700`}
+              >
+                {card.trend}
+              </span>
+            </div>
+
+            <h3 className="text-gray-600 text-sm font-medium mb-1">
+              {card.title}
+            </h3>
+            <p className="text-3xl font-bold text-gray-900">{card.value}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+### Gaming Card Collection
+
+```tsx
+const gameCards = [
+  {
+    image: "/cards/legendary-dragon.jpg",
+    name: "Legendary Dragon",
+    rarity: "Legendary",
+    power: 2500,
+    glareColor: "rgba(255, 215, 0, 0.4)", // Gold for legendary
+  },
+  {
+    image: "/cards/mystic-warrior.jpg",
+    name: "Mystic Warrior",
+    rarity: "Epic",
+    power: 1800,
+    glareColor: "rgba(138, 43, 226, 0.4)", // Purple for epic
+  },
+  {
+    image: "/cards/forest-guardian.jpg",
+    name: "Forest Guardian",
+    rarity: "Rare",
+    power: 1200,
+    glareColor: "rgba(0, 191, 255, 0.4)", // Blue for rare
+  },
+];
+
+export default function GameCardCollection() {
+  return (
+    <div className="bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 py-16">
+      <div className="max-w-6xl mx-auto px-4">
+        <h2 className="text-4xl font-bold text-white text-center mb-12">
+          Legendary Collection
+        </h2>
+
+        <div className="flex justify-center gap-8 flex-wrap">
+          {gameCards.map((card, index) => (
+            <div key={index} className="text-center">
+              <ReactiveImage
+                variant="tiltOnHover"
+                src={card.image}
+                alt={card.name}
+                animation="glare"
+                tiltMax={15}
+                glare={{
+                  enabled: true,
+                  maxOpacity: 0.7,
+                  color: card.glareColor,
+                  position: "mouse",
+                }}
+                timing={{
+                  duration: 100,
+                  reset: 600,
+                  easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+                }}
+                className="w-64 h-96 rounded-2xl overflow-hidden shadow-2xl mb-4"
+                imgClassName="w-full h-full object-cover"
+                enableTouch={true}
+              />
+
+              <div className="text-white">
+                <h3 className="text-xl font-bold mb-1">{card.name}</h3>
+                <div className="flex justify-center items-center gap-4">
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-medium ${
+                      card.rarity === "Legendary"
+                        ? "bg-yellow-600"
+                        : card.rarity === "Epic"
+                        ? "bg-purple-600"
+                        : "bg-blue-600"
+                    }`}
+                  >
+                    {card.rarity}
+                  </span>
+                  <span className="text-orange-400 font-bold">
+                    ⚡ {card.power}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### Props
+
+| Prop            | Type                | Default     | Description                        |
+| --------------- | ------------------- | ----------- | ---------------------------------- |
+| `tiltMax`       | `number`            | `10`        | Maximum tilt angle in degrees      |
+| `animation`     | `TiltAnimationType` | `"basic"`   | Animation type and behavior        |
+| `axis`          | `TiltAxis`          | `"both"`    | Tilt axis restriction (both, x, y) |
+| `timing`        | `TiltTiming`        | `{}`        | Animation timing configuration     |
+| `perspective`   | `number`            | `1000`      | 3D perspective value in pixels     |
+| `scale`         | `number`            | `1`         | Scale factor during tilt           |
+| `glare`         | `GlareSettings`     | `{}`        | Glare effect configuration         |
+| `shadow`        | `boolean`           | `false`     | Enable dynamic shadows             |
+| `reverse`       | `boolean`           | `false`     | Reverse tilt direction             |
+| `resetOnLeave`  | `boolean`           | `true`      | Reset tilt when mouse leaves       |
+| `gyroscope`     | `boolean`           | `false`     | Enable gyroscope support (mobile)  |
+| `enableTouch`   | `boolean`           | `false`     | Enable touch device support        |
+| `tiltClassName` | `string`            | `undefined` | CSS class applied during tilt      |
+| `onTiltStart`   | `function`          | `undefined` | Tilt start callback                |
+| `onTiltMove`    | `function`          | `undefined` | Tilt move callback                 |
+| `onTiltEnd`     | `function`          | `undefined` | Tilt end callback                  |
+
+### Types
+
+```tsx
+// Animation types
+type TiltAnimationType =
+  | "basic" // Simple 3D tilt effect
+  | "glare" // Tilt with interactive light reflection
+  | "scale" // Tilt combined with scaling
+  | "perspective" // Enhanced 3D depth effect
+  | "bounce" // Bouncy reset animation
+  | "elastic" // Smooth elastic reset
+  | "magnetic" // Attraction-like movement
+  | "float" // Floating effect with shadows
+  | "parallax"; // Multi-layer movement effect
+
+// Axis control
+type TiltAxis =
+  | "both" // Full X and Y axis movement
+  | "x" // Horizontal movement only
+  | "y"; // Vertical movement only
+
+// Timing configuration
+type TiltTiming = {
+  duration?: number; // Mouse response time in ms (default: 200)
+  reset?: number; // Reset animation duration in ms (default: 400)
+  easing?: string; // CSS easing function (default: "ease-out")
+};
+
+// Glare effect settings
+type GlareSettings = {
+  enabled?: boolean; // Enable glare effect (default: false)
+  maxOpacity?: number; // Maximum glare opacity (default: 0.3)
+  color?: string; // Glare color (default: "rgba(255,255,255,0.3)")
+  position?: "center" | "mouse"; // Glare positioning (default: "center")
+};
+```
+
+### Animation Performance Guide
+
+| Animation     | Performance | Mobile Friendly | Best Tilt Range | Recommended Uses      |
+| ------------- | ----------- | --------------- | --------------- | --------------------- |
+| `basic`       | ⭐⭐⭐⭐⭐  | ✅ Excellent    | 5-15°           | General UI, cards     |
+| `glare`       | ⭐⭐⭐⭐    | ✅ Good         | 8-12°           | Premium products      |
+| `scale`       | ⭐⭐⭐⭐    | ✅ Good         | 6-10°           | Interactive elements  |
+| `perspective` | ⭐⭐⭐      | ⚠️ Moderate     | 10-20°          | Hero sections         |
+| `bounce`      | ⭐⭐⭐⭐    | ✅ Good         | 8-15°           | Playful interfaces    |
+| `elastic`     | ⭐⭐⭐⭐⭐  | ✅ Excellent    | 6-12°           | Modern UI             |
+| `magnetic`    | ⭐⭐⭐      | ⚠️ Moderate     | 8-12°           | Creative interactions |
+| `float`       | ⭐⭐⭐      | ⚠️ Moderate     | 5-10°           | Card hovers           |
+| `parallax`    | ⭐⭐        | ❌ Limited      | 10-18°          | Desktop experiences   |
+
+## Performance Guidelines
+
+### Optimization Tips
+
+- **Tilt Range**: Use 5-15° for optimal visual impact without motion sickness
+- **Perspective**: Keep between 800-1500px for best performance
+- **Mobile**: Use `tiltMax <= 10` and avoid complex animations on mobile
+- **Glare Effects**: Limit `maxOpacity` to 0.3-0.5 for subtle, professional effects
+- **Reset Timing**: 300-600ms provides good balance between responsiveness and smoothness
+
+### Accessibility
+
+```tsx
+// Respect user preferences
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/accessible-image.jpg"
+  alt="Accessible tilt image"
+  animation="basic"
+  tiltMax={8}
+  timing={{
+    duration: 150,
+    reset: 400,
+  }}
+  // Automatically disabled when user prefers reduced motion
+  style={
+    {
+      // CSS respects prefers-reduced-motion automatically
+    }
+  }
+/>
+```
+
+### Browser Support
+
+| Feature       | Chrome 80+ | Firefox 75+ | Safari 13+ | Edge 80+ |
+| ------------- | ---------- | ----------- | ---------- | -------- |
+| Basic Tilt    | ✅ Full    | ✅ Full     | ✅ Full    | ✅ Full  |
+| Glare Effects | ✅ Full    | ✅ Full     | ✅ Full    | ✅ Full  |
+| Gyroscope     | ✅ Full    | ⚠️ Limited  | ✅ Full    | ✅ Full  |
+| Touch Events  | ✅ Full    | ✅ Full     | ✅ Full    | ✅ Full  |
+| Performance   | ✅ 60fps   | ✅ 60fps    | ✅ 60fps   | ✅ 60fps |
+
+---
+
+_Ready to add immersive 3D effects to your images? Explore our [showcase page](/showcase) for live demonstrations or check out other [component variants](/docs/getting-started) in our documentation._

@@ -1,0 +1,837 @@
+---
+title: ZoomOnHover
+description: Advanced zoom-on-hover component with smooth animations, flexible transform origins, and customizable effects for engaging image interactions.
+order: 5
+locale: en
+slug: zoom-on-hover
+toc: true
+---
+
+# ZoomOnHover
+
+The ZoomOnHover variant creates smooth zoom effects that respond to mouse hover, providing engaging visual feedback and enhanced user interaction. Features multiple animation types, flexible transform origins, customizable effects, and performance-optimized transforms for professional image experiences.
+
+## Features
+
+- **9 Animation Types**: From simple scales to elastic bounces and 3D perspectives
+- **Flexible Transform Origins**: 9 predefined positions plus cursor-following zoom
+- **Advanced Effects**: Combine zoom with rotation, blur, opacity, and translation
+- **Performance Optimized**: Smooth CSS transform animations with 60fps rendering
+- **Touch Device Support**: Optional touch interactions for mobile experiences
+- **Customizable Timing**: Precise control over duration, delay, and easing
+- **TypeScript Ready**: Complete type definitions and IntelliSense
+
+## Quick Start
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export default function ProductPreview() {
+  return (
+    <ReactiveImage
+      variant="zoomOnHover"
+      src="/product-image.jpg"
+      alt="Product preview with zoom"
+      animation="elastic"
+      zoomScale={1.2}
+      origin="center"
+      timing={{ duration: 400 }}
+    />
+  );
+}
+```
+
+## Animation Types
+
+### Basic Zoom Effects
+
+Simple and reliable zoom animations for most use cases.
+
+```tsx
+// Simple scale (default)
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/product.jpg"
+  alt="Simple zoom effect"
+  animation="scale"
+  zoomScale={1.15}
+/>
+
+// Scale with fade
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/gallery-item.jpg"
+  alt="Scale with fade"
+  animation="scaleFade"
+  zoomScale={1.2}
+  opacityChange={0.85} // Fade to 85% opacity
+/>
+
+// Scale with slide
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/card-image.jpg"
+  alt="Scale with slide effect"
+  animation="scaleSlide"
+  zoomScale={1.1}
+/>
+```
+
+### Dynamic Effects
+
+Add movement and rotation for more engaging interactions.
+
+```tsx
+// Scale with rotation
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/creative-image.jpg"
+  alt="Zoom with rotation"
+  animation="scaleRotate"
+  zoomScale={1.2}
+  rotation={10} // 10 degree rotation
+/>
+
+// 3D perspective zoom
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/hero-image.jpg"
+  alt="3D perspective zoom"
+  animation="perspective"
+  zoomScale={1.15}
+  rotation={15} // Adds 3D rotation effect
+/>
+
+// Scale with blur
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/artistic-photo.jpg"
+  alt="Artistic blur zoom"
+  animation="scaleBlur"
+  zoomScale={1.3}
+  blurAmount={3} // 3px blur effect
+/>
+```
+
+### Elastic & Bounce Effects
+
+Playful animations with spring physics for modern interfaces.
+
+```tsx
+// Elastic zoom
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/modern-ui.jpg"
+  alt="Elastic zoom effect"
+  animation="elastic"
+  zoomScale={1.25}
+  timing={{
+    duration: 600,
+    easing: "cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+  }}
+/>
+
+// Bounce effect
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/playful-image.jpg"
+  alt="Bouncy zoom effect"
+  animation="bounce"
+  zoomScale={1.2}
+  timing={{
+    duration: 800,
+    easing: "cubic-bezier(0.175, 0.885, 0.32, 1.275)"
+  }}
+/>
+
+// Pulse animation
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/button-like.jpg"
+  alt="Pulse zoom effect"
+  animation="pulse"
+  zoomScale={1.1}
+  timing={{ duration: 300 }}
+/>
+```
+
+## Transform Origins
+
+Control where the zoom effect originates for different interaction patterns.
+
+```tsx
+// Center origin (default)
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/center-zoom.jpg"
+  alt="Center zoom origin"
+  origin="center"
+  zoomScale={1.2}
+/>
+
+// Corner origins for asymmetric effects
+<div className="grid grid-cols-2 gap-4">
+  <ReactiveImage
+    variant="zoomOnHover"
+    src="/corner-demo.jpg"
+    alt="Top-left zoom"
+    origin="top-left"
+    zoomScale={1.3}
+  />
+
+  <ReactiveImage
+    variant="zoomOnHover"
+    src="/corner-demo.jpg"
+    alt="Top-right zoom"
+    origin="top-right"
+    zoomScale={1.3}
+  />
+
+  <ReactiveImage
+    variant="zoomOnHover"
+    src="/corner-demo.jpg"
+    alt="Bottom-left zoom"
+    origin="bottom-left"
+    zoomScale={1.3}
+  />
+
+  <ReactiveImage
+    variant="zoomOnHover"
+    src="/corner-demo.jpg"
+    alt="Bottom-right zoom"
+    origin="bottom-right"
+    zoomScale={1.3}
+  />
+</div>
+
+// Edge origins for directional effects
+<div className="flex gap-4 justify-center">
+  <ReactiveImage
+    variant="zoomOnHover"
+    src="/edge-demo.jpg"
+    alt="Left edge zoom"
+    origin="left"
+    zoomScale={1.25}
+  />
+
+  <ReactiveImage
+    variant="zoomOnHover"
+    src="/edge-demo.jpg"
+    alt="Top edge zoom"
+    origin="top"
+    zoomScale={1.25}
+  />
+
+  <ReactiveImage
+    variant="zoomOnHover"
+    src="/edge-demo.jpg"
+    alt="Right edge zoom"
+    origin="right"
+    zoomScale={1.25}
+  />
+
+  <ReactiveImage
+    variant="zoomOnHover"
+    src="/edge-demo.jpg"
+    alt="Bottom edge zoom"
+    origin="bottom"
+    zoomScale={1.25}
+  />
+</div>
+```
+
+## Cursor-Following Zoom
+
+Interactive zoom that follows mouse position for exploration interfaces.
+
+```tsx
+// Cursor-following zoom
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/detailed-image.jpg"
+  alt="Interactive cursor zoom"
+  origin="cursor"
+  followCursor={true}
+  zoomScale={1.5}
+  timing={{ duration: 150 }} // Fast response for smooth following
+/>
+
+// Magnifying glass effect
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/high-detail.jpg"
+  alt="Magnifying glass effect"
+  origin="cursor"
+  followCursor={true}
+  zoomScale={2.0}
+  containZoom={true} // Prevent overflow
+  timing={{
+    duration: 100,
+    easing: "ease-out"
+  }}
+/>
+```
+
+## Timing & Performance
+
+Fine-tune animation responsiveness and visual feedback.
+
+```tsx
+// Fast responsive zoom
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/ui-element.jpg"
+  alt="Fast zoom response"
+  animation="scale"
+  zoomScale={1.1}
+  timing={{
+    duration: 200, // Quick response
+    delay: 0,
+    easing: "ease-out"
+  }}
+/>
+
+// Smooth professional zoom
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/portfolio-item.jpg"
+  alt="Professional smooth zoom"
+  animation="elastic"
+  zoomScale={1.15}
+  timing={{
+    duration: 500, // Smooth transition
+    delay: 50,
+    easing: "cubic-bezier(0.4, 0, 0.2, 1)"
+  }}
+/>
+
+// Dramatic artistic zoom
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/artistic-piece.jpg"
+  alt="Dramatic zoom effect"
+  animation="perspective"
+  zoomScale={1.4}
+  rotation={20}
+  timing={{
+    duration: 800, // Slow and dramatic
+    easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+  }}
+/>
+```
+
+## Advanced Configuration
+
+Customize overflow behavior, opacity effects, and interaction patterns.
+
+```tsx
+// Contained zoom (prevents overflow)
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/contained-zoom.jpg"
+  alt="Contained zoom effect"
+  animation="scale"
+  zoomScale={1.4}
+  containZoom={true} // Prevents image from overflowing container
+/>
+
+// Multi-effect combination
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/complex-effect.jpg"
+  alt="Complex multi-effect zoom"
+  animation="scaleRotate"
+  zoomScale={1.25}
+  rotation={15}
+  opacityChange={0.9}
+  blurAmount={1}
+/>
+
+// Touch-enabled zoom
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/mobile-friendly.jpg"
+  alt="Touch-enabled zoom"
+  animation="pulse"
+  zoomScale={1.1}
+  enableTouch={true} // Enable tap-to-zoom on mobile
+  timing={{ duration: 250 }}
+/>
+```
+
+## Event Handling & Analytics
+
+Track zoom interactions and trigger custom behaviors.
+
+```tsx
+export default function TrackedZoomImage() {
+  const handleZoomStart = () => {
+    console.log("Zoom interaction started");
+    // Track user engagement
+    analytics.track("image_zoom_start", {
+      zoom_scale: 1.2,
+      animation_type: "elastic",
+    });
+  };
+
+  const handleZoomEnd = () => {
+    console.log("Zoom interaction ended");
+    // Track interaction completion
+    analytics.track("image_zoom_end");
+  };
+
+  return (
+    <ReactiveImage
+      variant="zoomOnHover"
+      src="/tracked-image.jpg"
+      alt="Analytics-tracked zoom"
+      animation="elastic"
+      zoomScale={1.2}
+      onZoomStart={handleZoomStart}
+      onZoomEnd={handleZoomEnd}
+    />
+  );
+}
+```
+
+## Styling & CSS Integration
+
+Combine with CSS classes for complex designs and state-based styling.
+
+```tsx
+// Dynamic styling during zoom
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/styled-image.jpg"
+  alt="Dynamic styled zoom"
+  animation="scale"
+  zoomScale={1.15}
+  className="rounded-xl shadow-lg transition-shadow duration-300"
+  imgClassName="object-cover w-full h-64"
+  zoomClassName="shadow-2xl ring-4 ring-blue-500 ring-opacity-50"
+  style={{
+    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    padding: '2px'
+  }}
+/>
+
+// Card layout with consistent zoom effects
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+  {imageGallery.map((item, index) => (
+    <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+      <ReactiveImage
+        variant="zoomOnHover"
+        src={item.image}
+        alt={item.title}
+        animation="scale"
+        zoomScale={1.1}
+        origin="center"
+        timing={{ duration: 300 }}
+        className="w-full aspect-video"
+        imgClassName="w-full h-full object-cover"
+      />
+      <div className="p-4">
+        <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+        <p className="text-gray-600">{item.description}</p>
+      </div>
+    </div>
+  ))}
+</div>
+```
+
+## Real-World Patterns
+
+### E-commerce Product Grid
+
+```tsx
+const products = [
+  {
+    id: 1,
+    image: "/products/sneakers-1.jpg",
+    name: "Premium Running Shoes",
+    price: "$129.99",
+    rating: 4.8,
+    badge: "Best Seller",
+  },
+  {
+    id: 2,
+    image: "/products/sneakers-2.jpg",
+    name: "Urban Street Style",
+    price: "$89.99",
+    rating: 4.6,
+    badge: "New Arrival",
+  },
+  {
+    id: 3,
+    image: "/products/sneakers-3.jpg",
+    name: "Casual Comfort",
+    price: "$69.99",
+    rating: 4.7,
+    badge: null,
+  },
+];
+
+export default function ProductGrid() {
+  return (
+    <div className="max-w-7xl mx-auto px-4 py-12">
+      <h2 className="text-3xl font-bold text-center mb-12">
+        Featured Products
+      </h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {products.map((product) => (
+          <div
+            key={product.id}
+            className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-500"
+          >
+            {/* Product Image with Zoom */}
+            <div className="relative aspect-square overflow-hidden">
+              {product.badge && (
+                <span className="absolute top-4 left-4 z-10 bg-red-500 text-white px-3 py-1 text-sm font-bold rounded-full">
+                  {product.badge}
+                </span>
+              )}
+
+              <ReactiveImage
+                variant="zoomOnHover"
+                src={product.image}
+                alt={product.name}
+                animation="elastic"
+                zoomScale={1.15}
+                origin="center"
+                timing={{
+                  duration: 500,
+                  easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+                }}
+                className="w-full h-full"
+                imgClassName="w-full h-full object-cover"
+                containZoom={true}
+              />
+            </div>
+
+            {/* Product Info */}
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-xl font-semibold text-gray-900">
+                  {product.name}
+                </h3>
+                <div className="flex items-center">
+                  <span className="text-yellow-400">★</span>
+                  <span className="text-sm text-gray-600 ml-1">
+                    {product.rating}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-2xl font-bold text-blue-600">
+                  {product.price}
+                </span>
+                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+### Photography Portfolio
+
+```tsx
+const portfolioImages = [
+  {
+    id: 1,
+    src: "/portfolio/landscape-1.jpg",
+    title: "Mountain Sunrise",
+    category: "Landscape",
+    location: "Swiss Alps",
+  },
+  {
+    id: 2,
+    src: "/portfolio/portrait-1.jpg",
+    title: "Street Portrait",
+    category: "Portrait",
+    location: "Tokyo, Japan",
+  },
+  {
+    id: 3,
+    src: "/portfolio/architecture-1.jpg",
+    title: "Modern Architecture",
+    category: "Architecture",
+    location: "New York City",
+  },
+  {
+    id: 4,
+    src: "/portfolio/wildlife-1.jpg",
+    title: "Wildlife Safari",
+    category: "Wildlife",
+    location: "Serengeti, Tanzania",
+  },
+];
+
+export default function PhotographyPortfolio() {
+  return (
+    <div className="bg-gray-900 text-white py-20">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold mb-4">Photography Portfolio</h2>
+          <p className="text-xl text-gray-300">
+            Capturing moments, creating memories
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {portfolioImages.map((image, index) => (
+            <div key={image.id} className="group relative">
+              <ReactiveImage
+                variant="zoomOnHover"
+                src={image.src}
+                alt={image.title}
+                animation={index % 2 === 0 ? "perspective" : "scaleRotate"}
+                zoomScale={1.1}
+                origin="cursor"
+                followCursor={true}
+                rotation={index % 2 === 0 ? 5 : 8}
+                timing={{
+                  duration: 400,
+                  easing: "cubic-bezier(0.23, 1, 0.32, 1)",
+                }}
+                className="w-full aspect-[4/3] rounded-2xl overflow-hidden"
+                imgClassName="w-full h-full object-cover"
+              />
+
+              {/* Overlay Information */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl">
+                <div className="absolute bottom-6 left-6 right-6">
+                  <span className="inline-block bg-blue-500 text-white px-3 py-1 text-sm font-medium rounded-full mb-3">
+                    {image.category}
+                  </span>
+                  <h3 className="text-2xl font-bold mb-1">{image.title}</h3>
+                  <p className="text-gray-300">📍 {image.location}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### Interactive Image Explorer
+
+```tsx
+const explorationImages = [
+  {
+    src: "/explore/city-aerial.jpg",
+    title: "Urban Exploration",
+    hotspots: [
+      { x: 30, y: 40, label: "Financial District" },
+      { x: 70, y: 25, label: "Central Park" },
+      { x: 55, y: 80, label: "Harbor Area" },
+    ],
+  },
+  {
+    src: "/explore/museum-interior.jpg",
+    title: "Museum Virtual Tour",
+    hotspots: [
+      { x: 20, y: 30, label: "Ancient Artifacts" },
+      { x: 80, y: 45, label: "Modern Art Gallery" },
+      { x: 50, y: 70, label: "Interactive Exhibits" },
+    ],
+  },
+];
+
+export default function InteractiveExplorer() {
+  const [selectedImage, setSelectedImage] = useState(0);
+
+  return (
+    <div className="max-w-4xl mx-auto p-8">
+      <h2 className="text-3xl font-bold text-center mb-8">
+        Interactive Explorer
+      </h2>
+
+      <div className="mb-6">
+        <div className="flex justify-center gap-4">
+          {explorationImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setSelectedImage(index)}
+              className={`px-6 py-2 rounded-lg font-medium transition-colors ${
+                selectedImage === index
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              }`}
+            >
+              View {index + 1}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative">
+        <ReactiveImage
+          variant="zoomOnHover"
+          src={explorationImages[selectedImage].src}
+          alt={explorationImages[selectedImage].title}
+          animation="scale"
+          zoomScale={2.0}
+          origin="cursor"
+          followCursor={true}
+          timing={{
+            duration: 100,
+            easing: "ease-out",
+          }}
+          containZoom={true}
+          className="w-full aspect-[16/10] rounded-xl overflow-hidden shadow-2xl"
+          imgClassName="w-full h-full object-cover"
+        />
+
+        {/* Hotspots */}
+        {explorationImages[selectedImage].hotspots.map((hotspot, index) => (
+          <div
+            key={index}
+            className="absolute w-4 h-4 bg-blue-500 border-2 border-white rounded-full shadow-lg animate-pulse cursor-pointer"
+            style={{
+              left: `${hotspot.x}%`,
+              top: `${hotspot.y}%`,
+              transform: "translate(-50%, -50%)",
+            }}
+            title={hotspot.label}
+          >
+            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 text-xs rounded opacity-0 hover:opacity-100 transition-opacity whitespace-nowrap">
+              {hotspot.label}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-6 text-center">
+        <h3 className="text-xl font-semibold mb-2">
+          {explorationImages[selectedImage].title}
+        </h3>
+        <p className="text-gray-600">
+          Hover over the image to zoom in and explore. Click hotspots for more
+          information.
+        </p>
+      </div>
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### Props
+
+| Prop            | Type                | Default     | Description                                 |
+| --------------- | ------------------- | ----------- | ------------------------------------------- |
+| `zoomScale`     | `number`            | `1.15`      | Zoom scale factor (1.0 = original size)     |
+| `animation`     | `ZoomAnimationType` | `"scale"`   | Animation type and behavior                 |
+| `origin`        | `ZoomOrigin`        | `"center"`  | Transform origin point                      |
+| `timing`        | `ZoomTiming`        | `{}`        | Animation timing configuration              |
+| `followCursor`  | `boolean`           | `false`     | Enable cursor following (for cursor origin) |
+| `opacityChange` | `number`            | `1`         | Opacity during zoom (0-1)                   |
+| `blurAmount`    | `number`            | `0`         | Blur amount in pixels                       |
+| `rotation`      | `number`            | `0`         | Rotation angle in degrees                   |
+| `containZoom`   | `boolean`           | `false`     | Prevent zoom overflow                       |
+| `enableTouch`   | `boolean`           | `false`     | Enable touch device support                 |
+| `zoomClassName` | `string`            | `undefined` | CSS class applied during zoom               |
+| `onZoomStart`   | `function`          | `undefined` | Zoom start callback                         |
+| `onZoomEnd`     | `function`          | `undefined` | Zoom end callback                           |
+
+### Types
+
+```tsx
+// Animation types
+type ZoomAnimationType =
+  | "scale" // Simple scale transformation
+  | "scaleRotate" // Scale with rotation effect
+  | "scaleBlur" // Scale with blur effect
+  | "scaleFade" // Scale with opacity change
+  | "scaleSlide" // Scale with slight translation
+  | "perspective" // 3D perspective transformation
+  | "pulse" // Quick pulse effect
+  | "bounce" // Bouncy elastic effect
+  | "elastic"; // Smooth elastic transformation
+
+// Transform origins
+type ZoomOrigin =
+  | "center" // Center of image
+  | "top" // Top edge
+  | "bottom" // Bottom edge
+  | "left" // Left edge
+  | "right" // Right edge
+  | "top-left" // Top-left corner
+  | "top-right" // Top-right corner
+  | "bottom-left" // Bottom-left corner
+  | "bottom-right" // Bottom-right corner
+  | "cursor"; // Mouse position
+
+// Timing configuration
+type ZoomTiming = {
+  duration?: number; // Animation duration in ms (default: 300)
+  delay?: number; // Animation delay in ms (default: 0)
+  easing?: string; // CSS easing function (default: "ease-out")
+};
+```
+
+### Animation Performance Guide
+
+| Animation     | Performance | Mobile Friendly | Best Scale Range | Recommended Uses      |
+| ------------- | ----------- | --------------- | ---------------- | --------------------- |
+| `scale`       | ⭐⭐⭐⭐⭐  | ✅ Excellent    | 1.1-1.3          | Product images, UI    |
+| `scaleRotate` | ⭐⭐⭐⭐    | ✅ Good         | 1.1-1.2          | Creative interactions |
+| `scaleBlur`   | ⭐⭐⭐      | ⚠️ Moderate     | 1.1-1.25         | Artistic effects      |
+| `scaleFade`   | ⭐⭐⭐⭐⭐  | ✅ Excellent    | 1.1-1.4          | Subtle interactions   |
+| `scaleSlide`  | ⭐⭐⭐⭐    | ✅ Good         | 1.05-1.15        | Card hover effects    |
+| `perspective` | ⭐⭐⭐      | ⚠️ Moderate     | 1.1-1.2          | Hero sections         |
+| `pulse`       | ⭐⭐⭐⭐⭐  | ✅ Excellent    | 1.05-1.15        | Button interactions   |
+| `bounce`      | ⭐⭐⭐⭐    | ✅ Good         | 1.1-1.25         | Playful interfaces    |
+| `elastic`     | ⭐⭐⭐⭐    | ✅ Good         | 1.1-1.3          | Premium interactions  |
+
+## Performance Guidelines
+
+### Optimization Tips
+
+- **Scale Range**: Use 1.1-1.3 for optimal visual impact without performance issues
+- **Mobile Optimization**: Prefer shorter durations (200-400ms) and smaller scales on mobile
+- **Blur Effects**: Limit blur to 2-5px for good performance across devices
+- **Container Overflow**: Use `containZoom={true}` to prevent layout shifts
+- **Touch Events**: Enable `enableTouch` only when necessary to save resources
+
+### Accessibility
+
+```tsx
+// Respects user motion preferences
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/accessible-zoom.jpg"
+  alt="Accessible zoom image"
+  animation="scale"
+  zoomScale={1.1}
+  timing={{ duration: 300 }}
+  // CSS automatically respects prefers-reduced-motion
+/>
+```
+
+### Browser Support
+
+| Feature          | Chrome 80+ | Firefox 75+ | Safari 13+ | Edge 80+ |
+| ---------------- | ---------- | ----------- | ---------- | -------- |
+| Basic Zoom       | ✅ Full    | ✅ Full     | ✅ Full    | ✅ Full  |
+| Cursor Following | ✅ Full    | ✅ Full     | ✅ Full    | ✅ Full  |
+| Blur Effects     | ✅ Full    | ✅ Full     | ✅ Full    | ✅ Full  |
+| 3D Transforms    | ✅ Full    | ✅ Full     | ✅ Full    | ✅ Full  |
+| Touch Events     | ✅ Full    | ✅ Full     | ✅ Full    | ✅ Full  |
+| Performance      | ✅ 60fps   | ✅ 60fps    | ✅ 60fps   | ✅ 60fps |
+
+---
+
+_Ready to add engaging zoom effects to your images? Check our [showcase page](/showcase) for live demonstrations or explore the complete [component documentation](/docs/getting-started) set._

@@ -1,0 +1,510 @@
+---
+title: ClickExpand
+description: Advanced click-to-expand modal functionality with multiple animation types, backdrop effects, and accessibility features.
+order: 2
+locale: en
+slug: click-expand
+toc: true
+---
+
+# ClickExpand
+
+The ClickExpand variant transforms images into interactive modal galleries with sophisticated animations, customizable backdrops, and comprehensive accessibility support. Perfect for image galleries, portfolios, and detailed image viewing experiences.
+
+## Features
+
+- **9 Animation Types**: From subtle scale fades to dynamic 3D flips
+- **5 Backdrop Effects**: Including blur, glass, and custom overlays  
+- **6 Modal Sizes**: From compact to full viewport coverage
+- **Full Accessibility**: ARIA compliance, keyboard navigation, focus trapping
+- **Performance Optimized**: Scroll locking, animation frame optimization
+- **TypeScript Support**: Complete type definitions and IntelliSense
+
+## Quick Start
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export default function Gallery() {
+  return (
+    <ReactiveImage
+      variant="clickExpand"
+      src="/gallery-image.jpg"
+      alt="Beautiful landscape"
+      modalAnimation="springPop"
+      backdrop="blur"
+      caption="Captured in the Swiss Alps"
+    />
+  );
+}
+```
+
+## Animation Types
+
+### Scale & Fade Effects
+Perfect for smooth, professional transitions.
+
+```tsx
+// Smooth scale with fade (default)
+<ReactiveImage
+  variant="clickExpand"
+  modalAnimation="scaleFade"
+  src="/image1.jpg"
+  alt="Scale fade demo"
+/>
+
+// Spring-powered bounce
+<ReactiveImage
+  variant="clickExpand"
+  modalAnimation="springPop"
+  animationDuration={350}
+  src="/image2.jpg"
+  alt="Spring animation demo"
+/>
+
+// Zoom with bounce effect
+<ReactiveImage
+  variant="clickExpand"
+  modalAnimation="zoomBounce"
+  src="/image3.jpg"
+  alt="Zoom bounce demo"
+/>
+```
+
+### Directional Slides
+Great for storytelling and sequential content.
+
+```tsx
+// Slide from bottom
+<ReactiveImage
+  variant="clickExpand"
+  modalAnimation="slideUp"
+  src="/image4.jpg"
+  alt="Slide up demo"
+/>
+
+// Slide from top
+<ReactiveImage
+  variant="clickExpand"
+  modalAnimation="slideDown" 
+  src="/image5.jpg"
+  alt="Slide down demo"
+/>
+
+// Slide from sides
+<ReactiveImage
+  variant="clickExpand"
+  modalAnimation="slideLeft" // or "slideRight"
+  src="/image6.jpg"
+  alt="Slide demo"
+/>
+```
+
+### 3D Effects
+Eye-catching animations for premium experiences.
+
+```tsx
+// 3D rotation entrance
+<ReactiveImage
+  variant="clickExpand"
+  modalAnimation="rotateIn"
+  animationDuration={400}
+  src="/image7.jpg"
+  alt="Rotate animation demo"
+/>
+
+// 3D flip effect
+<ReactiveImage
+  variant="clickExpand"
+  modalAnimation="flipIn"
+  animationDuration={500}
+  src="/image8.jpg"
+  alt="Flip animation demo"
+/>
+```
+
+## Backdrop Effects
+
+### Standard Backdrops
+
+```tsx
+// Subtle dark overlay
+<ReactiveImage
+  variant="clickExpand"
+  backdrop="dim"
+  src="/image.jpg"
+  alt="Dim backdrop demo"
+/>
+
+// Heavy dark overlay
+<ReactiveImage
+  variant="clickExpand"
+  backdrop="dark"
+  src="/image.jpg"
+  alt="Dark backdrop demo"
+/>
+
+// No backdrop (transparent)
+<ReactiveImage
+  variant="clickExpand"
+  backdrop="none"
+  src="/image.jpg"
+  alt="No backdrop demo"
+/>
+```
+
+### Modern Glass Effects
+
+```tsx
+// Blur effect
+<ReactiveImage
+  variant="clickExpand"
+  backdrop="blur"
+  src="/image.jpg"
+  alt="Blur backdrop demo"
+/>
+
+// Glassmorphism
+<ReactiveImage
+  variant="clickExpand"
+  backdrop="glass"
+  src="/image.jpg"
+  alt="Glass backdrop demo"
+/>
+```
+
+### Custom Backdrops
+
+```tsx
+// Custom colored overlay
+<ReactiveImage
+  variant="clickExpand"
+  backdrop="dim"
+  customBackdrop={{
+    backgroundColor: 'rgba(139, 69, 19, 0.8)', // Brown tint
+  }}
+  src="/image.jpg"
+  alt="Custom backdrop demo"
+/>
+
+// Advanced glassmorphism
+<ReactiveImage
+  variant="clickExpand"
+  backdrop="glass"
+  customBackdrop={{
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backdropFilter: 'blur(20px) saturate(200%)',
+  }}
+  src="/image.jpg"
+  alt="Advanced glass demo"
+/>
+```
+
+## Modal Sizing
+
+Control the maximum dimensions of your modal for different use cases.
+
+```tsx
+// Compact size (400x300px max)
+<ReactiveImage
+  variant="clickExpand"
+  modalSize="sm"
+  src="/thumbnail.jpg"
+  alt="Small modal demo"
+/>
+
+// Medium size (600x450px max)
+<ReactiveImage
+  variant="clickExpand"
+  modalSize="md"
+  src="/portrait.jpg"
+  alt="Medium modal demo"
+/>
+
+// Large size (800x600px max)
+<ReactiveImage
+  variant="clickExpand"
+  modalSize="lg"
+  src="/landscape.jpg"
+  alt="Large modal demo"
+/>
+
+// Extra large (1200x800px max)
+<ReactiveImage
+  variant="clickExpand"
+  modalSize="xl"
+  src="/high-res.jpg"
+  alt="Extra large modal demo"
+/>
+
+// Full viewport (95% coverage)
+<ReactiveImage
+  variant="clickExpand"
+  modalSize="full"
+  src="/panorama.jpg"
+  alt="Full size modal demo"
+/>
+
+// Auto-responsive (default)
+<ReactiveImage
+  variant="clickExpand"
+  modalSize="auto"
+  src="/adaptive.jpg"
+  alt="Auto size modal demo"
+/>
+```
+
+## Captions & Styling
+
+Add descriptions and custom styling to your modals.
+
+```tsx
+// Simple caption
+<ReactiveImage
+  variant="clickExpand"
+  src="/artwork.jpg"
+  alt="Digital artwork"
+  caption="Digital painting created in 2024"
+/>
+
+// Custom modal styling
+<ReactiveImage
+  variant="clickExpand"
+  src="/photo.jpg"
+  alt="Professional photo"
+  caption="Shot with Canon EOS R5"
+  modalClassName="custom-modal"
+  captionClassName="custom-caption"
+  className="gallery-thumbnail"
+/>
+```
+
+## Interactive Configuration
+
+Fine-tune user interaction and behavior.
+
+```tsx
+<ReactiveImage
+  variant="clickExpand"
+  src="/interactive.jpg"
+  alt="Interactive demo"
+  // Animation settings
+  modalAnimation="rotateIn"
+  animationDuration={350}
+  // Interaction controls
+  closeOnEsc={true}
+  closeOnBackdrop={true}
+  enableKeyboard={true}
+  preventScroll={true}
+  // Event handlers
+  onOpen={() => console.log('Modal opened')}
+  onClose={() => console.log('Modal closed')}
+  onAnimationStart={() => console.log('Animation started')}
+  onAnimationEnd={() => console.log('Animation completed')}
+/>
+```
+
+## Advanced Patterns
+
+### Gallery Grid
+
+```tsx
+const galleryImages = [
+  { src: '/gallery1.jpg', alt: 'Sunset landscape', caption: 'Golden hour magic' },
+  { src: '/gallery2.jpg', alt: 'Mountain peak', caption: 'Summit at 3000m' },
+  { src: '/gallery3.jpg', alt: 'Forest path', caption: 'Morning woodland walk' },
+];
+
+export default function PhotoGallery() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {galleryImages.map((image, index) => (
+        <ReactiveImage
+          key={index}
+          variant="clickExpand"
+          src={image.src}
+          alt={image.alt}
+          caption={image.caption}
+          modalAnimation="springPop"
+          backdrop="blur"
+          modalSize="lg"
+          className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+        />
+      ))}
+    </div>
+  );
+}
+```
+
+### Portfolio Showcase
+
+```tsx
+export default function PortfolioItem() {
+  const handleImageOpen = () => {
+    // Track analytics
+    analytics.track('portfolio_image_viewed');
+  };
+
+  return (
+    <div className="portfolio-item">
+      <ReactiveImage
+        variant="clickExpand"
+        src="/portfolio/project-hero.jpg"
+        alt="E-commerce website redesign"
+        caption="Complete UI/UX redesign for fashion retailer - 40% conversion increase"
+        modalAnimation="slideUp"
+        backdrop="glass"
+        modalSize="xl"
+        animationDuration={300}
+        onOpen={handleImageOpen}
+        className="w-full rounded-xl"
+      />
+    </div>
+  );
+}
+```
+
+## Custom Hook Usage
+
+For advanced use cases, use the underlying hook directly:
+
+```tsx
+import { useClickExpand } from "reactive-image/ClickExpand";
+
+export default function CustomModal() {
+  const { state, handlers, modalProps } = useClickExpand({
+    closeOnEsc: true,
+    closeOnBackdrop: true,
+    onOpen: () => console.log('Custom modal opened'),
+    onClose: () => console.log('Custom modal closed'),
+  });
+
+  return (
+    <div>
+      <button 
+        onClick={handlers.open}
+        className="bg-blue-500 text-white px-4 py-2 rounded"
+      >
+        Open Custom Modal
+      </button>
+
+      {state.isOpen && (
+        <div 
+          {...modalProps}
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          onClick={handlers.handleBackdropClick}
+        >
+          <div 
+            className="bg-white p-8 rounded-lg shadow-xl max-w-md w-full mx-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-2xl font-bold mb-4">Custom Modal</h2>
+            <p className="text-gray-600 mb-6">
+              Built with the ClickExpand hook for maximum flexibility.
+            </p>
+            <button 
+              onClick={handlers.close}
+              className="bg-gray-500 text-white px-4 py-2 rounded"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+## Accessibility Features
+
+ClickExpand is built with accessibility in mind:
+
+- **ARIA Attributes**: Proper `aria-modal`, `role`, and labeling
+- **Keyboard Navigation**: ESC to close, Enter/Space to open, Tab navigation
+- **Focus Management**: Focus trapping within modal, focus restoration
+- **Screen Readers**: Descriptive labels and announcements
+- **Color Contrast**: Backdrop overlays ensure sufficient contrast
+
+### Keyboard Shortcuts
+
+| Key | Action |
+|-----|--------|
+| `Enter` or `Space` | Open modal when image focused |
+| `Escape` | Close modal (if `closeOnEsc` enabled) |
+| `Tab` | Navigate within modal (focus trapped) |
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `modalAnimation` | `ModalAnimationType` | `"scaleFade"` | Animation type for modal entrance |
+| `backdrop` | `BackdropType` | `"dim"` | Backdrop effect style |
+| `caption` | `string` | `undefined` | Caption text below image |
+| `closeOnEsc` | `boolean` | `true` | Close modal on ESC key |
+| `closeOnBackdrop` | `boolean` | `true` | Close modal on backdrop click |
+| `modalSize` | `ModalSize` | `"auto"` | Maximum modal dimensions |
+| `animationDuration` | `number` | `200` | Animation duration in milliseconds |
+| `enableKeyboard` | `boolean` | `true` | Enable keyboard navigation |
+| `preventScroll` | `boolean` | `true` | Lock body scroll when modal open |
+| `customBackdrop` | `CSSProperties` | `undefined` | Custom backdrop styles |
+| `modalClassName` | `string` | `undefined` | CSS class for modal container |
+| `captionClassName` | `string` | `undefined` | CSS class for caption |
+| `onOpen` | `() => void` | `undefined` | Callback when modal opens |
+| `onClose` | `() => void` | `undefined` | Callback when modal closes |
+| `onAnimationStart` | `() => void` | `undefined` | Callback when animation starts |
+| `onAnimationEnd` | `() => void` | `undefined` | Callback when animation ends |
+
+### Types
+
+```tsx
+// Animation types
+type ModalAnimationType = 
+  | "scaleFade"
+  | "slideUp" 
+  | "slideDown"
+  | "slideLeft"
+  | "slideRight"
+  | "springPop"
+  | "zoomBounce"
+  | "rotateIn"
+  | "flipIn";
+
+// Backdrop types  
+type BackdropType = 
+  | "dim"
+  | "blur" 
+  | "glass"
+  | "dark"
+  | "none";
+
+// Modal sizes
+type ModalSize = 
+  | "sm"      // 400x300px max
+  | "md"      // 600x450px max  
+  | "lg"      // 800x600px max
+  | "xl"      // 1200x800px max
+  | "full"    // 95% viewport
+  | "auto";   // Responsive
+```
+
+## Performance Tips
+
+- Use `loading="lazy"` for images below the fold
+- Consider `modalSize` to prevent oversized modals on mobile
+- Use shorter `animationDuration` (150-250ms) for better perceived performance
+- Enable `preventScroll` to prevent layout shifts
+- Use `backdrop="none"` if you have custom overlay handling
+
+## Browser Support
+
+- **Modern Browsers**: Full support (Chrome 88+, Firefox 87+, Safari 14+)
+- **Focus Management**: Supported in all modern browsers
+- **Backdrop Filter**: Graceful degradation in older browsers
+- **CSS Custom Properties**: Fallback values provided
+
+---
+
+*Need help with implementation? Check our [examples repository](https://github.com/poyrazavsever/reactive-image/tree/main/examples) or [open an issue](https://github.com/poyrazavsever/reactive-image/issues).*

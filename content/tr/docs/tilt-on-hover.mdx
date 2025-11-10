@@ -1,0 +1,852 @@
+---
+title: TiltOnHover
+description: Gelişmiş 3D eğilim efekti komponenti ile etkileşimli parıltı efektleri, jiroskop desteği ve sürükleyici görsel deneyimler için pürüzsüz animasyonlar.
+order: 4
+locale: tr
+slug: tilt-on-hover
+toc: true
+---
+
+# TiltOnHover
+
+TiltOnHover varyantı, fare hareketine yanıt veren çarpıcı 3D eğilim efektleri oluşturarak görsellere derinlik ve etkileşim katar. Pürüzsüz animasyonlar, gerçekçi parıltı efektleri, mobil cihazlar için jiroskop desteği ve premium kullanıcı deneyimleri için performans optimize edilmiş dönüşümler sunar.
+
+## Özellikler
+
+- **9 Animasyon Türü**: Temel eğilimlerden manyetik çekimlere ve paralaks efektlere
+- **Etkileşimli Parıltı Efektleri**: Premium his için fare takipli ışık yansımaları
+- **Jiroskop Desteği**: Mobil cihaz yönelimi entegrasyonu
+- **Performans Optimize**: RequestAnimationFrame ve pürüzsüz 60fps render
+- **Eksen Kontrolü**: X, Y veya her iki eksen hareketi üzerinde tam kontrol
+- **Dokunmatik Destek**: İsteğe bağlı dokunmatik cihaz etkileşimleri
+- **TypeScript Hazır**: Tam tip tanımları ve IntelliSense
+
+## Hızlı Başlangıç
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export default function EtkileşimliKart() {
+  return (
+    <ReactiveImage
+      variant="tiltOnHover"
+      src="/ürün-kartı.jpg"
+      alt="Etkileşimli ürün kartı"
+      animation="glare"
+      tiltMax={12}
+      glare={{
+        enabled: true,
+        maxOpacity: 0.4,
+        position: "mouse",
+      }}
+    />
+  );
+}
+```
+
+## Animasyon Türleri
+
+### Temel Eğilim Efektleri
+
+Kartlar, UI öğeleri ve genel etkileşim için mükemmel.
+
+```tsx
+// Basit 3D eğilim (varsayılan)
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/kart.jpg"
+  alt="Temel eğilim kartı"
+  animation="basic"
+  tiltMax={10}
+/>
+
+// Gelişmiş 3D perspektif
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/ana-görsel.jpg"
+  alt="3D perspektif demo"
+  animation="perspective"
+  tiltMax={15}
+  perspective={1200}
+/>
+
+// Sıçrayıcı sıfırlama animasyonu
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/eğlenceli-kart.jpg"
+  alt="Sıçrayıcı eğilim efekti"
+  animation="bounce"
+  tiltMax={12}
+  timing={{
+    reset: 800,
+    easing: "cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+  }}
+/>
+
+// Pürüzsüz elastik sıfırlama
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/modern-ui.jpg"
+  alt="Elastik eğilim efekti"
+  animation="elastic"
+  tiltMax={8}
+  timing={{
+    duration: 100,
+    reset: 600
+  }}
+/>
+```
+
+### Premium Parıltı Efektleri
+
+Lüks ve ürün vitrin deneyimleri için gerçekçi ışık yansımaları ekleyin.
+
+```tsx
+// Fare takipli parıltı
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/premium-ürün.jpg"
+  alt="Parıltılı premium ürün"
+  animation="glare"
+  tiltMax={10}
+  glare={{
+    enabled: true,
+    maxOpacity: 0.4,
+    color: "rgba(255, 255, 255, 0.3)",
+    position: "mouse" // Fare imlecini takip eder
+  }}
+/>
+
+// Merkez konumlu parıltı
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/lüks-saat.jpg"
+  alt="Merkez parıltılı lüks saat"
+  animation="glare"
+  tiltMax={15}
+  glare={{
+    enabled: true,
+    maxOpacity: 0.5,
+    color: "rgba(255, 215, 0, 0.2)", // Altın parıltı
+    position: "center"
+  }}
+/>
+
+// Kartlar için hafif parıltı
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/kartvizit.jpg"
+  alt="Hafif parıltılı kartvizit"
+  animation="glare"
+  tiltMax={6}
+  glare={{
+    enabled: true,
+    maxOpacity: 0.25,
+    color: "rgba(255, 255, 255, 0.15)"
+  }}
+/>
+```
+
+### Ölçek & Dönüşüm Efektleri
+
+Eğilmeyi ölçekleme ve gelişmiş dönüşümler ile birleştirin.
+
+```tsx
+// Eğilim ile ölçekleme
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/etkileşimli-öğe.jpg"
+  alt="Ölçek eğilimi gösterimi"
+  animation="scale"
+  tiltMax={12}
+  scale={1.05} // %5 ölçek artışı
+/>
+
+// Gölge ile yüzen efekt
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/yüzen-kart.jpg"
+  alt="Yüzen kart efekti"
+  animation="float"
+  tiltMax={8}
+  shadow={true} // Eğilime dayalı dinamik gölge
+/>
+
+// Paralaks hareketi
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/paralaks-demo.jpg"
+  alt="Paralaks eğilim efekti"
+  animation="parallax"
+  tiltMax={15}
+/>
+```
+
+### Gelişmiş Etkileşimli Efektler
+
+Benzersiz kullanıcı deneyimleri için yaratıcı animasyonlar.
+
+```tsx
+// Manyetik çekim
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/manyetik-kart.jpg"
+  alt="Manyetik çekim efekti"
+  animation="magnetic"
+  tiltMax={10}
+/>
+
+// Özel perspektif derinliği
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/derin-perspektif.jpg"
+  alt="Derin 3D perspektif"
+  animation="perspective"
+  tiltMax={20}
+  perspective={800} // Daha güçlü perspektif efekti
+/>
+```
+
+## Eksen Kontrolü
+
+Belirli etkileşim desenleri için hangi eksenlerin fare hareketine yanıt vereceğini kontrol edin.
+
+```tsx
+// Tam hareket (varsayılan)
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/tam-eğilim.jpg"
+  alt="Tam eksen hareketi"
+  axis="both"
+  tiltMax={12}
+/>
+
+// Yalnızca yatay eğilim
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/yatay-kart.jpg"
+  alt="Yalnızca yatay eğilim"
+  axis="x"
+  tiltMax={15}
+/>
+
+// Yalnızca dikey eğilim
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/dikey-kart.jpg"
+  alt="Yalnızca dikey eğilim"
+  axis="y"
+  tiltMax={10}
+/>
+
+// Karşılaştırma düzeni
+<div className="grid grid-cols-3 gap-6">
+  <div className="text-center">
+    <ReactiveImage
+      variant="tiltOnHover"
+      src="/eksen-demo.jpg"
+      alt="Her iki eksen"
+      axis="both"
+      tiltMax={10}
+      className="mb-2"
+    />
+    <p className="text-sm text-gray-600">Her İki Eksen</p>
+  </div>
+
+  <div className="text-center">
+    <ReactiveImage
+      variant="tiltOnHover"
+      src="/eksen-demo.jpg"
+      alt="Yalnızca X-ekseni"
+      axis="x"
+      tiltMax={10}
+      className="mb-2"
+    />
+    <p className="text-sm text-gray-600">Yalnızca X-Ekseni</p>
+  </div>
+
+  <div className="text-center">
+    <ReactiveImage
+      variant="tiltOnHover"
+      src="/eksen-demo.jpg"
+      alt="Yalnızca Y-ekseni"
+      axis="y"
+      tiltMax={10}
+      className="mb-2"
+    />
+    <p className="text-sm text-gray-600">Yalnızca Y-Ekseni</p>
+  </div>
+</div>
+```
+
+## Zamanlama & Performans
+
+Animasyon yanıt verme hızını ve sıfırlama davranışını ince ayarlayın.
+
+```tsx
+// Hızlı yanıt veren etkileşim
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/hızlı-yanıt.jpg"
+  alt="Hızlı yanıt demo"
+  animation="basic"
+  tiltMax={10}
+  timing={{
+    duration: 50,  // Ultra hızlı yanıt
+    reset: 300,    // Hızlı sıfırlama
+    easing: "ease-out"
+  }}
+/>
+
+// Pürüzsüz profesyonel his
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/pürüzsüz-profesyonel.jpg"
+  alt="Profesyonel pürüzsüz etkileşim"
+  animation="elastic"
+  tiltMax={8}
+  timing={{
+    duration: 150, // Dengeli yanıt
+    reset: 600,    // Pürüzsüz sıfırlama
+    easing: "cubic-bezier(0.4, 0, 0.2, 1)"
+  }}
+/>
+
+// Dramatik sinematik efekt
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/sinematik-efekt.jpg"
+  alt="Sinematik dramatik efekt"
+  animation="perspective"
+  tiltMax={20}
+  timing={{
+    duration: 200, // Biraz daha yavaş yanıt
+    reset: 1000,   // Uzun dramatik sıfırlama
+    easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+  }}
+/>
+```
+
+## Mobil & Dokunmatik Destek
+
+Jiroskop entegrasyonu ile dokunmatik cihazlarda eğilim efektlerini etkinleştirin.
+
+```tsx
+// Dokunmatik etkin eğilim
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/dokunmatik-kart.jpg"
+  alt="Dokunmatik etkin eğilim"
+  animation="basic"
+  tiltMax={8}
+  enableTouch={true} // Dokunmatik etkileşimleri etkinleştir
+/>
+
+// Jiroskop entegrasyonu (mobil)
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/jiroskop-demo.jpg"
+  alt="Jiroskop eğilim efekti"
+  animation="glare"
+  tiltMax={15}
+  gyroscope={true} // Cihaz yönelimini kullan
+  glare={{
+    enabled: true,
+    maxOpacity: 0.3
+  }}
+/>
+
+// Mobil optimize ayarlar
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/mobil-optimize.jpg"
+  alt="Mobil optimize eğilim"
+  animation="scale"
+  tiltMax={6}        // Mobil için azaltılmış
+  scale={1.03}       // Hafif ölçek
+  enableTouch={true}
+  timing={{
+    duration: 100,   // Dokunmatik için hızlı yanıt
+    reset: 400       // Hızlı sıfırlama
+  }}
+/>
+```
+
+## Gelişmiş Konfigürasyon
+
+Davranışı, yönü ve etkileşim desenlerini özelleştirin.
+
+```tsx
+// Ters eğilim yönü
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/ters-eğilim.jpg"
+  alt="Ters eğilim yönü"
+  animation="basic"
+  tiltMax={12}
+  reverse={true} // Eğilim yönünü tersine çevirir
+/>
+
+// Kalıcı eğilim (çıkışta sıfırlama yok)
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/kalıcı-eğilim.jpg"
+  alt="Kalıcı eğilim durumu"
+  animation="glare"
+  tiltMax={10}
+  resetOnLeave={false} // Fare çıktığında eğilimi korur
+  glare={{ enabled: true }}
+/>
+
+// Yüksek perspektif yoğunluğu
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/yoğun-perspektif.jpg"
+  alt="Yoğun 3D perspektif"
+  animation="perspective"
+  tiltMax={25}
+  perspective={600} // Daha güçlü 3D efekt
+/>
+```
+
+## Olay İşleme & Analitik
+
+Eğilim etkileşimlerini takip edin ve özel davranışları tetikleyin.
+
+```tsx
+export default function TakipEdilen_Eğilim_Kartı() {
+  const eğilimBaşlangıcınıYönet = ({ tiltX, tiltY }) => {
+    console.log("Eğilim başladı:", { tiltX, tiltY });
+    // Etkileşim başlangıcını takip et
+    analytics.track("eğilim_etkileşimi_başladı");
+  };
+
+  const eğilimHareketiniYönet = ({ tiltX, tiltY, mouseX, mouseY }) => {
+    // Gerçek zamanlı eğilim takibi
+    console.log("Eğilim pozisyonu:", {
+      tiltX: tiltX.toFixed(1),
+      tiltY: tiltY.toFixed(1),
+      mouse: { x: mouseX.toFixed(1), y: mouseY.toFixed(1) },
+    });
+  };
+
+  const eğilimBitişiniYönet = () => {
+    console.log("Eğilim etkileşimi bitti");
+    // Katılım süresini takip et
+    analytics.track("eğilim_etkileşimi_bitti");
+  };
+
+  return (
+    <ReactiveImage
+      variant="tiltOnHover"
+      src="/takip-edilen-eğilim.jpg"
+      alt="Analitik takipli eğilim"
+      animation="glare"
+      tiltMax={12}
+      glare={{ enabled: true }}
+      onTiltStart={eğilimBaşlangıcınıYönet}
+      onTiltMove={eğilimHareketiniYönet}
+      onTiltEnd={eğilimBitişiniYönet}
+    />
+  );
+}
+```
+
+## Stil & CSS Entegrasyonu
+
+Karmaşık tasarımlar ve durum tabanlı stilleme için CSS sınıfları ile birleştirin.
+
+```tsx
+// Eğilim sırasında dinamik stilleme
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/stilli-kart.jpg"
+  alt="Dinamik stilli kart"
+  animation="scale"
+  tiltMax={10}
+  scale={1.05}
+  className="rounded-xl shadow-lg transition-shadow duration-300"
+  imgClassName="object-cover w-full h-64"
+  tiltClassName="shadow-2xl ring-4 ring-blue-500 ring-opacity-30"
+  style={{
+    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    padding: '4px'
+  }}
+/>
+
+// Tutarlı eğilim efektleri ile kart ızgarası
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {kartVerileri.map((kart, index) => (
+    <div key={index} className="bg-white rounded-xl p-6 shadow-md">
+      <ReactiveImage
+        variant="tiltOnHover"
+        src={kart.görsel}
+        alt={kart.başlık}
+        animation="glare"
+        tiltMax={8}
+        glare={{
+          enabled: true,
+          maxOpacity: 0.25
+        }}
+        className="w-full aspect-video overflow-hidden rounded-lg mb-4"
+        imgClassName="w-full h-full object-cover"
+      />
+      <h3 className="text-lg font-semibold mb-2">{kart.başlık}</h3>
+      <p className="text-gray-600">{kart.açıklama}</p>
+    </div>
+  ))}
+</div>
+```
+
+## Gerçek Dünya Desenleri
+
+### Premium Ürün Vitrini
+
+```tsx
+const premiumÜrünler = [
+  {
+    görsel: "/saatler/lüks-saat-1.jpg",
+    isim: "İsviçre Usta Kronograf",
+    fiyat: "₺12.499",
+    rozet: "Sınırlı Sürüm",
+  },
+  {
+    görsel: "/saatler/lüks-saat-2.jpg",
+    isim: "Miras Klasik",
+    fiyat: "₺9.499",
+    rozet: "En Çok Satan",
+  },
+  {
+    görsel: "/saatler/lüks-saat-3.jpg",
+    isim: "Modern Minimalist",
+    fiyat: "₺4.999",
+    rozet: "Yeni Geliş",
+  },
+];
+
+export default function LüksSaatVitrini() {
+  return (
+    <div className="bg-black text-white py-20">
+      <div className="max-w-7xl mx-auto px-4">
+        <h2 className="text-4xl font-bold text-center mb-16">
+          Premium Koleksiyon
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {premiumÜrünler.map((ürün, index) => (
+            <div key={index} className="text-center">
+              <div className="relative mb-8">
+                {ürün.rozet && (
+                  <span className="absolute -top-3 right-4 z-10 bg-gold text-black px-3 py-1 text-xs font-bold rounded-full">
+                    {ürün.rozet}
+                  </span>
+                )}
+
+                <ReactiveImage
+                  variant="tiltOnHover"
+                  src={ürün.görsel}
+                  alt={ürün.isim}
+                  animation="glare"
+                  tiltMax={10}
+                  glare={{
+                    enabled: true,
+                    maxOpacity: 0.6,
+                    color: "rgba(255, 215, 0, 0.3)", // Altın parıltı
+                    position: "mouse",
+                  }}
+                  timing={{
+                    duration: 120,
+                    reset: 800,
+                    easing: "cubic-bezier(0.23, 1, 0.32, 1)",
+                  }}
+                  className="w-full aspect-square rounded-2xl overflow-hidden"
+                  imgClassName="w-full h-full object-cover"
+                />
+              </div>
+
+              <h3 className="text-2xl font-semibold mb-2">{ürün.isim}</h3>
+              <p className="text-gold text-xl font-bold">{ürün.fiyat}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### Etkileşimli Pano Kartları
+
+```tsx
+const panoKartları = [
+  {
+    ikon: "📊",
+    başlık: "Analitik",
+    değer: "1,2M",
+    trend: "+%15",
+    renk: "blue",
+  },
+  { ikon: "💰", başlık: "Gelir", değer: "₺226K", trend: "+%8", renk: "green" },
+  {
+    ikon: "👥",
+    başlık: "Kullanıcı",
+    değer: "8,4K",
+    trend: "+%23",
+    renk: "purple",
+  },
+  {
+    ikon: "🎯",
+    başlık: "Dönüşüm",
+    değer: "%3,2",
+    trend: "+%12",
+    renk: "orange",
+  },
+];
+
+export default function EtkileşimliPano() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {panoKartları.map((kart, index) => (
+        <div
+          key={index}
+          className="relative bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+        >
+          <ReactiveImage
+            variant="tiltOnHover"
+            src={`/pano-arkaplan-${kart.renk}.jpg`}
+            alt={`${kart.başlık} pano kartı`}
+            animation="magnetic"
+            tiltMax={6}
+            timing={{
+              duration: 80,
+              reset: 400,
+            }}
+            className="absolute inset-0 rounded-xl overflow-hidden opacity-5"
+            imgClassName="w-full h-full object-cover"
+          />
+
+          <div className="relative z-10">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-2xl">{kart.ikon}</span>
+              <span
+                className={`text-sm font-medium px-2 py-1 rounded-full bg-${kart.renk}-100 text-${kart.renk}-700`}
+              >
+                {kart.trend}
+              </span>
+            </div>
+
+            <h3 className="text-gray-600 text-sm font-medium mb-1">
+              {kart.başlık}
+            </h3>
+            <p className="text-3xl font-bold text-gray-900">{kart.değer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+### Oyun Kart Koleksiyonu
+
+```tsx
+const oyunKartları = [
+  {
+    görsel: "/kartlar/efsane-ejder.jpg",
+    isim: "Efsanevi Ejder",
+    nadirlik: "Efsanevi",
+    güç: 2500,
+    parıltıRengi: "rgba(255, 215, 0, 0.4)", // Efsanevi için altın
+  },
+  {
+    görsel: "/kartlar/gizemli-savaşçı.jpg",
+    isim: "Gizemli Savaşçı",
+    nadirlik: "Destansı",
+    güç: 1800,
+    parıltıRengi: "rgba(138, 43, 226, 0.4)", // Destansı için mor
+  },
+  {
+    görsel: "/kartlar/orman-koruyucusu.jpg",
+    isim: "Orman Koruyucusu",
+    nadirlik: "Nadir",
+    güç: 1200,
+    parıltıRengi: "rgba(0, 191, 255, 0.4)", // Nadir için mavi
+  },
+];
+
+export default function OyunKartKoleksiyonu() {
+  return (
+    <div className="bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 py-16">
+      <div className="max-w-6xl mx-auto px-4">
+        <h2 className="text-4xl font-bold text-white text-center mb-12">
+          Efsanevi Koleksiyon
+        </h2>
+
+        <div className="flex justify-center gap-8 flex-wrap">
+          {oyunKartları.map((kart, index) => (
+            <div key={index} className="text-center">
+              <ReactiveImage
+                variant="tiltOnHover"
+                src={kart.görsel}
+                alt={kart.isim}
+                animation="glare"
+                tiltMax={15}
+                glare={{
+                  enabled: true,
+                  maxOpacity: 0.7,
+                  color: kart.parıltıRengi,
+                  position: "mouse",
+                }}
+                timing={{
+                  duration: 100,
+                  reset: 600,
+                  easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+                }}
+                className="w-64 h-96 rounded-2xl overflow-hidden shadow-2xl mb-4"
+                imgClassName="w-full h-full object-cover"
+                enableTouch={true}
+              />
+
+              <div className="text-white">
+                <h3 className="text-xl font-bold mb-1">{kart.isim}</h3>
+                <div className="flex justify-center items-center gap-4">
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-medium ${
+                      kart.nadirlik === "Efsanevi"
+                        ? "bg-yellow-600"
+                        : kart.nadirlik === "Destansı"
+                        ? "bg-purple-600"
+                        : "bg-blue-600"
+                    }`}
+                  >
+                    {kart.nadirlik}
+                  </span>
+                  <span className="text-orange-400 font-bold">
+                    ⚡ {kart.güç}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+## API Referansı
+
+### Özellikler
+
+| Özellik         | Tür                 | Varsayılan  | Açıklama                               |
+| --------------- | ------------------- | ----------- | -------------------------------------- |
+| `tiltMax`       | `number`            | `10`        | Derece cinsinden maksimum eğilim açısı |
+| `animation`     | `TiltAnimationType` | `"basic"`   | Animasyon türü ve davranışı            |
+| `axis`          | `TiltAxis`          | `"both"`    | Eğilim eksen kısıtlaması (both, x, y)  |
+| `timing`        | `TiltTiming`        | `{}`        | Animasyon zamanlama konfigürasyonu     |
+| `perspective`   | `number`            | `1000`      | Piksel cinsinden 3D perspektif değeri  |
+| `scale`         | `number`            | `1`         | Eğilim sırasında ölçek faktörü         |
+| `glare`         | `GlareSettings`     | `{}`        | Parıltı efekt konfigürasyonu           |
+| `shadow`        | `boolean`           | `false`     | Dinamik gölgeleri etkinleştir          |
+| `reverse`       | `boolean`           | `false`     | Eğilim yönünü tersine çevir            |
+| `resetOnLeave`  | `boolean`           | `true`      | Fare çıktığında eğilimi sıfırla        |
+| `gyroscope`     | `boolean`           | `false`     | Jiroskop desteğini etkinleştir (mobil) |
+| `enableTouch`   | `boolean`           | `false`     | Dokunmatik cihaz desteğini etkinleştir |
+| `tiltClassName` | `string`            | `undefined` | Eğilim sırasında uygulanan CSS sınıfı  |
+| `onTiltStart`   | `function`          | `undefined` | Eğilim başlangıç geri çağırması        |
+| `onTiltMove`    | `function`          | `undefined` | Eğilim hareket geri çağırması          |
+| `onTiltEnd`     | `function`          | `undefined` | Eğilim bitiş geri çağırması            |
+
+### Türler
+
+```tsx
+// Animasyon türleri
+type TiltAnimationType =
+  | "basic" // Basit 3D eğilim efekti
+  | "glare" // Etkileşimli ışık yansıması ile eğilim
+  | "scale" // Ölçekleme ile birleşik eğilim
+  | "perspective" // Gelişmiş 3D derinlik efekti
+  | "bounce" // Sıçrayıcı sıfırlama animasyonu
+  | "elastic" // Pürüzsüz elastik sıfırlama
+  | "magnetic" // Çekim benzeri hareket
+  | "float" // Gölgeler ile yüzen efekt
+  | "parallax"; // Çok katmanlı hareket efekti
+
+// Eksen kontrolü
+type TiltAxis =
+  | "both" // Tam X ve Y ekseni hareketi
+  | "x" // Yalnızca yatay hareket
+  | "y"; // Yalnızca dikey hareket
+
+// Zamanlama konfigürasyonu
+type TiltTiming = {
+  duration?: number; // Milisaniye cinsinden fare yanıt süresi (varsayılan: 200)
+  reset?: number; // Milisaniye cinsinden sıfırlama animasyon süresi (varsayılan: 400)
+  easing?: string; // CSS yumuşatma işlevi (varsayılan: "ease-out")
+};
+
+// Parıltı efekt ayarları
+type GlareSettings = {
+  enabled?: boolean; // Parıltı efektini etkinleştir (varsayılan: false)
+  maxOpacity?: number; // Maksimum parıltı opaklığı (varsayılan: 0.3)
+  color?: string; // Parıltı rengi (varsayılan: "rgba(255,255,255,0.3)")
+  position?: "center" | "mouse"; // Parıltı konumlandırması (varsayılan: "center")
+};
+```
+
+### Animasyon Performans Kılavuzu
+
+| Animasyon     | Performans | Mobil Dostu | En İyi Eğilim Aralığı | Önerilen Kullanımlar  |
+| ------------- | ---------- | ----------- | --------------------- | --------------------- |
+| `basic`       | ⭐⭐⭐⭐⭐ | ✅ Mükemmel | 5-15°                 | Genel UI, kartlar     |
+| `glare`       | ⭐⭐⭐⭐   | ✅ İyi      | 8-12°                 | Premium ürünler       |
+| `scale`       | ⭐⭐⭐⭐   | ✅ İyi      | 6-10°                 | Etkileşimli öğeler    |
+| `perspective` | ⭐⭐⭐     | ⚠️ Orta     | 10-20°                | Ana bölümler          |
+| `bounce`      | ⭐⭐⭐⭐   | ✅ İyi      | 8-15°                 | Eğlenceli arayüzler   |
+| `elastic`     | ⭐⭐⭐⭐⭐ | ✅ Mükemmel | 6-12°                 | Modern UI             |
+| `magnetic`    | ⭐⭐⭐     | ⚠️ Orta     | 8-12°                 | Yaratıcı etkileşimler |
+| `float`       | ⭐⭐⭐     | ⚠️ Orta     | 5-10°                 | Kart fare üzerileri   |
+| `parallax`    | ⭐⭐       | ❌ Sınırlı  | 10-18°                | Masaüstü deneyimleri  |
+
+## Performans Kılavuzları
+
+### Optimizasyon İpuçları
+
+- **Eğilim Aralığı**: Hareket hastalığı olmadan optimal görsel etki için 5-15° kullanın
+- **Perspektif**: En iyi performans için 800-1500px arasında tutun
+- **Mobil**: `tiltMax <= 10` kullanın ve mobilde karmaşık animasyonlardan kaçının
+- **Parıltı Efektleri**: Hafif, profesyonel efektler için `maxOpacity`'yi 0.3-0.5 ile sınırlayın
+- **Sıfırlama Zamanlaması**: 300-600ms yanıt verme hızı ve pürüzsüzlük arasında iyi denge sağlar
+
+### Erişilebilirlik
+
+```tsx
+// Kullanıcı tercihlerini saygı göster
+<ReactiveImage
+  variant="tiltOnHover"
+  src="/erişilebilir-görsel.jpg"
+  alt="Erişilebilir eğilim görseli"
+  animation="basic"
+  tiltMax={8}
+  timing={{
+    duration: 150,
+    reset: 400,
+  }}
+  // CSS otomatik olarak prefers-reduced-motion'ı saygı gösterir
+/>
+```
+
+### Tarayıcı Desteği
+
+| Özellik            | Chrome 80+ | Firefox 75+ | Safari 13+ | Edge 80+ |
+| ------------------ | ---------- | ----------- | ---------- | -------- |
+| Temel Eğilim       | ✅ Tam     | ✅ Tam      | ✅ Tam     | ✅ Tam   |
+| Parıltı Efektleri  | ✅ Tam     | ✅ Tam      | ✅ Tam     | ✅ Tam   |
+| Jiroskop           | ✅ Tam     | ⚠️ Sınırlı  | ✅ Tam     | ✅ Tam   |
+| Dokunmatik Olaylar | ✅ Tam     | ✅ Tam      | ✅ Tam     | ✅ Tam   |
+| Performans         | ✅ 60fps   | ✅ 60fps    | ✅ 60fps   | ✅ 60fps |
+
+---
+
+_Görsellerinize sürükleyici 3D efektler eklemeye hazır mısınız? Canlı gösteriler için [vitrin sayfamızı](/showcase) keşfedin veya dokümantasyonumuzda diğer [komponent varyantlarını](/docs/baslangic) kontrol edin._

@@ -30,10 +30,67 @@ export function MDXContent({ code }: { code: string }) {
         const result = await func([
           {
             Fragment: React.Fragment,
-            jsx: (type: any, props: any, key?: any) =>
-              React.createElement(type, { ...props, key }, props?.children),
-            jsxs: (type: any, props: any, key?: any) =>
-              React.createElement(type, { ...props, key }, props?.children),
+            jsx: (type: any, props: any, key?: any) => {
+              // Handle key prop properly for lists and iterative elements
+              const { children, ...restProps } = props || {};
+              const elementProps =
+                key !== undefined ? { ...restProps, key } : restProps;
+
+              // For list items and similar elements, generate key if missing
+              if (
+                !key &&
+                (type === "li" ||
+                  type === "tr" ||
+                  type === "td" ||
+                  type === "th")
+              ) {
+                const childKey =
+                  typeof children === "string"
+                    ? children.slice(0, 20)
+                    : Math.random().toString(36).substr(2, 9);
+                elementProps.key = childKey;
+              }
+
+              return React.createElement(type, elementProps, children);
+            },
+            jsxs: (type: any, props: any, key?: any) => {
+              // Handle key prop properly for JSX elements with children array
+              const { children, ...restProps } = props || {};
+              const elementProps =
+                key !== undefined ? { ...restProps, key } : restProps;
+
+              // Generate keys for array children if missing
+              if (Array.isArray(children)) {
+                const childrenWithKeys = children.map((child, index) => {
+                  if (React.isValidElement(child) && !child.key) {
+                    return React.cloneElement(child, { key: index });
+                  }
+                  return child;
+                });
+                return React.createElement(
+                  type,
+                  elementProps,
+                  ...childrenWithKeys
+                );
+              }
+
+              // For list items and similar elements, generate key if missing
+              if (
+                !key &&
+                (type === "li" ||
+                  type === "tr" ||
+                  type === "td" ||
+                  type === "th")
+              ) {
+                const childKey =
+                  typeof children === "string"
+                    ? children.slice(0, 20)
+                    : Math.random().toString(36).substr(2, 9);
+                elementProps.key = childKey;
+              }
+
+              return React.createElement(type, elementProps, children);
+            },
             baseUrl: window.location.origin,
             // Provide components directly instead of dynamic imports
             ...mdxComponents,

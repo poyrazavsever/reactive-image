@@ -1,0 +1,512 @@
+---
+title: ClickExpand
+description: Gelişmiş tıkla-genişlet modal işlevselliği ile çoklu animasyon türleri, arkaplan efektleri ve erişilebilirlik özellikleri.
+order: 2
+locale: tr
+slug: click-expand
+toc: true
+---
+
+# ClickExpand
+
+ClickExpand varyantı, görselleri sofistike animasyonlar, özelleştirilebilir arkaplanlar ve kapsamlı erişilebilirlik desteği ile etkileşimli modal galerilere dönüştürür. Görsel galeriler, portföyler ve detaylı görsel görüntüleme deneyimleri için mükemmeldir.
+
+## Özellikler
+
+- **9 Animasyon Türü**: Hafif ölçek geçişlerinden dinamik 3D döndürmelere
+- **5 Arkaplan Efekti**: Bulanıklık, cam ve özel kaplamalar dahil
+- **6 Modal Boyutu**: Kompakt'tan tam görünüm alanı kapsamına
+- **Tam Erişilebilirlik**: ARIA uyumluluğu, klavye navigasyonu, odak yakalama
+- **Performans Optimizasyonu**: Kaydırma kilitleme, animasyon karesi optimizasyonu
+- **TypeScript Desteği**: Tam tip tanımları ve IntelliSense
+
+## Hızlı Başlangıç
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export default function Galeri() {
+  return (
+    <ReactiveImage
+      variant="clickExpand"
+      src="/galeri-görseli.jpg"
+      alt="Güzel manzara"
+      modalAnimation="springPop"
+      backdrop="blur"
+      caption="İsviçre Alplerinde çekildi"
+    />
+  );
+}
+```
+
+## Animasyon Türleri
+
+### Ölçek & Geçiş Efektleri
+
+Pürüzsüz, profesyonel geçişler için mükemmel.
+
+```tsx
+// Pürüzsüz ölçek ve geçiş (varsayılan)
+<ReactiveImage
+  variant="clickExpand"
+  modalAnimation="scaleFade"
+  src="/görsel1.jpg"
+  alt="Ölçek geçişi demo"
+/>
+
+// Yaylı animasyon
+<ReactiveImage
+  variant="clickExpand"
+  modalAnimation="springPop"
+  animationDuration={350}
+  src="/görsel2.jpg"
+  alt="Yay animasyonu demo"
+/>
+
+// Yakınlaştırma ve sıçrama efekti
+<ReactiveImage
+  variant="clickExpand"
+  modalAnimation="zoomBounce"
+  src="/görsel3.jpg"
+  alt="Yakınlaştırma sıçrama demo"
+/>
+```
+
+### Yönlü Kaydırmalar
+
+Hikaye anlatımı ve sıralı içerik için harika.
+
+```tsx
+// Alttan kaydırma
+<ReactiveImage
+  variant="clickExpand"
+  modalAnimation="slideUp"
+  src="/görsel4.jpg"
+  alt="Yukarı kaydırma demo"
+/>
+
+// Üstten kaydırma
+<ReactiveImage
+  variant="clickExpand"
+  modalAnimation="slideDown"
+  src="/görsel5.jpg"
+  alt="Aşağı kaydırma demo"
+/>
+
+// Yanlardan kaydırma
+<ReactiveImage
+  variant="clickExpand"
+  modalAnimation="slideLeft" // veya "slideRight"
+  src="/görsel6.jpg"
+  alt="Kaydırma demo"
+/>
+```
+
+### 3D Efektler
+
+Premium deneyimler için göz alıcı animasyonlar.
+
+```tsx
+// 3D dönme girişi
+<ReactiveImage
+  variant="clickExpand"
+  modalAnimation="rotateIn"
+  animationDuration={400}
+  src="/görsel7.jpg"
+  alt="Dönme animasyon demo"
+/>
+
+// 3D çevirme efekti
+<ReactiveImage
+  variant="clickExpand"
+  modalAnimation="flipIn"
+  animationDuration={500}
+  src="/görsel8.jpg"
+  alt="Çevirme animasyon demo"
+/>
+```
+
+## Arkaplan Efektleri
+
+### Standart Arkaplanlar
+
+```tsx
+// Hafif koyu kaplama
+<ReactiveImage
+  variant="clickExpand"
+  backdrop="dim"
+  src="/görsel.jpg"
+  alt="Loş arkaplan demo"
+/>
+
+// Ağır koyu kaplama
+<ReactiveImage
+  variant="clickExpand"
+  backdrop="dark"
+  src="/görsel.jpg"
+  alt="Koyu arkaplan demo"
+/>
+
+// Arkaplan yok (şeffaf)
+<ReactiveImage
+  variant="clickExpand"
+  backdrop="none"
+  src="/görsel.jpg"
+  alt="Arkaplan yok demo"
+/>
+```
+
+### Modern Cam Efektleri
+
+```tsx
+// Bulanıklık efekti
+<ReactiveImage
+  variant="clickExpand"
+  backdrop="blur"
+  src="/görsel.jpg"
+  alt="Bulanık arkaplan demo"
+/>
+
+// Camvari görünüm
+<ReactiveImage
+  variant="clickExpand"
+  backdrop="glass"
+  src="/görsel.jpg"
+  alt="Cam arkaplan demo"
+/>
+```
+
+### Özel Arkaplanlar
+
+```tsx
+// Özel renkli kaplama
+<ReactiveImage
+  variant="clickExpand"
+  backdrop="dim"
+  customBackdrop={{
+    backgroundColor: 'rgba(139, 69, 19, 0.8)', // Kahverengi ton
+  }}
+  src="/görsel.jpg"
+  alt="Özel arkaplan demo"
+/>
+
+// Gelişmiş camvari görünüm
+<ReactiveImage
+  variant="clickExpand"
+  backdrop="glass"
+  customBackdrop={{
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backdropFilter: 'blur(20px) saturate(200%)',
+  }}
+  src="/görsel.jpg"
+  alt="Gelişmiş cam demo"
+/>
+```
+
+## Modal Boyutlandırma
+
+Farklı kullanım durumları için modal'ın maksimum boyutlarını kontrol edin.
+
+```tsx
+// Kompakt boyut (400x300px max)
+<ReactiveImage
+  variant="clickExpand"
+  modalSize="sm"
+  src="/küçük-resim.jpg"
+  alt="Küçük modal demo"
+/>
+
+// Orta boyut (600x450px max)
+<ReactiveImage
+  variant="clickExpand"
+  modalSize="md"
+  src="/portre.jpg"
+  alt="Orta modal demo"
+/>
+
+// Büyük boyut (800x600px max)
+<ReactiveImage
+  variant="clickExpand"
+  modalSize="lg"
+  src="/manzara.jpg"
+  alt="Büyük modal demo"
+/>
+
+// Çok büyük (1200x800px max)
+<ReactiveImage
+  variant="clickExpand"
+  modalSize="xl"
+  src="/yüksek-çözünürlük.jpg"
+  alt="Çok büyük modal demo"
+/>
+
+// Tam görünüm (%95 kaplama)
+<ReactiveImage
+  variant="clickExpand"
+  modalSize="full"
+  src="/panorama.jpg"
+  alt="Tam boyut modal demo"
+/>
+
+// Otomatik-uyumlu (varsayılan)
+<ReactiveImage
+  variant="clickExpand"
+  modalSize="auto"
+  src="/uyarlanabilir.jpg"
+  alt="Otomatik boyut modal demo"
+/>
+```
+
+## Başlıklar & Stil
+
+Modal'larınıza açıklamalar ve özel stil ekleyin.
+
+```tsx
+// Basit başlık
+<ReactiveImage
+  variant="clickExpand"
+  src="/sanat-eseri.jpg"
+  alt="Dijital sanat eseri"
+  caption="2024'te oluşturulan dijital resim"
+/>
+
+// Özel modal stili
+<ReactiveImage
+  variant="clickExpand"
+  src="/fotoğraf.jpg"
+  alt="Profesyonel fotoğraf"
+  caption="Canon EOS R5 ile çekildi"
+  modalClassName="özel-modal"
+  captionClassName="özel-başlık"
+  className="galeri-küçük-resmi"
+/>
+```
+
+## Etkileşim Konfigürasyonu
+
+Kullanıcı etkileşimini ve davranışı ince ayarlayın.
+
+```tsx
+<ReactiveImage
+  variant="clickExpand"
+  src="/etkileşimli.jpg"
+  alt="Etkileşimli demo"
+  // Animasyon ayarları
+  modalAnimation="rotateIn"
+  animationDuration={350}
+  // Etkileşim kontrolleri
+  closeOnEsc={true}
+  closeOnBackdrop={true}
+  enableKeyboard={true}
+  preventScroll={true}
+  // Olay işleyicileri
+  onOpen={() => console.log("Modal açıldı")}
+  onClose={() => console.log("Modal kapandı")}
+  onAnimationStart={() => console.log("Animasyon başladı")}
+  onAnimationEnd={() => console.log("Animasyon tamamlandı")}
+/>
+```
+
+## Gelişmiş Desenler
+
+### Galeri Izgara
+
+```tsx
+const galeriGörselleri = [
+  {
+    src: "/galeri1.jpg",
+    alt: "Gün batımı manzarası",
+    caption: "Altın saat büyüsü",
+  },
+  { src: "/galeri2.jpg", alt: "Dağ zirvesi", caption: "3000m'de zirve" },
+  { src: "/galeri3.jpg", alt: "Orman yolu", caption: "Sabah orman yürüyüşü" },
+];
+
+export default function FotoğrafGalerisi() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {galeriGörselleri.map((görsel, index) => (
+        <ReactiveImage
+          key={index}
+          variant="clickExpand"
+          src={görsel.src}
+          alt={görsel.alt}
+          caption={görsel.caption}
+          modalAnimation="springPop"
+          backdrop="blur"
+          modalSize="lg"
+          className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+        />
+      ))}
+    </div>
+  );
+}
+```
+
+### Portföy Vitrin
+
+```tsx
+export default function PortföyÖğesi() {
+  const görselAçılmasınıYönet = () => {
+    // Analitikleri takip et
+    analytics.track("portföy_görseli_görüntülendi");
+  };
+
+  return (
+    <div className="portföy-öğesi">
+      <ReactiveImage
+        variant="clickExpand"
+        src="/portföy/proje-ana.jpg"
+        alt="E-ticaret web sitesi yeniden tasarımı"
+        caption="Moda perakendecisi için tam UI/UX yeniden tasarımı - %40 dönüşüm artışı"
+        modalAnimation="slideUp"
+        backdrop="glass"
+        modalSize="xl"
+        animationDuration={300}
+        onOpen={görselAçılmasınıYönet}
+        className="w-full rounded-xl"
+      />
+    </div>
+  );
+}
+```
+
+## Özel Hook Kullanımı
+
+Gelişmiş kullanım durumları için alttaki hook'u doğrudan kullanın:
+
+```tsx
+import { useClickExpand } from "reactive-image/ClickExpand";
+
+export default function ÖzelModal() {
+  const { state, handlers, modalProps } = useClickExpand({
+    closeOnEsc: true,
+    closeOnBackdrop: true,
+    onOpen: () => console.log("Özel modal açıldı"),
+    onClose: () => console.log("Özel modal kapandı"),
+  });
+
+  return (
+    <div>
+      <button
+        onClick={handlers.open}
+        className="bg-blue-500 text-white px-4 py-2 rounded"
+      >
+        Özel Modal Aç
+      </button>
+
+      {state.isOpen && (
+        <div
+          {...modalProps}
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          onClick={handlers.handleBackdropClick}
+        >
+          <div
+            className="bg-white p-8 rounded-lg shadow-xl max-w-md w-full mx-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-2xl font-bold mb-4">Özel Modal</h2>
+            <p className="text-gray-600 mb-6">
+              Maksimum esneklik için ClickExpand hook'u ile oluşturuldu.
+            </p>
+            <button
+              onClick={handlers.close}
+              className="bg-gray-500 text-white px-4 py-2 rounded"
+            >
+              Kapat
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+## Erişilebilirlik Özellikleri
+
+ClickExpand erişilebilirlik düşünülerek oluşturulmuştur:
+
+- **ARIA Öznitelikleri**: Uygun `aria-modal`, `role` ve etiketleme
+- **Klavye Navigasyonu**: Kapatmak için ESC, açmak için Enter/Space, Tab navigasyonu
+- **Odak Yönetimi**: Modal içinde odak yakalama, odak geri yükleme
+- **Ekran Okuyucular**: Açıklayıcı etiketler ve duyurular
+- **Renk Kontrastı**: Arkaplan kaplamaları yeterli kontrast sağlar
+
+### Klavye Kısayolları
+
+| Tuş                  | Eylem                                |
+| -------------------- | ------------------------------------ |
+| `Enter` veya `Space` | Görsel odaklanmışken modal'ı aç      |
+| `Escape`             | Modal'ı kapat (`closeOnEsc` etkinse) |
+| `Tab`                | Modal içinde gezin (odak yakalanmış) |
+
+## API Referansı
+
+### Özellikler
+
+| Özellik             | Tür                  | Varsayılan    | Açıklama                                |
+| ------------------- | -------------------- | ------------- | --------------------------------------- |
+| `modalAnimation`    | `ModalAnimationType` | `"scaleFade"` | Modal girişi için animasyon türü        |
+| `backdrop`          | `BackdropType`       | `"dim"`       | Arkaplan efekt stili                    |
+| `caption`           | `string`             | `undefined`   | Görsel altında başlık metni             |
+| `closeOnEsc`        | `boolean`            | `true`        | ESC tuşuyla modal'ı kapat               |
+| `closeOnBackdrop`   | `boolean`            | `true`        | Arkaplan tıklamasıyla modal'ı kapat     |
+| `modalSize`         | `ModalSize`          | `"auto"`      | Maksimum modal boyutları                |
+| `animationDuration` | `number`             | `200`         | Milisaniye cinsinden animasyon süresi   |
+| `enableKeyboard`    | `boolean`            | `true`        | Klavye navigasyonunu etkinleştir        |
+| `preventScroll`     | `boolean`            | `true`        | Modal açıkken body kaydırmasını kilitle |
+| `customBackdrop`    | `CSSProperties`      | `undefined`   | Özel arkaplan stilleri                  |
+| `modalClassName`    | `string`             | `undefined`   | Modal konteyneri için CSS sınıfı        |
+| `captionClassName`  | `string`             | `undefined`   | Başlık için CSS sınıfı                  |
+| `onOpen`            | `() => void`         | `undefined`   | Modal açıldığında geri çağırma          |
+| `onClose`           | `() => void`         | `undefined`   | Modal kapandığında geri çağırma         |
+| `onAnimationStart`  | `() => void`         | `undefined`   | Animasyon başladığında geri çağırma     |
+| `onAnimationEnd`    | `() => void`         | `undefined`   | Animasyon bittiğinde geri çağırma       |
+
+### Türler
+
+```tsx
+// Animasyon türleri
+type ModalAnimationType =
+  | "scaleFade"
+  | "slideUp"
+  | "slideDown"
+  | "slideLeft"
+  | "slideRight"
+  | "springPop"
+  | "zoomBounce"
+  | "rotateIn"
+  | "flipIn";
+
+// Arkaplan türleri
+type BackdropType = "dim" | "blur" | "glass" | "dark" | "none";
+
+// Modal boyutları
+type ModalSize =
+  | "sm" // 400x300px max
+  | "md" // 600x450px max
+  | "lg" // 800x600px max
+  | "xl" // 1200x800px max
+  | "full" // %95 görünüm alanı
+  | "auto"; // Uyumlu
+```
+
+## Performans İpuçları
+
+- Sayfa altındaki görseller için `loading="lazy"` kullanın
+- Mobilde büyük modal'ları önlemek için `modalSize`'ı düşünün
+- Daha iyi algılanan performans için daha kısa `animationDuration` (150-250ms) kullanın
+- Layout kaymaları önlemek için `preventScroll`'u etkinleştirin
+- Özel kaplama yönetiminiz varsa `backdrop="none"` kullanın
+
+## Tarayıcı Desteği
+
+- **Modern Tarayıcılar**: Tam destek (Chrome 88+, Firefox 87+, Safari 14+)
+- **Odak Yönetimi**: Tüm modern tarayıcılarda desteklenir
+- **Backdrop Filter**: Eski tarayıcılarda zarif bozulma
+- **CSS Özel Özellikleri**: Yedek değerler sağlanır
+
+---
+
+_Uygulama konusunda yardıma mı ihtiyacınız var? [Örnekler deposunu](https://github.com/poyrazavsever/reactive-image/tree/main/examples) kontrol edin veya [bir sorun açın](https://github.com/poyrazavsever/reactive-image/issues)._

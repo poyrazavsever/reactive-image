@@ -1,0 +1,1174 @@
+---
+title: ZoomOnHover
+description: Gelişmiş ölçekleme efekti komponenti ile imleç takip sistemi, büyüteç etkileri, odak noktaları ve etkileşimli görsel gezinti için yumuşak geçişler.
+order: 5
+locale: tr
+slug: zoom-on-hover
+toc: true
+---
+
+# ZoomOnHover
+
+ZoomOnHover varyantı, açık ve çekici ölçekleme efektleri ile görsellerin ayrıntılarını öne çıkarmak için tasarlanmıştır. İmleç takip sistemi, büyüteç etkileri, odak noktası ölçeklendirmesi ve gelişmiş görsel gezinti deneyimleri için pürüzsüz transform animasyonları sunar.
+
+## Özellikler
+
+- **10 Ölçekleme Türü**: Temel yakınlaştırmadan büyüteç efektlere ve lens ölçeklemelere
+- **İmleç Takip Sistemi**: Dinamik fare pozisyonu bazlı görsel konumlandırma
+- **Transform Origin**: Özelleştirilebilir yakınlaştırma merkez noktaları
+- **Büyüteç Efektleri**: Ayrıntılı görsel inceleme için gelişmiş lens görünümleri
+- **Dokunmatik Gestures**: Çimdikleme yakınlaştırma ve mobil etkileşim desteği
+- **Çoklu Seviye**: Kademeli yakınlaştırma seviyeler ve geçişli deneyimler
+- **TypeScript Hazır**: Tam tip tanımları ve IntelliSense desteği
+
+## Hızlı Başlangıç
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export default function YakınlaştırılabilirGörsel() {
+  return (
+    <ReactiveImage
+      variant="zoomOnHover"
+      src="/ayrıntılı-ürün.jpg"
+      alt="Yakınlaştırılabilir ürün görseli"
+      animation="smooth"
+      scale={2.5}
+      transformOrigin="cursor"
+    />
+  );
+}
+```
+
+## Ölçekleme Türleri
+
+### Temel Yakınlaştırma Efektleri
+
+Genel kullanımlar ve UI öğeleri için basit ama etkili ölçekleme.
+
+```tsx
+// Pürüzsüz yakınlaştırma (varsayılan)
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/ürün-görseli.jpg"
+  alt="Temel yakınlaştırma demo"
+  animation="smooth"
+  scale={1.8}
+/>
+
+// Hızlı yakınlaştırma
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/hızlı-demo.jpg"
+  alt="Hızlı yakınlaştırma efekti"
+  animation="instant"
+  scale={2.2}
+  timing={{
+    duration: 150
+  }}
+/>
+
+// Yumuşak gecikmeli
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/yumuşak-gecikmeli.jpg"
+  alt="Gecikmeli yakınlaştırma"
+  animation="smooth"
+  scale={2.0}
+  timing={{
+    duration: 400,
+    delay: 100,
+    easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+  }}
+/>
+
+// Elastik yakınlaştırma
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/elastik-zoom.jpg"
+  alt="Elastik yakınlaştırma efekti"
+  animation="elastic"
+  scale={2.5}
+  timing={{
+    duration: 600,
+    easing: "cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+  }}
+/>
+```
+
+### Transform Origin (Yakınlaştırma Merkezi)
+
+Yakınlaştırmanın hangi noktadan gerçekleşeceğini kontrol edin.
+
+```tsx
+// İmleç pozisyonundan yakınlaştır
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/imleç-takipli.jpg"
+  alt="İmleç takipli yakınlaştırma"
+  animation="smooth"
+  scale={3.0}
+  transformOrigin="cursor" // Farenin olduğu noktadan yakınlaştır
+/>
+
+// Merkez noktasından yakınlaştır
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/merkez-yakınlaştırma.jpg"
+  alt="Merkez yakınlaştırma"
+  animation="smooth"
+  scale={2.5}
+  transformOrigin="center"
+/>
+
+// Özel nokta yakınlaştırma
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/özel-nokta.jpg"
+  alt="Özel nokta yakınlaştırma"
+  animation="smooth"
+  scale={2.2}
+  transformOrigin="30% 70%" // Sol-alt bölgeye odakla
+/>
+
+// Karşılaştırma düzeni
+<div className="grid grid-cols-2 gap-8">
+  <div className="text-center">
+    <ReactiveImage
+      variant="zoomOnHover"
+      src="/karşılaştırma-demo.jpg"
+      alt="İmleç yakınlaştırması"
+      animation="smooth"
+      scale={2.5}
+      transformOrigin="cursor"
+      className="w-full aspect-video rounded-lg mb-2"
+    />
+    <p className="text-sm text-gray-600">İmleç Takipli</p>
+  </div>
+
+  <div className="text-center">
+    <ReactiveImage
+      variant="zoomOnHover"
+      src="/karşılaştırma-demo.jpg"
+      alt="Merkez yakınlaştırması"
+      animation="smooth"
+      scale={2.5}
+      transformOrigin="center"
+      className="w-full aspect-video rounded-lg mb-2"
+    />
+    <p className="text-sm text-gray-600">Merkez Yakınlaştırma</p>
+  </div>
+</div>
+```
+
+### Büyüteç & Lens Efektleri
+
+Ayrıntılı inceleme ve profesyonel görsel gezinti için gelişmiş efektler.
+
+```tsx
+// Büyüteç lens efekti
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/büyüteç-demo.jpg"
+  alt="Büyüteç lens efekti"
+  animation="magnify"
+  scale={4.0}
+  lens={{
+    enabled: true,
+    size: 150, // Lens çapı (piksel)
+    borderWidth: 3,
+    borderColor: "rgba(255, 255, 255, 0.8)"
+  }}
+  transformOrigin="cursor"
+/>
+
+// Odak yakınlaştırması
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/odak-demo.jpg"
+  alt="Odak yakınlaştırma efekti"
+  animation="focus"
+  scale={2.8}
+  transformOrigin="cursor"
+  timing={{
+    duration: 250
+  }}
+/>
+
+// Köşe yakınlaştırması
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/köşe-yakınlaştırma.jpg"
+  alt="Köşe yakınlaştırma efekti"
+  animation="corner"
+  scale={3.5}
+  transformOrigin="cursor"
+/>
+
+// Çoklu seviye yakınlaştırma
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/çoklu-seviye.jpg"
+  alt="Çoklu seviye yakınlaştırma"
+  animation="multi-level"
+  scale={2.0} // İlk seviye
+  additionalLevels={[3.0, 4.5]} // Ek seviyeler (çift tık, üçlü tık)
+  transformOrigin="cursor"
+/>
+```
+
+### Gelişmiş Etkileşimli Efektler
+
+Yaratıcı görsel deneyimler için özel animasyon türleri.
+
+```tsx
+// Ken Burns efekti
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/ken-burns-demo.jpg"
+  alt="Ken Burns yakınlaştırma"
+  animation="ken-burns"
+  scale={1.5}
+  timing={{
+    duration: 3000, // Yavaş sinematik yakınlaştırma
+    easing: "linear"
+  }}
+/>
+
+// Dalga yakınlaştırması
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/dalga-yakınlaştırma.jpg"
+  alt="Dalga yakınlaştırma efekti"
+  animation="wave"
+  scale={2.3}
+  timing={{
+    duration: 800,
+    easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+  }}
+/>
+
+// Parça yakınlaştırması
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/parça-yakınlaştırma.jpg"
+  alt="Parça yakınlaştırma efekti"
+  animation="fragment"
+  scale={2.8}
+  fragments={{
+    count: 4, // 4 parçada yakınlaştır
+    delay: 50 // Her parça arası gecikme
+  }}
+/>
+
+// Radyal yakınlaştırma
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/radyal-yakınlaştırma.jpg"
+  alt="Radyal yakınlaştırma efekti"
+  animation="radial"
+  scale={3.0}
+  transformOrigin="cursor"
+  timing={{
+    duration: 400
+  }}
+/>
+```
+
+## Ölçek Seviyeleri & Kontrol
+
+Yakınlaştırma yoğunluğunu ve çoklu seviye etkileşimlerini yönetin.
+
+```tsx
+// Hafif yakınlaştırma (UI öğeleri için)
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/hafif-yakınlaştırma.jpg"
+  alt="Hafif UI yakınlaştırması"
+  animation="smooth"
+  scale={1.2} // %20 büyütme
+  timing={{ duration: 200 }}
+/>
+
+// Orta yakınlaştırma (ürün görselleri için)
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/orta-yakınlaştırma.jpg"
+  alt="Ürün yakınlaştırması"
+  animation="smooth"
+  scale={2.0} // %100 büyütme
+  transformOrigin="cursor"
+/>
+
+// Güçlü yakınlaştırma (ayrıntılı inceleme için)
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/güçlü-yakınlaştırma.jpg"
+  alt="Ayrıntılı inceleme yakınlaştırması"
+  animation="magnify"
+  scale={4.0} // %300 büyütme
+  transformOrigin="cursor"
+  lens={{ enabled: true, size: 200 }}
+/>
+
+// Çoklu seviye yakınlaştırma
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/çoklu-seviye-demo.jpg"
+  alt="Çoklu seviye yakınlaştırma"
+  animation="multi-level"
+  scale={1.5} // Hover için ilk seviye
+  additionalLevels={[2.5, 4.0, 6.0]} // Tık seviyeleri
+  transformOrigin="cursor"
+/>
+
+// Ölçek karşılaştırması
+<div className="grid grid-cols-3 gap-4">
+  {[1.3, 2.0, 3.5].map((ölçek, index) => (
+    <div key={index} className="text-center">
+      <ReactiveImage
+        variant="zoomOnHover"
+        src="/ölçek-demo.jpg"
+        alt={`${ölçek}x yakınlaştırma`}
+        animation="smooth"
+        scale={ölçek}
+        transformOrigin="cursor"
+        className="w-full aspect-square rounded-lg mb-2"
+      />
+      <p className="text-sm text-gray-600">{ölçek}x Yakınlaştırma</p>
+    </div>
+  ))}
+</div>
+```
+
+## İmleç Takibi & Gezinti
+
+Dinamik fare pozisyonu bazlı görsel konumlandırma sistemi.
+
+```tsx
+// Gelişmiş imleç takibi
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/imleç-takip-demo.jpg"
+  alt="Gelişmiş imleç takipli yakınlaştırma"
+  animation="smooth"
+  scale={3.0}
+  transformOrigin="cursor"
+  cursorTracking={{
+    enabled: true,
+    sensitivity: 0.8, // Takip hassasiyeti
+    smoothness: 0.15,  // Hareket yumuşaklığı
+    boundaries: {      // Hareket sınırları
+      x: [-50, 50], // X ekseni yüzde sınırları
+      y: [-50, 50]  // Y ekseni yüzde sınırları
+    }
+  }}
+/>
+
+// Pan & yakınlaştırma
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/pan-yakınlaştırma.jpg"
+  alt="Pan ve yakınlaştırma"
+  animation="pan"
+  scale={2.5}
+  transformOrigin="cursor"
+  panSettings={{
+    enabled: true,
+    panOnMove: true, // Fare hareketiyle pan yap
+    panRange: 20     // Pan aralığı (%)
+  }}
+/>
+
+// Sınırlı alan yakınlaştırması
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/sınırlı-alan.jpg"
+  alt="Sınırlı alan yakınlaştırması"
+  animation="smooth"
+  scale={4.0}
+  transformOrigin="cursor"
+  boundedZoom={{
+    enabled: true,
+    maxX: 80,  // Maksimum X hareketi (%)
+    maxY: 60,  // Maksimum Y hareketi (%)
+    centerBias: 0.3 // Merkeze çekim gücü
+  }}
+/>
+```
+
+## Zamanlama & Geçişler
+
+Yakınlaştırma animasyon yanıt verme hızı ve pürüzsüzlüğü için ince ayarlar.
+
+```tsx
+// Ultra hızlı yanıt
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/hızlı-yanıt.jpg"
+  alt="Ultra hızlı yakınlaştırma"
+  animation="instant"
+  scale={2.0}
+  timing={{
+    duration: 75,  // Çok hızlı
+    reset: 200,    // Hızlı sıfırlama
+    easing: "ease-out"
+  }}
+/>
+
+// Dengeli performans
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/dengeli-performans.jpg"
+  alt="Dengeli yakınlaştırma"
+  animation="smooth"
+  scale={2.5}
+  timing={{
+    duration: 250, // Dengeli yanıt
+    reset: 400,    // Pürüzsüz sıfırlama
+    easing: "cubic-bezier(0.4, 0, 0.2, 1)"
+  }}
+/>
+
+// Sinematik geçiş
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/sinematik-geçiş.jpg"
+  alt="Sinematik yakınlaştırma"
+  animation="smooth"
+  scale={3.0}
+  timing={{
+    duration: 600, // Yavaş sinematik
+    reset: 800,    // Uzun sıfırlama
+    easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+  }}
+/>
+
+// Özel gecikme ve easing
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/özel-zamanlama.jpg"
+  alt="Özel zamanlamılı yakınlaştırma"
+  animation="elastic"
+  scale={2.2}
+  timing={{
+    delay: 150,    // Başlangıç gecikmesi
+    duration: 500, // Animasyon süresi
+    reset: 700,    // Sıfırlama süresi
+    easing: "cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+  }}
+/>
+```
+
+## Mobil & Dokunmatik Gestures
+
+Çimdikleme yakınlaştırma ve mobil cihaz optimizasyonları.
+
+```tsx
+// Çimdikleme yakınlaştırma etkin
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/çimdikleme-demo.jpg"
+  alt="Çimdikleme yakınlaştırma demo"
+  animation="smooth"
+  scale={3.0}
+  gestures={{
+    pinch: true,        // Çimdikleme gestures
+    doubleTap: true,    // Çift dokunuş yakınlaştırma
+    maxPinchScale: 5.0, // Maksimum çimdikleme ölçeği
+    minPinchScale: 1.0  // Minimum ölçek
+  }}
+  transformOrigin="cursor"
+/>
+
+// Mobil optimize ayarlar
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/mobil-optimize.jpg"
+  alt="Mobil optimize yakınlaştırma"
+  animation="smooth"
+  scale={2.0}    // Mobil için azaltılmış
+  timing={{
+    duration: 150, // Dokunmatik için hızlı
+    reset: 300     // Hızlı sıfırlama
+  }}
+  gestures={{
+    pinch: true,
+    doubleTap: true,
+    enableTouch: true
+  }}
+/>
+
+// Tablet özel ayarlar
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/tablet-demo.jpg"
+  alt="Tablet yakınlaştırma demo"
+  animation="smooth"
+  scale={2.8}
+  gestures={{
+    pinch: true,
+    rotation: false,    // Rotasyonu devre dışı bırak
+    pan: true,          // Pan hareketiyi etkinleştir
+    doubleTap: true,
+    maxPinchScale: 4.0
+  }}
+/>
+```
+
+## Gelişmiş Özelleştirmeler
+
+Lens efektleri, sınır kontrolleri ve özel davranışlar.
+
+```tsx
+// Özelleştirilmiş büyüteç lensi
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/özel-büyüteç.jpg"
+  alt="Özelleştirilmiş büyüteç"
+  animation="magnify"
+  scale={4.5}
+  lens={{
+    enabled: true,
+    size: 180,
+    borderWidth: 4,
+    borderColor: "rgba(59, 130, 246, 0.8)", // Mavi sınır
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    cursor: "zoom-in"
+  }}
+/>
+
+// Sınırlı yakınlaştırma alanı
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/sınırlı-alan-demo.jpg"
+  alt="Sınırlı yakınlaştırma alanı"
+  animation="smooth"
+  scale={3.0}
+  transformOrigin="cursor"
+  boundaries={{
+    enabled: true,
+    maxX: 70,        // Maksimum X hareketi (%)
+    maxY: 70,        // Maksimum Y hareketi (%)
+    elasticEdges: true, // Kenar elastikliği
+    bounceBack: true    // Geri sıçrama
+  }}
+/>
+
+// Çoklu katman yakınlaştırması
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/çoklu-katman.jpg"
+  alt="Çoklu katman yakınlaştırma"
+  animation="layered"
+  scale={2.5}
+  layers={{
+    foreground: { scale: 2.8, opacity: 0.9 },
+    midground: { scale: 2.2, opacity: 0.7 },
+    background: { scale: 1.8, opacity: 0.5 }
+  }}
+/>
+
+// Adaptif yakınlaştırma
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/adaptif-yakınlaştırma.jpg"
+  alt="Adaptif yakınlaştırma"
+  animation="adaptive"
+  scale={2.0}
+  adaptive={{
+    enabled: true,
+    scaleBasedOnSize: true,  // Görsel boyutuna göre ölçekleme
+    performanceBased: true,  // Performansa dayalı ayarlama
+    deviceBased: true        // Cihaz türüne göre optimizasyon
+  }}
+/>
+```
+
+## Olay İşleme & Analitik
+
+Yakınlaştırma etkileşimlerini takip edin ve özel davranışları tetikleyin.
+
+```tsx
+export default function TakipEdilen_Yakınlaştırma() {
+  const yakınlaştırmaBaşlangıcınıYönet = ({ scale, position }) => {
+    console.log("Yakınlaştırma başladı:", { scale, position });
+    analytics.track("yakınlaştırma_etkileşimi_başladı", {
+      hedef_ölçek: scale,
+      başlangıç_pozisyonu: position,
+    });
+  };
+
+  const yakınlaştırmaDeğişiminiYönet = ({
+    currentScale,
+    targetScale,
+    progress,
+  }) => {
+    // Gerçek zamanlı yakınlaştırma takibi
+    console.log("Yakınlaştırma ilerlemesi:", {
+      mevcut: currentScale.toFixed(2),
+      hedef: targetScale.toFixed(2),
+      ilerleme: `%${(progress * 100).toFixed(1)}`,
+    });
+  };
+
+  const yakınlaştırmaBitişiniYönet = ({
+    finalScale,
+    duration,
+    interactionType,
+  }) => {
+    console.log("Yakınlaştırma bitti:", {
+      finalScale,
+      duration,
+      interactionType,
+    });
+    analytics.track("yakınlaştırma_etkileşimi_bitti", {
+      son_ölçek: finalScale,
+      etkileşim_süresi: duration,
+      etkileşim_türü: interactionType,
+    });
+  };
+
+  const lensHareketiniYönet = ({ lensPosition, zoomedArea }) => {
+    // Büyüteç lens pozisyonu takibi
+    console.log(
+      "Lens pozisyonu:",
+      lensPosition,
+      "Yakınlaştırılan alan:",
+      zoomedArea
+    );
+  };
+
+  return (
+    <ReactiveImage
+      variant="zoomOnHover"
+      src="/takip-edilen-yakınlaştırma.jpg"
+      alt="Analitik takipli yakınlaştırma"
+      animation="magnify"
+      scale={3.5}
+      transformOrigin="cursor"
+      lens={{ enabled: true, size: 160 }}
+      onZoomStart={yakınlaştırmaBaşlangıcınıYönet}
+      onZoomChange={yakınlaştırmaDeğişiminiYönet}
+      onZoomEnd={yakınlaştırmaBitişiniYönet}
+      onLensMove={lensHareketiniYönet}
+    />
+  );
+}
+```
+
+## Stil & CSS Entegrasyonu
+
+Karmaşık tasarımlar ve durum tabanlı stilleme için CSS sınıfları ile birleştirin.
+
+```tsx
+// Yakınlaştırma sırasında dinamik stilleme
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/stilli-yakınlaştırma.jpg"
+  alt="Dinamik stilli yakınlaştırma"
+  animation="smooth"
+  scale={2.5}
+  transformOrigin="cursor"
+  className="rounded-2xl overflow-hidden shadow-lg transition-all duration-300"
+  imgClassName="object-cover w-full h-80"
+  zoomClassName="shadow-2xl ring-4 ring-indigo-500 ring-opacity-50"
+  style={{
+    background: 'linear-gradient(145deg, #667eea 0%, #764ba2 100%)',
+    padding: '6px'
+  }}
+/>
+
+// Görsel galeri ile entegre yakınlaştırma
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+  {galeriGörselleri.map((görsel, index) => (
+    <div key={index} className="bg-white rounded-xl shadow-sm overflow-hidden group">
+      <ReactiveImage
+        variant="zoomOnHover"
+        src={görsel.url}
+        alt={görsel.başlık}
+        animation="smooth"
+        scale={2.2}
+        transformOrigin="cursor"
+        className="w-full aspect-square overflow-hidden"
+        imgClassName="w-full h-full object-cover transition-transform group-hover:scale-105"
+        timing={{
+          duration: 200,
+          reset: 300
+        }}
+      />
+
+      <div className="p-4">
+        <h3 className="font-semibold text-lg mb-1">{görsel.başlık}</h3>
+        <p className="text-gray-600 text-sm">{görsel.açıklama}</p>
+        <div className="flex justify-between items-center mt-3">
+          <span className="text-xs text-gray-500">{görsel.kategori}</span>
+          <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+            Ayrıntıları Gör
+          </button>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+```
+
+## Gerçek Dünya Desenleri
+
+### E-ticaret Ürün Galerisi
+
+```tsx
+const ürünGörselleri = [
+  {
+    ana: "/ürünler/ayakkabı-ana.jpg",
+    yakınPlan: "/ürünler/ayakkabı-yakın.jpg",
+    isim: "Premium Spor Ayakkabı",
+    fiyat: "₺899",
+    özellik: "Zoom ile ayrıntılı görüntüle",
+  },
+  {
+    ana: "/ürünler/saat-ana.jpg",
+    yakınPlan: "/ürünler/saat-yakın.jpg",
+    isim: "Lüks Analog Saat",
+    fiyat: "₺2.499",
+    özellik: "Kadran detaylarını keşfet",
+  },
+  {
+    ana: "/ürünler/çanta-ana.jpg",
+    yakınPlan: "/ürünler/çanta-yakın.jpg",
+    isim: "Deri İş Çantası",
+    fiyat: "₺1.299",
+    özellik: "Deri dokusunu incele",
+  },
+];
+
+export default function EticaretÜrünGalerisi() {
+  return (
+    <div className="max-w-7xl mx-auto px-4 py-16">
+      <h2 className="text-3xl font-bold text-center mb-12">
+        Öne Çıkan Ürünler
+      </h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {ürünGörselleri.map((ürün, index) => (
+          <div
+            key={index}
+            className="bg-white rounded-2xl shadow-lg overflow-hidden"
+          >
+            <div className="relative bg-gray-50">
+              <ReactiveImage
+                variant="zoomOnHover"
+                src={ürün.ana}
+                alt={ürün.isim}
+                animation="magnify"
+                scale={3.5}
+                transformOrigin="cursor"
+                lens={{
+                  enabled: true,
+                  size: 120,
+                  borderWidth: 2,
+                  borderColor: "rgba(59, 130, 246, 0.6)",
+                }}
+                timing={{
+                  duration: 200,
+                  reset: 400,
+                }}
+                className="w-full aspect-square"
+                imgClassName="w-full h-full object-cover"
+              />
+
+              <div className="absolute top-4 right-4 bg-white bg-opacity-90 rounded-full p-2">
+                <svg
+                  className="w-5 h-5 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                  />
+                </svg>
+              </div>
+
+              <div className="absolute bottom-4 left-4 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full text-sm">
+                {ürün.özellik}
+              </div>
+            </div>
+
+            <div className="p-6">
+              <h3 className="text-xl font-semibold mb-2">{ürün.isim}</h3>
+              <div className="flex justify-between items-center">
+                <span className="text-2xl font-bold text-blue-600">
+                  {ürün.fiyat}
+                </span>
+                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                  Sepete Ekle
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+### Sanat Galerisi & Portfolio
+
+```tsx
+const sanatEserleri = [
+  {
+    görsel: "/galeri/modern-sanat-1.jpg",
+    başlık: "Şehir Işıkları",
+    sanatçı: "Mehmet Özer",
+    yıl: "2023",
+    teknik: "Yağlıboya, 80x60cm",
+    açıklama: "Gece şehrinin enerjisini yansıtan modern ekspresyonist eser",
+  },
+  {
+    görsel: "/galeri/klasik-portre.jpg",
+    başlık: "Zamansız Portre",
+    sanatçı: "Ayşe Kaya",
+    yıl: "2022",
+    teknik: "Akrilik, 70x50cm",
+    açıklama: "Klasik portre tekniği ile modern yorumlama",
+  },
+  {
+    görsel: "/galeri/manzara-suluboya.jpg",
+    başlık: "Kapadokya Seher Vakti",
+    sanatçı: "Ali Vural",
+    yıl: "2023",
+    teknik: "Suluboya, 90x65cm",
+    açıklama: "Anadolu topraklarının büyüleyici atmosferi",
+  },
+];
+
+export default function SanatGalerisi() {
+  return (
+    <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white py-20">
+      <div className="max-w-6xl mx-auto px-4">
+        <header className="text-center mb-16">
+          <h1 className="text-4xl font-bold mb-4">Çağdaş Sanat Koleksiyonu</h1>
+          <p className="text-xl text-gray-300">
+            Eserlerin ayrıntılarını keşfetmek için üzerine gelin
+          </p>
+        </header>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          {sanatEserleri.map((eser, index) => (
+            <div key={index} className="text-center">
+              <div className="mb-6 relative">
+                <ReactiveImage
+                  variant="zoomOnHover"
+                  src={eser.görsel}
+                  alt={eser.başlık}
+                  animation="smooth"
+                  scale={2.8}
+                  transformOrigin="cursor"
+                  timing={{
+                    duration: 300,
+                    reset: 600,
+                    easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                  }}
+                  className="w-full aspect-[4/5] rounded-lg overflow-hidden shadow-2xl"
+                  imgClassName="w-full h-full object-cover"
+                  style={{
+                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
+                  }}
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent rounded-lg pointer-events-none" />
+              </div>
+
+              <div className="space-y-2">
+                <h2 className="text-2xl font-bold">{eser.başlık}</h2>
+                <p className="text-lg text-gray-300">
+                  {eser.sanatçı} • {eser.yıl}
+                </p>
+                <p className="text-sm text-gray-400">{eser.teknik}</p>
+                <p className="text-gray-300 text-sm leading-relaxed mt-3 max-w-sm mx-auto">
+                  {eser.açıklama}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### Mimari Portfolio & Proje Galerisi
+
+```tsx
+const mimariProjeler = [
+  {
+    görsel: "/mimari/modern-ev-dış.jpg",
+    isim: "Villa Akdeniz",
+    kategori: "Konut",
+    konum: "Antalya, Türkiye",
+    yıl: 2023,
+    alan: "350 m²",
+    özellik: "Sürdürülebilir Tasarım",
+  },
+  {
+    görsel: "/mimari/ofis-binası.jpg",
+    isim: "Tech Hub İstanbul",
+    kategori: "Ticari",
+    konum: "Maslak, İstanbul",
+    yıl: 2022,
+    alan: "12.000 m²",
+    özellik: "LEED Gold Sertifikalı",
+  },
+  {
+    görsel: "/mimari/kültür-merkezi.jpg",
+    isim: "Çağdaş Sanat Merkezi",
+    kategori: "Kültürel",
+    konum: "Ankara, Türkiye",
+    yıl: 2023,
+    alan: "5.500 m²",
+    özellik: "Akustik Tasarım",
+  },
+];
+
+export default function MimariPortfolio() {
+  return (
+    <div className="bg-gray-50 py-20">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Mimari Projeler
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Modern tasarım anlayışı ile hayata geçirilen projelerimizi
+            inceleyin. Detayları görmek için projelerin üzerine gelin.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {mimariProjeler.map((proje, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-xl shadow-lg overflow-hidden group"
+            >
+              <div className="relative">
+                <ReactiveImage
+                  variant="zoomOnHover"
+                  src={proje.görsel}
+                  alt={proje.isim}
+                  animation="smooth"
+                  scale={2.2}
+                  transformOrigin="cursor"
+                  timing={{
+                    duration: 250,
+                    reset: 500,
+                  }}
+                  className="w-full aspect-[4/3] overflow-hidden"
+                  imgClassName="w-full h-full object-cover group-hover:brightness-110 transition-all duration-300"
+                />
+
+                <div className="absolute top-4 left-4">
+                  <span className="bg-white bg-opacity-90 text-gray-900 px-3 py-1 rounded-full text-sm font-medium">
+                    {proje.kategori}
+                  </span>
+                </div>
+
+                <div className="absolute top-4 right-4">
+                  <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    {proje.yıl}
+                  </span>
+                </div>
+
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="bg-black bg-opacity-70 text-white p-3 rounded-lg backdrop-blur-sm">
+                    <p className="text-sm font-medium">{proje.özellik}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  {proje.isim}
+                </h3>
+                <p className="text-gray-600 mb-4">{proje.konum}</p>
+
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span className="text-gray-500">Toplam Alan</span>
+                    <p className="font-semibold">{proje.alan}</p>
+                  </div>
+                  <div>
+                    <span className="text-gray-500">Tamamlanma</span>
+                    <p className="font-semibold">{proje.yıl}</p>
+                  </div>
+                </div>
+
+                <button className="w-full mt-6 bg-gray-900 text-white py-2 rounded-lg hover:bg-gray-800 transition-colors">
+                  Proje Detayları
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+## API Referansı
+
+### Özellikler
+
+| Özellik            | Tür                      | Varsayılan  | Açıklama                               |
+| ------------------ | ------------------------ | ----------- | -------------------------------------- |
+| `scale`            | `number`                 | `1.5`       | Yakınlaştırma ölçek faktörü            |
+| `animation`        | `ZoomAnimationType`      | `"smooth"`  | Animasyon türü ve davranışı            |
+| `transformOrigin`  | `TransformOrigin`        | `"center"`  | Yakınlaştırma merkez noktası           |
+| `timing`           | `ZoomTiming`             | `{}`        | Animasyon zamanlama konfigürasyonu     |
+| `lens`             | `LensSettings`           | `{}`        | Büyüteç lens konfigürasyonu            |
+| `gestures`         | `GestureSettings`        | `{}`        | Dokunmatik gesture ayarları            |
+| `cursorTracking`   | `CursorTrackingSettings` | `{}`        | İmleç takip sistemi ayarları           |
+| `boundaries`       | `BoundarySettings`       | `{}`        | Hareket sınırları ve kısıtlamalar      |
+| `additionalLevels` | `number[]`               | `[]`        | Çoklu seviye yakınlaştırma ölçekleri   |
+| `panSettings`      | `PanSettings`            | `{}`        | Pan hareket konfigürasyonu             |
+| `adaptive`         | `AdaptiveSettings`       | `{}`        | Adaptif yakınlaştırma ayarları         |
+| `zoomClassName`    | `string`                 | `undefined` | Yakınlaştırma sırasında CSS sınıfı     |
+| `onZoomStart`      | `function`               | `undefined` | Yakınlaştırma başlangıç geri çağırması |
+| `onZoomChange`     | `function`               | `undefined` | Yakınlaştırma değişimi geri çağırması  |
+| `onZoomEnd`        | `function`               | `undefined` | Yakınlaştırma bitiş geri çağırması     |
+| `onLensMove`       | `function`               | `undefined` | Büyüteç lens hareket geri çağırması    |
+
+### Türler
+
+```tsx
+// Animasyon türleri
+type ZoomAnimationType =
+  | "smooth" // Pürüzsüz geçiş yakınlaştırması
+  | "instant" // Anında yakınlaştırma
+  | "elastic" // Elastik sıçrama efekti
+  | "magnify" // Büyüteç lens efekti
+  | "focus" // Odak yakınlaştırması
+  | "corner" // Köşe yakınlaştırma efekti
+  | "multi-level" // Çoklu seviye yakınlaştırma
+  | "ken-burns" // Sinematik yavaş yakınlaştırma
+  | "wave" // Dalga yakınlaştırma efekti
+  | "fragment" // Parça yakınlaştırma
+  | "radial" // Radyal yakınlaştırma
+  | "pan" // Pan ile yakınlaştırma
+  | "layered" // Çoklu katman yakınlaştırması
+  | "adaptive"; // Adaptif yakınlaştırma
+
+// Transform origin ayarları
+type TransformOrigin =
+  | "center" // Merkez noktasından yakınlaştır
+  | "cursor" // Fare imleci noktasından yakınlaştır
+  | string; // Özel CSS transform-origin değeri (örn: "30% 70%")
+
+// Zamanlama konfigürasyonu
+type ZoomTiming = {
+  duration?: number; // Milisaniye cinsinden yakınlaştırma süresi (varsayılan: 250)
+  reset?: number; // Milisaniye cinsinden sıfırlama süresi (varsayılan: 400)
+  delay?: number; // Milisaniye cinsinden başlangıç gecikmesi (varsayılan: 0)
+  easing?: string; // CSS yumuşatma işlevi (varsayılan: "ease-out")
+};
+
+// Büyüteç lens ayarları
+type LensSettings = {
+  enabled?: boolean; // Lens efektini etkinleştir (varsayılan: false)
+  size?: number; // Lens çapı piksel cinsinden (varsayılan: 100)
+  borderWidth?: number; // Lens sınır kalınlığı (varsayılan: 2)
+  borderColor?: string; // Lens sınır rengi (varsayılan: "#fff")
+  backgroundColor?: string; // Lens arka plan rengi (varsayılan: "transparent")
+  cursor?: string; // Lens içi imleç türü (varsayılan: "zoom-in")
+};
+
+// Dokunmatik gesture ayarları
+type GestureSettings = {
+  pinch?: boolean; // Çimdikleme yakınlaştırma (varsayılan: false)
+  doubleTap?: boolean; // Çift dokunuş yakınlaştırma (varsayılan: false)
+  rotation?: boolean; // Rotasyon gestures (varsayılan: false)
+  pan?: boolean; // Pan hareket (varsayılan: false)
+  enableTouch?: boolean; // Dokunmatik destek (varsayılan: false)
+  maxPinchScale?: number; // Maksimum çimdikleme ölçeği (varsayılan: 4.0)
+  minPinchScale?: number; // Minimum ölçek (varsayılan: 1.0)
+};
+
+// İmleç takip ayarları
+type CursorTrackingSettings = {
+  enabled?: boolean; // İmleç takibini etkinleştir (varsayılan: false)
+  sensitivity?: number; // Takip hassasiyeti 0-1 (varsayılan: 1.0)
+  smoothness?: number; // Hareket yumuşaklığı 0-1 (varsayılan: 0.1)
+  boundaries?: {
+    x?: [number, number]; // X ekseni sınırları yüzde [-50, 50]
+    y?: [number, number]; // Y ekseni sınırları yüzde [-50, 50]
+  };
+};
+```
+
+### Animasyon Performans Kılavuzu
+
+| Animasyon     | Performans | Mobil Dostu | Önerilen Ölçek | En İyi Kullanımlar    |
+| ------------- | ---------- | ----------- | -------------- | --------------------- |
+| `smooth`      | ⭐⭐⭐⭐⭐ | ✅ Mükemmel | 1.2-3.0        | Genel UI, kartlar     |
+| `instant`     | ⭐⭐⭐⭐⭐ | ✅ Mükemmel | 1.5-2.5        | Hızlı etkileşimler    |
+| `elastic`     | ⭐⭐⭐⭐   | ✅ İyi      | 1.3-2.2        | Modern UI             |
+| `magnify`     | ⭐⭐⭐     | ⚠️ Orta     | 2.5-5.0        | Ürün detayları        |
+| `focus`       | ⭐⭐⭐⭐   | ✅ İyi      | 2.0-3.5        | Görsel odaklama       |
+| `corner`      | ⭐⭐⭐     | ⚠️ Orta     | 2.5-4.0        | Yaratıcı arayüzler    |
+| `multi-level` | ⭐⭐       | ❌ Sınırlı  | 1.5-6.0        | Karmaşık etkileşimler |
+| `ken-burns`   | ⭐⭐       | ❌ Sınırlı  | 1.2-1.8        | Sinematik efektler    |
+| `wave`        | ⭐⭐⭐     | ⚠️ Orta     | 1.8-3.0        | Eğlenceli arayüzler   |
+| `fragment`    | ⭐⭐       | ❌ Sınırlı  | 2.0-3.5        | Yaratıcı portföyler   |
+| `radial`      | ⭐⭐⭐     | ⚠️ Orta     | 2.2-4.0        | Vurgu efektleri       |
+| `pan`         | ⭐⭐⭐⭐   | ✅ İyi      | 1.8-3.0        | Görsel gezinti        |
+| `layered`     | ⭐⭐       | ❌ Sınırlı  | 1.5-2.8        | Karmaşık compositing  |
+| `adaptive`    | ⭐⭐⭐⭐   | ✅ İyi      | Otomatik       | Akıllı uyum           |
+
+## Performans Kılavuzları
+
+### Optimizasyon İpuçları
+
+- **Ölçek Aralığı**: Performans için 1.2-3.0, ayrıntılı inceleme için 3.0-5.0 kullanın
+- **Büyüteç Lensi**: CPU yoğun, yalnızca gerektiğinde etkinleştirin
+- **Mobil**: `scale <= 2.5` kullanın ve karmaşık animasyonlardan kaçının
+- **Transform Origin**: `cursor` takip sistem kaynaklarını daha fazla kullanır
+- **Gesture Desteği**: Yalnızca gerekli gestures'ları etkinleştirin
+
+### Erişilebilirlik
+
+```tsx
+// Kullanıcı tercihlerini saygı göster
+<ReactiveImage
+  variant="zoomOnHover"
+  src="/erişilebilir-yakınlaştırma.jpg"
+  alt="Erişilebilir yakınlaştırma görseli"
+  animation="smooth"
+  scale={2.0}
+  timing={{
+    duration: 200,
+    reset: 300,
+  }}
+  // CSS otomatik olarak prefers-reduced-motion'ı saygı gösterir
+/>
+```
+
+### Tarayıcı Desteği
+
+| Özellik             | Chrome 80+ | Firefox 75+ | Safari 13+ | Edge 80+ |
+| ------------------- | ---------- | ----------- | ---------- | -------- |
+| Temel Yakınlaştırma | ✅ Tam     | ✅ Tam      | ✅ Tam     | ✅ Tam   |
+| Transform Origin    | ✅ Tam     | ✅ Tam      | ✅ Tam     | ✅ Tam   |
+| Büyüteç Lensi       | ✅ Tam     | ✅ Tam      | ✅ Tam     | ✅ Tam   |
+| Çimdikleme Gestures | ✅ Tam     | ⚠️ Sınırlı  | ✅ Tam     | ✅ Tam   |
+| İmleç Takibi        | ✅ Tam     | ✅ Tam      | ✅ Tam     | ✅ Tam   |
+| Performans          | ✅ 60fps   | ✅ 60fps    | ✅ 60fps   | ✅ 60fps |
+
+---
+
+_Görsellerinize güçlü yakınlaştırma efektleri eklemeye hazır mısınız? Canlı gösteriler için [vitrin sayfamızı](/showcase) keşfedin veya dokümantasyonumuzda diğer [komponent varyantlarını](/docs/baslangic) kontrol edin._

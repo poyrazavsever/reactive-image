@@ -1,0 +1,615 @@
+---
+title: HoverSwitch
+description: Advanced hover switch component with smooth animations, performance optimizations, and touch support for interactive image experiences.
+order: 3
+locale: en
+slug: hover-switch
+toc: true
+---
+
+# HoverSwitch
+
+The HoverSwitch variant creates engaging hover interactions by smoothly transitioning between two different images. Perfect for product showcases, before/after comparisons, and interactive galleries with professional animations and performance optimization.
+
+## Features
+
+- **8 Animation Types**: From smooth crossfades to dynamic 3D rotations
+- **Performance Optimized**: Image preloading, lazy loading, efficient re-renders
+- **Touch Device Support**: Optional touch interactions for mobile experiences
+- **Customizable Timing**: Precise control over duration, delay, and easing
+- **Accessibility Ready**: Proper ARIA attributes and keyboard support
+- **TypeScript Support**: Full type definitions and IntelliSense
+
+## Quick Start
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export default function ProductShowcase() {
+  return (
+    <ReactiveImage
+      variant="hoverSwitch"
+      src="/product-front.jpg"
+      hoverSrc="/product-back.jpg"
+      alt="Product front and back view"
+      animation="slide"
+      slideDirection="right"
+    />
+  );
+}
+```
+
+## Animation Types
+
+### Slide Animations
+
+Perfect for before/after comparisons and directional reveals.
+
+```tsx
+// Horizontal slide (customizable direction)
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/before.jpg"
+  hoverSrc="/after.jpg"
+  alt="Before and after comparison"
+  animation="slide"
+  slideDirection="right" // left, right, up, down
+/>
+
+// Vertical slide up
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/original.jpg"
+  hoverSrc="/enhanced.jpg"
+  alt="Image enhancement demo"
+  animation="slideUp"
+/>
+
+// Vertical slide down
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/initial.jpg"
+  hoverSrc="/final.jpg"
+  alt="Design progression"
+  animation="slideDown"
+/>
+```
+
+### Fade & Crossfade Effects
+
+Smooth transitions ideal for product variations and subtle changes.
+
+```tsx
+// Simple crossfade (default)
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/color-blue.jpg"
+  hoverSrc="/color-red.jpg"
+  alt="Product color options"
+  animation="crossfade"
+/>
+
+// Zoom with fade effect
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/overview.jpg"
+  hoverSrc="/detail.jpg"
+  alt="Product overview and details"
+  animation="zoom"
+/>
+```
+
+### Creative Effects
+
+Eye-catching animations for artistic and premium experiences.
+
+```tsx
+// Blur to focus transition
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/blurred-bg.jpg"
+  hoverSrc="/sharp-focus.jpg"
+  alt="Focus transition effect"
+  animation="blur"
+/>
+
+// 3D flip effect
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/front-card.jpg"
+  hoverSrc="/back-card.jpg"
+  alt="Card flip interaction"
+  animation="rotateY"
+/>
+
+// Combined scale and rotate
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/static-logo.jpg"
+  hoverSrc="/animated-logo.jpg"
+  alt="Logo animation demo"
+  animation="scaleRotate"
+/>
+```
+
+## Timing Configuration
+
+Fine-tune animation behavior with precise timing controls.
+
+```tsx
+// Fast snappy interaction
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/quick1.jpg"
+  hoverSrc="/quick2.jpg"
+  alt="Fast transition demo"
+  animation="slide"
+  timing={{
+    duration: 200,
+    delay: 0,
+    easing: "ease-out"
+  }}
+/>
+
+// Smooth professional transition
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/smooth1.jpg"
+  hoverSrc="/smooth2.jpg"
+  alt="Smooth transition demo"
+  animation="crossfade"
+  timing={{
+    duration: 400,
+    delay: 50,
+    easing: "cubic-bezier(0.4, 0, 0.2, 1)"
+  }}
+/>
+
+// Artistic slow reveal
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/artistic1.jpg"
+  hoverSrc="/artistic2.jpg"
+  alt="Artistic reveal demo"
+  animation="blur"
+  timing={{
+    duration: 600,
+    delay: 100,
+    easing: "ease-in-out"
+  }}
+/>
+```
+
+## Slide Directions
+
+Control the direction of slide animations for intuitive interactions.
+
+```tsx
+// Horizontal slides
+<div className="grid grid-cols-2 gap-4">
+  <ReactiveImage
+    variant="hoverSwitch"
+    src="/slide-base.jpg"
+    hoverSrc="/slide-reveal.jpg"
+    alt="Slide from left"
+    animation="slide"
+    slideDirection="left"
+  />
+
+  <ReactiveImage
+    variant="hoverSwitch"
+    src="/slide-base.jpg"
+    hoverSrc="/slide-reveal.jpg"
+    alt="Slide from right"
+    animation="slide"
+    slideDirection="right"
+  />
+</div>
+
+// Vertical slides
+<div className="grid grid-cols-2 gap-4">
+  <ReactiveImage
+    variant="hoverSwitch"
+    src="/slide-base.jpg"
+    hoverSrc="/slide-reveal.jpg"
+    alt="Slide from top"
+    animation="slide"
+    slideDirection="up"
+  />
+
+  <ReactiveImage
+    variant="hoverSwitch"
+    src="/slide-base.jpg"
+    hoverSrc="/slide-reveal.jpg"
+    alt="Slide from bottom"
+    animation="slide"
+    slideDirection="down"
+  />
+</div>
+```
+
+## Performance Optimization
+
+Optimize loading and interaction performance for better user experience.
+
+```tsx
+// Preload hover image for instant interaction
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/hero-image.jpg"
+  hoverSrc="/hero-detail.jpg"
+  alt="Hero image with details"
+  animation="zoom"
+  preloadHover={true}  // Loads hover image immediately
+  disableLazy={false}  // Keep lazy loading for performance
+/>
+
+// Critical images with eager loading
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/critical-image.jpg"
+  hoverSrc="/critical-hover.jpg"
+  alt="Above-the-fold content"
+  animation="crossfade"
+  preloadHover={true}
+  disableLazy={true}   // Load immediately for critical content
+/>
+
+// Background images with lazy optimization
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/background1.jpg"
+  hoverSrc="/background2.jpg"
+  alt="Background decoration"
+  animation="blur"
+  preloadHover={false} // Don't preload for decorative images
+  disableLazy={false}  // Use lazy loading to save bandwidth
+/>
+```
+
+## Touch Device Support
+
+Enable hover effects on touch devices with tap interactions.
+
+```tsx
+// Mobile-friendly product gallery
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/product-default.jpg"
+  hoverSrc="/product-active.jpg"
+  alt="Product with hover state"
+  animation="slide"
+  enableTouch={true}  // Enables tap-to-toggle on mobile
+  timing={{
+    duration: 300,
+    easing: "ease-out"
+  }}
+/>
+
+// Desktop-only hover effect
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/desktop-image.jpg"
+  hoverSrc="/desktop-hover.jpg"
+  alt="Desktop-only interaction"
+  animation="rotateY"
+  enableTouch={false} // Hover only, no touch interaction
+/>
+```
+
+## Event Handling & Analytics
+
+Track interactions and trigger custom behaviors.
+
+```tsx
+export default function TrackedHoverImage() {
+  const handleAnimationStart = () => {
+    // Track hover start
+    analytics.track("image_hover_start", {
+      image_type: "product_showcase",
+    });
+  };
+
+  const handleAnimationEnd = () => {
+    // Track hover completion
+    analytics.track("image_hover_complete", {
+      animation_type: "slide",
+    });
+  };
+
+  return (
+    <ReactiveImage
+      variant="hoverSwitch"
+      src="/tracked-image.jpg"
+      hoverSrc="/tracked-hover.jpg"
+      alt="Analytics-tracked image"
+      animation="slide"
+      slideDirection="right"
+      onAnimationStart={handleAnimationStart}
+      onAnimationEnd={handleAnimationEnd}
+    />
+  );
+}
+```
+
+## Advanced Styling & CSS Classes
+
+Combine with CSS classes for complex designs and state-based styling.
+
+```tsx
+// Dynamic styling based on hover state
+<ReactiveImage
+  variant="hoverSwitch"
+  src="/styled-image.jpg"
+  hoverSrc="/styled-hover.jpg"
+  alt="Custom styled image"
+  animation="zoom"
+  className="rounded-xl shadow-lg transition-shadow duration-300"
+  imgClassName="object-cover w-full h-64"
+  hoverClassName="shadow-2xl ring-4 ring-blue-500 ring-opacity-50"
+  style={{
+    maxWidth: '400px',
+    background: 'linear-gradient(45deg, #f0f0f0, #e0e0e0)'
+  }}
+/>
+
+// Complex grid layout with consistent styling
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+  {portfolioItems.map((item, index) => (
+    <ReactiveImage
+      key={index}
+      variant="hoverSwitch"
+      src={item.thumbnail}
+      hoverSrc={item.preview}
+      alt={item.title}
+      animation="crossfade"
+      className="group cursor-pointer"
+      imgClassName="rounded-lg transition-transform duration-300 group-hover:scale-105"
+      hoverClassName="shadow-xl"
+      timing={{ duration: 350 }}
+    />
+  ))}
+</div>
+```
+
+## Real-World Patterns
+
+### E-commerce Product Gallery
+
+```tsx
+const productImages = [
+  { main: "/products/shoe-1-front.jpg", hover: "/products/shoe-1-side.jpg" },
+  { main: "/products/shoe-2-front.jpg", hover: "/products/shoe-2-side.jpg" },
+  { main: "/products/shoe-3-front.jpg", hover: "/products/shoe-3-side.jpg" },
+];
+
+export default function ProductGrid() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {productImages.map((product, index) => (
+        <div key={index} className="bg-white rounded-lg p-4 shadow-md">
+          <ReactiveImage
+            variant="hoverSwitch"
+            src={product.main}
+            hoverSrc={product.hover}
+            alt={`Product ${index + 1} - Front and side view`}
+            animation="slide"
+            slideDirection="right"
+            timing={{ duration: 300, easing: "ease-out" }}
+            className="w-full aspect-square overflow-hidden rounded-md"
+            imgClassName="w-full h-full object-cover"
+            preloadHover={true}
+          />
+          <div className="mt-4">
+            <h3 className="font-semibold text-gray-900">Premium Sneaker</h3>
+            <p className="text-gray-600">$129.99</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+### Portfolio Before/After Showcase
+
+```tsx
+const portfolioProjects = [
+  {
+    before: "/portfolio/website-before.jpg",
+    after: "/portfolio/website-after.jpg",
+    title: "E-commerce Redesign",
+    description: "Complete UI overhaul with 40% conversion increase",
+  },
+  {
+    before: "/portfolio/logo-before.jpg",
+    after: "/portfolio/logo-after.jpg",
+    title: "Brand Identity Refresh",
+    description: "Modern logo design for tech startup",
+  },
+];
+
+export default function PortfolioShowcase() {
+  return (
+    <div className="space-y-12">
+      {portfolioProjects.map((project, index) => (
+        <div
+          key={index}
+          className="flex flex-col lg:flex-row items-center gap-8"
+        >
+          <div className="lg:w-1/2">
+            <ReactiveImage
+              variant="hoverSwitch"
+              src={project.before}
+              hoverSrc={project.after}
+              alt={`${project.title} - Before and after`}
+              animation="slide"
+              slideDirection="left"
+              timing={{ duration: 400 }}
+              className="rounded-xl overflow-hidden shadow-xl"
+              imgClassName="w-full h-auto"
+              enableTouch={true}
+            />
+            <p className="text-center text-sm text-gray-500 mt-2">
+              Hover to see the transformation
+            </p>
+          </div>
+          <div className="lg:w-1/2">
+            <h3 className="text-2xl font-bold mb-4">{project.title}</h3>
+            <p className="text-gray-600 leading-relaxed">
+              {project.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+### Interactive Image Comparison
+
+```tsx
+export default function ComparisonTool() {
+  const [selectedFilter, setSelectedFilter] = useState("original");
+
+  const filterImages = {
+    original: "/photo-original.jpg",
+    vintage: "/photo-vintage.jpg",
+    bw: "/photo-bw.jpg",
+    sepia: "/photo-sepia.jpg",
+  };
+
+  return (
+    <div className="max-w-2xl mx-auto">
+      <div className="mb-6">
+        <h3 className="text-xl font-semibold mb-4">Photo Filter Preview</h3>
+        <div className="flex gap-2">
+          {Object.keys(filterImages).map((filter) => (
+            <button
+              key={filter}
+              onClick={() => setSelectedFilter(filter)}
+              className={`px-4 py-2 rounded-lg capitalize ${
+                selectedFilter === filter
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <ReactiveImage
+        variant="hoverSwitch"
+        src={filterImages.original}
+        hoverSrc={filterImages[selectedFilter as keyof typeof filterImages]}
+        alt="Photo with filter preview"
+        animation="crossfade"
+        timing={{ duration: 250 }}
+        className="rounded-lg overflow-hidden"
+        imgClassName="w-full h-auto"
+        preloadHover={true}
+      />
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### Props
+
+| Prop               | Type                       | Default       | Description                                 |
+| ------------------ | -------------------------- | ------------- | ------------------------------------------- |
+| `hoverSrc`         | `string`                   | `undefined`   | Image source for hover state                |
+| `animation`        | `HoverSwitchAnimationType` | `"crossfade"` | Animation type                              |
+| `slideDirection`   | `SlideDirection`           | `"right"`     | Direction for slide animations              |
+| `timing`           | `HoverSwitchTiming`        | `{}`          | Animation timing configuration              |
+| `preloadHover`     | `boolean`                  | `true`        | Preload hover image for instant interaction |
+| `disableLazy`      | `boolean`                  | `false`       | Disable lazy loading for critical images    |
+| `enableTouch`      | `boolean`                  | `false`       | Enable touch device support                 |
+| `hoverClassName`   | `string`                   | `undefined`   | Additional CSS class when hovered           |
+| `onAnimationStart` | `() => void`               | `undefined`   | Callback when animation starts              |
+| `onAnimationEnd`   | `() => void`               | `undefined`   | Callback when animation ends                |
+
+### Types
+
+```tsx
+// Animation types
+type HoverSwitchAnimationType =
+  | "slide" // Directional slide transition
+  | "crossfade" // Smooth opacity crossfade
+  | "zoom" // Scale with fade effect
+  | "blur" // Blur to focus transition
+  | "rotateY" // 3D vertical flip
+  | "slideUp" // Vertical slide from bottom
+  | "slideDown" // Vertical slide from top
+  | "scaleRotate"; // Combined scale and rotate
+
+// Slide directions (for slide animation)
+type SlideDirection =
+  | "left" // Slide from left to right
+  | "right" // Slide from right to left
+  | "up" // Slide from top to bottom
+  | "down"; // Slide from bottom to top
+
+// Timing configuration
+type HoverSwitchTiming = {
+  duration?: number; // Animation duration in ms (default: 300)
+  delay?: number; // Animation delay in ms (default: 0)
+  easing?: string; // CSS easing function (default: "ease-in-out")
+};
+```
+
+### Animation Showcase
+
+| Animation     | Best For                 | Duration  | Mobile         |
+| ------------- | ------------------------ | --------- | -------------- |
+| `slide`       | Before/after comparisons | 300-400ms | ✅ Great       |
+| `crossfade`   | Product variations       | 250-350ms | ✅ Perfect     |
+| `zoom`        | Detail reveals           | 300-500ms | ✅ Good        |
+| `blur`        | Artistic effects         | 400-600ms | ⚠️ Performance |
+| `rotateY`     | Card flips               | 400-500ms | ⚠️ Performance |
+| `slideUp`     | Content reveals          | 250-350ms | ✅ Great       |
+| `slideDown`   | Content reveals          | 250-350ms | ✅ Great       |
+| `scaleRotate` | Dynamic interactions     | 350-450ms | ⚠️ Performance |
+
+## Performance Guidelines
+
+### Loading Strategy
+
+- **Critical Images**: Use `preloadHover={true}` and `disableLazy={true}`
+- **Above the Fold**: Use `preloadHover={true}` and `disableLazy={false}`
+- **Below the Fold**: Use `preloadHover={false}` and `disableLazy={false}`
+- **Decorative**: Use `preloadHover={false}` and `disableLazy={false}`
+
+### Animation Performance
+
+- **Fast Interactions**: 200-300ms duration with `ease-out`
+- **Professional Transitions**: 300-400ms with `cubic-bezier(0.4, 0, 0.2, 1)`
+- **Artistic Effects**: 400-600ms with `ease-in-out`
+- **Mobile Devices**: Prefer shorter durations (200-350ms)
+
+### Memory Optimization
+
+- Only preload hover images that users are likely to interact with
+- Use appropriate image formats (WebP, AVIF when supported)
+- Consider image dimensions - don't load unnecessarily large images
+- Test on slower devices to ensure smooth performance
+
+## Browser Support
+
+| Browser       | Version | Animation Support | Touch Support |
+| ------------- | ------- | ----------------- | ------------- |
+| Chrome        | 80+     | ✅ Full           | ✅ Full       |
+| Firefox       | 75+     | ✅ Full           | ✅ Full       |
+| Safari        | 13+     | ✅ Full           | ✅ Full       |
+| Edge          | 80+     | ✅ Full           | ✅ Full       |
+| Mobile Safari | 13+     | ✅ Full           | ✅ Full       |
+| Chrome Mobile | 80+     | ✅ Full           | ✅ Full       |
+
+---
+
+_Ready to create engaging hover interactions? Check our [showcase page](/showcase) for live demos or explore more [component variants](/docs/getting-started) in our documentation._

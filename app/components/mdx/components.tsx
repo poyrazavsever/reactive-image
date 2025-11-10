@@ -55,4 +55,115 @@ export const mdxComponents = {
       {...props}
     />
   ),
+
+  // List elements with proper key handling
+  ul: (props: any) => {
+    const { children, ...restProps } = props;
+    const childrenWithKeys = React.Children.map(children, (child, index) => {
+      if (React.isValidElement(child) && !child.key) {
+        return React.cloneElement(child, { key: `ul-item-${index}` });
+      }
+      return child;
+    });
+
+    return (
+      <ul
+        className="list-disc list-inside mb-4 space-y-2 text-gray-600"
+        {...restProps}
+      >
+        {childrenWithKeys}
+      </ul>
+    );
+  },
+
+  ol: (props: any) => {
+    const { children, ...restProps } = props;
+    const childrenWithKeys = React.Children.map(children, (child, index) => {
+      if (React.isValidElement(child) && !child.key) {
+        return React.cloneElement(child, { key: `ol-item-${index}` });
+      }
+      return child;
+    });
+
+    return (
+      <ol
+        className="list-decimal list-inside mb-4 space-y-2 text-gray-600"
+        {...restProps}
+      >
+        {childrenWithKeys}
+      </ol>
+    );
+  },
+
+  li: (props: any) => <li className="text-gray-600" {...props} />,
+
+  // Table elements with key handling
+  table: (props: any) => (
+    <div className="overflow-x-auto mb-6">
+      <table
+        className="min-w-full border-collapse border border-gray-300"
+        {...props}
+      />
+    </div>
+  ),
+
+  thead: (props: any) => <thead className="bg-gray-50" {...props} />,
+
+  tbody: (props: any) => {
+    const { children, ...restProps } = props;
+    const childrenWithKeys = React.Children.map(children, (child, index) => {
+      if (React.isValidElement(child) && !child.key) {
+        return React.cloneElement(child, { key: `tbody-row-${index}` });
+      }
+      return child;
+    });
+
+    return <tbody {...restProps}>{childrenWithKeys}</tbody>;
+  },
+
+  tr: (props: any) => {
+    const { children, ...restProps } = props;
+    const childrenWithKeys = React.Children.map(children, (child, index) => {
+      if (React.isValidElement(child) && !child.key) {
+        return React.cloneElement(child, { key: `tr-cell-${index}` });
+      }
+      return child;
+    });
+
+    return (
+      <tr className="border-b border-gray-200" {...restProps}>
+        {childrenWithKeys}
+      </tr>
+    );
+  },
+
+  th: (props: any) => (
+    <th
+      className="border border-gray-300 px-4 py-2 text-left font-semibold text-gray-700"
+      {...props}
+    />
+  ),
+
+  td: (props: any) => (
+    <td className="border border-gray-300 px-4 py-2 text-gray-600" {...props} />
+  ),
+
+  // Block elements
+  blockquote: (props: any) => (
+    <blockquote
+      className="border-l-4 border-blue-500 pl-4 py-2 mb-4 italic text-gray-700 bg-blue-50"
+      {...props}
+    />
+  ),
+
+  // Inline elements
+  a: (props: any) => (
+    <a className="text-blue-600 hover:text-blue-800 underline" {...props} />
+  ),
+
+  strong: (props: any) => (
+    <strong className="font-bold text-gray-900" {...props} />
+  ),
+
+  em: (props: any) => <em className="italic text-gray-700" {...props} />,
 };
