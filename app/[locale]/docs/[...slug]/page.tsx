@@ -1,8 +1,9 @@
 import { docs } from "@/.velite";
 import { notFound } from "next/navigation";
 import { MDXContent } from "@/app/components/mdx/MdxProvider";
+import { SimpleMDXContent } from "@/app/components/mdx/SimpleMdxContent";
 
-type Props = { params: { locale: string; slug: string[] } };
+type Props = { params: Promise<{ locale: string; slug: string[] }> };
 
 export function generateStaticParams() {
   console.log(
@@ -21,8 +22,8 @@ export function generateStaticParams() {
   });
 }
 
-export default function DocPage({ params }: Props) {
-  const { locale, slug } = params;
+export default async function DocPage({ params }: Props) {
+  const { locale, slug } = await params;
 
   if (!slug || !Array.isArray(slug)) {
     console.log("Invalid slug:", slug);
@@ -40,10 +41,26 @@ export default function DocPage({ params }: Props) {
   if (!doc) return notFound();
 
   return (
-    <main className="prose prose-neutral dark:prose-invert mx-auto px-6 py-10">
-      <h1>{doc.title}</h1>
-      {doc.description && <p className="lead">{doc.description}</p>}
-      <MDXContent code={doc.body} />
+    <main className="mx-auto px-6 py-10 max-w-4xl">
+      {/* Try MDX rendering first, fallback to simple content */}
+      <div className="mb-4 text-sm text-gray-500">
+        Rendering: {doc.title} ({locale})
+      </div>
+
+      {/* For now, use simple content while MDX is being fixed */}
+      <SimpleMDXContent title={doc.title} description={doc.description} />
+
+      {/* Debug: Show raw MDX code in development */}
+      {process.env.NODE_ENV === "development" && (
+        <details className="mt-8">
+          <summary className="cursor-pointer text-blue-600">
+            Debug: Show MDX Code
+          </summary>
+          <pre className="text-xs bg-gray-100 p-2 rounded overflow-auto mt-2 max-h-40">
+            {doc.body.substring(0, 500)}...
+          </pre>
+        </details>
+      )}
     </main>
   );
 }

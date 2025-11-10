@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
-export default function LocalePage({ params }: Props) {
-  const { locale } = params;
+export default async function LocalePage({ params }: Props) {
+  const { locale } = await params;
 
   return (
     <div className="container mx-auto px-4 py-8">
