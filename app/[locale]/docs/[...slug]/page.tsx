@@ -29,21 +29,21 @@ export default async function DocPage({ params }: Props) {
   if (!doc) return notFound();
 
   return (
-    <article className="px-6 py-8">
+    <article className="w-full min-w-0 py-6 sm:py-8 max-w-none overflow-hidden">
       {/* Article Header */}
-      <header className="mb-8 pb-8 border-b border-neutral-200">
-        <h1 className="text-4xl font-bold text-neutral-900 mb-4">
+      <header className="mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-neutral-200">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900 mb-3 sm:mb-4 text-wrap">
           {doc.title}
         </h1>
         {doc.description && (
-          <p className="text-xl text-neutral-600 leading-relaxed max-w-3xl">
+          <p className="text-lg sm:text-xl text-neutral-600 leading-relaxed max-w-3xl text-wrap">
             {doc.description}
           </p>
         )}
       </header>
 
       {/* Article Content */}
-      <div className="prose prose-neutral max-w-none">
+      <div className="customMd">
         {/* Try MDX rendering first, fallback to simple content */}
         <MDXContent code={doc.body} />
       </div>

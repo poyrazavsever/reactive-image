@@ -5,6 +5,7 @@ import { ClickExpand } from "../../../packages/reactive-image/src/variants/Click
 import { HoverSwitch } from "../../../packages/reactive-image/src/variants/HoverSwitch";
 import { TiltOnHover } from "../../../packages/reactive-image/src/variants/TiltOnHover";
 import { ZoomOnHover } from "../../../packages/reactive-image/src/variants/ZoomOnHover";
+import { CodeBlock } from "./CodeBlock";
 
 // Create a wrapper component for ReactiveImage
 const ReactiveImage = ({ variant, ...props }: any) => {
@@ -30,33 +31,45 @@ export const mdxComponents = {
   TiltOnHover,
   ZoomOnHover,
 
-  // HTML elements with custom styling
-  h1: (props: any) => (
-    <h1 className="text-4xl font-bold mb-6 text-gray-900" {...props} />
-  ),
-  h2: (props: any) => (
-    <h2 className="text-3xl font-semibold mb-4 text-gray-800 mt-8" {...props} />
-  ),
-  h3: (props: any) => (
-    <h3 className="text-2xl font-medium mb-3 text-gray-700 mt-6" {...props} />
-  ),
-  p: (props: any) => (
-    <p className="text-gray-600 mb-4 leading-relaxed" {...props} />
-  ),
-  code: (props: any) => (
-    <code
-      className="bg-gray-100 px-2 py-1 rounded text-sm font-mono"
-      {...props}
-    />
-  ),
-  pre: (props: any) => (
-    <pre
-      className="bg-gray-900 text-white p-4 rounded-lg overflow-auto mb-4"
-      {...props}
-    />
-  ),
+  // HTML elements with custom styling - using customMd classes
+  h1: (props: any) => <h1 {...props} />,
+  h2: (props: any) => <h2 {...props} />,
+  h3: (props: any) => <h3 {...props} />,
+  h4: (props: any) => <h4 {...props} />,
+  p: (props: any) => <p {...props} />,
 
-  // List elements with proper key handling
+  // Code elements with syntax highlighting
+  code: (props: any) => {
+    const { children, className, ...restProps } = props;
+
+    // If it's a code block (has language), use CodeBlock component
+    if (className && className.includes("language-")) {
+      const language = className.replace("language-", "");
+      return <CodeBlock language={language}>{children}</CodeBlock>;
+    }
+
+    // Otherwise, it's inline code
+    return <code {...restProps}>{children}</code>;
+  },
+
+  pre: (props: any) => {
+    const { children, ...restProps } = props;
+
+    // If the child is a code element with language, extract it
+    if (React.isValidElement(children) && children.props) {
+      const childProps = children.props as any;
+      if (childProps.className?.includes("language-")) {
+        const language = childProps.className.replace("language-", "");
+        const code = childProps.children;
+        return <CodeBlock language={language}>{code}</CodeBlock>;
+      }
+    }
+
+    // Otherwise use default pre styling
+    return <pre {...restProps}>{children}</pre>;
+  },
+
+  // List elements with proper key handling - using customMd classes
   ul: (props: any) => {
     const { children, ...restProps } = props;
     const childrenWithKeys = React.Children.map(children, (child, index) => {
@@ -66,14 +79,7 @@ export const mdxComponents = {
       return child;
     });
 
-    return (
-      <ul
-        className="list-disc list-inside mb-4 space-y-2 text-gray-600"
-        {...restProps}
-      >
-        {childrenWithKeys}
-      </ul>
-    );
+    return <ul {...restProps}>{childrenWithKeys}</ul>;
   },
 
   ol: (props: any) => {
@@ -85,29 +91,15 @@ export const mdxComponents = {
       return child;
     });
 
-    return (
-      <ol
-        className="list-decimal list-inside mb-4 space-y-2 text-gray-600"
-        {...restProps}
-      >
-        {childrenWithKeys}
-      </ol>
-    );
+    return <ol {...restProps}>{childrenWithKeys}</ol>;
   },
 
-  li: (props: any) => <li className="text-gray-600" {...props} />,
+  li: (props: any) => <li {...props} />,
 
-  // Table elements with key handling
-  table: (props: any) => (
-    <div className="overflow-x-auto mb-6">
-      <table
-        className="min-w-full border-collapse border border-gray-300"
-        {...props}
-      />
-    </div>
-  ),
+  // Table elements with key handling - using customMd classes
+  table: (props: any) => <table {...props} />,
 
-  thead: (props: any) => <thead className="bg-gray-50" {...props} />,
+  thead: (props: any) => <thead {...props} />,
 
   tbody: (props: any) => {
     const { children, ...restProps } = props;
@@ -130,40 +122,26 @@ export const mdxComponents = {
       return child;
     });
 
-    return (
-      <tr className="border-b border-gray-200" {...restProps}>
-        {childrenWithKeys}
-      </tr>
-    );
+    return <tr {...restProps}>{childrenWithKeys}</tr>;
   },
 
-  th: (props: any) => (
-    <th
-      className="border border-gray-300 px-4 py-2 text-left font-semibold text-gray-700"
-      {...props}
-    />
-  ),
+  th: (props: any) => <th {...props} />,
 
-  td: (props: any) => (
-    <td className="border border-gray-300 px-4 py-2 text-gray-600" {...props} />
-  ),
+  td: (props: any) => <td {...props} />,
 
-  // Block elements
-  blockquote: (props: any) => (
-    <blockquote
-      className="border-l-4 border-blue-500 pl-4 py-2 mb-4 italic text-gray-700 bg-blue-50"
-      {...props}
-    />
-  ),
+  // Block elements - using customMd classes
+  blockquote: (props: any) => <blockquote {...props} />,
 
-  // Inline elements
-  a: (props: any) => (
-    <a className="text-blue-600 hover:text-blue-800 underline" {...props} />
-  ),
+  // Inline elements - using customMd classes
+  a: (props: any) => <a {...props} />,
 
-  strong: (props: any) => (
-    <strong className="font-bold text-gray-900" {...props} />
-  ),
+  strong: (props: any) => <strong {...props} />,
 
-  em: (props: any) => <em className="italic text-gray-700" {...props} />,
+  em: (props: any) => <em {...props} />,
+
+  // Horizontal rule
+  hr: (props: any) => <hr {...props} />,
+
+  // Images
+  img: (props: any) => <img {...props} />,
 };

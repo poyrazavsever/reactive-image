@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react";
 import { getDocs } from "./sidebar";
 
@@ -11,6 +12,7 @@ type DocsLayoutProps = {
 
 export function DocsLayout({ children, params }: DocsLayoutProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const pathname = usePathname();
   const docs = getDocs(params.locale);
 
   return (
@@ -52,16 +54,25 @@ export function DocsLayout({ children, params }: DocsLayoutProps) {
 
             {/* Navigation */}
             <nav className="space-y-1">
-              {docs.map((doc: any) => (
-                <a
-                  key={`${doc.locale}-${doc.slug}`}
-                  href={`/${doc.locale}/docs/${doc.slug}`}
-                  className="block px-3 py-2 rounded-lg text-sm text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 transition-colors"
-                  onClick={() => setIsSidebarOpen(false)}
-                >
-                  {doc.title}
-                </a>
-              ))}
+              {docs.map((doc: any) => {
+                const href = `/${doc.locale}/docs/${doc.slug}`;
+                const isActive = pathname === href;
+
+                return (
+                  <a
+                    key={`${doc.locale}-${doc.slug}`}
+                    href={href}
+                    className={`block px-3 py-2 rounded-lg text-sm transition-colors ${
+                      isActive
+                        ? "bg-orange-100 text-orange-900 font-medium"
+                        : "text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900"
+                    }`}
+                    onClick={() => setIsSidebarOpen(false)}
+                  >
+                    {doc.title}
+                  </a>
+                );
+              })}
 
               {/* Fallback links if no docs */}
               {docs.length === 0 && (
@@ -123,20 +134,22 @@ export function DocsLayout({ children, params }: DocsLayoutProps) {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 lg:ml-72 xl:ml-80">
-          {/* Mobile Header */}
-          <div className="lg:hidden sticky top-0 bg-white border-b border-neutral-200 p-4 z-20">
+        <main className="flex-1 lg:ml-72 xl:ml-80 min-w-0 overflow-hidden">
+          {/* Mobile Header - Fixed at top */}
+          <div className="lg:hidden fixed top-18 left-0 right-0 bg-white border-b border-neutral-200 px-4 py-3 z-30">
             <button
               onClick={() => setIsSidebarOpen(true)}
               className="flex items-center gap-2 text-neutral-700 hover:text-neutral-900 transition-colors"
             >
               <Icon icon="lucide:menu" className="w-5 h-5" />
-              <span className="text-sm font-medium">Menu</span>
+              <span className="text-sm font-medium">Documentation Menu</span>
             </button>
           </div>
 
-          {/* Content */}
-          <div className="max-w-4xl mx-auto p-6">{children}</div>
+          {/* Content with mobile header spacing */}
+          <div className="w-full max-w-full mx-auto pt-16 lg:pt-0 pb-6 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            {children}
+          </div>
         </main>
       </div>
     </div>
