@@ -7,6 +7,7 @@ import { ZoomOnHover } from "../../../packages/reactive-image/src/variants/ZoomO
 import { TiltOnHover } from "../../../packages/reactive-image/src/variants/TiltOnHover";
 import { HoverSwitch } from "../../../packages/reactive-image/src/variants/HoverSwitch";
 import { ClickExpand } from "../../../packages/reactive-image/src/variants/ClickExpand";
+import { PanReveal } from "../../../packages/reactive-image/src/variants/PanReveal";
 
 type InteractivePlaygroundProps = {
   locale: string;
@@ -32,6 +33,12 @@ export function InteractivePlayground({
     duration: 400,
     glareEnabled: true,
     scaleEnabled: true,
+    panAnimation: "slide",
+    panDirection: "right",
+    panAmount: 35,
+    panMaskShape: "circle",
+    panMaskSize: 55,
+    panFollowCursor: false,
   });
 
   const renderComponent = () => {
@@ -76,6 +83,44 @@ export function InteractivePlayground({
             timing={{ duration: settings.duration, easing: "ease-in-out" }}
             preloadHover={true}
           />
+        );
+      case "pan-reveal":
+        return (
+          <div className="w-full h-48 sm:h-64 lg:h-80">
+            <PanReveal
+              {...baseProps}
+              secondarySrc={
+                sampleImages[(selectedImage + 1) % sampleImages.length]
+              }
+              style={{ width: "100%", height: "100%" }}
+              className="block w-full h-full rounded-lg sm:rounded-xl overflow-hidden"
+              imgClassName="w-full h-full object-cover"
+              animation={settings.panAnimation as "slide" | "mask" | "spotlight"}
+              direction={
+                settings.panDirection as
+                  | "left"
+                  | "right"
+                  | "up"
+                  | "down"
+                  | "diagonal"
+              }
+              panAmount={settings.panAmount}
+              maskShape={
+                settings.panMaskShape as "circle" | "ellipse" | "rectangle"
+              }
+              maskSize={settings.panMaskSize}
+              followCursor={settings.panFollowCursor}
+              gradientColor={
+                settings.panAnimation === "spotlight"
+                  ? "rgba(255, 255, 255, 0.35)"
+                  : "rgba(0, 0, 0, 0.45)"
+              }
+              timing={{
+                duration: settings.duration,
+                easing: "cubic-bezier(0.22, 0.61, 0.36, 1)",
+              }}
+            />
+          </div>
         );
       case "click-expand":
         return (
@@ -122,6 +167,17 @@ export function InteractivePlayground({
   hoverSrc="${sampleImages[(selectedImage + 1) % sampleImages.length]}"
   timing={{ duration: ${settings.duration}, easing: "ease-in-out" }}
   preloadHover={true}`;
+        break;
+      case "pan-reveal":
+        props += `
+  secondarySrc="${sampleImages[(selectedImage + 1) % sampleImages.length]}"
+  animation="${settings.panAnimation}"
+  direction="${settings.panDirection}"
+  panAmount={${settings.panAmount}}
+  maskShape="${settings.panMaskShape}"
+  maskSize={${settings.panMaskSize}}
+  followCursor={${settings.panFollowCursor}}
+  timing={{ duration: ${settings.duration}, easing: "cubic-bezier(0.22, 0.61, 0.36, 1)" }}`;
         break;
       case "click-expand":
         props += `
@@ -172,6 +228,7 @@ export function InteractivePlayground({
                     { id: "zoom-on-hover", name: "Zoom", shortName: "Zoom" },
                     { id: "tilt-on-hover", name: "3D Tilt", shortName: "Tilt" },
                     { id: "hover-switch", name: "Switch", shortName: "Switch" },
+                    { id: "pan-reveal", name: "Pan Reveal", shortName: "Pan" },
                     { id: "click-expand", name: "Expand", shortName: "Expand" },
                   ].map((variant) => (
                     <button
@@ -195,6 +252,7 @@ export function InteractivePlayground({
                   { id: "zoom-on-hover", name: "Zoom on Hover" },
                   { id: "tilt-on-hover", name: "3D Tilt" },
                   { id: "hover-switch", name: "Hover Switch" },
+                  { id: "pan-reveal", name: "Pan Reveal" },
                   { id: "click-expand", name: "Click Expand" },
                 ].map((variant) => (
                   <button
@@ -328,6 +386,138 @@ export function InteractivePlayground({
                         Enable Scale
                       </label>
                     </div>
+                  </>
+                )}
+
+                {selectedVariant === "pan-reveal" && (
+                  <>
+                    <div>
+                      <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-2">
+                        Animation
+                      </label>
+                      <select
+                        value={settings.panAnimation}
+                        onChange={(e) =>
+                          setSettings((prev) => ({
+                            ...prev,
+                            panAnimation: e.target.value,
+                          }))
+                        }
+                        className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-xs sm:text-sm bg-white"
+                      >
+                        <option value="slide">Slide</option>
+                        <option value="mask">Mask</option>
+                        <option value="spotlight">Spotlight</option>
+                      </select>
+                    </div>
+
+                    {settings.panAnimation === "slide" && (
+                      <>
+                        <div>
+                          <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-2">
+                            Direction
+                          </label>
+                          <select
+                            value={settings.panDirection}
+                            onChange={(e) =>
+                              setSettings((prev) => ({
+                                ...prev,
+                                panDirection: e.target.value,
+                              }))
+                            }
+                            className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-xs sm:text-sm bg-white"
+                          >
+                            <option value="right">Right</option>
+                            <option value="left">Left</option>
+                            <option value="up">Up</option>
+                            <option value="down">Down</option>
+                            <option value="diagonal">Diagonal</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-2">
+                            Pan Amount: {settings.panAmount}%
+                          </label>
+                          <input
+                            type="range"
+                            min="15"
+                            max="60"
+                            step="5"
+                            value={settings.panAmount}
+                            onChange={(e) =>
+                              setSettings((prev) => ({
+                                ...prev,
+                                panAmount: parseInt(e.target.value),
+                              }))
+                            }
+                            className="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer"
+                          />
+                        </div>
+                      </>
+                    )}
+
+                    {settings.panAnimation !== "slide" && (
+                      <>
+                        <div>
+                          <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-2">
+                            Mask Shape
+                          </label>
+                          <select
+                            value={settings.panMaskShape}
+                            onChange={(e) =>
+                              setSettings((prev) => ({
+                                ...prev,
+                                panMaskShape: e.target.value,
+                              }))
+                            }
+                            className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-xs sm:text-sm bg-white"
+                          >
+                            <option value="circle">Circle</option>
+                            <option value="ellipse">Ellipse</option>
+                            <option value="rectangle">Rectangle</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-2">
+                            Mask Size: {settings.panMaskSize}%
+                          </label>
+                          <input
+                            type="range"
+                            min="25"
+                            max="80"
+                            step="5"
+                            value={settings.panMaskSize}
+                            onChange={(e) =>
+                              setSettings((prev) => ({
+                                ...prev,
+                                panMaskSize: parseInt(e.target.value),
+                              }))
+                            }
+                            className="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer"
+                          />
+                        </div>
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <input
+                            type="checkbox"
+                            id="pan-follow"
+                            checked={settings.panFollowCursor}
+                            onChange={(e) =>
+                              setSettings((prev) => ({
+                                ...prev,
+                                panFollowCursor: e.target.checked,
+                              }))
+                            }
+                            className="w-3 h-3 sm:w-4 sm:h-4"
+                          />
+                          <label
+                            htmlFor="pan-follow"
+                            className="text-xs sm:text-sm text-neutral-700"
+                          >
+                            Follow cursor
+                          </label>
+                        </div>
+                      </>
+                    )}
                   </>
                 )}
 

@@ -1,0 +1,132 @@
+﻿---
+title: PanReveal
+description: Alternatif kadrajlar� veya ikinci g�rseli kayd�rma, maskeleme ve spotlight efektleriyle ortaya ��karan sinematik varyant.
+order: 6
+locale: tr
+slug: pan-reveal
+toc: true
+---
+
+# PanReveal
+
+PanReveal iki g�rsel katman�n� �st �ste getirip hareketli maskelerle a�arak �ncesi/sonras� kurgular�, detay vurgular� ya da hikaye anlat�m� sahneleri olu�turman�za yard�m eder. Y�nsel kayd�rmalar, dairesel/oval maskeler ve imleci takip eden spotlight modlar�n� destekler.
+
+## �ne ��kanlar
+
+- **�� Farkl� Preset**: `slide`, `mask` ve `spotlight` animasyon aileleri vitrin, kar��la�t�rma ve hikaye anlat�m� senaryolar� i�in optimize edildi.
+- **�kincil Kaynak Deste�i**: `secondarySrc` ile farkl� bir g�rsel kullanabilir veya ayn� g�rselin farkl� kadraj�n� yans�tabilirsiniz.
+- **Kursor & Dokunmatik Haz�r**: `followCursor` ve `enableTouch` bayraklar�yla masa�st� + mobil deneyimleri hizla ayarlay�n.
+- **Maskeyi �zelle�tirin**: Y�n, boyut, �ekil, gradyan rengi ve easing de�erlerini basit props'larla kontrol edin.
+- **Lifecycle Hook'lar**: `onRevealStart` / `onRevealEnd` callback'leriyle analitik veya altyaz� ak��lar�n� tetikleyin.
+
+## H�zl� Ba�lang��
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export default function HeroPanReveal() {
+  return (
+    <ReactiveImage
+      variant="panReveal"
+      src="/hero-wide.jpg"
+      secondarySrc="/hero-detail.jpg"
+      alt="Moda hikayesi"
+      animation="slide"
+      direction="right"
+      panAmount={45}
+      timing={{ duration: 600, easing: "cubic-bezier(0.22, 0.61, 0.36, 1)" }}
+    />
+  );
+}
+```
+
+## Animasyon Presetleri
+
+### Slide Reveal
+
+Y�ns�z kayd�rmalar ikincil katman� belirledi�iniz eksende ortaya ��kar�r. �nce/sonra ya da bir �r�n�n iki a��s�n� g�stermek i�in idealdir.
+
+```tsx
+<PanReveal
+  src="/studio-front.jpg"
+  secondarySrc="/studio-back.jpg"
+  alt="�r�n kar��la�t�rmas�"
+  animation="slide"
+  direction="left" // left, right, up, down, diagonal
+  panAmount={35}
+  gradientColor="rgba(0,0,0,0.4)"
+/>
+```
+
+### Maske Penceresi
+
+Mask animasyonu ikinci katman� dairesel, oval veya dikd�rtgen bir pencereyle geni�leterek dikkat toplar.
+
+```tsx
+<PanReveal
+  src="/macro-texture.jpg"
+  secondarySrc="/macro-zoom.jpg"
+  alt="Doku detayı"
+  animation="mask"
+  maskShape="circle"
+  maskSize={55}
+  followCursor={false}
+/>
+```
+
+### Spotlight Takibi
+
+Spotlight modu mask + gradyan kombinasyonu sunar ve imleci takip ederek mini turlar yarat�r.
+
+```tsx
+<PanReveal
+  src="/cityscape-wide.jpg"
+  secondarySrc="/cityscape-night.jpg"
+  alt="Gece ���klar�"
+  animation="spotlight"
+  followCursor={true}
+  maskSize={40}
+  gradientColor="rgba(255, 255, 255, 0.35)"
+/>
+```
+
+## �leri Teknikler
+
+### Kursor Takibi & Dokunmatik
+
+- `followCursor` maskeyi imle�in bulundu�u noktada tutar. Klavye kullananlar i�in maskeyi %40+ b�y�kl�kte tutmak iyi bir deneyim sa�lar.
+- `enableTouch` a�ik oldu�unda dokunma ile reveal tetiklenir ve kullan�c� ayr�l�nca kapan�r.
+
+### Katman Stil �nerileri
+
+- `secondarySrc` ile farkl� g�rsel kullanabilir veya ayn� kayna�� farkl� `object-position` ile sunabilirsiniz.
+- `gradientColor` markan�n renkleriyle uyumlu olacak �ekilde ayarlanabilir.
+- `className` ve `revealClassName` ile kenarl�k, g�lge veya blend-mode efektleri ekleyin.
+
+## API Referans�
+
+| Prop | Tip | Varsay�lan | A��klama |
+| ---- | --- | ---------- | -------- |
+| `secondarySrc` | `string` | `src` | Reveal s�ras�nda g�r�necek g�rsel. Belirtilmezse `src` kullan�l�r. |
+| `animation` | `"slide" \| "mask" \| "spotlight"` | `"slide"` | Kullan�lacak preset. |
+| `direction` | `"left" \| "right" \| "up" \| "down" \| "diagonal"` | `"right"` | Slide modunda hareket y�n�. |
+| `panAmount` | `number` | `35` | Reveal katman�n�n hareket miktar� (y�zde). |
+| `maskShape` | `"circle" \| "ellipse" \| "rectangle"` | `"circle"` | Maskenin geometrisi. |
+| `maskSize` | `number` | `55` | Maskenin boyutu (%). |
+| `followCursor` | `boolean` | `false` | Maskeyi imleci/touch noktas�n� takip edecek �ekilde konumland�r�r. |
+| `gradientColor` | `string` | `rgba(0,0,0,0.45)` | Overlay i�in kullan�lan renk. |
+| `timing` | `{ duration?: number; easing?: string; }` | `{ duration: 500, easing: "ease-out" }` | Animasyon s�resi ve easing de�erleri. |
+| `enableTouch` | `boolean` | `false` | Mobil dokunma deste�ini a��r. |
+| `revealClassName` | `string` | `undefined` | Reveal aktifken eklenen s�n�f. |
+| `onRevealStart` | `() => void` | `undefined` | Animasyon ba�lad���nda tetiklenir. |
+| `onRevealEnd` | `() => void` | `undefined` | Animasyon tamamland���nda tetiklenir. |
+
+## Performans Notlar�
+
+- `panAmount` de�erini %50 alt�nda tutmak mobil GPU'larda daha p�r�zs�z sonu�lar verir.
+- Spotlight maskeleri `clip-path` kullan�r; ayn� sayfada �ok fazla kullanmak eski taray�c�larda maliyetli olabilir.
+- Kritikteki g�rseli daha erken getirmek i�in `secondarySrc` i�in preload ba�l�klar� eklemeyi de�erlendirin.
+
+---
+
+Daha fazla fikir i�in [showcase](/showcase) sayfas�na bakabilir veya playground b�l�m�nde PanReveal ayarlar�n� deneyebilirsiniz.

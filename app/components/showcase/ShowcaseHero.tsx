@@ -5,6 +5,7 @@ import { ClickExpand } from "../../../packages/reactive-image/src/variants/Click
 import { HoverSwitch } from "../../../packages/reactive-image/src/variants/HoverSwitch";
 import { TiltOnHover } from "../../../packages/reactive-image/src/variants/TiltOnHover";
 import { ZoomOnHover } from "../../../packages/reactive-image/src/variants/ZoomOnHover";
+import { PanReveal } from "../../../packages/reactive-image/src/variants/PanReveal";
 
 type ShowcaseHeroProps = {
   locale: string;
@@ -344,6 +345,143 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
                 animation="scaleRotate"
                 timing={{ duration: 400, easing: "ease-out" }}
               />
+            </div>
+          </div>
+        </div>
+
+        {/* PanReveal Section */}
+        <div className="mb-20">
+          <h3 className="text-xl text-neutral-400 mb-8 flex items-center gap-3">
+            {locale === "tr"
+              ? "Pan & Reveal Animasyonları"
+              : "Pan & Reveal Animations"}
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {/* Slide Right */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Slide Right</h4>
+              </div>
+              <div className="aspect-4/3">
+                <PanReveal
+                  src={showcaseImages.nature.primary}
+                  secondarySrc={showcaseImages.nature.secondary}
+                  alt="Pan reveal slide right"
+                  animation="slide"
+                  direction="right"
+                  panAmount={35}
+                  timing={{ duration: 600, easing: "cubic-bezier(0.22, 0.61, 0.36, 1)" }}
+                  className="block w-full h-full"
+                  imgClassName="w-full h-full object-cover"
+                  style={{ width: "100%", height: "100%" }}
+                />
+              </div>
+            </div>
+
+            {/* Slide Up */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Slide Up</h4>
+              </div>
+              <div className="aspect-4/3">
+                <PanReveal
+                  src={showcaseImages.urban.primary}
+                  secondarySrc={showcaseImages.urban.secondary}
+                  alt="Pan reveal slide up"
+                  animation="slide"
+                  direction="up"
+                  panAmount={30}
+                  timing={{ duration: 550, easing: "cubic-bezier(0.22, 0.61, 0.36, 1)" }}
+                  className="block w-full h-full"
+                  imgClassName="w-full h-full object-cover"
+                  style={{ width: "100%", height: "100%" }}
+                />
+              </div>
+            </div>
+
+            {/* Diagonal Reveal */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Diagonal</h4>
+              </div>
+              <div className="aspect-4/3">
+                <PanReveal
+                  src={showcaseImages.architecture.primary}
+                  secondarySrc={showcaseImages.abstract.primary}
+                  alt="Pan reveal diagonal"
+                  animation="slide"
+                  direction="diagonal"
+                  panAmount={40}
+                  timing={{ duration: 600, easing: "cubic-bezier(0.22, 0.61, 0.36, 1)" }}
+                  className="block w-full h-full"
+                  imgClassName="w-full h-full object-cover"
+                  style={{ width: "100%", height: "100%" }}
+                />
+              </div>
+            </div>
+
+            {/* Mask Circle */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Mask Circle</h4>
+              </div>
+              <div className="aspect-4/3">
+                <PanReveal
+                  src={showcaseImages.nature.tertiary}
+                  secondarySrc={showcaseImages.architecture.secondary}
+                  alt="Pan reveal mask"
+                  animation="mask"
+                  maskShape="circle"
+                  maskSize={60}
+                  timing={{ duration: 450, easing: "ease-out" }}
+                  className="block w-full h-full"
+                  imgClassName="w-full h-full object-cover"
+                  style={{ width: "100%", height: "100%" }}
+                />
+              </div>
+            </div>
+
+            {/* Mask Rectangle */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Mask Rectangle</h4>
+              </div>
+              <div className="aspect-4/3">
+                <PanReveal
+                  src={showcaseImages.abstract.secondary}
+                  secondarySrc={showcaseImages.urban.tertiary}
+                  alt="Pan reveal mask rectangle"
+                  animation="mask"
+                  maskShape="rectangle"
+                  maskSize={70}
+                  timing={{ duration: 450, easing: "ease-out" }}
+                  className="block w-full h-full"
+                  imgClassName="w-full h-full object-cover"
+                  style={{ width: "100%", height: "100%" }}
+                />
+              </div>
+            </div>
+
+            {/* Spotlight */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Spotlight</h4>
+              </div>
+              <div className="aspect-4/3">
+                <PanReveal
+                  src={showcaseImages.architecture.tertiary}
+                  secondarySrc={showcaseImages.nature.primary}
+                  alt="Pan reveal spotlight"
+                  animation="spotlight"
+                  maskSize={45}
+                  followCursor={true}
+                  gradientColor="rgba(255, 255, 255, 0.35)"
+                  timing={{ duration: 380, easing: "ease-out" }}
+                  className="block w-full h-full"
+                  imgClassName="w-full h-full object-cover"
+                  style={{ width: "100%", height: "100%" }}
+                />
+              </div>
             </div>
           </div>
         </div>

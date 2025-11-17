@@ -45,3 +45,26 @@ function MyComponent() {
   );
 }
 ```
+
+## PanReveal Kullanımı
+
+PanReveal iki görseli sinematik kaydırma veya maske ile ortaya çıkarır:
+
+```tsx
+import { PanReveal } from "reactive-image";
+
+function SpotlightOrnek() {
+  return (
+    <PanReveal
+      src="/editorial-wide.jpg"
+      secondarySrc="/editorial-detail.jpg"
+      alt="Detay vurgusu"
+      animation="spotlight"
+      maskSize={40}
+      followCursor
+    />
+  );
+}
+```
+
+Önce/sonra senaryoları için `animation="slide"` seçebilir, maskeli açılışlar için `mask` veya `spotlight` modlarına geçip `panAmount`, `maskSize` ve `timing` değerleriyle ince ayar yapabilirsiniz.

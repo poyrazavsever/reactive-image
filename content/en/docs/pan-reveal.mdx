@@ -1,0 +1,132 @@
+﻿---
+title: PanReveal
+description: Cinematic pan, mask, and spotlight reveals that showcase alternate crops or secondary assets with smooth motion.
+order: 6
+locale: en
+slug: pan-reveal
+toc: true
+---
+
+# PanReveal
+
+PanReveal layers two images and animates the reveal so you can stage before/after states, focus on a detail, or create editorial storytelling moments. The variant supports directional slides, circular/elliptic masks, and spotlight reveals that can follow the cursor.
+
+## Highlights
+
+- **Three Animation Families**: `slide`, `mask`, and `spotlight` presets tuned for showcase, compare, and storytelling layouts.
+- **Secondary Source Support**: Provide a dedicated `secondarySrc` or reuse the same asset for stylish crops.
+- **Cursor & Touch Ready**: Optional cursor following plus touch toggle for on-the-go experiences.
+- **Customizable Masks**: Control direction, mask shape, size, gradients, and easing with a few props.
+- **Lifecycle Hooks**: `onRevealStart`/`onRevealEnd` events make it simple to coordinate captions or analytics.
+
+## Quick Start
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export default function HeroReveal() {
+  return (
+    <ReactiveImage
+      variant="panReveal"
+      src="/hero-wide.jpg"
+      secondarySrc="/hero-detail.jpg"
+      alt="Editorial fashion story"
+      animation="slide"
+      direction="right"
+      panAmount={45}
+      timing={{ duration: 600, easing: "cubic-bezier(0.22, 0.61, 0.36, 1)" }}
+    />
+  );
+}
+```
+
+## Animation Presets
+
+### Slide Reveal
+
+Directional slides move the secondary layer in/out of view. Perfect for comparisons and multi-angle showcases.
+
+```tsx
+<PanReveal
+  src="/studio-front.jpg"
+  secondarySrc="/studio-back.jpg"
+  alt="Product before/after"
+  animation="slide"
+  direction="left" // left, right, up, down, diagonal
+  panAmount={35} // how far the reveal image travels
+  gradientColor="rgba(0,0,0,0.4)"
+/>
+```
+
+### Mask Window
+
+Mask animations clip the secondary image to a circular, ellipse, or rectangular window that expands smoothly.
+
+```tsx
+<PanReveal
+  src="/macro-texture.jpg"
+  secondarySrc="/macro-zoom.jpg"
+  alt="Texture close-up"
+  animation="mask"
+  maskShape="circle"
+  maskSize={55}
+  followCursor={false}
+/>
+```
+
+### Spotlight Follow
+
+Spotlight combines mask + gradient overlays and feels like a guided tour. Enable `followCursor` for an interactive exploration.
+
+```tsx
+<PanReveal
+  src="/cityscape-wide.jpg"
+  secondarySrc="/cityscape-night.jpg"
+  alt="City light reveal"
+  animation="spotlight"
+  followCursor={true}
+  maskSize={40}
+  gradientColor="rgba(255, 255, 255, 0.35)"
+/>
+```
+
+## Advanced Techniques
+
+### Cursor Tracking & Touch Support
+
+- `followCursor` keeps the mask pinned to pointer coordinates. For accessibility, keep the mask large enough (>40%) so keyboard users still benefit.
+- Enable touch interactions with `enableTouch`. A tap will trigger the reveal and maintain state until the user taps away.
+
+### Layer Styling Tips
+
+- Use `secondarySrc` for entirely different assets or supply the same `src` with a different crop (e.g., add CSS `object-position`).
+- `gradientColor` can be any CSS color; try brand gradients to match marketing art direction.
+- Combine with utility classes through `className`/`revealClassName` to add drop shadows, borders, or blend modes.
+
+## API Reference
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `secondarySrc` | `string` | `src` | Image shown during reveal. Falls back to `src` when omitted. |
+| `animation` | `"slide" \| "mask" \| "spotlight"` | `"slide"` | Preset that defines the reveal strategy. |
+| `direction` | `"left" \| "right" \| "up" \| "down" \| "diagonal"` | `"right"` | Directional slide vector (slide only). |
+| `panAmount` | `number` | `35` | How far the reveal image moves (percentage). |
+| `maskShape` | `"circle" \| "ellipse" \| "rectangle"` | `"circle"` | Mask geometry for mask/spotlight presets. |
+| `maskSize` | `number` | `55` | Mask size percentage for mask/spotlight. |
+| `followCursor` | `boolean` | `false` | Makes the mask follow pointer or touch coordinates. |
+| `gradientColor` | `string` | `rgba(0,0,0,0.45)` | Accent color used by internal gradient overlays. |
+| `timing` | `{ duration?: number; easing?: string; }` | `{ duration: 500, easing: "ease-out" }` | Animation timing configuration. |
+| `enableTouch` | `boolean` | `false` | Enables touch handlers for mobile devices. |
+| `revealClassName` | `string` | `undefined` | Extra class applied when the reveal state is active. |
+| `onRevealStart` | `() => void` | `undefined` | Fired when the reveal animation begins. |
+| `onRevealEnd` | `() => void` | `undefined` | Fired when the reveal animation finishes. |
+
+## Performance Notes
+
+- Keep `panAmount` below 50% for subtle reveals and to reduce large translations on mobile GPUs.
+- Spotlight masks rely on clip-path; avoid stacking too many on a single page for legacy browsers.
+- Preload the secondary asset (e.g., using `<link rel="preload">`) if the reveal is critical to the hero experience.
+
+---
+
+Need inspiration? Head to the [showcase page](/showcase) to see PanReveal mixed with other variants, or experiment interactively in the playground.

@@ -43,3 +43,26 @@ function MyComponent() {
   return <ZoomOnHover src="your-image.jpg" alt="Description" zoomScale={1.2} />;
 }
 ```
+
+## Using PanReveal
+
+PanReveal reveals a secondary crop or image with cinematic transitions:
+
+```tsx
+import { PanReveal } from "reactive-image";
+
+function SpotlightReveal() {
+  return (
+    <PanReveal
+      src="/editorial-wide.jpg"
+      secondarySrc="/editorial-detail.jpg"
+      alt="Editorial highlight"
+      animation="spotlight"
+      maskSize={40}
+      followCursor
+    />
+  );
+}
+```
+
+Use `animation="slide"` for before/after comparisons, or switch to `mask`/`spotlight` for guided reveals. Control intensity via `panAmount`, `maskSize`, and `timing`.

@@ -89,6 +89,28 @@ function MyComponent() {
   );
 }`,
   },
+  {
+    title: "Pan Reveal Spotlight",
+    description: "Reveal a secondary crop with a cursor-following spotlight",
+    code: `import { PanReveal } from 'reactive-image';
+
+function MyComponent() {
+  return (
+    <PanReveal
+      src="editorial-wide.jpg"
+      secondarySrc="editorial-detail.jpg"
+      alt="Editorial reveal"
+      animation="spotlight"
+      maskSize={40}
+      followCursor={true}
+      timing={{
+        duration: 500,
+        easing: "cubic-bezier(0.22, 0.61, 0.36, 1)"
+      }}
+    />
+  );
+}`,
+  },
 ];
 
 export function CodeExamples({ locale, dict }: CodeExamplesProps) {
