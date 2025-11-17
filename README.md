@@ -12,12 +12,13 @@
 
 ## Features
 
-### **4 Powerful Interactive Variants**
+### **5 Powerful Interactive Variants**
 
 - **HoverSwitch** - Image switching on mouse hover
 - **ZoomOnHover** - Mouse-driven zoom effects
 - **TiltOnHover** - 3D tilt and perspective effects
 - **ClickExpand** - Click-to-expand modal viewing
+- **PanReveal** - Cinematic slide, mask, and spotlight reveals
 
 ### **Performance Focused**
 
@@ -28,7 +29,7 @@
 
 ### **Fully Customizable**
 
-- 35+ different animation types
+- 39+ different animation types
 - CSS-in-JS or external stylesheet support
 - Custom timing and easing functions
 - Flexible sizing for responsive design
@@ -309,6 +310,43 @@ Click-to-expand modal viewing.
 - `zoomBounce` - Zoom + bounce
 - `rotateIn` - Rotate entrance
 - `flipIn` - 3D flip
+
+### 5. PanReveal - Cinematic Reveals
+
+Layer two visuals and reveal them with directional slides, masks, or spotlight focus.
+
+```jsx
+// Slide reveal
+<ReactiveImage
+  variant="panReveal"
+  src="/before.jpg"
+  secondarySrc="/after.jpg"
+  alt="Before vs after"
+  animation="slide"
+  direction="right"
+  panAmount={40}
+  timing={{ duration: 600, easing: "cubic-bezier(0.22, 0.61, 0.36, 1)" }}
+/>
+
+// Spotlight tour
+<ReactiveImage
+  variant="panReveal"
+  src="/city-day.jpg"
+  secondarySrc="/city-night.jpg"
+  alt="City transformation"
+  animation="spotlight"
+  maskSize={45}
+  followCursor
+  gradientColor="rgba(255,255,255,0.35)"
+/>
+```
+
+**PanReveal Controls**
+
+- `animation`: `slide`, `mask`, `spotlight`
+- `direction`: `left`, `right`, `up`, `down`, `diagonal` (slide only)
+- `secondarySrc`: optional alternate asset
+- `panAmount`, `maskShape`, `maskSize`, `followCursor`, `timing`
 
 ## Advanced Customization
 
