@@ -4,7 +4,7 @@
 
 **Reactive Image** - A powerful, interactive, and customizable visual component collection for React applications. Delivers stunning animations and smooth transitions to enhance user experience.
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.1.3-blue.svg)
 ![License](https://img.shields.io/badge/license-ISC-green.svg)
 ![React](https://img.shields.io/badge/react-%E2%89%A518.0.0-blue.svg)
 ![TypeScript](https://img.shields.io/badge/typescript-%E2%89%A55.0.0-blue.svg)
