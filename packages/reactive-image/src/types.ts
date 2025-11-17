@@ -6,7 +6,8 @@ export type VariantName =
   | "hoverSwitch"
   | "zoomOnHover"
   | "tiltOnHover"
-  | "clickExpand";
+  | "clickExpand"
+  | "panReveal";
 
 type NativeImgProps = Omit<
   ImgHTMLAttributes<HTMLImageElement>,
@@ -156,12 +157,31 @@ export type ClickExpandProps = {
   onAnimationStart?: () => void;
   onAnimationEnd?: () => void;
 };
+export type PanRevealProps = {
+  secondarySrc?: string;
+  animation?: "slide" | "mask" | "spotlight";
+  direction?: "left" | "right" | "up" | "down" | "diagonal";
+  panAmount?: number;
+  maskShape?: "circle" | "ellipse" | "rectangle";
+  maskSize?: number;
+  followCursor?: boolean;
+  gradientColor?: string;
+  timing?: {
+    duration?: number;
+    easing?: string;
+  };
+  enableTouch?: boolean;
+  revealClassName?: string;
+  onRevealStart?: () => void;
+  onRevealEnd?: () => void;
+};
 
 export type VariantProps =
   | ({ variant: "hoverSwitch" } & HoverSwitchProps)
   | ({ variant: "zoomOnHover" } & ZoomOnHoverProps)
   | ({ variant: "tiltOnHover" } & TiltOnHoverProps)
-  | ({ variant: "clickExpand" } & ClickExpandProps);
+  | ({ variant: "clickExpand" } & ClickExpandProps)
+  | ({ variant: "panReveal" } & PanRevealProps);
 
 export type ReactiveImageProps = BaseProps &
   (VariantProps | { variant?: undefined });

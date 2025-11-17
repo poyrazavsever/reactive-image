@@ -6,15 +6,16 @@ Reactive Image provides beautiful, performant image animations for modern web ap
 
 ## Features
 
-- ✅ **4 Animation Variants**: HoverSwitch, ZoomOnHover, TiltOnHover, ClickExpand
-- ✅ **36+ Animation Types**: Wide variety of effects and transitions
-- ✅ **Performance Optimized**: GPU acceleration, lazy loading, image preloading
-- ✅ **TypeScript First**: Full type safety and IntelliSense support
-- ✅ **Accessible**: ARIA attributes, keyboard navigation, screen reader friendly
-- ✅ **Responsive**: Mobile-friendly with touch support
-- ✅ **Zero Dependencies**: Only requires React as peer dependency
+- **5 Animation Variants**: HoverSwitch, ZoomOnHover, TiltOnHover, ClickExpand, PanReveal
+- **39+ Animation Types**: Wide variety of effects and transitions
+- **Performance Optimized**: GPU acceleration, lazy loading, image preloading
+- **TypeScript First**: Full type safety and IntelliSense support
+- **Accessible**: ARIA attributes, keyboard navigation, screen reader friendly
+- **Responsive**: Mobile-friendly with touch support
+- **Zero Dependencies**: Only requires React as peer dependency
 
 ## Installation
+
 
 ```bash
 npm install reactive-image
@@ -60,6 +61,16 @@ import { ReactiveImage } from "reactive-image";
   alt="Expand example"
   modalAnimation="scaleFade"
 />
+
+// Pan reveal between two visuals
+<ReactiveImage
+  variant="panReveal"
+  src="/wide.jpg"
+  secondarySrc="/detail.jpg"
+  alt="Pan reveal example"
+  animation="spotlight"
+  panAmount={40}
+/>
 ```
 
 ## Animation Variants
@@ -87,6 +98,12 @@ Zoom and transform effects triggered by mouse hover.
 Modal overlay activated by clicking the image.
 
 - `scaleFade`, `slideUp`, `slideDown`, `slideLeft`, `slideRight`, `springPop`, `zoomBounce`, `rotateIn`, `flipIn`
+
+### PanReveal (3 animations)
+
+Pan between crops or reveal an alternate image with cinematic wipes.
+
+- `slide`, `mask`, `spotlight`
 
 ## Performance
 
