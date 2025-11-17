@@ -3,12 +3,7 @@ import type { BaseProps } from "../../types";
 
 export type PanRevealAnimationType = "slide" | "mask" | "spotlight";
 
-export type PanRevealDirection =
-  | "left"
-  | "right"
-  | "up"
-  | "down"
-  | "diagonal";
+export type PanRevealDirection = "left" | "right" | "up" | "down" | "diagonal";
 
 export type PanRevealMaskShape = "circle" | "ellipse" | "rectangle";
 
@@ -61,7 +56,7 @@ export type PanRevealHookReturn = {
     x: number;
     y: number;
   };
-  containerRef: React.RefObject<HTMLSpanElement>;
+  containerRef: React.RefObject<HTMLSpanElement | null>;
   handlers: {
     onMouseEnter: React.MouseEventHandler<HTMLElement>;
     onMouseLeave: React.MouseEventHandler<HTMLElement>;
