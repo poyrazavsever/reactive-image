@@ -5,6 +5,7 @@ import { ZoomOnHover } from "./variants/ZoomOnHover";
 import { TiltOnHover } from "./variants/TiltOnHover";
 import { ClickExpand } from "./variants/ClickExpand";
 import { PanReveal } from "./variants/PanReveal";
+import { KenBurnsSequence } from "./variants/KenBurnsSequence";
 
 export function ReactiveImage(props: ReactiveImageProps) {
   const { variant } = props as any;
@@ -13,6 +14,8 @@ export function ReactiveImage(props: ReactiveImageProps) {
   if (variant === "tiltOnHover") return <TiltOnHover {...(props as any)} />;
   if (variant === "clickExpand") return <ClickExpand {...(props as any)} />;
   if (variant === "panReveal") return <PanReveal {...(props as any)} />;
+  if (variant === "kenBurnsSequence")
+    return <KenBurnsSequence {...(props as any)} />;
   // default plain image
   const { src, alt, className, imgClassName, style, ...rest } = props as any;
   return (

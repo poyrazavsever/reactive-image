@@ -6,8 +6,8 @@ Reactive Image provides beautiful, performant image animations for modern web ap
 
 ## Features
 
-- **5 Animation Variants**: HoverSwitch, ZoomOnHover, TiltOnHover, ClickExpand, PanReveal
-- **39+ Animation Types**: Wide variety of effects and transitions
+- **6 Animation Variants**: HoverSwitch, ZoomOnHover, TiltOnHover, ClickExpand, PanReveal, KenBurnsSequence
+- **42+ Animation Types**: Wide variety of effects and transitions
 - **Performance Optimized**: GPU acceleration, lazy loading, image preloading
 - **TypeScript First**: Full type safety and IntelliSense support
 - **Accessible**: ARIA attributes, keyboard navigation, screen reader friendly
@@ -71,6 +71,15 @@ import { ReactiveImage } from "reactive-image";
   animation="spotlight"
   panAmount={40}
 />
+
+// Ken Burns hero sequence
+<ReactiveImage
+  variant="kenBurnsSequence"
+  src="/hero.jpg"
+  alt="Ken Burns example"
+  animation="dramatic"
+  crossfadeDuration={1200}
+/>
 ```
 
 ## Animation Variants
@@ -104,6 +113,12 @@ Modal overlay activated by clicking the image.
 Pan between crops or reveal an alternate image with cinematic wipes.
 
 - `slide`, `mask`, `spotlight`
+
+### KenBurnsSequence (3 animations)
+
+Play a cinematic sequence of zoom/pan keyframes—perfect for hero sections or carousels.
+
+- `classic`, `slowPan`, `dramatic`
 
 ## Performance
 

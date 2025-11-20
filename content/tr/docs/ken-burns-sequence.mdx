@@ -1,0 +1,142 @@
+---
+title: KenBurnsSequence
+description: Ken Burns tarzı sinematik zum ve kaydırma sekanslarını preset’ler, çapraz geçişler ve özelleştirilebilir karelerle oluşturun.
+order: 7
+locale: tr
+slug: ken-burns-sequence
+toc: true
+---
+
+# KenBurnsSequence
+
+KenBurnsSequence birden fazla zum, pan ve hafif döndürme adımını ardışık şekilde oynatarak kahraman bölümlerine sinematik bir hikâye katar. Her kare ana `src` görselini kullanabilir veya tamamen farklı bir görsele geçebilir; komponent yeni kare animasyona başlarken bir önceki kareyi otomatik olarak çözündürür.
+
+## Öne Çıkanlar
+
+- **Hazır Zaman Çizelgeleri**: `classic`, `slowPan` ve `dramatic` preset’leri çoğu vitrin senaryosu için yeterlidir.
+- **Özel Kareler**: `frames` dizisiyle her sahneye özel `zoom`, `panX`, `panY`, `rotate`, `duration` ve `easing` değerleri atayabilirsiniz.
+- **Çapraz Geçişler**: `crossfadeDuration` parametresi kareler arası yumuşak geçişleri otomatik yönetir.
+- **Etkileşim Kontrolleri**: `pauseOnHover`, `autoplay`, `loop` ve `enableTouch` sayesinde masaüstü ve mobil deneyimleri kolayca ayarlarsınız.
+- **Lifecycle Hook’lar**: `onSequenceStart`, `onSequenceEnd` ve `onFrameChange` animasyonla eşzamanlı içerik veya analitik tetiklemeye yardımcı olur.
+
+## Hızlı Başlangıç
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export default function HeroSekansi() {
+  return (
+    <ReactiveImage
+      variant="kenBurnsSequence"
+      src="/hero.jpg"
+      alt="Sinematik hero"
+      animation="classic"
+      crossfadeDuration={900}
+      overlayGradient="linear-gradient(180deg, rgba(5, 7, 12, 0) 0%, rgba(5, 7, 12, 0.65) 100%)"
+      pauseOnHover
+    />
+  );
+}
+```
+
+## Hazır Zaman Çizelgeleri
+
+### Classic Drift
+
+Yavaş zum ve hafif yatay kaydırmalar. Sakin ürün veya seyahat görselleri için ideal.
+
+```tsx
+<KenBurnsSequence
+  src="/editorial-01.jpg"
+  alt="Klasik drift"
+  animation="classic"
+  crossfadeDuration={800}
+  pauseOnHover={true}
+/>
+```
+
+### Slow Pan
+
+Zum değerlerini düşük tutup sağ/sol kaydırmalarla hareket sağlar; metin bindirmelerinin bulunduğu hero alanlarında temiz bir deneyim sunar.
+
+```tsx
+<KenBurnsSequence
+  src="/editorial-02.jpg"
+  alt="Yavaş panoramik hareket"
+  animation="slowPan"
+  overlayGradient="linear-gradient(120deg, rgba(0,0,0,0.1), rgba(0,0,0,0.45))"
+  pauseOnHover={false}
+  loop={true}
+/>
+```
+
+### Dramatic Punch
+
+Daha yüksek zum ve hafif rotasyon değerleriyle dinamik girişler oluşturur.
+
+```tsx
+<KenBurnsSequence
+  src="/editorial-03.jpg"
+  alt="Dramatik vurgu"
+  animation="dramatic"
+  crossfadeDuration={1200}
+  pauseOnHover={true}
+  timing={{ duration: 5200, easing: "cubic-bezier(0.33, 1, 0.68, 1)" }}
+/>
+```
+
+## Özel Kare Sekansları
+
+`frames` dizisi tanımlayarak tamamen size özel hareket kurguları oluşturabilirsiniz. Her kare ortak `timing` fallback’lerini devralır ancak gerekirse yerel olarak geçersiz kılınabilir.
+
+```tsx
+const canyonFrames = [
+  { zoom: 1.12, panX: -12, panY: 8, duration: 4800 },
+  { zoom: 1.22, panX: 6, panY: -4, rotate: 0.8, duration: 5200 },
+  { zoom: 1.15, panX: 2, panY: 10, rotate: -0.5, duration: 5000 },
+];
+
+<KenBurnsSequence
+  src="/canyon.jpg"
+  alt="Özel kare sekansı"
+  frames={canyonFrames}
+  crossfadeDuration={1000}
+  overlayGradient="linear-gradient(180deg, rgba(12, 16, 24, 0) 0%, rgba(12, 16, 24, 0.65) 100%)"
+  pauseOnHover={true}
+  onFrameChange={(index) => console.log("Kare", index)}
+/>
+```
+
+### Dokunmatik ve Etkileşim İpuçları
+
+- `enableTouch` aktifleştirildiğinde mobilde dokunarak duraklatma davranışı kazanırsınız.
+- Animasyonun sadece bir kez oynamasını istiyorsanız `loop={false}` kullanın ve `pauseOnHover` ile birleştiğinde kullanıcı fokusunu kolaylaştırın.
+- `onSequenceStart` / `onSequenceEnd` callback’lerini metin geçişleri veya analitik olayları senkronize etmek için kullanın.
+
+## API Referansı
+
+| Prop | Tip | Varsayılan | Açıklama |
+| ---- | --- | ---------- | -------- |
+| `animation` | `"classic" \| "slowPan" \| "dramatic"` | `"classic"` | `frames` verilmediğinde kullanılan preset zaman çizelgesi. |
+| `frames` | `KenBurnsFrame[]` | `undefined` | Özelleştirilmiş kare tanımları. |
+| `crossfadeDuration` | `number` | `900` | Kareler arası geçişin milisaniye cinsinden süresi. |
+| `pauseOnHover` | `boolean` | `true` | İmleç üzerindeyken animasyonu duraklatır. |
+| `autoplay` | `boolean` | `true` | Bileşen yüklendiğinde otomatik başlatır. |
+| `loop` | `boolean` | `true` | Son kareden sonra başa dönülmesini sağlar. |
+| `overlayGradient` | `string` | `linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.55))` | Sekansın üstüne çizilen isteğe bağlı gradyan. |
+| `enableTouch` | `boolean` | `false` | Dokunmatik cihazlarda dokunarak duraklatma desteği ekler. |
+| `timing` | `{ duration?: number; easing?: string; }` | `{ duration: 6500, easing: "cubic-bezier(0.33, 1, 0.68, 1)" }` | Kareler için varsayılan süre ve easing değerleri. |
+| `onSequenceStart` | `() => void` | `undefined` | İlk kare çalışmaya başladığında tetiklenir. |
+| `onSequenceEnd` | `() => void` | `undefined` | `loop` kapalıysa son kare tamamlandığında tetiklenir. |
+| `onFrameChange` | `(index: number) => void` | `undefined` | Her yeni kare aktif olduğunda tetiklenir. |
+
+## Performans Notları
+
+- Çoğu hero tasarımında 3–5 kare yeterlidir; daha fazlası zamanlayıcıları karmaşıklaştırabilir.
+- Çapraz geçişler `opacity` üzerine kurulu olduğu için aynı view port içinde çok fazla sekans kullanmamaya dikkat edin.
+- `frames` içindeki `src` değerlerini ilk ekranda gösterecekseniz `<link rel="preload">` ile önceden yüklemeyi düşünün.
+- CTA butonlarıyla birlikte kullanırken `pauseOnHover` kullanıcıların dikkatini odaklamak için iyi bir araçtır.
+
+---
+
+Daha fazla örnek için [showcase](/showcase) sayfasını ziyaret edin ve KenBurnsSequence’i diğer varyantlarla birlikte görün.

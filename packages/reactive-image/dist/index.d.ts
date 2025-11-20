@@ -1,7 +1,7 @@
 import React, { ImgHTMLAttributes, CSSProperties } from 'react';
 import * as react_jsx_runtime from 'react/jsx-runtime';
 
-type VariantName = "hoverSwitch" | "zoomOnHover" | "tiltOnHover" | "clickExpand";
+type VariantName = "hoverSwitch" | "zoomOnHover" | "tiltOnHover" | "clickExpand" | "panReveal" | "kenBurnsSequence";
 type NativeImgProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "src" | "alt" | "width" | "height" | "loading" | "decoding">;
 type BaseProps = NativeImgProps & {
     src: string;
@@ -102,6 +102,50 @@ type ClickExpandProps = {
     onAnimationStart?: () => void;
     onAnimationEnd?: () => void;
 };
+type PanRevealProps = {
+    secondarySrc?: string;
+    animation?: "slide" | "mask" | "spotlight";
+    direction?: "left" | "right" | "up" | "down" | "diagonal";
+    panAmount?: number;
+    maskShape?: "circle" | "ellipse" | "rectangle";
+    maskSize?: number;
+    followCursor?: boolean;
+    gradientColor?: string;
+    timing?: {
+        duration?: number;
+        easing?: string;
+    };
+    enableTouch?: boolean;
+    revealClassName?: string;
+    onRevealStart?: () => void;
+    onRevealEnd?: () => void;
+};
+type KenBurnsSequenceFrame = {
+    src?: string;
+    zoom?: number;
+    panX?: number;
+    panY?: number;
+    rotate?: number;
+    duration?: number;
+    easing?: string;
+};
+type KenBurnsSequenceProps = {
+    animation?: "classic" | "slowPan" | "dramatic";
+    frames?: KenBurnsSequenceFrame[];
+    crossfadeDuration?: number;
+    pauseOnHover?: boolean;
+    autoplay?: boolean;
+    loop?: boolean;
+    overlayGradient?: string;
+    enableTouch?: boolean;
+    timing?: {
+        duration?: number;
+        easing?: string;
+    };
+    onSequenceStart?: () => void;
+    onSequenceEnd?: () => void;
+    onFrameChange?: (index: number) => void;
+};
 type VariantProps = ({
     variant: "hoverSwitch";
 } & HoverSwitchProps) | ({
@@ -110,11 +154,15 @@ type VariantProps = ({
     variant: "tiltOnHover";
 } & TiltOnHoverProps) | ({
     variant: "clickExpand";
-} & ClickExpandProps);
+} & ClickExpandProps) | ({
+    variant: "panReveal";
+} & PanRevealProps) | ({
+    variant: "kenBurnsSequence";
+} & KenBurnsSequenceProps);
 type ReactiveImageProps = BaseProps & (VariantProps | {
     variant?: undefined;
 });
 
 declare function ReactiveImage(props: ReactiveImageProps): react_jsx_runtime.JSX.Element;
 
-export { type BaseProps, type ClickExpandProps, type HoverSwitchProps, ReactiveImage, type ReactiveImageProps, type TiltOnHoverProps, type VariantName, type VariantProps, type ZoomOnHoverProps };
+export { type BaseProps, type ClickExpandProps, type HoverSwitchProps, type KenBurnsSequenceFrame, type KenBurnsSequenceProps, type PanRevealProps, ReactiveImage, type ReactiveImageProps, type TiltOnHoverProps, type VariantName, type VariantProps, type ZoomOnHoverProps };

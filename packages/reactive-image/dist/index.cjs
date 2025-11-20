@@ -1990,16 +1990,872 @@ function ClickExpand({
   ] });
 }
 
-// src/ReactiveImage.tsx
+// src/variants/PanReveal/PanReveal.tsx
+var import_react10 = require("react");
+
+// src/variants/PanReveal/animations.ts
+var panAnimations = {
+  slide: {
+    container: {
+      position: "relative",
+      display: "inline-block",
+      overflow: "hidden"
+    },
+    baseImage: {
+      display: "block",
+      width: "100%",
+      height: "auto",
+      transition: "transform var(--duration, 500ms) var(--easing, cubic-bezier(0.22, 0.61, 0.36, 1))",
+      willChange: "transform"
+    },
+    revealImage: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      transition: "transform var(--duration, 600ms) var(--easing, cubic-bezier(0.22, 0.61, 0.36, 1)), clip-path var(--duration, 600ms) var(--easing, ease-out)",
+      willChange: "transform"
+    },
+    overlay: {
+      position: "absolute",
+      inset: 0,
+      pointerEvents: "none",
+      background: "linear-gradient(var(--gradient-direction, to right), rgba(0,0,0,0.4), transparent 60%)",
+      mixBlendMode: "multiply",
+      opacity: 0,
+      transition: "opacity 200ms ease-out"
+    }
+  },
+  mask: {
+    container: {
+      position: "relative",
+      display: "inline-block",
+      overflow: "hidden"
+    },
+    baseImage: {
+      display: "block",
+      width: "100%",
+      height: "auto"
+    },
+    revealImage: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      opacity: 0,
+      transition: "clip-path var(--duration, 450ms) var(--easing, ease-out), opacity var(--duration, 350ms) ease-out",
+      filter: "drop-shadow(0 12px 25px rgba(0,0,0,0.25))",
+      willChange: "clip-path, opacity"
+    },
+    overlay: {
+      position: "absolute",
+      inset: 0,
+      pointerEvents: "none",
+      background: "radial-gradient(circle at var(--cursor-x, 50%) var(--cursor-y, 50%), rgba(0,0,0,0) 40%, var(--gradient-color, rgba(0,0,0,0.55)) 100%)",
+      opacity: 0,
+      transition: "opacity var(--duration, 350ms) ease-out"
+    }
+  },
+  spotlight: {
+    container: {
+      position: "relative",
+      display: "inline-block",
+      overflow: "hidden"
+    },
+    baseImage: {
+      display: "block",
+      width: "100%",
+      height: "auto",
+      filter: "grayscale(30%)"
+    },
+    revealImage: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      opacity: 0,
+      transition: "clip-path var(--duration, 350ms) var(--easing, ease-out), opacity var(--duration, 250ms) ease-out",
+      willChange: "clip-path, opacity"
+    },
+    overlay: {
+      position: "absolute",
+      inset: 0,
+      pointerEvents: "none",
+      mixBlendMode: "screen",
+      background: "radial-gradient(circle at var(--cursor-x, 50%) var(--cursor-y, 50%), var(--gradient-color, rgba(255,255,255,0.35)), transparent 60%)",
+      opacity: 0,
+      transition: "opacity var(--duration, 250ms) ease-out"
+    }
+  }
+};
+
+// src/variants/PanReveal/hooks.ts
+var import_react9 = require("react");
+function usePanReveal({
+  followCursor = false,
+  enableTouch = false,
+  animationDuration,
+  onRevealStart,
+  onRevealEnd
+}) {
+  const [isRevealed, setIsRevealed] = (0, import_react9.useState)(false);
+  const [cursorPosition, setCursorPosition] = (0, import_react9.useState)({ x: 50, y: 50 });
+  const containerRef = (0, import_react9.useRef)(null);
+  const timeoutRef = (0, import_react9.useRef)(null);
+  const scheduleAnimationEnd = (0, import_react9.useCallback)(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      onRevealEnd?.();
+      timeoutRef.current = null;
+    }, animationDuration);
+  }, [animationDuration, onRevealEnd]);
+  const handleMouseEnter = (0, import_react9.useCallback)(() => {
+    setIsRevealed((prev) => {
+      if (prev) return prev;
+      onRevealStart?.();
+      scheduleAnimationEnd();
+      return true;
+    });
+  }, [onRevealStart, scheduleAnimationEnd]);
+  const handleMouseLeave = (0, import_react9.useCallback)(() => {
+    setIsRevealed((prev) => {
+      if (!prev) return prev;
+      onRevealStart?.();
+      scheduleAnimationEnd();
+      return false;
+    });
+  }, [onRevealStart, scheduleAnimationEnd]);
+  const updateCursor = (0, import_react9.useCallback)((clientX, clientY) => {
+    if (!followCursor || !containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = (clientX - rect.left) / rect.width * 100;
+    const y = (clientY - rect.top) / rect.height * 100;
+    setCursorPosition({
+      x: Math.max(0, Math.min(100, x)),
+      y: Math.max(0, Math.min(100, y))
+    });
+  }, [followCursor]);
+  const handleMouseMove = (0, import_react9.useCallback)(
+    (event) => {
+      if (!followCursor) return;
+      updateCursor(event.clientX, event.clientY);
+    },
+    [followCursor, updateCursor]
+  );
+  const handleTouchStart = (0, import_react9.useCallback)(
+    (event) => {
+      if (!enableTouch) return;
+      handleMouseEnter();
+      if (followCursor) {
+        const touch = event.touches[0];
+        updateCursor(touch.clientX, touch.clientY);
+      }
+    },
+    [enableTouch, followCursor, handleMouseEnter, updateCursor]
+  );
+  const handleTouchMove = (0, import_react9.useCallback)(
+    (event) => {
+      if (!enableTouch || !followCursor) return;
+      const touch = event.touches[0];
+      updateCursor(touch.clientX, touch.clientY);
+    },
+    [enableTouch, followCursor, updateCursor]
+  );
+  const handleTouchEnd = (0, import_react9.useCallback)(() => {
+    if (!enableTouch) return;
+    handleMouseLeave();
+  }, [enableTouch, handleMouseLeave]);
+  (0, import_react9.useEffect)(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+  return {
+    isRevealed,
+    cursorPosition,
+    containerRef,
+    handlers: {
+      onMouseEnter: handleMouseEnter,
+      onMouseLeave: handleMouseLeave,
+      onMouseMove: handleMouseMove,
+      onTouchStart: handleTouchStart,
+      onTouchMove: handleTouchMove,
+      onTouchEnd: handleTouchEnd
+    }
+  };
+}
+
+// src/variants/PanReveal/PanReveal.tsx
 var import_jsx_runtime5 = require("react/jsx-runtime");
+function PanReveal({
+  src,
+  alt,
+  secondarySrc,
+  animation = "slide",
+  direction = "right",
+  panAmount = 35,
+  maskShape = "circle",
+  maskSize = 55,
+  followCursor = false,
+  gradientColor = "rgba(0,0,0,0.45)",
+  timing = {},
+  enableTouch = false,
+  className,
+  imgClassName,
+  revealClassName,
+  style,
+  onRevealStart,
+  onRevealEnd,
+  loading,
+  decoding,
+  ...rest
+}) {
+  const effectiveAnimation = animation;
+  const effectiveDirection = direction === "diagonal" ? "diagonal" : direction;
+  const effectiveFollowCursor = effectiveAnimation === "spotlight" ? true : followCursor;
+  const effectiveMaskShape = effectiveAnimation === "spotlight" ? "circle" : maskShape;
+  const computedDuration = timing.duration ?? (effectiveAnimation === "slide" ? 650 : effectiveAnimation === "mask" ? 450 : 380);
+  const computedEasing = timing.easing ?? "cubic-bezier(0.22, 0.61, 0.36, 1)";
+  const {
+    isRevealed,
+    cursorPosition,
+    containerRef,
+    handlers
+  } = usePanReveal({
+    followCursor: effectiveFollowCursor,
+    enableTouch,
+    animationDuration: computedDuration,
+    onRevealStart,
+    onRevealEnd
+  });
+  const animationConfig = panAnimations[effectiveAnimation];
+  const revealImageSrc = secondarySrc ?? src;
+  const clampedPanAmount = Math.max(5, Math.min(100, panAmount));
+  const clampedMaskSize = Math.max(5, Math.min(100, maskSize));
+  const cssVars = (0, import_react10.useMemo)(
+    () => ({
+      "--duration": `${computedDuration}ms`,
+      "--easing": computedEasing,
+      "--cursor-x": `${cursorPosition.x}%`,
+      "--cursor-y": `${cursorPosition.y}%`,
+      "--gradient-color": gradientColor,
+      "--gradient-direction": directionToGradient(effectiveDirection)
+    }),
+    [
+      computedDuration,
+      computedEasing,
+      cursorPosition.x,
+      cursorPosition.y,
+      gradientColor,
+      effectiveDirection
+    ]
+  );
+  const containerStyle = (0, import_react10.useMemo)(
+    () => ({
+      ...animationConfig.container,
+      ...cssVars,
+      ...style
+    }),
+    [animationConfig.container, cssVars, style]
+  );
+  const baseImageStyle = (0, import_react10.useMemo)(() => {
+    const baseStyle = { ...animationConfig.baseImage };
+    if (effectiveAnimation === "slide") {
+      baseStyle.transform = isRevealed ? "translate3d(0, 0, 0)" : getCounterTransform(effectiveDirection, clampedPanAmount * 0.2);
+    }
+    return baseStyle;
+  }, [
+    animationConfig.baseImage,
+    effectiveAnimation,
+    effectiveDirection,
+    clampedPanAmount,
+    isRevealed
+  ]);
+  const revealImageStyle = (0, import_react10.useMemo)(() => {
+    const baseStyle = { ...animationConfig.revealImage };
+    if (effectiveAnimation === "slide") {
+      baseStyle.transform = getSlideTransform(
+        effectiveDirection,
+        clampedPanAmount,
+        isRevealed
+      );
+      baseStyle.opacity = 1;
+    } else {
+      baseStyle.clipPath = getMaskClipPath(
+        effectiveMaskShape,
+        clampedMaskSize,
+        cursorPosition,
+        isRevealed
+      );
+      baseStyle.opacity = isRevealed ? 1 : 0;
+    }
+    return baseStyle;
+  }, [
+    animationConfig.revealImage,
+    effectiveAnimation,
+    effectiveDirection,
+    effectiveMaskShape,
+    clampedMaskSize,
+    clampedPanAmount,
+    cursorPosition,
+    isRevealed
+  ]);
+  const overlayStyle = (0, import_react10.useMemo)(() => {
+    if (!animationConfig.overlay) return void 0;
+    const style2 = { ...animationConfig.overlay };
+    if (effectiveAnimation === "slide") {
+      style2.opacity = isRevealed ? 0 : 1;
+    } else {
+      style2.opacity = isRevealed ? 1 : 0.15;
+    }
+    return style2;
+  }, [animationConfig.overlay, effectiveAnimation, isRevealed]);
+  const containerClassName = (0, import_react10.useMemo)(() => {
+    const classes = [
+      "ri-pan-reveal",
+      `ri-pan-reveal--${effectiveAnimation}`,
+      `ri-pan-reveal--${effectiveDirection}`
+    ];
+    if (className) classes.push(className);
+    if (isRevealed && revealClassName) classes.push(revealClassName);
+    return classes.join(" ");
+  }, [
+    className,
+    revealClassName,
+    isRevealed,
+    effectiveAnimation,
+    effectiveDirection
+  ]);
+  return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+    "span",
+    {
+      ref: containerRef,
+      className: containerClassName,
+      style: containerStyle,
+      ...handlers,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+          "img",
+          {
+            src,
+            alt,
+            className: imgClassName,
+            style: baseImageStyle,
+            loading,
+            decoding,
+            draggable: false,
+            ...rest
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+          "img",
+          {
+            src: revealImageSrc,
+            alt,
+            "aria-hidden": "true",
+            className: imgClassName,
+            style: revealImageStyle,
+            loading: "lazy",
+            decoding: "async",
+            draggable: false
+          }
+        ),
+        overlayStyle && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+          "span",
+          {
+            "aria-hidden": "true",
+            className: "ri-pan-reveal__overlay",
+            style: overlayStyle
+          }
+        )
+      ]
+    }
+  );
+}
+function getSlideTransform(direction, amount, isRevealed) {
+  if (isRevealed) return "translate3d(0, 0, 0)";
+  const offset = `${amount}%`;
+  switch (direction) {
+    case "left":
+      return `translate3d(-${offset}, 0, 0)`;
+    case "right":
+      return `translate3d(${offset}, 0, 0)`;
+    case "up":
+      return `translate3d(0, -${offset}, 0)`;
+    case "down":
+      return `translate3d(0, ${offset}, 0)`;
+    case "diagonal":
+      return `translate3d(${offset}, ${offset}, 0)`;
+    default:
+      return "translate3d(0, 0, 0)";
+  }
+}
+function getCounterTransform(direction, amount) {
+  const offset = `${amount}%`;
+  switch (direction) {
+    case "left":
+      return `translate3d(${offset}, 0, 0)`;
+    case "right":
+      return `translate3d(-${offset}, 0, 0)`;
+    case "up":
+      return `translate3d(0, ${offset}, 0)`;
+    case "down":
+      return `translate3d(0, -${offset}, 0)`;
+    case "diagonal":
+      return `translate3d(-${offset}, -${offset}, 0)`;
+    default:
+      return "translate3d(0, 0, 0)";
+  }
+}
+function getMaskClipPath(shape, size, cursor, isRevealed) {
+  const center = `${cursor.x}% ${cursor.y}%`;
+  if (!isRevealed) {
+    if (shape === "rectangle") {
+      return "inset(0% 50% 0% 50%)";
+    }
+    return `circle(0% at ${center})`;
+  }
+  switch (shape) {
+    case "ellipse":
+      return `ellipse(${size * 1.2}% ${Math.max(size * 0.8, 5)}% at ${center})`;
+    case "rectangle": {
+      const gap = Math.max(0, (100 - size) / 2);
+      return `inset(0% ${gap}% 0% ${gap}%)`;
+    }
+    default:
+      return `circle(${size}% at ${center})`;
+  }
+}
+function directionToGradient(direction) {
+  switch (direction) {
+    case "left":
+      return "to left";
+    case "right":
+      return "to right";
+    case "up":
+      return "to top";
+    case "down":
+      return "to bottom";
+    case "diagonal":
+      return "135deg";
+    default:
+      return "to right";
+  }
+}
+
+// src/variants/KenBurnsSequence/KenBurnsSequence.tsx
+var import_react12 = require("react");
+
+// src/variants/KenBurnsSequence/animations.ts
+var kenBurnsStyles = {
+  container: {
+    position: "relative",
+    display: "inline-block",
+    overflow: "hidden"
+  },
+  image: {
+    display: "block",
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    willChange: "transform, opacity",
+    transformOrigin: "center center",
+    backfaceVisibility: "hidden"
+  },
+  overlay: {
+    position: "absolute",
+    inset: 0,
+    pointerEvents: "none",
+    mixBlendMode: "multiply"
+  }
+};
+var kenBurnsPresets = {
+  classic: [
+    { zoom: 1.12, panX: -8, panY: -6, duration: 6400 },
+    { zoom: 1.18, panX: 6, panY: 2, duration: 6200 },
+    { zoom: 1.08, panX: 0, panY: 8, duration: 6e3 }
+  ],
+  slowPan: [
+    { zoom: 1.08, panX: -12, panY: 4, duration: 7200 },
+    { zoom: 1.08, panX: 12, panY: -6, duration: 7200 },
+    { zoom: 1.05, panX: 0, panY: 6, duration: 6800 }
+  ],
+  dramatic: [
+    { zoom: 1.22, panX: -6, panY: 0, rotate: -1, duration: 5200 },
+    { zoom: 1.28, panX: 4, panY: 6, rotate: 1, duration: 5e3 },
+    { zoom: 1.18, panX: -3, panY: -8, rotate: -0.5, duration: 5400 }
+  ]
+};
+
+// src/variants/KenBurnsSequence/hooks.ts
+var import_react11 = require("react");
+function useKenBurnsSequence({
+  frameDurations,
+  autoplay,
+  loop,
+  pauseOnHover,
+  enableTouch = false,
+  framesKey,
+  onSequenceStart,
+  onSequenceEnd,
+  onFrameChange
+}) {
+  const [activeIndex, setActiveIndex] = (0, import_react11.useState)(0);
+  const [isPlaying, setIsPlaying] = (0, import_react11.useState)(autoplay);
+  const containerRef = (0, import_react11.useRef)(null);
+  const timerRef = (0, import_react11.useRef)(null);
+  const startedRef = (0, import_react11.useRef)(false);
+  const frameCount = frameDurations.length;
+  const clearTimer = (0, import_react11.useCallback)(() => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  }, []);
+  const resetState = (0, import_react11.useCallback)(() => {
+    clearTimer();
+    setActiveIndex(0);
+    setIsPlaying(autoplay);
+    startedRef.current = false;
+  }, [autoplay, clearTimer]);
+  (0, import_react11.useEffect)(() => {
+    resetState();
+  }, [framesKey, resetState]);
+  (0, import_react11.useEffect)(() => {
+    return () => {
+      clearTimer();
+    };
+  }, [clearTimer]);
+  (0, import_react11.useEffect)(() => {
+    if (!isPlaying || frameCount <= 1) return;
+    if (!startedRef.current) {
+      startedRef.current = true;
+      onSequenceStart?.();
+    }
+    const duration = frameDurations[activeIndex] ?? frameDurations[0] ?? 6e3;
+    timerRef.current = setTimeout(() => {
+      setActiveIndex((prev) => {
+        const next = prev + 1;
+        const reachedEnd = next >= frameCount;
+        if (reachedEnd && !loop) {
+          setIsPlaying(false);
+          onSequenceEnd?.();
+          return prev;
+        }
+        if (frameCount === 0) {
+          return prev;
+        }
+        const target = next % frameCount;
+        onFrameChange?.(target);
+        return target;
+      });
+    }, duration);
+    return () => {
+      clearTimer();
+    };
+  }, [
+    activeIndex,
+    clearTimer,
+    frameCount,
+    frameDurations,
+    isPlaying,
+    loop,
+    onFrameChange,
+    onSequenceEnd,
+    onSequenceStart
+  ]);
+  const handleMouseEnter = (0, import_react11.useCallback)(() => {
+    if (!pauseOnHover) return;
+    setIsPlaying(false);
+  }, [pauseOnHover]);
+  const handleMouseLeave = (0, import_react11.useCallback)(() => {
+    if (!pauseOnHover) return;
+    if (frameCount <= 1) return;
+    if (!loop && activeIndex === frameCount - 1) return;
+    setIsPlaying(true);
+  }, [pauseOnHover, frameCount, loop, activeIndex]);
+  const handleTouchStart = (0, import_react11.useCallback)(() => {
+    if (!enableTouch) return;
+    setIsPlaying(false);
+  }, [enableTouch]);
+  const handleTouchEnd = (0, import_react11.useCallback)(() => {
+    if (!enableTouch) return;
+    if (frameCount <= 1) return;
+    if (!loop && activeIndex === frameCount - 1) return;
+    setIsPlaying(true);
+  }, [enableTouch, frameCount, loop, activeIndex]);
+  return {
+    activeIndex,
+    isPlaying,
+    containerRef,
+    handlers: {
+      onMouseEnter: handleMouseEnter,
+      onMouseLeave: handleMouseLeave,
+      onTouchStart: handleTouchStart,
+      onTouchEnd: handleTouchEnd
+    }
+  };
+}
+
+// src/variants/KenBurnsSequence/KenBurnsSequence.tsx
+var import_jsx_runtime6 = require("react/jsx-runtime");
+var DEFAULT_DURATION = 6500;
+var DEFAULT_EASING = "cubic-bezier(0.33, 1, 0.68, 1)";
+function KenBurnsSequence({
+  src,
+  alt,
+  frames,
+  animation = "classic",
+  crossfadeDuration = 900,
+  pauseOnHover = true,
+  autoplay = true,
+  loop = true,
+  overlayGradient = "linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%)",
+  enableTouch = false,
+  timing = {},
+  className,
+  imgClassName,
+  style,
+  onSequenceStart,
+  onSequenceEnd,
+  onFrameChange,
+  loading,
+  decoding,
+  ...rest
+}) {
+  const fallbackDuration = timing.duration ?? DEFAULT_DURATION;
+  const fallbackEasing = timing.easing ?? DEFAULT_EASING;
+  const resolvedFrames = (0, import_react12.useMemo)(() => {
+    if (frames && frames.length > 0) {
+      return frames;
+    }
+    return kenBurnsPresets[animation] ?? kenBurnsPresets.classic;
+  }, [animation, frames]);
+  const normalizedFrames = (0, import_react12.useMemo)(() => {
+    const source = resolvedFrames.length ? resolvedFrames : kenBurnsPresets.classic;
+    return source.map(
+      (frame) => normalizeFrame(frame, src, fallbackDuration, fallbackEasing)
+    );
+  }, [resolvedFrames, src, fallbackDuration, fallbackEasing]);
+  const framesKey = (0, import_react12.useMemo)(
+    () => normalizedFrames.map(
+      (frame) => `${frame.src}-${frame.zoom}-${frame.panX}-${frame.panY}-${frame.rotate}-${frame.duration}-${frame.easing}`
+    ).join("|"),
+    [normalizedFrames]
+  );
+  const frameDurations = (0, import_react12.useMemo)(
+    () => normalizedFrames.map((frame) => frame.duration),
+    [normalizedFrames]
+  );
+  const { activeIndex, isPlaying, containerRef, handlers } = useKenBurnsSequence({
+    frameDurations,
+    autoplay,
+    loop,
+    pauseOnHover,
+    enableTouch,
+    framesKey,
+    onSequenceStart,
+    onSequenceEnd,
+    onFrameChange
+  });
+  const activeFrame = normalizedFrames[activeIndex] ?? normalizedFrames[0] ?? normalizeFrame(
+    void 0,
+    src,
+    fallbackDuration,
+    fallbackEasing
+  );
+  const [leavingFrame, setLeavingFrame] = (0, import_react12.useState)(null);
+  const [isLeavingVisible, setIsLeavingVisible] = (0, import_react12.useState)(false);
+  const leaveTimeoutRef = (0, import_react12.useRef)(null);
+  const rafRef = (0, import_react12.useRef)(null);
+  const previousFrameRef = (0, import_react12.useRef)(null);
+  (0, import_react12.useEffect)(() => {
+    previousFrameRef.current = normalizedFrames[0] ?? null;
+    setLeavingFrame(null);
+    setIsLeavingVisible(false);
+    if (leaveTimeoutRef.current) {
+      clearTimeout(leaveTimeoutRef.current);
+      leaveTimeoutRef.current = null;
+    }
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+  }, [framesKey, normalizedFrames]);
+  (0, import_react12.useEffect)(() => {
+    if (!previousFrameRef.current) {
+      previousFrameRef.current = activeFrame;
+      return;
+    }
+    if (crossfadeDuration <= 0) {
+      previousFrameRef.current = activeFrame;
+      setLeavingFrame(null);
+      setIsLeavingVisible(false);
+      return;
+    }
+    setLeavingFrame(previousFrameRef.current);
+    setIsLeavingVisible(true);
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+    }
+    rafRef.current = requestAnimationFrame(() => {
+      setIsLeavingVisible(false);
+      rafRef.current = null;
+    });
+    if (leaveTimeoutRef.current) {
+      clearTimeout(leaveTimeoutRef.current);
+    }
+    leaveTimeoutRef.current = setTimeout(() => {
+      setLeavingFrame(null);
+      leaveTimeoutRef.current = null;
+    }, crossfadeDuration);
+    previousFrameRef.current = activeFrame;
+  }, [activeFrame, crossfadeDuration]);
+  (0, import_react12.useEffect)(() => {
+    return () => {
+      if (leaveTimeoutRef.current) {
+        clearTimeout(leaveTimeoutRef.current);
+      }
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, []);
+  const containerClassName = (0, import_react12.useMemo)(() => {
+    const classes = [
+      "ri-kenburns-sequence",
+      `ri-kenburns-sequence--${animation}`
+    ];
+    if (!isPlaying) {
+      classes.push("ri-kenburns-sequence--paused");
+    }
+    if (className) {
+      classes.push(className);
+    }
+    return classes.join(" ");
+  }, [animation, className, isPlaying]);
+  const containerStyle = (0, import_react12.useMemo)(
+    () => ({
+      ...kenBurnsStyles.container,
+      ...style
+    }),
+    [style]
+  );
+  const activeImageStyle = (0, import_react12.useMemo)(
+    () => ({
+      ...kenBurnsStyles.image,
+      transition: `transform ${activeFrame.duration}ms ${activeFrame.easing}`,
+      transform: activeFrame.transform
+    }),
+    [activeFrame]
+  );
+  const leavingImageStyle = (0, import_react12.useMemo)(() => {
+    if (!leavingFrame) return void 0;
+    return {
+      ...kenBurnsStyles.image,
+      position: "absolute",
+      inset: 0,
+      opacity: isLeavingVisible ? 1 : 0,
+      transition: `opacity ${crossfadeDuration}ms ease`,
+      transform: leavingFrame.transform,
+      pointerEvents: "none"
+    };
+  }, [crossfadeDuration, isLeavingVisible, leavingFrame]);
+  const overlayStyle = (0, import_react12.useMemo)(() => {
+    if (!overlayGradient) return void 0;
+    return {
+      ...kenBurnsStyles.overlay,
+      background: overlayGradient
+    };
+  }, [overlayGradient]);
+  return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+    "span",
+    {
+      ref: containerRef,
+      className: containerClassName,
+      style: containerStyle,
+      ...handlers,
+      children: [
+        leavingFrame && leavingImageStyle && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+          "img",
+          {
+            src: leavingFrame.src,
+            alt,
+            "aria-hidden": "true",
+            className: imgClassName,
+            style: leavingImageStyle,
+            loading: "lazy",
+            decoding: "async",
+            draggable: false
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+          "img",
+          {
+            src: activeFrame.src,
+            alt,
+            className: imgClassName,
+            style: activeImageStyle,
+            loading,
+            decoding,
+            draggable: false,
+            ...rest
+          }
+        ),
+        overlayStyle && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { "aria-hidden": "true", className: "ri-kenburns-sequence__overlay", style: overlayStyle })
+      ]
+    }
+  );
+}
+function normalizeFrame(frame, fallbackSrc, fallbackDuration, fallbackEasing) {
+  const zoom = clamp(frame?.zoom ?? 1.12, 1, 1.6);
+  const panX = clamp(frame?.panX ?? 0, -30, 30);
+  const panY = clamp(frame?.panY ?? 0, -30, 30);
+  const rotate = clamp(frame?.rotate ?? 0, -6, 6);
+  const duration = Math.max(1200, frame?.duration ?? fallbackDuration);
+  const easing = frame?.easing ?? fallbackEasing;
+  const src = frame?.src ?? fallbackSrc;
+  return {
+    src,
+    zoom,
+    panX,
+    panY,
+    rotate,
+    duration,
+    easing,
+    transform: createTransform(panX, panY, zoom, rotate)
+  };
+}
+function createTransform(panX, panY, zoom, rotate) {
+  return `translate3d(${panX}%, ${panY}%, 0) scale(${zoom}) rotate(${rotate}deg)`;
+}
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+// src/ReactiveImage.tsx
+var import_jsx_runtime7 = require("react/jsx-runtime");
 function ReactiveImage(props) {
   const { variant } = props;
-  if (variant === "hoverSwitch") return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(HoverSwitch, { ...props });
-  if (variant === "zoomOnHover") return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(ZoomOnHover, { ...props });
-  if (variant === "tiltOnHover") return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(TiltOnHover, { ...props });
-  if (variant === "clickExpand") return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(ClickExpand, { ...props });
+  if (variant === "hoverSwitch") return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(HoverSwitch, { ...props });
+  if (variant === "zoomOnHover") return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(ZoomOnHover, { ...props });
+  if (variant === "tiltOnHover") return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(TiltOnHover, { ...props });
+  if (variant === "clickExpand") return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(ClickExpand, { ...props });
+  if (variant === "panReveal") return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(PanReveal, { ...props });
+  if (variant === "kenBurnsSequence")
+    return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(KenBurnsSequence, { ...props });
   const { src, alt, className, imgClassName, style, ...rest } = props;
-  return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className, style, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className, style, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
     "img",
     {
       src,

@@ -7,7 +7,8 @@ export type VariantName =
   | "zoomOnHover"
   | "tiltOnHover"
   | "clickExpand"
-  | "panReveal";
+  | "panReveal"
+  | "kenBurnsSequence";
 
 type NativeImgProps = Omit<
   ImgHTMLAttributes<HTMLImageElement>,
@@ -175,13 +176,40 @@ export type PanRevealProps = {
   onRevealStart?: () => void;
   onRevealEnd?: () => void;
 };
+export type KenBurnsSequenceFrame = {
+  src?: string;
+  zoom?: number;
+  panX?: number;
+  panY?: number;
+  rotate?: number;
+  duration?: number;
+  easing?: string;
+};
+export type KenBurnsSequenceProps = {
+  animation?: "classic" | "slowPan" | "dramatic";
+  frames?: KenBurnsSequenceFrame[];
+  crossfadeDuration?: number;
+  pauseOnHover?: boolean;
+  autoplay?: boolean;
+  loop?: boolean;
+  overlayGradient?: string;
+  enableTouch?: boolean;
+  timing?: {
+    duration?: number;
+    easing?: string;
+  };
+  onSequenceStart?: () => void;
+  onSequenceEnd?: () => void;
+  onFrameChange?: (index: number) => void;
+};
 
 export type VariantProps =
   | ({ variant: "hoverSwitch" } & HoverSwitchProps)
   | ({ variant: "zoomOnHover" } & ZoomOnHoverProps)
   | ({ variant: "tiltOnHover" } & TiltOnHoverProps)
   | ({ variant: "clickExpand" } & ClickExpandProps)
-  | ({ variant: "panReveal" } & PanRevealProps);
+  | ({ variant: "panReveal" } & PanRevealProps)
+  | ({ variant: "kenBurnsSequence" } & KenBurnsSequenceProps);
 
 export type ReactiveImageProps = BaseProps &
   (VariantProps | { variant?: undefined });

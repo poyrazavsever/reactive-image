@@ -68,7 +68,20 @@
 - `panAmount`, `maskShape`, `maskSize`, `gradientColor`.
 - `followCursor`, `enableTouch`, `revealClassName`, lifecycle callbacks.
 
-**Notes:** `usePanReveal` mirrors the pattern of other hooks—hover/touch handlers fire `onRevealStart` and schedule the `onRevealEnd` callback, while cursor position is normalized to CSS percentages for clip-path math. Animations rely heavily on CSS custom properties (`--cursor-x`, `--gradient-direction`, `--duration`) to keep the component declarative and easy to theme.
+**Notes:** `usePanReveal` mirrors the pattern of other hooks-hover/touch handlers fire `onRevealStart` and schedule the `onRevealEnd` callback, while cursor position is normalized to CSS percentages for clip-path math. Animations rely heavily on CSS custom properties (`--cursor-x`, `--gradient-direction`, `--duration`) to keep the component declarative and easy to theme.
+
+### KenBurnsSequence (`src/variants/KenBurnsSequence/KenBurnsSequence.tsx`)
+**Behavior:** Plays a looping Ken Burns story by sliding between zoom/pan keyframes. Each keyframe can reuse the base `src` or point to a secondary asset, while the component crossfades the previous frame as soon as the next zoom kicks in.
+
+**Key Props:**
+- `frames`: array of `{ src, zoom, panX, panY, rotate, duration, easing }` for full control.
+- `animation`: `classic`, `slowPan`, `dramatic` presets injected when `frames` is omitted.
+- `crossfadeDuration`, `pauseOnHover`, `autoplay`, `loop`, `overlayGradient`, `enableTouch`.
+- `timing` fallback plus lifecycle callbacks (`onSequenceStart`, `onSequenceEnd`, `onFrameChange`).
+
+**Notes:** `useKenBurnsSequence` only coordinates timing and pause/resume mechanics; `KenBurnsSequence` keeps a cached `leavingFrame` so the prior image fades out while the next frame's transform animates underneath. Motion relies on inline `translate3d + scale + rotate` transforms to stay GPU bound, and timers clean themselves up whenever frames or props shift.
+
+**Possible New Animations:** portrait drift (vertical bias and subtle rotation), snap zoom (short duration + higher zoom), trio sequences with accent overlays synced to each frame.
 
 ## Shared Hook & Animation Principles
 - Hooks clean up `setTimeout`, `requestAnimationFrame`, and event listeners on unmount to avoid leaks.
@@ -88,7 +101,6 @@
 | Variant | Goal | Suggested Animations |
 | --- | --- | --- |
 | **PanReveal** | Two cropped versions of the same image sliding over one another | mask-image pans, inertia easing, gradient wipes |
-| **KenBurnsSequence** | Slow cinematic zoom/pan for slideshows or hero blocks | Ken Burns keyframes, crossfade between frames |
 | **DepthFocus** | Emphasize a focal point by shifting blur/focus | radial gradient masks, CSS filter blur swap |
 | **SplitLayers** | Foreground and background layers move at different speeds | translateZ parallax, staggered timing |
 | **SpotlightReveal** | Cursor controlled circular spotlight that recolors the asset | mix-blend-mode overlays, animated clip-path |

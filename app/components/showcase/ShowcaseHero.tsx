@@ -6,6 +6,7 @@ import { HoverSwitch } from "../../../packages/reactive-image/src/variants/Hover
 import { TiltOnHover } from "../../../packages/reactive-image/src/variants/TiltOnHover";
 import { ZoomOnHover } from "../../../packages/reactive-image/src/variants/ZoomOnHover";
 import { PanReveal } from "../../../packages/reactive-image/src/variants/PanReveal";
+import { KenBurnsSequence } from "../../../packages/reactive-image/src/variants/KenBurnsSequence";
 
 type ShowcaseHeroProps = {
   locale: string;
@@ -46,6 +47,14 @@ const showcaseImages = {
     tertiary:
       "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&h=400&fit=crop&crop=center",
   },
+};
+
+const kenBurnsTimelines = {
+  canyon: [
+    { zoom: 1.12, panX: -12, panY: 8, duration: 4800 },
+    { zoom: 1.22, panX: 6, panY: -4, rotate: 0.8, duration: 5200 },
+    { zoom: 1.15, panX: 2, panY: 10, rotate: -0.5, duration: 5000 },
+  ],
 };
 
 export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
@@ -480,6 +489,78 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
                   className="block w-full h-full"
                   imgClassName="w-full h-full object-cover"
                   style={{ width: "100%", height: "100%" }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* KenBurnsSequence Section */}
+        <div className="mb-20">
+          <h3 className="text-xl text-neutral-400 mb-8 flex items-center gap-3">
+            {locale === "tr"
+              ? "Sinematik Ken Burns Sekansları"
+              : "Cinematic Ken Burns Sequences"}
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Classic Drift */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Classic Drift</h4>
+              </div>
+              <div className="aspect-4/3">
+                <KenBurnsSequence
+                  src={showcaseImages.nature.primary}
+                  alt="Classic Ken Burns drift"
+                  animation="classic"
+                  crossfadeDuration={900}
+                  pauseOnHover
+                  className="block h-full w-full"
+                  imgClassName="w-full h-full object-cover"
+                  overlayGradient="linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.65))"
+                  style={{ display: "block", width: "100%", height: "100%" }}
+                />
+              </div>
+            </div>
+
+            {/* Dramatic Spotlight */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Dramatic Spotlight</h4>
+              </div>
+              <div className="aspect-4/3">
+                <KenBurnsSequence
+                  src={showcaseImages.architecture.primary}
+                  alt="Dramatic Ken Burns motion"
+                  animation="dramatic"
+                  crossfadeDuration={1200}
+                  pauseOnHover={false}
+                  overlayGradient="linear-gradient(160deg, rgba(0,0,0,0.05), rgba(0,0,0,0.55))"
+                  className="block h-full w-full"
+                  imgClassName="w-full h-full object-cover"
+                  style={{ display: "block", width: "100%", height: "100%" }}
+                />
+              </div>
+            </div>
+
+            {/* Custom Frames */}
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Custom Frames</h4>
+              </div>
+              <div className="aspect-4/3">
+                <KenBurnsSequence
+                  src={showcaseImages.abstract.primary}
+                  alt="Custom Ken Burns sequence"
+                  frames={kenBurnsTimelines.canyon}
+                  crossfadeDuration={1100}
+                  pauseOnHover
+                  loop={false}
+                  enableTouch
+                  overlayGradient="linear-gradient(180deg, rgba(12,16,24,0) 0%, rgba(12,16,24,0.7) 100%)"
+                  className="block h-full w-full"
+                  imgClassName="w-full h-full object-cover"
+                  style={{ display: "block", width: "100%", height: "100%" }}
                 />
               </div>
             </div>

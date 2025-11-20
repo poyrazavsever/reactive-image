@@ -1,0 +1,142 @@
+---
+title: KenBurnsSequence
+description: Cinematic Ken Burns style zoom-and-pan sequences with presets, crossfades, and fully customizable keyframes.
+order: 7
+locale: en
+slug: ken-burns-sequence
+toc: true
+---
+
+# KenBurnsSequence
+
+KenBurnsSequence choreographs a series of zoom, pan, and rotation transforms so hero sections and carousels feel alive. Each frame can reuse the original `src` or swap to a different photo, and the component automatically crossfades the outgoing frame as the next one animates in.
+
+## Highlights
+
+- **Preset Timelines**: `classic`, `slowPan`, and `dramatic` cover most editorial use cases out of the box.
+- **Custom Frames**: Provide a `frames` array with precise `zoom`, `panX`, `panY`, `rotate`, `duration`, and `easing` controls per scene.
+- **Built-in Crossfades**: `crossfadeDuration` handles buttery transitions between frames without juggling CSS keyframes.
+- **Pause & Loop Controls**: `pauseOnHover`, `autoplay`, `loop`, and `enableTouch` make the animation feel responsive across devices.
+- **Lifecycle Hooks**: `onSequenceStart`, `onSequenceEnd`, and `onFrameChange` keep analytics or captions in sync with the motion.
+
+## Quick Start
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export default function HeroSequence() {
+  return (
+    <ReactiveImage
+      variant="kenBurnsSequence"
+      src="/hero.jpg"
+      alt="Cinematic hero"
+      animation="classic"
+      crossfadeDuration={900}
+      overlayGradient="linear-gradient(180deg, rgba(5, 7, 12, 0) 0%, rgba(5, 7, 12, 0.65) 100%)"
+      pauseOnHover
+    />
+  );
+}
+```
+
+## Preset Timelines
+
+### Classic Drift
+
+Slow zooms with gentle horizontal drift. Great for product hero shots or calm travel scenes.
+
+```tsx
+<KenBurnsSequence
+  src="/editorial-01.jpg"
+  alt="Classic drift"
+  animation="classic"
+  crossfadeDuration={800}
+  pauseOnHover={true}
+/>
+```
+
+### Slow Pan
+
+Keeps the zoom subtle and leans on left/right pans—ideal when typography overlays need steady motion.
+
+```tsx
+<KenBurnsSequence
+  src="/editorial-02.jpg"
+  alt="Slow panoramic motion"
+  animation="slowPan"
+  overlayGradient="linear-gradient(120deg, rgba(0,0,0,0.1), rgba(0,0,0,0.45))"
+  pauseOnHover={false}
+  loop={true}
+/>
+```
+
+### Dramatic Punch
+
+Higher zoom values paired with small rotations for punchy hero intros.
+
+```tsx
+<KenBurnsSequence
+  src="/editorial-03.jpg"
+  alt="Bold dramatic zoom"
+  animation="dramatic"
+  crossfadeDuration={1200}
+  pauseOnHover={true}
+  timing={{ duration: 5200, easing: "cubic-bezier(0.33, 1, 0.68, 1)" }}
+/>
+```
+
+## Custom Frame Sequences
+
+Pass a `frames` array to design fully bespoke motion. Each frame inherits `timing` defaults but can override them locally.
+
+```tsx
+const canyonFrames = [
+  { zoom: 1.12, panX: -12, panY: 8, duration: 4800 },
+  { zoom: 1.22, panX: 6, panY: -4, rotate: 0.8, duration: 5200 },
+  { zoom: 1.15, panX: 2, panY: 10, rotate: -0.5, duration: 5000 },
+];
+
+<KenBurnsSequence
+  src="/canyon.jpg"
+  alt="Custom frames"
+  frames={canyonFrames}
+  crossfadeDuration={1000}
+  overlayGradient="linear-gradient(180deg, rgba(12, 16, 24, 0) 0%, rgba(12, 16, 24, 0.65) 100%)"
+  pauseOnHover={true}
+  onFrameChange={(index) => console.log("Frame", index)}
+/>
+```
+
+### Touch & Interaction Tips
+
+- Enable `enableTouch` to allow tap-to-pause interactions on touchscreens.
+- Combine `pauseOnHover` with `loop={false}` when you want the animation to run once and stop after the final frame.
+- Use `onSequenceStart`/`onSequenceEnd` to sync copy fades or analytics beacons with the cinematic cue.
+
+## API Reference
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `animation` | `"classic" \| "slowPan" \| "dramatic"` | `"classic"` | Preset timeline used when `frames` is not supplied. |
+| `frames` | `KenBurnsFrame[]` | `undefined` | Custom frame definitions overriding presets. |
+| `crossfadeDuration` | `number` | `900` | Milliseconds used to fade the previous frame out. |
+| `pauseOnHover` | `boolean` | `true` | Pauses the timeline while the pointer hovers the component. |
+| `autoplay` | `boolean` | `true` | Starts the sequence immediately when mounted. |
+| `loop` | `boolean` | `true` | Restarts from the first frame after reaching the end. |
+| `overlayGradient` | `string` | `linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.55))` | Optional overlay rendered on top of the sequence. |
+| `enableTouch` | `boolean` | `false` | Allows tap-to-pause behavior for touch devices. |
+| `timing` | `{ duration?: number; easing?: string; }` | `{ duration: 6500, easing: "cubic-bezier(0.33, 1, 0.68, 1)" }` | Fallback values applied to frames lacking explicit timing. |
+| `onSequenceStart` | `() => void` | `undefined` | Fired once when the first frame begins animating. |
+| `onSequenceEnd` | `() => void` | `undefined` | Fired when the last frame finishes and `loop` is `false`. |
+| `onFrameChange` | `(index: number) => void` | `undefined` | Fired each time a new frame becomes active. |
+
+## Performance Notes
+
+- Stick to 3–5 frames for most hero use cases to keep timers predictable.
+- Crossfades rely on `opacity` transitions; avoid stacking dozens of sequences on the same viewport section.
+- Preload imagery referenced via `frames[i].src` when the reveal is part of the initial viewport to prevent flashes.
+- Prefer `pauseOnHover` when pairing KenBurnsSequence with clickable CTAs so users can focus on interacting without motion distraction.
+
+---
+
+Need more inspiration? Jump to the [showcase](/showcase) to see KenBurnsSequence running alongside other variants.
