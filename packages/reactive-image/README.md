@@ -118,7 +118,9 @@ Pan between crops or reveal an alternate image with cinematic wipes.
 
 Play a cinematic sequence of zoom/pan keyframes—perfect for hero sections or carousels.
 
-- `classic`, `slowPan`, `dramatic`
+- Presets: `classic`, `slowPan`, `dramatic`
+- Provide custom `frames` for bespoke timelines
+- Control `crossfadeDuration`, `pauseOnHover`, `autoplay`, `loop`, `overlayGradient`, `enableTouch`
 
 ## Performance
 

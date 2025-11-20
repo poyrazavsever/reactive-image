@@ -12,13 +12,14 @@
 
 ## Features
 
-### **5 Powerful Interactive Variants**
+### **6 Powerful Interactive Variants**
 
 - **HoverSwitch** - Image switching on mouse hover
 - **ZoomOnHover** - Mouse-driven zoom effects
 - **TiltOnHover** - 3D tilt and perspective effects
 - **ClickExpand** - Click-to-expand modal viewing
 - **PanReveal** - Cinematic slide, mask, and spotlight reveals
+- **KenBurnsSequence** - Cinematic zoom/pan storyboards for hero blocks
 
 ### **Performance Focused**
 
@@ -29,7 +30,7 @@
 
 ### **Fully Customizable**
 
-- 39+ different animation types
+- 42+ different animation types
 - CSS-in-JS or external stylesheet support
 - Custom timing and easing functions
 - Flexible sizing for responsive design
@@ -347,6 +348,47 @@ Layer two visuals and reveal them with directional slides, masks, or spotlight f
 - `direction`: `left`, `right`, `up`, `down`, `diagonal` (slide only)
 - `secondarySrc`: optional alternate asset
 - `panAmount`, `maskShape`, `maskSize`, `followCursor`, `timing`
+
+### 6. KenBurnsSequence - Cinematic Hero Sequences
+
+Play curated zoom + pan timelines that make hero sections feel alive.
+
+```jsx
+// Dramatic preset
+<ReactiveImage
+  variant="kenBurnsSequence"
+  src="/hero.jpg"
+  alt="Cinematic hero"
+  animation="dramatic"
+  crossfadeDuration={1100}
+  overlayGradient="linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.55))"
+  pauseOnHover
+/>
+
+// Custom frame stack
+const canyonFrames = [
+  { zoom: 1.12, panX: -12, panY: 8, duration: 4800 },
+  { zoom: 1.22, panX: 6, panY: -4, rotate: 0.8, duration: 5200 },
+  { zoom: 1.15, panX: 2, panY: 10, rotate: -0.5, duration: 5000 },
+];
+
+<ReactiveImage
+  variant="kenBurnsSequence"
+  src="/canyon.jpg"
+  alt="Custom timeline"
+  frames={canyonFrames}
+  crossfadeDuration={1000}
+  pauseOnHover={false}
+  loop={false}
+  enableTouch
+/>
+```
+
+**KenBurns Controls**
+
+- Presets: `classic`, `slowPan`, `dramatic`
+- `frames`: custom timeline overrides
+- `crossfadeDuration`, `pauseOnHover`, `autoplay`, `loop`, `overlayGradient`, `enableTouch`
 
 ## Advanced Customization
 
