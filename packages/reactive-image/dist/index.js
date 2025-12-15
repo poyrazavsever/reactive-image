@@ -2812,19 +2812,451 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
-// src/ReactiveImage.tsx
+// src/variants/PolaroidStack/PolaroidStack.tsx
+import { useMemo as useMemo6 } from "react";
+
+// src/variants/PolaroidStack/animations.ts
+var polaroidStyles = {
+  container: {
+    position: "relative",
+    display: "block",
+    width: "100%",
+    perspective: "900px"
+  },
+  frame: {
+    position: "relative",
+    display: "block",
+    width: "100%",
+    aspectRatio: "4 / 3",
+    padding: "12px"
+  },
+  card: {
+    position: "absolute",
+    inset: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    backgroundColor: "#fff",
+    borderRadius: "12px",
+    border: "10px solid #fff",
+    boxShadow: "var(--shadow, 0 14px 30px rgba(0,0,0,0.18))",
+    transition: "transform 320ms cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 220ms ease, filter 200ms ease",
+    transformOrigin: "center center",
+    willChange: "transform, box-shadow",
+    backfaceVisibility: "hidden"
+  }
+};
+var shadowMap = {
+  soft: "0 10px 24px rgba(0,0,0,0.12)",
+  medium: "0 14px 30px rgba(0,0,0,0.18)",
+  strong: "0 18px 40px rgba(0,0,0,0.22)"
+};
+
+// src/variants/PolaroidStack/hooks.ts
+import { useState as useState8, useCallback as useCallback7, useRef as useRef8, useEffect as useEffect8 } from "react";
+function usePolaroidStack({
+  enableTouch = false,
+  onStackEnter,
+  onStackLeave
+}) {
+  const [isActive, setIsActive] = useState8(false);
+  const containerRef = useRef8(null);
+  const touchTimeoutRef = useRef8(null);
+  const activate = useCallback7(() => {
+    setIsActive(true);
+    onStackEnter?.();
+  }, [onStackEnter]);
+  const deactivate = useCallback7(() => {
+    setIsActive(false);
+    onStackLeave?.();
+  }, [onStackLeave]);
+  const handleMouseEnter = useCallback7(() => {
+    if (touchTimeoutRef.current) {
+      clearTimeout(touchTimeoutRef.current);
+      touchTimeoutRef.current = null;
+    }
+    activate();
+  }, [activate]);
+  const handleMouseLeave = useCallback7(() => {
+    if (touchTimeoutRef.current) {
+      clearTimeout(touchTimeoutRef.current);
+      touchTimeoutRef.current = null;
+    }
+    deactivate();
+  }, [deactivate]);
+  const handleTouchStart = useCallback7(() => {
+    if (!enableTouch) return;
+    activate();
+  }, [activate, enableTouch]);
+  const handleTouchEnd = useCallback7(() => {
+    if (!enableTouch) return;
+    touchTimeoutRef.current = setTimeout(deactivate, 150);
+  }, [deactivate, enableTouch]);
+  useEffect8(() => {
+    return () => {
+      if (touchTimeoutRef.current) {
+        clearTimeout(touchTimeoutRef.current);
+      }
+    };
+  }, []);
+  return {
+    isActive,
+    containerRef,
+    handlers: {
+      onMouseEnter: handleMouseEnter,
+      onMouseLeave: handleMouseLeave,
+      onTouchStart: handleTouchStart,
+      onTouchEnd: handleTouchEnd
+    }
+  };
+}
+
+// src/variants/PolaroidStack/PolaroidStack.tsx
 import { jsx as jsx7 } from "react/jsx-runtime";
+function PolaroidStack({
+  src,
+  alt,
+  stack = [],
+  stackDepth,
+  spreadAngle = 32,
+  offsetStep = 14,
+  lift = 14,
+  rotationJitter = 4,
+  shadow = "medium",
+  aspectRatio,
+  enableTouch = false,
+  className,
+  imgClassName,
+  style,
+  onStackEnter,
+  onStackLeave,
+  loading,
+  decoding,
+  ...rest
+}) {
+  const { variant: _variant, ...imgRest } = rest;
+  const { isActive, containerRef, handlers } = usePolaroidStack({
+    enableTouch,
+    onStackEnter,
+    onStackLeave
+  });
+  const items = useMemo6(() => {
+    const combined = [...stack ?? [], { src, alt }];
+    const depth = typeof stackDepth === "number" ? Math.max(1, Math.min(stackDepth, combined.length)) : Math.min(4, combined.length || 1);
+    return combined.slice(0, depth);
+  }, [alt, src, stack, stackDepth]);
+  const ratioFromStyle = style?.aspectRatio ?? void 0;
+  const frameAspect = aspectRatio ?? ratioFromStyle ?? "4 / 3";
+  const containerStyle = useMemo6(
+    () => ({
+      ...polaroidStyles.container,
+      ...style
+    }),
+    [style]
+  );
+  const frameStyle = useMemo6(
+    () => ({
+      ...polaroidStyles.frame,
+      aspectRatio: frameAspect
+    }),
+    [frameAspect]
+  );
+  const cardStyles = useMemo6(() => {
+    const count = items.length || 1;
+    const center = (count - 1) / 2;
+    const totalSpread = Math.max(4, spreadAngle);
+    const angleStep = count > 1 ? totalSpread / (count - 1) : 0;
+    return items.map((_, index) => {
+      const angle = count > 1 ? -totalSpread / 2 + angleStep * index : 0;
+      const jitter = (index - center) * rotationJitter * (isActive ? 0.6 : 1) / 1.8;
+      const rotation = isActive ? angle : jitter;
+      const translateX = isActive ? (index - center) * offsetStep : index * offsetStep * 0.4;
+      const translateY = isActive ? -lift + Math.abs(index - center) * -2 : index * offsetStep * 0.55;
+      const scale = isActive ? 1 : 0.985;
+      const boxShadow = shadowMap[shadow] ?? shadowMap.medium;
+      return {
+        transform: `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rotation}deg) scale(${scale})`,
+        zIndex: 100 + index,
+        boxShadow,
+        filter: isActive && index === count - 1 ? "saturate(1.05)" : "saturate(0.96)"
+      };
+    });
+  }, [isActive, items.length, lift, offsetStep, rotationJitter, shadow, spreadAngle]);
+  const containerClassName = useMemo6(() => {
+    const classes = ["ri-polaroid-stack"];
+    if (isActive) classes.push("ri-polaroid-stack--active");
+    if (className) classes.push(className);
+    return classes.join(" ");
+  }, [className, isActive]);
+  return /* @__PURE__ */ jsx7(
+    "span",
+    {
+      ref: containerRef,
+      className: containerClassName,
+      style: containerStyle,
+      ...handlers,
+      children: /* @__PURE__ */ jsx7("span", { style: frameStyle, className: "ri-polaroid-stack__frame block", children: items.map((item, index) => /* @__PURE__ */ jsx7(
+        "img",
+        {
+          src: item.src,
+          alt: index === items.length - 1 ? item.alt ?? alt : "",
+          "aria-hidden": index !== items.length - 1,
+          className: imgClassName,
+          style: {
+            ...polaroidStyles.card,
+            ...cardStyles[index]
+          },
+          loading: index === items.length - 1 ? loading : "lazy",
+          decoding: index === items.length - 1 ? decoding : "async",
+          draggable: false,
+          ...imgRest
+        },
+        `${item.src}-${index}`
+      )) })
+    }
+  );
+}
+
+// src/variants/ScrollReactive/ScrollReactive.tsx
+import { useMemo as useMemo7 } from "react";
+
+// src/variants/ScrollReactive/animations.ts
+var scrollAnimations = {
+  container: {
+    position: "relative",
+    display: "inline-block",
+    overflow: "hidden"
+  },
+  image: {
+    display: "block",
+    width: "100%",
+    height: "auto",
+    willChange: "transform, opacity",
+    transformOrigin: "center center",
+    transition: "transform 90ms linear, opacity 90ms linear"
+  }
+};
+
+// src/variants/ScrollReactive/hooks.ts
+import { useState as useState9, useRef as useRef9, useEffect as useEffect9, useCallback as useCallback8 } from "react";
+var clamp2 = (value, min, max) => Math.min(Math.max(value, min), max);
+function useScrollReactive({
+  triggerOffset = 0,
+  once = false,
+  onEnter,
+  onExit,
+  onProgress
+}) {
+  const [progress, setProgress] = useState9(0);
+  const [isActive, setIsActive] = useState9(false);
+  const hasEnteredRef = useRef9(false);
+  const containerRef = useRef9(null);
+  const rafRef = useRef9(null);
+  const calculateProgress = useCallback8(() => {
+    const el = containerRef.current;
+    if (!el) return 0;
+    const rect = el.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || 1;
+    const total = rect.height + viewportHeight - triggerOffset;
+    if (total <= 0) return 0;
+    const raw = (viewportHeight - rect.top - triggerOffset) / total;
+    return clamp2(raw, 0, 1);
+  }, [triggerOffset]);
+  const scheduleUpdate = useCallback8(() => {
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+    }
+    rafRef.current = requestAnimationFrame(() => {
+      const next = calculateProgress();
+      setProgress((prev) => {
+        const value = once && hasEnteredRef.current ? Math.max(prev, next) : next;
+        if (value !== prev) {
+          onProgress?.(value);
+        }
+        return value;
+      });
+      rafRef.current = null;
+    });
+  }, [calculateProgress, onProgress, once]);
+  useEffect9(() => {
+    scheduleUpdate();
+  }, [scheduleUpdate]);
+  useEffect9(() => {
+    const handle = () => scheduleUpdate();
+    window.addEventListener("scroll", handle, { passive: true });
+    window.addEventListener("resize", handle);
+    return () => {
+      window.removeEventListener("scroll", handle);
+      window.removeEventListener("resize", handle);
+    };
+  }, [scheduleUpdate]);
+  useEffect9(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (!entry) return;
+        if (entry.isIntersecting) {
+          if (!hasEnteredRef.current) {
+            hasEnteredRef.current = true;
+            onEnter?.();
+          }
+          setIsActive(true);
+        } else {
+          if (!once || !hasEnteredRef.current) {
+            setIsActive(false);
+            onExit?.();
+          }
+        }
+        scheduleUpdate();
+      },
+      {
+        threshold: [0, 0.15, 0.35, 0.6, 1],
+        rootMargin: `0px 0px ${-triggerOffset}px 0px`
+      }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [once, onEnter, onExit, scheduleUpdate, triggerOffset]);
+  useEffect9(() => {
+    return () => {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, []);
+  return {
+    progress,
+    isActive,
+    containerRef
+  };
+}
+
+// src/variants/ScrollReactive/ScrollReactive.tsx
+import { jsx as jsx8 } from "react/jsx-runtime";
+var lerp = (start, end, t) => start + (end - start) * t;
+function ScrollReactive({
+  src,
+  alt,
+  animation = "parallax",
+  parallaxOffset = 60,
+  scaleFrom = 0.92,
+  rotate = 8,
+  opacityFrom = 0.35,
+  triggerOffset = 0,
+  once = false,
+  enableTouch = false,
+  className,
+  imgClassName,
+  style,
+  onEnter,
+  onExit,
+  onProgress,
+  loading,
+  decoding,
+  ...rest
+}) {
+  const { variant: _variant, ...imgRest } = rest;
+  const { progress, isActive, containerRef } = useScrollReactive({
+    triggerOffset,
+    once,
+    onEnter,
+    onExit,
+    onProgress
+  });
+  const clampedProgress = Math.min(1, Math.max(0, progress));
+  const containerStyle = useMemo7(
+    () => ({
+      ...scrollAnimations.container,
+      ...enableTouch ? { touchAction: "manipulation" } : {},
+      ...style,
+      // Expose progress to consumers
+      // @ts-ignore CSS custom property
+      "--ri-scroll-progress": clampedProgress
+    }),
+    [clampedProgress, enableTouch, style]
+  );
+  const imageStyle = useMemo7(() => {
+    const base = {
+      ...scrollAnimations.image,
+      opacity: lerp(opacityFrom, 1, clampedProgress)
+    };
+    switch (animation) {
+      case "fadeIn": {
+        const translateY = parallaxOffset * (1 - clampedProgress);
+        base.transform = `translate3d(0, ${translateY}px, 0)`;
+        break;
+      }
+      case "scale": {
+        const translateY = parallaxOffset * 0.4 * (1 - clampedProgress);
+        const scale = lerp(scaleFrom, 1, clampedProgress);
+        base.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+        break;
+      }
+      case "tilt": {
+        const translateY = parallaxOffset * 0.5 * (1 - clampedProgress);
+        const tiltX = (1 - clampedProgress) * (rotate * 0.4);
+        const tiltY = (clampedProgress - 0.5) * rotate;
+        const scale = lerp(scaleFrom, 1, clampedProgress);
+        base.transform = `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translate3d(0, ${translateY}px, 0) scale(${scale})`;
+        break;
+      }
+      case "parallax":
+      default: {
+        const translateY = parallaxOffset * (1 - clampedProgress);
+        base.transform = `translate3d(0, ${translateY}px, 0)`;
+        base.opacity = Math.max(base.opacity ?? 1, 0.9);
+        break;
+      }
+    }
+    return base;
+  }, [
+    animation,
+    clampedProgress,
+    opacityFrom,
+    parallaxOffset,
+    rotate,
+    scaleFrom
+  ]);
+  const containerClassName = useMemo7(() => {
+    const classes = ["ri-scroll-reactive", `ri-scroll-reactive--${animation}`];
+    if (isActive) classes.push("ri-scroll-reactive--active");
+    if (className) classes.push(className);
+    return classes.join(" ");
+  }, [animation, className, isActive]);
+  return /* @__PURE__ */ jsx8("span", { ref: containerRef, className: containerClassName, style: containerStyle, children: /* @__PURE__ */ jsx8(
+    "img",
+    {
+      src,
+      alt,
+      className: imgClassName,
+      style: imageStyle,
+      loading,
+      decoding,
+      draggable: false,
+      ...imgRest
+    }
+  ) });
+}
+
+// src/ReactiveImage.tsx
+import { jsx as jsx9 } from "react/jsx-runtime";
 function ReactiveImage(props) {
   const { variant } = props;
-  if (variant === "hoverSwitch") return /* @__PURE__ */ jsx7(HoverSwitch, { ...props });
-  if (variant === "zoomOnHover") return /* @__PURE__ */ jsx7(ZoomOnHover, { ...props });
-  if (variant === "tiltOnHover") return /* @__PURE__ */ jsx7(TiltOnHover, { ...props });
-  if (variant === "clickExpand") return /* @__PURE__ */ jsx7(ClickExpand, { ...props });
-  if (variant === "panReveal") return /* @__PURE__ */ jsx7(PanReveal, { ...props });
+  if (variant === "hoverSwitch") return /* @__PURE__ */ jsx9(HoverSwitch, { ...props });
+  if (variant === "zoomOnHover") return /* @__PURE__ */ jsx9(ZoomOnHover, { ...props });
+  if (variant === "tiltOnHover") return /* @__PURE__ */ jsx9(TiltOnHover, { ...props });
+  if (variant === "clickExpand") return /* @__PURE__ */ jsx9(ClickExpand, { ...props });
+  if (variant === "panReveal") return /* @__PURE__ */ jsx9(PanReveal, { ...props });
   if (variant === "kenBurnsSequence")
-    return /* @__PURE__ */ jsx7(KenBurnsSequence, { ...props });
+    return /* @__PURE__ */ jsx9(KenBurnsSequence, { ...props });
+  if (variant === "polaroidStack")
+    return /* @__PURE__ */ jsx9(PolaroidStack, { ...props });
+  if (variant === "scrollReactive")
+    return /* @__PURE__ */ jsx9(ScrollReactive, { ...props });
   const { src, alt, className, imgClassName, style, ...rest } = props;
-  return /* @__PURE__ */ jsx7("span", { className, style, children: /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx9("span", { className, style, children: /* @__PURE__ */ jsx9(
     "img",
     {
       src,

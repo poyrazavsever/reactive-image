@@ -1,7 +1,7 @@
 import React, { ImgHTMLAttributes, CSSProperties } from 'react';
 import * as react_jsx_runtime from 'react/jsx-runtime';
 
-type VariantName = "hoverSwitch" | "zoomOnHover" | "tiltOnHover" | "clickExpand" | "panReveal" | "kenBurnsSequence";
+type VariantName = "hoverSwitch" | "zoomOnHover" | "tiltOnHover" | "clickExpand" | "panReveal" | "kenBurnsSequence" | "polaroidStack" | "scrollReactive";
 type NativeImgProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "src" | "alt" | "width" | "height" | "loading" | "decoding">;
 type BaseProps = NativeImgProps & {
     src: string;
@@ -146,6 +146,36 @@ type KenBurnsSequenceProps = {
     onSequenceEnd?: () => void;
     onFrameChange?: (index: number) => void;
 };
+type PolaroidStackItem = {
+    src: string;
+    alt?: string;
+};
+type PolaroidStackProps = {
+    stack?: PolaroidStackItem[];
+    stackDepth?: number;
+    spreadAngle?: number;
+    offsetStep?: number;
+    lift?: number;
+    rotationJitter?: number;
+    shadow?: "soft" | "medium" | "strong";
+    aspectRatio?: number | string;
+    enableTouch?: boolean;
+    onStackEnter?: () => void;
+    onStackLeave?: () => void;
+};
+type ScrollReactiveProps = {
+    animation?: "fadeIn" | "parallax" | "scale" | "tilt";
+    parallaxOffset?: number;
+    scaleFrom?: number;
+    rotate?: number;
+    opacityFrom?: number;
+    triggerOffset?: number;
+    once?: boolean;
+    enableTouch?: boolean;
+    onEnter?: () => void;
+    onExit?: () => void;
+    onProgress?: (value: number) => void;
+};
 type VariantProps = ({
     variant: "hoverSwitch";
 } & HoverSwitchProps) | ({
@@ -158,11 +188,15 @@ type VariantProps = ({
     variant: "panReveal";
 } & PanRevealProps) | ({
     variant: "kenBurnsSequence";
-} & KenBurnsSequenceProps);
+} & KenBurnsSequenceProps) | ({
+    variant: "polaroidStack";
+} & PolaroidStackProps) | ({
+    variant: "scrollReactive";
+} & ScrollReactiveProps);
 type ReactiveImageProps = BaseProps & (VariantProps | {
     variant?: undefined;
 });
 
 declare function ReactiveImage(props: ReactiveImageProps): react_jsx_runtime.JSX.Element;
 
-export { type BaseProps, type ClickExpandProps, type HoverSwitchProps, type KenBurnsSequenceFrame, type KenBurnsSequenceProps, type PanRevealProps, ReactiveImage, type ReactiveImageProps, type TiltOnHoverProps, type VariantName, type VariantProps, type ZoomOnHoverProps };
+export { type BaseProps, type ClickExpandProps, type HoverSwitchProps, type KenBurnsSequenceFrame, type KenBurnsSequenceProps, type PanRevealProps, type PolaroidStackItem, type PolaroidStackProps, ReactiveImage, type ReactiveImageProps, type ScrollReactiveProps, type TiltOnHoverProps, type VariantName, type VariantProps, type ZoomOnHoverProps };
