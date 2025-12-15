@@ -1,0 +1,64 @@
+---
+title: ScrollReactive
+description: Scroll ilerlemesine baYlŽñ solma, parallax, scale ve tilt hareketleri; ilerleme deŽYerini `--ri-scroll-progress` ile paylaYŽñr.
+order: 9
+locale: tr
+slug: scroll-reactive
+toc: true
+---
+
+# ScrollReactive
+
+ScrollReactive gÇôrsel hareketini sayfa kaydŽñrma ilerlemesine baYlŽñ kŽñlar. Parallax, giriY animasyonu veya anlatŽñm odaklŽñ bloklar iÇõin kullanŽñn; ilerleme deŽYeri CSS deŽYiYkeni olarak sunulur.
+
+## HŽñzlŽñ BaYlangŽñÇõ
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export function ScrollHero() {
+  return (
+    <ReactiveImage
+      variant="scrollReactive"
+      src="/hero.jpg"
+      alt="Scroll reaktif hero"
+      animation="tilt"
+      parallaxOffset={80}
+      scaleFrom={0.9}
+      rotate={10}
+      opacityFrom={0.4}
+      triggerOffset={120}
+      once
+    />
+  );
+}
+```
+
+## Animasyonlar
+
+- `fadeIn`: solma + hafif yukarŽñ kaydŽñrma
+- `parallax`: klasik parallax kaydŽñrma
+- `scale`: kaydŽñrma + ölçekli giriY
+- `tilt`: perspektif tilt + kaydŽñrma/ölçek
+
+## Prop'lar
+
+| Prop | Tip | VarsayŽñlan | AçŽñklama |
+| --- | --- | --- | --- |
+| `animation` | `"fadeIn" \| "parallax" \| "scale" \| "tilt"` | `"parallax"` | Hareket preset'i. |
+| `parallaxOffset` | `number` | `60` | Maksimum translate mesafesi (px). |
+| `scaleFrom` | `number` | `0.92` | Scale/tilt preset'leri iÇõin baYlangŽñç ölçek. |
+| `rotate` | `number` | `8` | Tilt preset'i iÇõin en bÇøyYk rotasyon (derece). |
+| `opacityFrom` | `number` | `0.35` | BaYlangŽñç opacity. |
+| `triggerOffset` | `number` | `0` | Animasyonun baYlamasŽñ iÇõin offset (px). |
+| `once` | `boolean` | `false` | Girildikten sonra ilerlemeyi geri almamaya zorlar. |
+| `enableTouch` | `boolean` | `false` | Dokunma/Pan etkileYimini akŽñcŽñ kŽñlar. |
+| `onEnter` | `() => void` | - | GÇôrsel viewport'a girdiYinde çalŽñYr. |
+| `onExit` | `() => void` | - | ( `once` deŽYilse ) gÇôrsel çŽñktŽñYŽñnda çalŽñYr. |
+| `onProgress` | `(value: number) => void` | - | Normalize scroll ilerlemesini (`0-1`) dÇñner. |
+
+## ÝpuçlarŽñ
+
+- GÇôrselin etrafŽñnda boYluk bŽñrakmak (padding/margin) animasyonu daha belirgin kŽñlar.
+- `className` ile gÇôlge/kenarlŽñk eklerken transform'larŽñ GPU'da kalmasŽñna dikkat edin.
+- CSS deŽYiYkeni `--ri-scroll-progress` ile kapsama, gradient veya altyazŽñ animasyonlarŽñŽñ eYleYin.

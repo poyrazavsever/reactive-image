@@ -8,7 +8,9 @@ export type VariantName =
   | "tiltOnHover"
   | "clickExpand"
   | "panReveal"
-  | "kenBurnsSequence";
+  | "kenBurnsSequence"
+  | "polaroidStack"
+  | "scrollReactive";
 
 type NativeImgProps = Omit<
   ImgHTMLAttributes<HTMLImageElement>,
@@ -203,13 +205,44 @@ export type KenBurnsSequenceProps = {
   onFrameChange?: (index: number) => void;
 };
 
+export type PolaroidStackItem = { src: string; alt?: string };
+export type PolaroidStackProps = {
+  stack?: PolaroidStackItem[];
+  stackDepth?: number;
+  spreadAngle?: number;
+  offsetStep?: number;
+  lift?: number;
+  rotationJitter?: number;
+  shadow?: "soft" | "medium" | "strong";
+  aspectRatio?: number | string;
+  enableTouch?: boolean;
+  onStackEnter?: () => void;
+  onStackLeave?: () => void;
+};
+
+export type ScrollReactiveProps = {
+  animation?: "fadeIn" | "parallax" | "scale" | "tilt";
+  parallaxOffset?: number;
+  scaleFrom?: number;
+  rotate?: number;
+  opacityFrom?: number;
+  triggerOffset?: number;
+  once?: boolean;
+  enableTouch?: boolean;
+  onEnter?: () => void;
+  onExit?: () => void;
+  onProgress?: (value: number) => void;
+};
+
 export type VariantProps =
   | ({ variant: "hoverSwitch" } & HoverSwitchProps)
   | ({ variant: "zoomOnHover" } & ZoomOnHoverProps)
   | ({ variant: "tiltOnHover" } & TiltOnHoverProps)
   | ({ variant: "clickExpand" } & ClickExpandProps)
   | ({ variant: "panReveal" } & PanRevealProps)
-  | ({ variant: "kenBurnsSequence" } & KenBurnsSequenceProps);
+  | ({ variant: "kenBurnsSequence" } & KenBurnsSequenceProps)
+  | ({ variant: "polaroidStack" } & PolaroidStackProps)
+  | ({ variant: "scrollReactive" } & ScrollReactiveProps);
 
 export type ReactiveImageProps = BaseProps &
   (VariantProps | { variant?: undefined });

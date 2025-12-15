@@ -83,6 +83,29 @@
 
 **Possible New Animations:** portrait drift (vertical bias and subtle rotation), snap zoom (short duration + higher zoom), trio sequences with accent overlays synced to each frame.
 
+### PolaroidStack (`src/variants/PolaroidStack/PolaroidStack.tsx`)
+**Behavior:** Fans out a small stack of images into a polaroid-like spread on hover/touch. The top card keeps the accessible `alt`, lower cards are `aria-hidden`.
+
+**Key Props:**
+- `stack`: additional `{ src, alt? }` entries layered under the primary `src`.
+- `stackDepth`: limit how many cards render.
+- `spreadAngle`, `offsetStep`, `lift`, `rotationJitter`: control how far cards fan out, their offsets, and casual rotation when collapsed.
+- `shadow`: `soft | medium | strong` drop shadow presets.
+- `aspectRatio`: optional aspect-ratio override (defaults to `4 / 3`), `enableTouch`, `onStackEnter/Leave`.
+
+**Notes:** Uses absolute positioning with a padded frame to preserve aspect ratio; CSS custom properties expose the shadow. Last item in the stack handles real `alt` + loading/decoding, others are lazy.
+
+### ScrollReactive (`src/variants/ScrollReactive/ScrollReactive.tsx`)
+**Behavior:** Drives transforms with scroll progress. Progress is exposed via `--ri-scroll-progress` so consumers can theme around it.
+
+**Key Props:**
+- `animation`: `fadeIn`, `parallax`, `scale`, `tilt`.
+- `parallaxOffset`, `scaleFrom`, `rotate`, `opacityFrom`: tune the motion range.
+- `triggerOffset`: start/end window offset; `once` locks progress forward only.
+- Lifecycle: `onEnter`, `onExit`, `onProgress`.
+
+**Notes:** Uses IntersectionObserver to gate updates and a scroll/resize RAF loop to compute progress. Default transition is gentle; perspective is added for the tilt preset. Cleaned up listeners/RAF on unmount to avoid leaks.
+
 ## Shared Hook & Animation Principles
 - Hooks clean up `setTimeout`, `requestAnimationFrame`, and event listeners on unmount to avoid leaks.
 - CSS custom properties make theming/extending easy; every variant already exposes the knobs you would pass down from a design system.

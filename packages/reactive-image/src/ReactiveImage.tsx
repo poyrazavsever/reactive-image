@@ -6,6 +6,8 @@ import { TiltOnHover } from "./variants/TiltOnHover";
 import { ClickExpand } from "./variants/ClickExpand";
 import { PanReveal } from "./variants/PanReveal";
 import { KenBurnsSequence } from "./variants/KenBurnsSequence";
+import { PolaroidStack } from "./variants/PolaroidStack";
+import { ScrollReactive } from "./variants/ScrollReactive";
 
 export function ReactiveImage(props: ReactiveImageProps) {
   const { variant } = props as any;
@@ -16,6 +18,10 @@ export function ReactiveImage(props: ReactiveImageProps) {
   if (variant === "panReveal") return <PanReveal {...(props as any)} />;
   if (variant === "kenBurnsSequence")
     return <KenBurnsSequence {...(props as any)} />;
+  if (variant === "polaroidStack")
+    return <PolaroidStack {...(props as any)} />;
+  if (variant === "scrollReactive")
+    return <ScrollReactive {...(props as any)} />;
   // default plain image
   const { src, alt, className, imgClassName, style, ...rest } = props as any;
   return (

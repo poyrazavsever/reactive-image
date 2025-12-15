@@ -6,7 +6,7 @@ Reactive Image provides beautiful, performant image animations for modern web ap
 
 ## Features
 
-- **6 Animation Variants**: HoverSwitch, ZoomOnHover, TiltOnHover, ClickExpand, PanReveal, KenBurnsSequence
+- **8 Animation Variants**: HoverSwitch, ZoomOnHover, TiltOnHover, ClickExpand, PanReveal, KenBurnsSequence, PolaroidStack, ScrollReactive
 - **42+ Animation Types**: Wide variety of effects and transitions
 - **Performance Optimized**: GPU acceleration, lazy loading, image preloading
 - **TypeScript First**: Full type safety and IntelliSense support
@@ -80,6 +80,26 @@ import { ReactiveImage } from "reactive-image";
   animation="dramatic"
   crossfadeDuration={1200}
 />
+
+// Polaroid stack
+<ReactiveImage
+  variant="polaroidStack"
+  src="/cover.jpg"
+  alt="Polaroid collage"
+  stack={[{ src: "/detail-1.jpg" }, { src: "/detail-2.jpg" }]}
+  spreadAngle={28}
+  shadow="strong"
+/>
+
+// Scroll reactive parallax
+<ReactiveImage
+  variant="scrollReactive"
+  src="/story.jpg"
+  alt="Scroll reactive hero"
+  animation="tilt"
+  parallaxOffset={80}
+  scaleFrom={0.9}
+/>
 ```
 
 ## Animation Variants
@@ -121,6 +141,19 @@ Play a cinematic sequence of zoom/pan keyframes—perfect for hero sections or c
 - Presets: `classic`, `slowPan`, `dramatic`
 - Provide custom `frames` for bespoke timelines
 - Control `crossfadeDuration`, `pauseOnHover`, `autoplay`, `loop`, `overlayGradient`, `enableTouch`
+
+### PolaroidStack (fan-out stack)
+
+Fan-out polaroid-style cards on hover/touch.
+
+- Controls: `stack`, `stackDepth`, `spreadAngle`, `offsetStep`, `lift`, `shadow`, `rotationJitter`, `aspectRatio`, `enableTouch`
+
+### ScrollReactive (4 animations)
+
+Scroll-driven transforms for inline visuals and hero blocks.
+
+- `animation`: `fadeIn`, `parallax`, `scale`, `tilt`
+- Controls: `parallaxOffset`, `scaleFrom`, `rotate`, `opacityFrom`, `triggerOffset`, `once`, lifecycle callbacks (`onEnter`, `onExit`, `onProgress`)
 
 ## Performance
 

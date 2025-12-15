@@ -1,0 +1,58 @@
+---
+title: PolaroidStack
+description: Fan-out polaroid-style stacks that lift on hover or touch for collage, gallery, and portfolio layouts.
+order: 8
+locale: en
+slug: polaroid-stack
+toc: true
+---
+
+# PolaroidStack
+
+PolaroidStack layers a handful of images and fans them out like a casual photo pile. On hover or touch the stack lifts, rotates, and offsets to reveal the items beneath while keeping the top card accessible.
+
+## Quick Start
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export function Collage() {
+  return (
+    <ReactiveImage
+      variant="polaroidStack"
+      src="/cover.jpg"
+      alt="Travel collage"
+      stack={[
+        { src: "/detail-1.jpg" },
+        { src: "/detail-2.jpg" },
+      ]}
+      spreadAngle={28}
+      offsetStep={16}
+      lift={18}
+      shadow="strong"
+    />
+  );
+}
+```
+
+## Controls
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `stack` | `{ src: string; alt?: string }[]` | `[]` | Additional cards under the primary `src`. |
+| `stackDepth` | `number` | `min(4, stack.length)` | How many cards to render. |
+| `spreadAngle` | `number` | `32` | Total fan-out angle across the stack. |
+| `offsetStep` | `number` | `14` | Pixel offset between cards. |
+| `lift` | `number` | `14` | Vertical lift when active. |
+| `rotationJitter` | `number` | `4` | Casual rotation when collapsed. |
+| `shadow` | `"soft" \| "medium" \| "strong"` | `"medium"` | Drop shadow preset. |
+| `aspectRatio` | `number \| string` | `"4 / 3"` | Aspect ratio of the frame. |
+| `enableTouch` | `boolean` | `false` | Enable touch interactions. |
+| `onStackEnter` | `() => void` | - | Fired when the stack activates. |
+| `onStackLeave` | `() => void` | - | Fired when the stack deactivates. |
+
+## Tips
+
+- Keep `stackDepth` small (3-5) for clarity; large piles are visually noisy.
+- Use consistent aspect ratios for cleaner overlaps; override with `aspectRatio` if your assets vary.
+- Pair with subtle borders or shadows via `className` to match your brand style.

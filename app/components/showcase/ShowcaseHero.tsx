@@ -7,6 +7,8 @@ import { TiltOnHover } from "../../../packages/reactive-image/src/variants/TiltO
 import { ZoomOnHover } from "../../../packages/reactive-image/src/variants/ZoomOnHover";
 import { PanReveal } from "../../../packages/reactive-image/src/variants/PanReveal";
 import { KenBurnsSequence } from "../../../packages/reactive-image/src/variants/KenBurnsSequence";
+import { PolaroidStack } from "../../../packages/reactive-image/src/variants/PolaroidStack";
+import { ScrollReactive } from "../../../packages/reactive-image/src/variants/ScrollReactive";
 
 type ShowcaseHeroProps = {
   locale: string;
@@ -563,6 +565,141 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
                   style={{ display: "block", width: "100%", height: "100%" }}
                 />
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* PolaroidStack Section */}
+        <div className="mb-20">
+          <h3 className="text-xl text-neutral-400 mb-8 flex items-center gap-3">
+            {locale === "tr"
+              ? "Polaroid YŽñYnleri"
+              : "Polaroid Stacks"}
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-50 p-4">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Travel Spread</h4>
+              </div>
+              <PolaroidStack
+                src={showcaseImages.nature.primary}
+                alt="Travel collage spread"
+                stack={[
+                  { src: showcaseImages.nature.secondary },
+                  { src: showcaseImages.urban.primary },
+                ]}
+                spreadAngle={28}
+                offsetStep={14}
+                lift={16}
+                shadow="strong"
+                className="block w-full"
+                imgClassName="rounded-md"
+              />
+            </div>
+
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-50 p-4">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Editorial Stack</h4>
+              </div>
+              <PolaroidStack
+                src={showcaseImages.architecture.primary}
+                alt="Editorial polaroid stack"
+                stack={[
+                  { src: showcaseImages.abstract.primary },
+                  { src: showcaseImages.architecture.secondary },
+                  { src: showcaseImages.urban.secondary },
+                ]}
+                stackDepth={4}
+                spreadAngle={34}
+                offsetStep={18}
+                lift={20}
+                rotationJitter={6}
+                shadow="medium"
+                aspectRatio="3 / 4"
+                className="block w-full"
+                imgClassName="rounded-md"
+              />
+            </div>
+
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-50 p-4">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Minimal Pair</h4>
+              </div>
+              <PolaroidStack
+                src={showcaseImages.abstract.secondary}
+                alt="Minimal polaroid pair"
+                stack={[{ src: showcaseImages.abstract.tertiary }]}
+                spreadAngle={18}
+                offsetStep={12}
+                lift={12}
+                shadow="soft"
+                className="block w-full"
+                imgClassName="rounded-md"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* ScrollReactive Section */}
+        <div className="mb-20">
+          <h3 className="text-xl text-neutral-400 mb-8 flex items-center gap-3">
+            {locale === "tr"
+              ? "Scroll Reaktif Animasyonlar"
+              : "Scroll Reactive Animations"}
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="relative overflow-hidden rounded-xl bg-neutral-50 p-4">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Parallax Fade</h4>
+              </div>
+              <ScrollReactive
+                src={showcaseImages.nature.primary}
+                alt="Scroll reactive parallax"
+                animation="parallax"
+                parallaxOffset={90}
+                opacityFrom={0.45}
+                triggerOffset={60}
+                style={{ width: "100%", display: "block" }}
+                className="block w-full"
+                imgClassName="w-full h-64 object-cover rounded-lg"
+              />
+            </div>
+
+            <div className="relative overflow-hidden rounded-xl bg-neutral-50 p-4">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Scale Entrance</h4>
+              </div>
+              <ScrollReactive
+                src={showcaseImages.urban.primary}
+                alt="Scroll reactive scale"
+                animation="scale"
+                parallaxOffset={70}
+                scaleFrom={0.9}
+                opacityFrom={0.35}
+                triggerOffset={80}
+                style={{ width: "100%", display: "block" }}
+                className="block w-full"
+                imgClassName="w-full h-64 object-cover rounded-lg"
+              />
+            </div>
+
+            <div className="relative overflow-hidden rounded-xl bg-neutral-50 p-4">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Tilt Hero</h4>
+              </div>
+              <ScrollReactive
+                src={showcaseImages.architecture.primary}
+                alt="Scroll reactive tilt"
+                animation="tilt"
+                parallaxOffset={80}
+                scaleFrom={0.92}
+                rotate={10}
+                opacityFrom={0.4}
+                triggerOffset={100}
+                style={{ width: "100%", display: "block" }}
+                className="block w-full"
+                imgClassName="w-full h-64 object-cover rounded-lg"
+              />
             </div>
           </div>
         </div>

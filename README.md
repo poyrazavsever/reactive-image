@@ -12,7 +12,7 @@
 
 ## Features
 
-### **6 Powerful Interactive Variants**
+### **8 Powerful Interactive Variants**
 
 - **HoverSwitch** - Image switching on mouse hover
 - **ZoomOnHover** - Mouse-driven zoom effects
@@ -20,6 +20,8 @@
 - **ClickExpand** - Click-to-expand modal viewing
 - **PanReveal** - Cinematic slide, mask, and spotlight reveals
 - **KenBurnsSequence** - Cinematic zoom/pan storyboards for hero blocks
+- **PolaroidStack** - Fan-out polaroid stacks that lift on hover/touch
+- **ScrollReactive** - Scroll-driven fades, parallax, scale, and tilt transforms
 
 ### **Performance Focused**
 
@@ -389,6 +391,60 @@ const canyonFrames = [
 - Presets: `classic`, `slowPan`, `dramatic`
 - `frames`: custom timeline overrides
 - `crossfadeDuration`, `pauseOnHover`, `autoplay`, `loop`, `overlayGradient`, `enableTouch`
+
+### 7. PolaroidStack - Fan-Out Photo Stacks
+
+Layered polaroid-style cards that spread apart on hover or touch.
+
+```jsx
+<ReactiveImage
+  variant="polaroidStack"
+  src="/cover.jpg"
+  alt="Travel collage"
+  stack={[
+    { src: "/detail-1.jpg" },
+    { src: "/detail-2.jpg" },
+  ]}
+  spreadAngle={28}
+  offsetStep={16}
+  lift={18}
+  shadow="strong"
+/>
+```
+
+**PolaroidStack Controls**
+
+- `stack`: additional cards under the primary `src`
+- `stackDepth`: limit how many cards render
+- `spreadAngle`, `offsetStep`, `lift`, `rotationJitter`
+- `shadow`: `soft | medium | strong`
+- `aspectRatio`, `enableTouch`, `onStackEnter/Leave`
+
+### 8. ScrollReactive - Scroll-Tied Motion
+
+Drive parallax, fades, scales, or tilt with scroll progress (exposed as `--ri-scroll-progress` for theming).
+
+```jsx
+<ReactiveImage
+  variant="scrollReactive"
+  src="/hero.jpg"
+  alt="Scroll reactive hero"
+  animation="tilt"
+  parallaxOffset={80}
+  scaleFrom={0.9}
+  rotate={10}
+  opacityFrom={0.4}
+  triggerOffset={120}
+  once
+/>
+```
+
+**ScrollReactive Controls**
+
+- `animation`: `fadeIn`, `parallax`, `scale`, `tilt`
+- `parallaxOffset`, `scaleFrom`, `rotate`, `opacityFrom`
+- `triggerOffset`, `once`, `enableTouch`
+- Lifecycle: `onEnter`, `onExit`, `onProgress`
 
 ## Advanced Customization
 

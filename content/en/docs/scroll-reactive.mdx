@@ -1,0 +1,64 @@
+---
+title: ScrollReactive
+description: Scroll-driven fades, parallax, scale, and tilt transforms with lifecycle callbacks and progress exposure.
+order: 9
+locale: en
+slug: scroll-reactive
+toc: true
+---
+
+# ScrollReactive
+
+ScrollReactive ties image transforms to scroll progress. Use it for inline parallax, hero entrances, or subtle storytelling effects. The variant exposes progress as `--ri-scroll-progress` so you can coordinate surrounding UI.
+
+## Quick Start
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export function ScrollHero() {
+  return (
+    <ReactiveImage
+      variant="scrollReactive"
+      src="/hero.jpg"
+      alt="Scroll reactive hero"
+      animation="tilt"
+      parallaxOffset={80}
+      scaleFrom={0.9}
+      rotate={10}
+      opacityFrom={0.4}
+      triggerOffset={120}
+      once
+    />
+  );
+}
+```
+
+## Animations
+
+- `fadeIn`: fade + gentle translate up
+- `parallax`: classic parallax translate
+- `scale`: translate + scale-up entrance
+- `tilt`: perspective tilt plus translate/scale
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `animation` | `"fadeIn" \| "parallax" \| "scale" \| "tilt"` | `"parallax"` | Motion preset. |
+| `parallaxOffset` | `number` | `60` | Max translate distance (px). |
+| `scaleFrom` | `number` | `0.92` | Starting scale for scale/tilt presets. |
+| `rotate` | `number` | `8` | Max rotation used by tilt preset (deg). |
+| `opacityFrom` | `number` | `0.35` | Starting opacity. |
+| `triggerOffset` | `number` | `0` | Offset before the element begins animating (px). |
+| `once` | `boolean` | `false` | Prevent progress from rewinding after entering. |
+| `enableTouch` | `boolean` | `false` | Keep pointer/touch interaction smooth. |
+| `onEnter` | `() => void` | - | Fires when the element enters view. |
+| `onExit` | `() => void` | - | Fires when the element leaves view (unless `once`). |
+| `onProgress` | `(value: number) => void` | - | Provides normalized scroll progress (`0-1`). |
+
+## Usage Notes
+
+- Works best when the element has breathing room; add padding or margin so the scroll distance is meaningful.
+- Combine with `className` to add shadows/borders and keep GPU-bound transforms only.
+- Access progress via the CSS variable to coordinate overlays, captions, or gradients.
