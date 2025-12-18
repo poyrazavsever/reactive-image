@@ -81,7 +81,10 @@ export function ScrollReactive({
       default: {
         const translateY = parallaxOffset * (1 - clampedProgress);
         base.transform = `translate3d(0, ${translateY}px, 0)`;
-        base.opacity = Math.max(base.opacity ?? 1, 0.9);
+        base.opacity = Math.max(
+          typeof base.opacity === "number" ? base.opacity : 1,
+          0.9
+        );
         break;
       }
     }
