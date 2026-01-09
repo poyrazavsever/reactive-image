@@ -10,7 +10,9 @@ export type VariantName =
   | "panReveal"
   | "kenBurnsSequence"
   | "polaroidStack"
-  | "scrollReactive";
+  | "scrollReactive"
+  | "depthFocus"
+  | "splitLayers";
 
 type NativeImgProps = Omit<
   ImgHTMLAttributes<HTMLImageElement>,
@@ -234,6 +236,49 @@ export type ScrollReactiveProps = {
   onProgress?: (value: number) => void;
 };
 
+export type DepthFocusProps = {
+  animation?: "rackFocus" | "spotlight" | "drift" | "pulseGlow";
+  focusMode?: "cursor" | "auto" | "scroll";
+  blurRange?: {
+    min?: number;
+    max?: number;
+  };
+  focusSize?: number;
+  edgeSoftness?: number;
+  tiltAmount?: number;
+  glowColor?: string;
+  parallaxDepth?: number;
+  enableTouch?: boolean;
+  focusClassName?: string;
+  onFocusStart?: () => void;
+  onFocusMove?: (coords: { x: number; y: number }) => void;
+  onFocusEnd?: () => void;
+};
+
+export type SplitLayerItem = {
+  src: string;
+  alt?: string;
+  depth?: number;
+  opacity?: number;
+  blendMode?: CSSProperties["mixBlendMode"];
+};
+
+export type SplitLayersProps = {
+  layers?: SplitLayerItem[];
+  animation?: "parallax" | "peel" | "rippleReveal" | "glassSlide";
+  parallaxIntensity?: number;
+  peelDirection?: "left" | "right" | "up" | "down";
+  peelLift?: number;
+  rippleRadius?: number;
+  glassOpacity?: number;
+  baseScale?: number;
+  perspective?: number;
+  enableTouch?: boolean;
+  onLayerEnter?: () => void;
+  onLayerLeave?: () => void;
+  onLayerMove?: (coords: { x: number; y: number }) => void;
+};
+
 export type VariantProps =
   | ({ variant: "hoverSwitch" } & HoverSwitchProps)
   | ({ variant: "zoomOnHover" } & ZoomOnHoverProps)
@@ -242,7 +287,9 @@ export type VariantProps =
   | ({ variant: "panReveal" } & PanRevealProps)
   | ({ variant: "kenBurnsSequence" } & KenBurnsSequenceProps)
   | ({ variant: "polaroidStack" } & PolaroidStackProps)
-  | ({ variant: "scrollReactive" } & ScrollReactiveProps);
+  | ({ variant: "scrollReactive" } & ScrollReactiveProps)
+  | ({ variant: "depthFocus" } & DepthFocusProps)
+  | ({ variant: "splitLayers" } & SplitLayersProps);
 
 export type ReactiveImageProps = BaseProps &
   (VariantProps | { variant?: undefined });
