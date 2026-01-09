@@ -1,0 +1,77 @@
+---
+title: SplitLayers
+description: Çok katmanlı parallax/peel varyantı; ripple reveal, blend mode ve cam efektli kaydırma ile katmanlı hikaye anlatımı.
+order: 11
+locale: tr
+slug: split-layers
+toc: true
+---
+
+# SplitLayers
+
+SplitLayers, birden fazla görsel katmanı parallax, peel-out, ripple reveal ve cam kaydırma efektleriyle hareketlendirir. Her katman derinlik, opaklık ve blend mode alabilir; hikaye anlatımı, hero görselleri ve art-direction parallax sahneleri için idealdir.
+
+## Özellikler
+
+- **4 Animasyon Stili**: `parallax`, `peel`, `rippleReveal`, `glassSlide`
+- **Katman Bazlı Kontrol**: Her katman için derinlik, opaklık ve blend mode
+- **İmleç + Dokunmatik**: Parallax ve peel imleç ya da dokunuşu takip eder
+- **Cam Overlay**: İsteğe bağlı cam parlama katmanı kayarak hareket eder
+- **Ripple Maskesi**: Etkileşim noktasından yayılan dairesel reveal
+- **Perspektif Hazır**: GPU destekli transform ve özelleştirilebilir perspektif
+
+## Hızlı Başlangıç
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export default function KatmanliHero() {
+  return (
+    <ReactiveImage
+      variant="splitLayers"
+      src="/layers/base.jpg"
+      alt="Katmanlı hero"
+      layers={[
+        { src: "/layers/foreground.png", depth: 2.5, opacity: 0.95 },
+        { src: "/layers/glow.png", depth: 3.4, blendMode: "screen" },
+      ]}
+      animation="peel"
+      peelDirection="right"
+      parallaxIntensity={20}
+      baseScale={1.03}
+      enableTouch
+    />
+  );
+}
+```
+
+## Props
+
+| Prop | Tip | Varsayılan | Açıklama |
+| --- | --- | --- | --- |
+| `layers` | `{ src: string; alt?: string; depth?: number; opacity?: number; blendMode?: CSSProperties["mixBlendMode"] }[]` | `[]` | Temel `src` üzerine yığılacak ek katmanlar. |
+| `animation` | `"parallax" \| "peel" \| "rippleReveal" \| "glassSlide"` | `parallax` | Katmanlara uygulanacak hareket stili. |
+| `parallaxIntensity` | `number` | `18` | İmleç tabanlı parallax kuvveti (px çarpanı). |
+| `peelDirection` | `"left" \| "right" \| "up" \| "down"` | `right` | Peel animasyonunun yönü. |
+| `peelLift` | `number` | `16` | Peel sırasında katmanların kaldırılma mesafesi. |
+| `rippleRadius` | `number` | `240` | `rippleReveal` maskesinin maksimum yarıçapı. |
+| `glassOpacity` | `number` | `0.34` | `glassSlide` aktifken cam overlay opaklığı. |
+| `baseScale` | `number` | `1.02` | Tüm katmanlara uygulanan temel ölçek. |
+| `perspective` | `number` | `980` | 3B hissi için perspektif uzaklığı. |
+| `enableTouch` | `boolean` | `false` | Dokunmatik parallax/peel kontrolü. |
+| `onLayerEnter` | `() => void` | `-` | İmleç/dokunuş girdiğinde tetiklenir. |
+| `onLayerLeave` | `() => void` | `-` | İmleç/dokunuş çıktığında tetiklenir. |
+| `onLayerMove` | `(coords: { x: number; y: number }) => void` | `-` | İmleç konumu güncellendiğinde tetiklenir. |
+
+## Animasyon Presetleri
+
+- **Parallax**: Derinlik değerine göre katmanların kaymasıyla klasik çok düzlemli hareket.
+- **Peel**: Seçilen yönde katmanları kaldırıp açar, derinlik offsetlerini korur.
+- **RippleReveal**: Etkileşim noktasından yayılan dairesel maskeyle reveal.
+- **GlassSlide**: Katman parallax’ına cam parlama katmanı ekler.
+
+## İpuçları
+
+- Ön plan katmanlarına daha yüksek `depth` vererek parallax’ı güçlendirin; arka planı `1` civarında tutun.
+- Şeffaf PNG’lerle `blendMode` (`screen`, `overlay`, `multiply`) kullanarak stilize yığınlar oluşturun.
+- Hover reveal için `rippleReveal`, premium hero sahneleri için `glassSlide` tercih edin.

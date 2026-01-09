@@ -52,6 +52,14 @@
     "zoomOnHover": {
       "title": "Zoom on Hover",
       "description": "Smooth zoom effects that highlight details and create focus on important visuals."
+    },
+    "depthFocus": {
+      "title": "Depth Focus",
+      "description": "Cinematic focus shifts with layered blur, glow accents, and parallax tilt."
+    },
+    "splitLayers": {
+      "title": "Split Layers",
+      "description": "Multi-layer parallax and peel effects with ripple reveals and glass overlays."
     }
   },
   "examples": {
@@ -93,6 +101,8 @@
     "hoverSwitch": "Dynamic image switching on hover",
     "tiltOnHover": "3D tilt effect with mouse interaction",
     "zoomOnHover": "Smooth zoom effect on hover",
+    "depthFocus": "Layered blur focus shift with glow and parallax tilt",
+    "splitLayers": "Multi-layer parallax/peel with ripple reveal and glass sheen",
     "explore": {
       "title": "Explore Interactive Demos",
       "description": "See how our components work in real applications with fully interactive examples and comprehensive documentation.",

@@ -1,0 +1,73 @@
+---
+title: DepthFocus
+description: Katmanlı blur, otomatik/scroll odak modları, glow ve parallax tilt ile sinematik odak kaydırma varyantı.
+order: 10
+locale: tr
+slug: depth-focus
+toc: true
+---
+
+# DepthFocus
+
+DepthFocus, katmanlı blur ve animasyonlu odak maskesiyle bakışı yönlendirir. İmleç takibi, otomatik drift veya scroll’a bağlı odak modlarıyla çalışır; parallax tilt ve yumuşak glow ile sinematik bir vurgu sağlar.
+
+## Özellikler
+
+- **4 Hareket Preseti**: `rackFocus`, `spotlight`, `drift`, `pulseGlow`
+- **Çoklu Odak Modu**: İmleç, otomatik drift veya scroll tabanlı odak
+- **Katmanlı Blur**: Arka plan ve odak bölgesi için ayrı blur aralığı
+- **Parallax Tilt**: Odak noktasına bağlı perspektif/tilt derinliği
+- **Glow Vurgusu**: İsteğe bağlı nefes alan glow halkası
+- **Dokunmatik Dostu**: İsteğe bağlı dokunmatik takip ve callback’ler
+
+## Hızlı Başlangıç
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export default function DepthFocusKahraman() {
+  return (
+    <ReactiveImage
+      variant="depthFocus"
+      src="/galeri/portre.jpg"
+      alt="Animasyonlu odaklı portre"
+      animation="spotlight"
+      focusMode="cursor"
+      focusSize={280}
+      tiltAmount={10}
+      glowColor="rgba(255, 196, 143, 0.7)"
+    />
+  );
+}
+```
+
+## Props
+
+| Prop | Tip | Varsayılan | Açıklama |
+| --- | --- | --- | --- |
+| `animation` | `"rackFocus" \| "spotlight" \| "drift" \| "pulseGlow"` | `rackFocus` | Odak/glow davranışı. |
+| `focusMode` | `"cursor" \| "auto" \| "scroll"` | `cursor` | Odağın nasıl sürüleceği (imleç, otomatik drift, scroll). |
+| `blurRange` | `{ min?: number; max?: number }` | `{ min: 1.5, max: 12 }` | Arka plan ve odak bölgesi blur değerleri. |
+| `focusSize` | `number` | `260` | Net odak bölgesinin çapı (px). |
+| `edgeSoftness` | `number` | `~focusSize'ın %45’i` | Odak maskesi için yumuşak kenar payı. |
+| `tiltAmount` | `number` | `8` | Perspektifle birleşen maksimum tilt (derece). |
+| `glowColor` | `string` | `"rgba(255, 255, 255, 0.52)"` | Glow halkasının rengi. |
+| `parallaxDepth` | `number` | `18` | İmleç/scroll hareketiyle çeviri mesafesi. |
+| `enableTouch` | `boolean` | `false` | Dokunmatik takibi açar. |
+| `focusClassName` | `string` | `-` | Net (odaklı) katman için ek sınıf. |
+| `onFocusStart` | `() => void` | `-` | Odak etkileşimi başladığında. |
+| `onFocusMove` | `(coords: { x: number; y: number }) => void` | `-` | Odak noktası güncellendiğinde. |
+| `onFocusEnd` | `() => void` | `-` | Odak etkileşimi bittiğinde. |
+
+## Animasyon Presetleri
+
+- **RackFocus**: Odaklı kısım net kalırken arka plan dinamik blur alır.
+- **Spotlight**: İmleci takip eden net bir spot maskesi; hero görseller için ideal.
+- **Drift**: Yavaş, kendiliğinden gezen odak; pasif sahneler için.
+- **PulseGlow**: Odak noktası çevresinde nefes alan glow vurgusu.
+
+## İpuçları
+
+- Hero görselleri için `focusSize` değerini büyütün; ürün detayları için küçültün.
+- Daha güçlü derinlik için `tiltAmount` ve `parallaxDepth` değerlerini birlikte artırın.
+- Sadece net katmana stil eklemek için `focusClassName` kullanın.

@@ -1,0 +1,77 @@
+---
+title: SplitLayers
+description: Layered parallax and peel variant for multi-image stacks with ripple reveals, blend modes, and glass overlays.
+order: 11
+locale: en
+slug: split-layers
+toc: true
+---
+
+# SplitLayers
+
+SplitLayers animates multiple image layers with parallax, peel-out, ripple reveals, and optional glass overlays. Perfect for storytelling stacks, hero visuals with depth, and art-directed parallax where each layer can set its own depth, opacity, and blend mode.
+
+## Features
+
+- **4 Animation Styles**: `parallax`, `peel`, `rippleReveal`, `glassSlide`
+- **Per-Layer Control**: Depth, opacity, and blend modes per image layer
+- **Pointer + Touch Aware**: Smooth parallax and peel following cursor or touch
+- **Glass Overlay**: Optional glass sheen that slides with motion
+- **Ripple Mask**: Circular mask reveal radiating from the pointer
+- **Perspective Ready**: GPU-accelerated transforms with custom perspective
+
+## Quick Start
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export default function LayeredHero() {
+  return (
+    <ReactiveImage
+      variant="splitLayers"
+      src="/layers/base.jpg"
+      alt="Layered hero"
+      layers={[
+        { src: "/layers/foreground.png", depth: 2.5, opacity: 0.95 },
+        { src: "/layers/glow.png", depth: 3.4, blendMode: "screen" },
+      ]}
+      animation="peel"
+      peelDirection="right"
+      parallaxIntensity={20}
+      baseScale={1.03}
+      enableTouch
+    />
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `layers` | `{ src: string; alt?: string; depth?: number; opacity?: number; blendMode?: CSSProperties["mixBlendMode"] }[]` | `[]` | Additional layers stacked over the base `src`. |
+| `animation` | `"parallax" \| "peel" \| "rippleReveal" \| "glassSlide"` | `parallax` | Motion style applied to layers. |
+| `parallaxIntensity` | `number` | `18` | Strength of pointer-based parallax (px multiplier). |
+| `peelDirection` | `"left" \| "right" \| "up" \| "down"` | `right` | Direction layers peel when active. |
+| `peelLift` | `number` | `16` | How far layers lift during peel. |
+| `rippleRadius` | `number` | `240` | Max radius for `rippleReveal` mask. |
+| `glassOpacity` | `number` | `0.34` | Opacity for the glass overlay when `glassSlide` is active. |
+| `baseScale` | `number` | `1.02` | Base scale applied to all layers. |
+| `perspective` | `number` | `980` | Perspective distance for 3D feeling. |
+| `enableTouch` | `boolean` | `false` | Enables touch parallax/peel controls. |
+| `onLayerEnter` | `() => void` | `-` | Fires when pointer/touch enters. |
+| `onLayerLeave` | `() => void` | `-` | Fires when pointer/touch leaves. |
+| `onLayerMove` | `(coords: { x: number; y: number }) => void` | `-` | Fires when pointer position updates. |
+
+## Animation Presets
+
+- **Parallax**: Layered offsets based on depth for classic multi-plane motion.
+- **Peel**: Layers lift and pivot in the chosen direction while keeping depth offsets.
+- **RippleReveal**: Circular mask reveals layers from the interaction point.
+- **GlassSlide**: Adds a sliding glass sheen on top of layered parallax.
+
+## Tips
+
+- Set higher `depth` for foreground layers to exaggerate parallax; keep backgrounds near `1`.
+- Combine `blendMode` (`screen`, `overlay`, `multiply`) with transparent PNGs for stylized stacks.
+- Use `rippleReveal` for hover reveals and `glassSlide` for premium hero treatments.

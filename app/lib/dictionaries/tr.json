@@ -52,6 +52,14 @@
     "zoomOnHover": {
       "title": "Hover Yakınlaştırma",
       "description": "Detayları vurgulayan ve önemli görsellere odak yaratan pürüzsüz yakınlaştırma efektleri."
+    },
+    "depthFocus": {
+      "title": "Depth Focus",
+      "description": "Katmanlı blur, glow ve parallax tilt ile sinematik odak kaydırma."
+    },
+    "splitLayers": {
+      "title": "Split Layers",
+      "description": "Ripple reveal ve cam efektli çok katmanlı parallax/peel animasyonları."
     }
   },
   "examples": {
@@ -93,6 +101,8 @@
     "hoverSwitch": "Hover ile dinamik görsel değişimi",
     "tiltOnHover": "Fare etkileşimi ile 3D eğim efekti",
     "zoomOnHover": "Hover ile pürüzsüz yakınlaştırma efekti",
+    "depthFocus": "Glow ve parallax tilt ile katmanlı blur odak kaydırma",
+    "splitLayers": "Ripple reveal ve cam parlama ile çok katmanlı parallax/peel",
     "explore": {
       "title": "İnteraktif Demoları Keşfedin",
       "description": "Bileşenlerimizin gerçek uygulamalarda nasıl çalıştığını tam interaktif örnekler ve kapsamlı dokümantasyonla görün.",

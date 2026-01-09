@@ -1,0 +1,73 @@
+---
+title: DepthFocus
+description: Interactive focus-shift variant with layered blur, cursor/auto focus modes, glow pulses, and parallax tilt for cinematic emphasis.
+order: 10
+locale: en
+slug: depth-focus
+toc: true
+---
+
+# DepthFocus
+
+DepthFocus lets you guide the viewer’s attention with layered blur, animated focus masks, and subtle parallax tilt. It supports cursor-tracked focus, automatic drift, or scroll-tied focus while keeping motion GPU-accelerated through CSS transforms and masks.
+
+## Features
+
+- **4 Motion Presets**: `rackFocus`, `spotlight`, `drift`, `pulseGlow`
+- **Multiple Focus Modes**: Cursor-follow, auto drift, or scroll-based positioning
+- **Layered Blur Control**: Separate blur ranges for background vs. focused region
+- **Parallax Tilt**: Perspective and tilt tied to focus point for depth
+- **Glow Accents**: Optional pulse glow that breathes around the focus center
+- **Touch Friendly**: Opt-in touch tracking and focus callbacks
+
+## Quick Start
+
+```tsx
+import { ReactiveImage } from "reactive-image";
+
+export default function DepthFocusHero() {
+  return (
+    <ReactiveImage
+      variant="depthFocus"
+      src="/gallery/portrait.jpg"
+      alt="Portrait with animated focus"
+      animation="spotlight"
+      focusMode="cursor"
+      focusSize={280}
+      tiltAmount={10}
+      glowColor="rgba(255, 196, 143, 0.7)"
+    />
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `animation` | `"rackFocus" \| "spotlight" \| "drift" \| "pulseGlow"` | `rackFocus` | Motion style for focus/glow behavior. |
+| `focusMode` | `"cursor" \| "auto" \| "scroll"` | `cursor` | How the focus point is driven (cursor, auto drift, or scroll position). |
+| `blurRange` | `{ min?: number; max?: number }` | `{ min: 1.5, max: 12 }` | Base and maximum blur values for background vs. focus area. |
+| `focusSize` | `number` | `260` | Diameter (px) of the sharp focus region. |
+| `edgeSoftness` | `number` | `~45% of focusSize` | Feather size for the focus mask edges. |
+| `tiltAmount` | `number` | `8` | Max tilt in degrees applied with perspective. |
+| `glowColor` | `string` | `"rgba(255, 255, 255, 0.52)"` | Color for the glow halo. |
+| `parallaxDepth` | `number` | `18` | How far content translates with pointer/scroll movement. |
+| `enableTouch` | `boolean` | `false` | Enables touch tracking. |
+| `focusClassName` | `string` | `-` | Class for the focused (sharp) image layer. |
+| `onFocusStart` | `() => void` | `-` | Fires when focus interaction begins. |
+| `onFocusMove` | `(coords: { x: number; y: number }) => void` | `-` | Fires when the focus point updates. |
+| `onFocusEnd` | `() => void` | `-` | Fires when focus interaction ends. |
+
+## Animation Presets
+
+- **RackFocus**: Soft foreground clarity while background blurs dynamically around the cursor.
+- **Spotlight**: Crisp spotlight mask that follows the pointer; great for hero reveals.
+- **Drift**: Slow autonomous drift of focus for ambient visuals or idle states.
+- **PulseGlow**: Adds a breathing glow around the focus point for dramatic emphasis.
+
+## Tips
+
+- Increase `focusSize` for hero imagery; reduce it for product detail highlights.
+- Pair `tiltAmount` and `parallaxDepth` for stronger depth; lower them for subtlety.
+- Use `focusClassName` to add borders/overlays specific to the sharp layer.
