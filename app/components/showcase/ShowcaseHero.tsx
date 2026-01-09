@@ -9,6 +9,8 @@ import { PanReveal } from "../../../packages/reactive-image/src/variants/PanReve
 import { KenBurnsSequence } from "../../../packages/reactive-image/src/variants/KenBurnsSequence";
 import { PolaroidStack } from "../../../packages/reactive-image/src/variants/PolaroidStack";
 import { ScrollReactive } from "../../../packages/reactive-image/src/variants/ScrollReactive";
+import { DepthFocus } from "../../../packages/reactive-image/src/variants/DepthFocus";
+import { SplitLayers } from "../../../packages/reactive-image/src/variants/SplitLayers";
 
 type ShowcaseHeroProps = {
   locale: string;
@@ -497,6 +499,65 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
           </div>
         </div>
 
+        {/* DepthFocus Section */}
+        <div className="mb-20">
+          <h3 className="text-xl text-neutral-400 mb-8 flex items-center gap-3">
+            {locale === "tr"
+              ? "Katmanlı Odak ve Parallax"
+              : "Layered Focus & Parallax"}
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Spotlight</h4>
+              </div>
+              <DepthFocus
+                src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&h=600&fit=crop&crop=center"
+                alt="Spotlight depth focus"
+                className="w-full aspect-4/3 object-cover"
+                animation="spotlight"
+                focusMode="cursor"
+                focusSize={260}
+                tiltAmount={10}
+                glowColor="rgba(255, 196, 143, 0.7)"
+              />
+            </div>
+
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Drift</h4>
+              </div>
+              <DepthFocus
+                src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800&h=600&fit=crop&crop=center"
+                alt="Drift focus animation"
+                className="w-full aspect-4/3 object-cover"
+                animation="drift"
+                focusMode="auto"
+                focusSize={300}
+                edgeSoftness={160}
+                tiltAmount={8}
+                parallaxDepth={16}
+              />
+            </div>
+
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Pulse Glow</h4>
+              </div>
+              <DepthFocus
+                src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&h=600&fit=crop&crop=center"
+                alt="Pulse glow focus"
+                className="w-full aspect-4/3 object-cover"
+                animation="pulseGlow"
+                focusMode="cursor"
+                focusSize={240}
+                glowColor="rgba(167, 139, 250, 0.75)"
+                tiltAmount={12}
+              />
+            </div>
+          </div>
+        </div>
+
         {/* KenBurnsSequence Section */}
         <div className="mb-20">
           <h3 className="text-xl text-neutral-400 mb-8 flex items-center gap-3">
@@ -569,11 +630,105 @@ export function ShowcaseHero({ locale, dict }: ShowcaseHeroProps) {
           </div>
         </div>
 
+        {/* SplitLayers Section */}
+        <div className="mb-20">
+          <h3 className="text-xl text-neutral-400 mb-8 flex items-center gap-3">
+            {locale === "tr"
+              ? "Çok Katmanlı Parallax ve Peel"
+              : "Layered Parallax & Peel"}
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Parallax Stack</h4>
+              </div>
+              <SplitLayers
+                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop&crop=center"
+                alt="Layered parallax stack"
+                className="w-full aspect-4/3 object-cover"
+                layers={[
+                  {
+                    src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&h=600&fit=crop&crop=center",
+                    depth: 2.1,
+                    opacity: 0.9,
+                  },
+                  {
+                    src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=600&fit=crop&crop=center",
+                    depth: 3.2,
+                    opacity: 0.65,
+                    blendMode: "screen",
+                  },
+                ]}
+                animation="parallax"
+                parallaxIntensity={18}
+                baseScale={1.02}
+              />
+            </div>
+
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Peel Right</h4>
+              </div>
+              <SplitLayers
+                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&h=600&fit=crop&crop=center"
+                alt="Peel animation"
+                className="w-full aspect-4/3 object-cover"
+                layers={[
+                  {
+                    src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop&crop=center&sat=-20",
+                    depth: 2.6,
+                    opacity: 0.8,
+                  },
+                  {
+                    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop&crop=center",
+                    depth: 3.3,
+                    opacity: 0.6,
+                    blendMode: "overlay",
+                  },
+                ]}
+                animation="peel"
+                peelDirection="right"
+                peelLift={18}
+                parallaxIntensity={16}
+                baseScale={1.03}
+              />
+            </div>
+
+            <div className="relative group overflow-hidden rounded-xl bg-neutral-100">
+              <div className="absolute inset-x-0 top-0 bg-linear-to-b from-black/60 to-transparent p-3 z-10">
+                <h4 className="text-white font-medium text-xs">Glass Slide</h4>
+              </div>
+              <SplitLayers
+                src="https://images.unsplash.com/photo-1523419400524-330b57406c1b?w=800&h=600&fit=crop&crop=center"
+                alt="Glass slide layered"
+                className="w-full aspect-4/3 object-cover"
+                layers={[
+                  {
+                    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop&crop=center",
+                    depth: 2.2,
+                    opacity: 0.85,
+                  },
+                  {
+                    src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=600&fit=crop&crop=center",
+                    depth: 3.4,
+                    opacity: 0.55,
+                    blendMode: "screen",
+                  },
+                ]}
+                animation="glassSlide"
+                parallaxIntensity={14}
+                baseScale={1.02}
+                glassOpacity={0.4}
+              />
+            </div>
+          </div>
+        </div>
+
         {/* PolaroidStack Section */}
         <div className="mb-20">
           <h3 className="text-xl text-neutral-400 mb-8 flex items-center gap-3">
             {locale === "tr"
-              ? "Polaroid YŽñYnleri"
+              ? "Polaroid Yığınları"
               : "Polaroid Stacks"}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

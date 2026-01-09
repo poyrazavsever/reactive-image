@@ -8,6 +8,8 @@ import { PanReveal } from "./variants/PanReveal";
 import { KenBurnsSequence } from "./variants/KenBurnsSequence";
 import { PolaroidStack } from "./variants/PolaroidStack";
 import { ScrollReactive } from "./variants/ScrollReactive";
+import { DepthFocus } from "./variants/DepthFocus";
+import { SplitLayers } from "./variants/SplitLayers";
 
 export function ReactiveImage(props: ReactiveImageProps) {
   const { variant } = props as any;
@@ -22,6 +24,8 @@ export function ReactiveImage(props: ReactiveImageProps) {
     return <PolaroidStack {...(props as any)} />;
   if (variant === "scrollReactive")
     return <ScrollReactive {...(props as any)} />;
+  if (variant === "depthFocus") return <DepthFocus {...(props as any)} />;
+  if (variant === "splitLayers") return <SplitLayers {...(props as any)} />;
   // default plain image
   const { src, alt, className, imgClassName, style, ...rest } = props as any;
   return (

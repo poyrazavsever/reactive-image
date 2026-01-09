@@ -7,6 +7,8 @@ import { ClickExpand } from "../../../packages/reactive-image/src/variants/Click
 import { HoverSwitch } from "../../../packages/reactive-image/src/variants/HoverSwitch";
 import { TiltOnHover } from "../../../packages/reactive-image/src/variants/TiltOnHover";
 import { ZoomOnHover } from "../../../packages/reactive-image/src/variants/ZoomOnHover";
+import { DepthFocus } from "../../../packages/reactive-image/src/variants/DepthFocus";
+import { SplitLayers } from "../../../packages/reactive-image/src/variants/SplitLayers";
 
 type ShowcaseSectionProps = {
   locale: string;
@@ -32,7 +34,7 @@ export function ShowcaseSection({ locale, dict }: ShowcaseSectionProps) {
         </div>
 
         {/* Interactive Demo Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-20">
           {/* Click Expand Demo */}
           <div className="group">
             <div className="relative overflow-hidden rounded-2xl">
@@ -121,6 +123,67 @@ export function ShowcaseSection({ locale, dict }: ShowcaseSectionProps) {
               </h3>
               <p className="text-sm text-neutral-600">
                 {dict.showcase.zoomOnHover}
+              </p>
+            </div>
+          </div>
+
+          {/* Depth Focus Demo */}
+          <div className="group">
+            <div className="relative overflow-hidden rounded-2xl">
+              <DepthFocus
+                src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&h=600&fit=crop&crop=center"
+                alt="Portrait focus shift demo"
+                className="w-full h-80 object-cover"
+                animation="spotlight"
+                focusMode="cursor"
+                focusSize={260}
+                tiltAmount={10}
+                glowColor="rgba(255, 196, 143, 0.7)"
+              />
+            </div>
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold text-neutral-900 mb-1">
+                Depth Focus
+              </h3>
+              <p className="text-sm text-neutral-600">
+                {dict.showcase.depthFocus}
+              </p>
+            </div>
+          </div>
+
+          {/* Split Layers Demo */}
+          <div className="group">
+            <div className="relative overflow-hidden rounded-2xl">
+              <SplitLayers
+                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&h=600&fit=crop&crop=center"
+                alt="Layered parallax city"
+                className="w-full h-80 object-cover"
+                layers={[
+                  {
+                    src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&h=600&fit=crop&crop=center&sat=-20",
+                    depth: 2.1,
+                    opacity: 0.85,
+                    blendMode: "screen",
+                  },
+                  {
+                    src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop&crop=center",
+                    depth: 3,
+                    opacity: 0.5,
+                    blendMode: "overlay",
+                  },
+                ]}
+                animation="peel"
+                peelDirection="right"
+                parallaxIntensity={16}
+                baseScale={1.03}
+              />
+            </div>
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold text-neutral-900 mb-1">
+                Split Layers
+              </h3>
+              <p className="text-sm text-neutral-600">
+                {dict.showcase.splitLayers}
               </p>
             </div>
           </div>
