@@ -1,7 +1,7 @@
 import React, { ImgHTMLAttributes, CSSProperties } from 'react';
 import * as react_jsx_runtime from 'react/jsx-runtime';
 
-type VariantName = "hoverSwitch" | "zoomOnHover" | "tiltOnHover" | "clickExpand" | "panReveal" | "kenBurnsSequence" | "polaroidStack" | "scrollReactive";
+type VariantName = "hoverSwitch" | "zoomOnHover" | "tiltOnHover" | "clickExpand" | "panReveal" | "kenBurnsSequence" | "polaroidStack" | "scrollReactive" | "depthFocus" | "splitLayers";
 type NativeImgProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "src" | "alt" | "width" | "height" | "loading" | "decoding">;
 type BaseProps = NativeImgProps & {
     src: string;
@@ -176,6 +176,52 @@ type ScrollReactiveProps = {
     onExit?: () => void;
     onProgress?: (value: number) => void;
 };
+type DepthFocusProps = {
+    animation?: "rackFocus" | "spotlight" | "drift" | "pulseGlow";
+    focusMode?: "cursor" | "auto" | "scroll";
+    blurRange?: {
+        min?: number;
+        max?: number;
+    };
+    focusSize?: number;
+    edgeSoftness?: number;
+    tiltAmount?: number;
+    glowColor?: string;
+    parallaxDepth?: number;
+    enableTouch?: boolean;
+    focusClassName?: string;
+    onFocusStart?: () => void;
+    onFocusMove?: (coords: {
+        x: number;
+        y: number;
+    }) => void;
+    onFocusEnd?: () => void;
+};
+type SplitLayerItem = {
+    src: string;
+    alt?: string;
+    depth?: number;
+    opacity?: number;
+    blendMode?: CSSProperties["mixBlendMode"];
+};
+type SplitLayersProps = {
+    layers?: SplitLayerItem[];
+    animation?: "parallax" | "peel" | "rippleReveal" | "glassSlide";
+    parallaxIntensity?: number;
+    peelDirection?: "left" | "right" | "up" | "down";
+    peelLift?: number;
+    rippleRadius?: number;
+    glassOpacity?: number;
+    baseScale?: number;
+    perspective?: number;
+    enableTouch?: boolean;
+    onLayerEnter?: () => void;
+    onLayerLeave?: () => void;
+    onLayerMove?: (coords: {
+        x: number;
+        y: number;
+    }) => void;
+};
 type VariantProps = ({
     variant: "hoverSwitch";
 } & HoverSwitchProps) | ({
@@ -192,11 +238,15 @@ type VariantProps = ({
     variant: "polaroidStack";
 } & PolaroidStackProps) | ({
     variant: "scrollReactive";
-} & ScrollReactiveProps);
+} & ScrollReactiveProps) | ({
+    variant: "depthFocus";
+} & DepthFocusProps) | ({
+    variant: "splitLayers";
+} & SplitLayersProps);
 type ReactiveImageProps = BaseProps & (VariantProps | {
     variant?: undefined;
 });
 
 declare function ReactiveImage(props: ReactiveImageProps): react_jsx_runtime.JSX.Element;
 
-export { type BaseProps, type ClickExpandProps, type HoverSwitchProps, type KenBurnsSequenceFrame, type KenBurnsSequenceProps, type PanRevealProps, type PolaroidStackItem, type PolaroidStackProps, ReactiveImage, type ReactiveImageProps, type ScrollReactiveProps, type TiltOnHoverProps, type VariantName, type VariantProps, type ZoomOnHoverProps };
+export { type BaseProps, type ClickExpandProps, type DepthFocusProps, type HoverSwitchProps, type KenBurnsSequenceFrame, type KenBurnsSequenceProps, type PanRevealProps, type PolaroidStackItem, type PolaroidStackProps, ReactiveImage, type ReactiveImageProps, type ScrollReactiveProps, type SplitLayerItem, type SplitLayersProps, type TiltOnHoverProps, type VariantName, type VariantProps, type ZoomOnHoverProps };
