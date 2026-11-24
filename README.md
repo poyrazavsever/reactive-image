@@ -793,7 +793,7 @@ Use [Discussions](https://github.com/poyrazavsever/reactive-image/discussions) f
 
 ### Documentation
 
-Visit the [documentation site](https://reactive-image-docs.vercel.app) for detailed API reference and examples.
+Visit the [documentation site](https://reactive-image.poyrazavsever.com) for detailed API reference and examples.
 
 ### Showcase
 
@@ -816,7 +816,7 @@ This project is licensed under **ISC License**. See [LICENSE](LICENSE) file for 
 
 **If you like this project, don't forget to star it on GitHub!**
 
-[Star on GitHub](https://github.com/poyrazavsever/reactive-image) • [Documentation](https://reactive-image-docs.vercel.app) • [Demo](https://reactive-image-demo.vercel.app)
+[Star on GitHub](https://github.com/poyrazavsever/reactive-image) • [Documentation](https://reactive-image.poyrazavsever.com) • [Demo](https://reactive-image.poyrazavsever.com/showcase)
 
 **Developer:** [Poyraz Avsever](https://github.com/poyrazavsever)  
 **License:** ISC • **Version:** 1.0.0

@@ -183,6 +183,6 @@ MIT © [Poyraz Avsever](https://github.com/poyrazavsever)
 
 ## Links
 
-- 📖 [Documentation](https://reactive-image.vercel.app)
-- 🎮 [Interactive Demos](https://reactive-image.vercel.app/showcase)
+- 📖 [Documentation](https://reactive-image.poyrazavsever.com)
+- 🎮 [Interactive Demos](https://reactive-image.poyrazavsever.com/showcase)
 - 🐛 [Issues](https://github.com/poyrazavsever/reactive-image/issues)
